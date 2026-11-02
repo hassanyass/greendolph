@@ -1,0 +1,55 @@
+---
+import { brand } from '../config/brand';
+import { routes, navigation } from '../domain/routes';
+import { copy, type Locale } from '../config/content';
+const { locale } = Astro.props as { locale: Locale };
+const t = copy[locale];
+---
+
+<header class="header">
+  <a
+    href={routes.homeAnchor(locale, 'home')}
+    class="brand"
+    aria-label={brand.name}
+  >
+    <img src={brand.logo} alt={brand.name} width="280" height="60" />
+  </a>
+  <nav aria-label={t.menu} id="main-nav">
+    {navigation.map((item) => (
+      <a
+        href={routes.homeAnchor(locale, item.section)}
+        class:list={{ active: item.section === 'home' }}
+      >
+        {t.nav[item.labelIndex]}
+      </a>
+    ))}
+  </nav>
+  <div class="header-actions">
+    <a
+      class="language"
+      href={routes.alternate('home', locale)}
+      lang={locale === 'en' ? 'ar' : 'en'}
+      aria-label={t.langLabel}
+    >
+      {t.lang}
+    </a>
+    <a
+      class="button button-small header-quote"
+      href={routes.homeAnchor(locale, 'contact')}
+    >
+      {t.quote}
+      <span aria-hidden="true" class="arrow">
+        ↗
+      </span>
+    </a>
+    <button
+      class="menu-toggle"
+      aria-expanded="false"
+      aria-controls="main-nav"
+      aria-label={t.menu}
+    >
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>

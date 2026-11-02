@@ -1,0 +1,80 @@
+---
+import { media } from '../config/brand';
+import { copy, type Locale } from '../config/content';
+const { locale } = Astro.props as { locale: Locale };
+const t = copy[locale];
+---
+
+<section class="hero" id="home" aria-labelledby="hero-title">
+  <img
+    class="hero-poster"
+    src={media.hero}
+    alt=""
+    width="1600"
+    height="900"
+    fetchpriority="high"
+  />
+  <video
+    id="hero-video"
+    class="hero-video"
+    muted
+    loop
+    playsinline
+    preload="none"
+    poster={media.hero}
+    aria-hidden="true"
+    data-src={media.video}
+  ></video>
+  <div class="hero-shade"></div>
+  <div class="hero-copy">
+    <p class="eyebrow light">
+      <span class="small-line"></span>
+      {t.eyebrow}
+    </p>
+    <h1 id="hero-title">
+      {t.heroTop}
+      <br />
+      <span>{t.heroBottom}</span>
+    </h1>
+    <p class="hero-description">{t.heroText}</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="button button-light">
+        {t.quote}
+        <span aria-hidden="true" class="arrow">
+          ↗
+        </span>
+      </a>
+      <a href="#services" class="text-link light-link">
+        {t.explore}
+        <span aria-hidden="true" class="arrow">
+          ↗
+        </span>
+      </a>
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <div>
+      <p>{t.heroCaption}</p>
+      <span>{t.heroFoot}</span>
+    </div>
+    <button
+      class="video-control"
+      aria-label={t.play}
+      data-play={t.play}
+      data-pause={t.pause}
+    >
+      <span aria-hidden="true">▶</span>
+    </button>
+  </div>
+</section>
+<div class="service-strip">
+  {t.strip.map((item, i) => (
+    <a href={`#service-${i}`}>
+      <span class="strip-index">0{i + 1}</span>
+      {item}
+      <span aria-hidden="true" class="arrow">
+        ↗
+      </span>
+    </a>
+  ))}
+</div>

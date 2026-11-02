@@ -1,0 +1,46 @@
+---
+import type { PageMetadata } from '../domain/seo';
+import { serializeJsonLd } from '../domain/seo';
+import { company } from '../config/company';
+import { brand } from '../config/brand';
+import { StructuredDataBuilder } from '../domain/structured-data';
+interface Props {
+  metadata: PageMetadata;
+}
+const { metadata } = Astro.props;
+const { site, locale } = metadata;
+const schema = new StructuredDataBuilder(site, company, brand.logo).build();
+---
+
+<title>{metadata.title}</title>
+<meta name="description" content={metadata.description} />
+<meta name="robots" content={metadata.robots} />
+{metadata.canonical && <link rel="canonical" href={metadata.canonical} />}
+{metadata.alternates.map((alternate) => (
+  <link rel="alternate" hreflang={alternate.language} href={alternate.url} />
+))}
+<meta property="og:title" content={metadata.title} />
+<meta property="og:description" content={metadata.description} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={brand.name} />
+<meta property="og:locale" content={locale === 'ar' ? 'ar_AE' : 'en_AE'} />
+<meta
+  property="og:locale:alternate"
+  content={locale === 'ar' ? 'en_AE' : 'ar_AE'}
+/>
+{metadata.canonical && <meta property="og:url" content={metadata.canonical} />}
+{metadata.image && (
+  <>
+    <meta property="og:image" content={metadata.image} />
+    <meta property="og:image:alt" content={metadata.title} />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="900" />
+  </>
+)}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={metadata.title} />
+<meta name="twitter:description" content={metadata.description} />
+{metadata.image && <meta name="twitter:image" content={metadata.image} />}
+{schema && metadata.indexable && (
+  <script type="application/ld+json" set:html={serializeJsonLd(schema)} />
+)}

@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { PageDefinition } from '../domain/routes';
+const page: PageDefinition = {
+  key: 'notFound',
+  paths: { en: '/404/', ar: '/404/' },
+  indexable: false,
+};
+---
+
+<BaseLayout
+  locale="en"
+  page={page}
+  title="Page not found | Aldolphin Alakhthar"
+  description="Find your way back to the Aldolphin Alakhthar website."
+>
+  <section class="not-found section">
+    <p class="eyebrow">404</p>
+    <h1>Let’s get you back home.</h1>
+    <p>This page could not be found.</p>
+    <a class="button" href="/">
+      English home <span aria-hidden="true">↗</span>
+    </a>
+    <div lang="ar" dir="rtl">
+      <h2>لنعد إلى الصفحة الرئيسية.</h2>
+      <p>لم نتمكن من العثور على هذه الصفحة.</p>
+      <a class="button" href="/ar/">
+        الرئيسية بالعربية <span aria-hidden="true">↖</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .not-found {
+    min-height: 65vh;
+  }
+  h1 {
+    font-size: clamp(32px, 5vw, 58px);
+    font-weight: 500;
+    margin-block: 20px;
+    letter-spacing: -0.035em;
+  }
+  p {
+    margin-block: 20px;
+  }
+  .not-found div {
+    font-family: 'Readex Pro', sans-serif;
+    margin-top: 55px;
+    text-align: start;
+  }
+  .not-found h2 {
+    font-size: 28px;
+  }
+</style>

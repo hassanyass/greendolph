@@ -1,0 +1,53 @@
+---
+import { brand } from '../config/brand';
+import { copy, type Locale } from '../config/content';
+import { routes, navigation } from '../domain/routes';
+const { locale } = Astro.props as { locale: Locale };
+const t = copy[locale];
+---
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <img
+        src={brand.inverseLogo}
+        alt={brand.name}
+        width="300"
+        height="64"
+        loading="lazy"
+      />
+      <p>{t.footerText}</p>
+      <span>{t.footerLocation}</span>
+    </div>
+    <div class="footer-links">
+      <p class="eyebrow">{t.footerNav}</p>
+      {navigation.map((item) => (
+        <a href={routes.homeAnchor(locale, item.section)}>
+          {t.nav[item.labelIndex]}
+        </a>
+      ))}
+    </div>
+    <div class="footer-cta">
+      <p class="eyebrow">{t.footerContact}</p>
+      <a href={routes.homeAnchor(locale, 'contact')}>
+        {t.quote}
+        <span class="arrow" aria-hidden="true">
+          ↗
+        </span>
+      </a>
+      <a
+        class="footer-language"
+        href={routes.alternate('home', locale)}
+        lang={locale === 'en' ? 'ar' : 'en'}
+      >
+        {t.lang}
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>
+      © {new Date().getFullYear()} {t.copyright}
+    </span>
+    <span>{t.rights}</span>
+  </div>
+</footer>

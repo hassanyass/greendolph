@@ -1,0 +1,86 @@
+---
+import { services, emirates, copy, type Locale } from '../config/content';
+const { locale } = Astro.props as { locale: Locale };
+const t = copy[locale];
+---
+
+<section class="contact section" id="contact" aria-labelledby="contact-title">
+  <div class="contact-intro">
+    <p class="eyebrow">{t.contactLabel}</p>
+    <h2 id="contact-title">{t.contactTitle}</h2>
+    <p>{t.contactText}</p>
+    <div class="contact-motif" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <form id="quote-form">
+    <div class="form-grid">
+      <label>
+        <span>{t.name}</span>
+        <input name="name" autocomplete="name" required maxlength="90" />
+      </label>
+      <label>
+        <span>{t.phone}</span>
+        <input
+          name="phone"
+          type="tel"
+          inputmode="tel"
+          autocomplete="tel"
+          required
+          pattern="\+?[0-9][0-9\s\-]{6,23}"
+          maxlength="25"
+          dir="ltr"
+        />
+      </label>
+      <label>
+        <span id="service-label">{t.service}</span>
+        <select name="service" aria-labelledby="service-label" required>
+          <option value="">{t.choose}</option>
+          {services.map((s) => (
+            <option value={s.id}>{s.title[locale]}</option>
+          ))}
+          <option value="other">{t.other}</option>
+        </select>
+      </label>
+      <label>
+        <span id="emirate-label">{t.location}</span>
+        <select name="emirate" aria-labelledby="emirate-label" required>
+          <option value="">{t.locationChoose}</option>
+          {emirates.map((e) => (
+            <option value={e[locale]}>{e[locale]}</option>
+          ))}
+        </select>
+      </label>
+      <label class="form-wide">
+        <span>{t.details}</span>
+        <textarea
+          name="details"
+          rows="3"
+          placeholder={t.detailsHint}
+          required
+          maxlength="1500"
+        ></textarea>
+      </label>
+    </div>
+    <button class="button form-submit" type="submit">
+      {t.submit}
+      <span class="arrow" aria-hidden="true">
+        ↗
+      </span>
+    </button>
+    <p class="form-note">{t.formNote}</p>
+    <div id="quote-review" class="quote-review" hidden tabindex="-1">
+      <h3>{t.reviewTitle}</h3>
+      <p>{t.reviewText}</p>
+      <dl></dl>
+      <button type="button" class="text-link" id="edit-request">
+        {t.edit}
+        <span class="arrow" aria-hidden="true">
+          ↗
+        </span>
+      </button>
+    </div>
+  </form>
+</section>

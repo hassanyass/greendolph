@@ -1,0 +1,65 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SeoHead from '../components/SeoHead.astro';
+import { brand, media } from '../config/brand';
+import { copy } from '../config/content';
+import { site } from '../config/site';
+import { routes, type Locale, type PageDefinition } from '../domain/routes';
+import { PageMetadata } from '../domain/seo';
+import '../styles/global.css';
+
+interface Props {
+  locale: Locale;
+  page?: PageDefinition;
+  title?: string;
+  description?: string;
+}
+const {
+  locale,
+  page = routes.page('home'),
+  title = copy[locale].title,
+  description = copy[locale].description,
+} = Astro.props;
+const metadata = new PageMetadata(
+  site,
+  page,
+  locale,
+  title,
+  description,
+  media.hero,
+  page.indexable,
+);
+---
+
+<!doctype html>
+<html
+  lang={locale}
+  dir={locale === 'ar' ? 'rtl' : 'ltr'}
+  style={brand.cssVariables()}
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <SeoHead metadata={metadata} />
+    <meta name="theme-color" content={brand.colors.forest} />
+    <link rel="icon" type="image/svg+xml" href={brand.mark} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Readex+Pro:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">
+      {copy[locale].skip}
+    </a>
+    <Header locale={locale} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+    <script src="../scripts/interactions.ts"></script>
+  </body>
+</html>
