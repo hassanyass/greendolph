@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import QuoteForm from './QuoteForm.astro';
+import { copy, type Locale } from '../config/content';
+import { routes } from '../domain/routes';
+const { locale } = Astro.props as { locale: Locale };
+const t = copy[locale];
+---
+
+<BaseLayout
+  locale={locale}
+  page={routes.page('contact')}
+  title={t.contactPageTitle}
+  description={t.contactPageDescription}
+>
+  <div class="page-intro">
+    <p class="eyebrow">{t.contactLabel}</p>
+    <h1>{t.contactPageHeading}</h1>
+  </div>
+  <QuoteForm locale={locale} />
+</BaseLayout>
+<style>
+  .page-intro {
+    padding-bottom: 0;
+  }
+</style>

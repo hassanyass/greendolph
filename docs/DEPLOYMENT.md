@@ -20,9 +20,17 @@ Without a configured origin, canonical and social-image URLs are omitted rather 
 
 For the finished website, configure the actual `SITE_URL`, set `SITE_ENV=production`, and deliberately set `SITE_INDEXABLE=true`. An invalid origin or an attempt to index a preview build fails with a clear error. Canonicals, en-AE/ar-AE/x-default alternates, Open Graph URLs and sitemap entries derive from that origin and the shared route catalog.
 
-The current sitemap advertises only the implemented English and Arabic home routes. The 404 is always noindex and never canonicalizes to the home page. Structured data currently describes the Organization and WebSite when an origin exists; LocalBusiness is emitted only after a real address and phone are supplied in `CompanyProfile`. No fabricated ratings, opening hours or geographic coverage are inserted.
+The current sitemap advertises the implemented English and Arabic Home, Services, About and Contact routes; Our Works stays excluded until actual projects are supplied. The 404 is always noindex and never canonicalizes to the home page. Structured data currently describes the Organization and WebSite when an origin exists; LocalBusiness is emitted only after a real address and phone are supplied in `CompanyProfile`. No fabricated ratings, opening hours or geographic coverage are inserted.
 
 Before enabling indexing, complete the agreed pages and real enquiry path, confirm the company's trading name/address/phone and actual service coverage, and provide appropriate privacy text. Search Console verification and Google Business Profile management need the selected domain and company account access. No ranking guarantee is implied.
+
+## Vercel peer review
+
+Import `hassanyass/greendolph`, choose branch `main`, and leave Root Directory at the repository root (`.`). `vercel.json` sets the Astro framework, `npm run build`, output `dist`, trailing-slash routes and response headers. Use Node 22.x (22.23.4+) or a supported newer version. No Vercel adapter is needed for this static site.
+
+For this review, use `SITE_ENV=preview` and `SITE_INDEXABLE=false` for both Production and Preview environments; leave `SITE_URL` unset until a stable review URL or production domain is chosen. The default build already uses these noindex settings, including on the main-branch deployment. Vercel does not consume the generated `_headers`; page robots metadata protects the review build and `vercel.json` supplies its response headers. Keep future public indexing controlled through the environment settings above.
+
+After import, check `/`, `/ar/`, all navigation destinations and a missing URL. The quotation form remains a local request review until delivery is implemented. Deployment has not been performed from this workspace.
 
 ## Host settings
 
@@ -61,3 +69,5 @@ The final two commands restore the noindex preview artifact. GitHub Actions runs
 - [Google: noindex](https://developers.google.com/search/docs/crawling-indexing/block-indexing)
 - [Netlify file configuration](https://docs.netlify.com/build/configure-builds/file-based-configuration/)
 - [Cloudflare Pages headers](https://developers.cloudflare.com/pages/configuration/headers/)
+
+- [Vercel project configuration](https://vercel.com/docs/project-configuration/vercel-json)

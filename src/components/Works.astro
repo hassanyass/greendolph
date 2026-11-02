@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { projects } from '../config/projects';
+import { routes } from '../domain/routes';
+import { copy, type Locale } from '../config/content';
+const { locale } = Astro.props as { locale: Locale };
+const t = copy[locale];
+---
+
+<BaseLayout
+  locale={locale}
+  page={routes.page('works')}
+  title={t.worksPageTitle}
+  description={t.worksPageDescription}
+>
+  <div class="page-intro">
+    <p class="eyebrow">{t.nav[4]}</p>
+    <h1>{t.worksHeading}</h1>
+    <p>{t.worksIntro}</p>
+  </div>
+  <div class="section works-content">
+    {projects.length ? (
+      <div class="works-grid">
+        {projects.map((project) => (
+          <article id={project.id}>
+            <img
+              src={project.image}
+              alt={project.imageAlt[locale]}
+              width="900"
+              height="675"
+              loading="lazy"
+            />
+            <h2>{project.title[locale]}</h2>
+            <p>{project.summary[locale]}</p>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="works-empty">
+        <h2>{t.worksEmpty}</h2>
+        <p>{t.worksText}</p>
+        <a class="button" href={routes.enquiry(locale)}>
+          {t.quote}
+        </a>
+      </div>
+    )}
+  </div>
+</BaseLayout>

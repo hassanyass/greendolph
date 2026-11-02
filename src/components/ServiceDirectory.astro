@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { routes } from '../domain/routes';
+import { copy, services, type Locale } from '../config/content';
+const { locale } = Astro.props as { locale: Locale };
+const t = copy[locale];
+---
+
+<BaseLayout
+  locale={locale}
+  page={routes.page('services')}
+  title={t.servicesPageTitle}
+  description={t.servicesPageDescription}
+>
+  <div class="page-intro">
+    <p class="eyebrow">{t.servicesLabel}</p>
+    <h1>{t.servicesPageHeading}</h1>
+    <p>{t.servicesText}</p>
+  </div>
+  <div class="service-directory section">
+    {services.map((service) => (
+      <section
+        class="service-detail"
+        id={service.id}
+        aria-labelledby={`heading-${service.id}`}
+      >
+        <img
+          src={service.image}
+          alt={service.alt[locale]}
+          width="800"
+          height="600"
+          loading="lazy"
+        />
+        <div>
+          <h2 id={`heading-${service.id}`}>{service.title[locale]}</h2>
+          <p>{service.detail[locale]}</p>
+          <a class="button" href={routes.enquiry(locale, service.id)}>
+            {t.dialogQuote}
+          </a>
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>

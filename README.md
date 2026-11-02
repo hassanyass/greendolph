@@ -51,6 +51,16 @@ GitHub Actions validates preview and simulated production builds on pushes and p
 
 ## Current boundaries
 
-Only the approved home-page concept is implemented in both languages. Services, About, Contact and individual service pages will be added when their content is agreed; missing pages are not linked or advertised in the sitemap.
+Home, Services, About and Contact are implemented in both languages. Our Works has an explicit empty state and a configurable project collection, pending actual project material; it remains noindex. Every primary navigation item leads to its own page, and the home About button leads to the full About page. Further page and lower-section work awaits the user’s next review.
 
 The quotation interaction remains an explicit local review, without submission or persistence. Contact delivery, privacy content, verified business SEO facts and final page content are still required before public launch. No analytics or cookie tracking is installed.
+
+## Navigation, hero and services
+
+The full-screen video hero keeps its content over the background footage. The logo, navigation and language control contract together into a centered floating bar on scroll; `src/config/experience.ts` configures its thresholds and visible carousel cards. The Services label is a real page link, with a separate hover/touch/keyboard dropdown. Both the dropdown and swipeable carousel derive from `services` in `content.ts`. Hero media is configured in `brand.ts`; its current technical-work clip is illustrative stock footage with provenance in the asset guide. Brand colours and logos remain replaceable.
+
+Service enquiries return to the matching language home page with the service preselected. Add only company-approved projects to `src/config/projects.ts`; change the Works route’s indexing setting after real project content is ready.
+
+## Vercel review deployment
+
+Import this repository with root `.`, framework Astro, build `npm run build`, output `dist`. The checked-in `vercel.json` provides these defaults. Keep `SITE_ENV=preview` and `SITE_INDEXABLE=false` while reviewing. See [deployment settings](docs/DEPLOYMENT.md#vercel-peer-review).

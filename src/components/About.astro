@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { brand, media } from '../config/brand';
+import { copy, type Locale } from '../config/content';
+import { routes } from '../domain/routes';
+const { locale } = Astro.props as { locale: Locale };
+const t = copy[locale];
+---
+
+<BaseLayout
+  locale={locale}
+  page={routes.page('about')}
+  title={t.aboutPageTitle}
+  description={t.aboutPageDescription}
+>
+  <div class="page-intro">
+    <p class="eyebrow">{t.aboutLabel}</p>
+    <h1>{t.aboutPageHeading}</h1>
+  </div>
+  <section class="about section about-page" aria-labelledby="company-title">
+    <div class="about-image">
+      <img
+        src={media.interior}
+        alt={t.aboutImageAlt}
+        width="900"
+        height="1050"
+      />
+    </div>
+    <div class="about-copy">
+      <img src={brand.logo} alt={brand.name} width="280" height="60" />
+      <h2 id="company-title">{t.aboutTitle}</h2>
+      <p>{t.aboutText}</p>
+      <p>{t.aboutDetail}</p>
+      <a class="button" href={routes.path('services', locale)}>
+        {t.viewServices}
+      </a>
+    </div>
+  </section>
+  <section class="process section" aria-labelledby="about-process">
+    <p class="eyebrow">{t.processLabel}</p>
+    <h2 id="about-process">{t.processTitle}</h2>
+    <div class="steps">
+      {t.steps.map((step) => (
+        <article>
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+        </article>
+      ))}
+    </div>
+    <a class="button" href={routes.enquiry(locale)}>
+      {t.quote}
+    </a>
+  </section>
+</BaseLayout>
+<style>
+  .about-page {
+    padding-top: 24px;
+    border: 0;
+  }
+  .about-copy .button {
+    margin-top: 26px;
+  }
+  .process > .button {
+    margin-top: 36px;
+  }
+</style>

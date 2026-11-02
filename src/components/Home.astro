@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from './Hero.astro';
 import Services from './Services.astro';
 import QuoteForm from './QuoteForm.astro';
+import { routes } from '../domain/routes';
 import { brand, media } from '../config/brand';
 import { copy, type Locale } from '../config/content';
 const { locale } = Astro.props as { locale: Locale };
@@ -30,15 +31,9 @@ const t = copy[locale];
       <p class="eyebrow">{t.aboutLabel}</p>
       <h2 id="about-title">{t.aboutTitle}</h2>
       <p>{t.aboutText}</p>
-      <details class="about-more">
-        <summary class="text-link">
-          {t.aboutMore}
-          <span class="arrow" aria-hidden="true">
-            ↗
-          </span>
-        </summary>
-        <p>{t.aboutDetail}</p>
-      </details>
+      <a class="text-link about-more" href={routes.path('about', locale)}>
+        {t.aboutMore}
+      </a>
       <div class="about-signature">
         <img src={brand.logo} alt={brand.name} width="280" height="60" />
       </div>
@@ -48,9 +43,8 @@ const t = copy[locale];
     <p class="eyebrow">{t.processLabel}</p>
     <h2 id="process-title">{t.processTitle}</h2>
     <div class="steps">
-      {t.steps.map((s, i) => (
+      {t.steps.map((s) => (
         <article>
-          <span class="step-index">0{i + 1}</span>
           <h3>{s.title}</h3>
           <p>{s.text}</p>
         </article>

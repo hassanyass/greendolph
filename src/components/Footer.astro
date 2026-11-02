@@ -1,8 +1,16 @@
 ---
 import { brand } from '../config/brand';
 import { copy, type Locale } from '../config/content';
-import { routes, navigation } from '../domain/routes';
-const { locale } = Astro.props as { locale: Locale };
+import {
+  routes,
+  navigation,
+  navigationHref,
+  type PageKey,
+} from '../domain/routes';
+const { locale, page = 'home' } = Astro.props as {
+  locale: Locale;
+  page?: PageKey;
+};
 const t = copy[locale];
 ---
 
@@ -22,22 +30,15 @@ const t = copy[locale];
     <div class="footer-links">
       <p class="eyebrow">{t.footerNav}</p>
       {navigation.map((item) => (
-        <a href={routes.homeAnchor(locale, item.section)}>
-          {t.nav[item.labelIndex]}
-        </a>
+        <a href={navigationHref(item, locale)}>{t.nav[item.labelIndex]}</a>
       ))}
     </div>
     <div class="footer-cta">
       <p class="eyebrow">{t.footerContact}</p>
-      <a href={routes.homeAnchor(locale, 'contact')}>
-        {t.quote}
-        <span class="arrow" aria-hidden="true">
-          ↗
-        </span>
-      </a>
+      <a href={routes.enquiry(locale)}>{t.quote}</a>
       <a
         class="footer-language"
-        href={routes.alternate('home', locale)}
+        href={routes.alternate(page === 'notFound' ? 'home' : page, locale)}
         lang={locale === 'en' ? 'ar' : 'en'}
       >
         {t.lang}

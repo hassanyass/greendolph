@@ -83,7 +83,7 @@ test('unconfigured builds stay out of search without inventing a canonical domai
     'en',
     'Home',
     'Description',
-    '/images/dubai.webp',
+    '/images/technical-care.webp',
   );
   assert.equal(page.canonical, null);
   assert.equal(page.robots, 'noindex, follow');
@@ -121,7 +121,7 @@ test('locale pages have distinct canonicals and reciprocal UAE alternates', () =
     'en',
     'English',
     'Description',
-    '/images/dubai.webp',
+    '/images/technical-care.webp',
   );
   const arabic = new PageMetadata(
     production(),
@@ -129,7 +129,7 @@ test('locale pages have distinct canonicals and reciprocal UAE alternates', () =
     'ar',
     'العربية',
     'الوصف',
-    '/images/dubai.webp',
+    '/images/technical-care.webp',
   );
   assert.equal(english.canonical, 'https://example.com/');
   assert.equal(arabic.canonical, 'https://example.com/ar/');
@@ -138,7 +138,7 @@ test('locale pages have distinct canonicals and reciprocal UAE alternates', () =
     arabic.alternates.map((item) => item.language),
     ['en-AE', 'ar-AE', 'x-default'],
   );
-  assert.equal(arabic.image, 'https://example.com/images/dubai.webp');
+  assert.equal(arabic.image, 'https://example.com/images/technical-care.webp');
 });
 
 test('sitemap contains only implemented, indexable locale routes', () => {
@@ -146,9 +146,10 @@ test('sitemap contains only implemented, indexable locale routes', () => {
     ...routes.pages,
     { key: 'notFound', paths: { en: '/404/', ar: '/404/' }, indexable: false },
   ]).render();
-  assert.equal((xml.match(/<url>/g) || []).length, 2);
+  assert.equal((xml.match(/<url>/g) || []).length, 8);
   assert.match(xml, /<loc>https:\/\/example.com\/ar\/<\/loc>/);
-  assert.doesNotMatch(xml, /404|services/);
+  assert.match(xml, /<loc>https:\/\/example.com\/services\/<\/loc>/);
+  assert.doesNotMatch(xml, /404|our-works/);
 });
 
 test('unindexable pages never canonicalize to the home page', () => {
@@ -158,7 +159,7 @@ test('unindexable pages never canonicalize to the home page', () => {
     'en',
     '404',
     'Not found',
-    '/images/dubai.webp',
+    '/images/technical-care.webp',
   );
   assert.equal(page.canonical, null);
   assert.equal(page.robots, 'noindex, follow');
@@ -176,7 +177,34 @@ test('structured data cannot close its script element through content', () => {
 });
 
 test('route helpers preserve the language and avoid root-relative cross-locale leaks', () => {
-  assert.equal(routes.homeAnchor('ar', 'services'), '/ar/#services');
+  assert.equal(routes.path('services', 'ar'), '/ar/services/');
   assert.equal(routes.alternate('home', 'ar'), '/');
   assert.throws(() => production().absolute('//another.example/'));
+});
+
+test('navigation destinations and service enquiries retain the requested language', () => {
+  assert.equal(routes.path('services', 'ar'), '/ar/services/');
+  assert.equal(routes.path('works', 'en'), '/our-works/');
+  assert.equal(routes.alternate('services', 'en'), '/ar/services/');
+  assert.equal(
+    routes.enquiry('ar', 'electrical'),
+    '/ar/contact/?service=electrical',
+  );
+});
+
+test('all primary navigation destinations are standalone locale pages', () => {
+  for (const locale of ['en', 'ar'] as const) {
+    for (const key of [
+      'home',
+      'services',
+      'works',
+      'about',
+      'contact',
+    ] as const) {
+      assert.ok(
+        routes.path(key, locale).startsWith(locale === 'ar' ? '/ar/' : '/'),
+      );
+      assert.ok(!routes.path(key, locale).includes('#'));
+    }
+  }
 });

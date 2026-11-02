@@ -2,7 +2,7 @@
 
 This repository is the source of truth for the Aldolphin Alakhthar website. Read `docs/PROJECT-STANDARDS.md` before changing it. Use `skills/aldolphin-web/SKILL.md` for company-specific requirements.
 
-The concept is approved. Current scope is repository and deployment/SEO foundations; await the user's detailed home-page comments before redesigning its sections. Do not create unapproved marketing copy, extra service pages or operational enquiry handling.
+The current review covers the full-screen video hero, compact floating navigation, Services carousel, and separate bilingual destinations for every navigation item. The home About button leads to the complete About page. Preserve this scope and stop after the requested changes. Do not invent project examples, business claims or operational enquiry handling.
 
 Keep branding in `src/config/brand.ts`, company facts in `src/config/company.ts`, deployment settings in `src/config/site-configuration.mjs`, implemented locale routes in `src/domain/routes.ts`, and page metadata in `src/domain/seo.ts`. Shared shell belongs in `src/layouts/BaseLayout.astro`; sections stay separate. Classes should own useful domain or interaction behavior without forced inheritance.
 

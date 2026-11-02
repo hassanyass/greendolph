@@ -23,7 +23,9 @@ export class Brand {
 
 export const brand = new Brand();
 export const media = {
-  hero: '/images/dubai.webp',
-  video: '/images/dubai.mp4',
+  hero: '/images/property-care.webp',
+  video: '/images/property-care.mp4',
+  heroWidth: 1280,
+  heroHeight: 720,
   interior: '/images/interior.webp',
 };

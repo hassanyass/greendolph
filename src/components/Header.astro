@@ -1,55 +1,123 @@
 ---
 import { brand } from '../config/brand';
-import { routes, navigation } from '../domain/routes';
-import { copy, type Locale } from '../config/content';
-const { locale } = Astro.props as { locale: Locale };
+import {
+  routes,
+  navigation,
+  navigationHref,
+  type PageKey,
+} from '../domain/routes';
+import { copy, services, type Locale } from '../config/content';
+import { experience } from '../config/experience';
+import ControlIcon from './ControlIcon.astro';
+const { locale, page = 'home' } = Astro.props as {
+  locale: Locale;
+  page?: PageKey;
+};
 const t = copy[locale];
 ---
 
-<header class="header">
-  <a
-    href={routes.homeAnchor(locale, 'home')}
-    class="brand"
-    aria-label={brand.name}
-  >
-    <img src={brand.logo} alt={brand.name} width="280" height="60" />
-  </a>
-  <nav aria-label={t.menu} id="main-nav">
-    {navigation.map((item) => (
+<header
+  class="header"
+  data-compact-after={experience.navigation.compactAfter}
+  data-expand-before={experience.navigation.expandBefore}
+>
+  <div class="header-inner">
+    <a href={routes.path('home', locale)} class="brand" aria-label={brand.name}>
+      <img src={brand.logo} alt={brand.name} width="280" height="60" />
+    </a>
+    <nav aria-label={t.menu} id="main-nav">
+      {navigation.map((item) =>
+        item.page === 'services' ? (
+          <div class="nav-services" data-services-menu>
+            <div class="nav-services-label">
+              <a
+                href={navigationHref(item, locale)}
+                class:list={['nav-link', { active: page === 'services' }]}
+                data-nav-section="services"
+                aria-current={page === 'services' ? 'page' : undefined}
+              >
+                {t.nav[item.labelIndex]}
+              </a>
+              <button
+                class="dropdown-toggle"
+                type="button"
+                aria-label={t.servicesMenu}
+                aria-expanded="false"
+                aria-controls="services-dropdown"
+              >
+                <ControlIcon name="down" />
+              </button>
+            </div>
+            <div class="services-dropdown" id="services-dropdown" hidden>
+              <ul>
+                {services.map((service) => (
+                  <li>
+                    <a
+                      href={`${routes.path('services', locale)}#${service.id}`}
+                    >
+                      <img src={service.image} width="48" height="48" alt="" />
+                      <span>
+                        <strong>{service.title[locale]}</strong>
+                        <span>{service.description[locale]}</span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <a
+                class="dropdown-overview"
+                href={routes.path('services', locale)}
+              >
+                {t.viewServices}
+              </a>
+            </div>
+          </div>
+        ) : (
+          <a
+            href={navigationHref(item, locale)}
+            class:list={[
+              'nav-link',
+              {
+                active:
+                  page === 'home'
+                    ? item.section === 'home'
+                    : item.page === page,
+              },
+            ]}
+            data-nav-section={item.section}
+            aria-current={
+              page === item.page && (page !== 'home' || item.section === 'home')
+                ? 'page'
+                : undefined
+            }
+          >
+            {t.nav[item.labelIndex]}
+          </a>
+        ),
+      )}
+    </nav>
+    <div class="header-actions">
       <a
-        href={routes.homeAnchor(locale, item.section)}
-        class:list={{ active: item.section === 'home' }}
+        class="language"
+        href={routes.alternate(page === 'notFound' ? 'home' : page, locale)}
+        lang={locale === 'en' ? 'ar' : 'en'}
+        aria-label={t.langLabel}
       >
-        {t.nav[item.labelIndex]}
+        {t.lang}
       </a>
-    ))}
-  </nav>
-  <div class="header-actions">
-    <a
-      class="language"
-      href={routes.alternate('home', locale)}
-      lang={locale === 'en' ? 'ar' : 'en'}
-      aria-label={t.langLabel}
-    >
-      {t.lang}
-    </a>
-    <a
-      class="button button-small header-quote"
-      href={routes.homeAnchor(locale, 'contact')}
-    >
-      {t.quote}
-      <span aria-hidden="true" class="arrow">
-        ↗
-      </span>
-    </a>
-    <button
-      class="menu-toggle"
-      aria-expanded="false"
-      aria-controls="main-nav"
-      aria-label={t.menu}
-    >
-      <span></span>
-      <span></span>
-    </button>
+      <a class="button button-small header-quote" href={routes.enquiry(locale)}>
+        {t.quote}
+      </a>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="main-nav"
+        aria-label={t.menu}
+      >
+        <span></span>
+        <span></span>
+      </button>
+    </div>
   </div>
 </header>

@@ -1,16 +1,13 @@
-# Concept verification — 2 November 2026
+# Website review verification — 2 November 2026
 
-- Astro/TypeScript check: 12 files, zero errors, warnings or hints.
-- Static build: both `/` and `/ar/` generated successfully.
-- Browser inspection: English and Arabic at 320, 390, 768 and 1440 px. No horizontal document overflow at those widths.
-- Mobile menu: opens, closes after navigation, dismisses with Escape and restores focus to the menu control.
-- Service preview: opens a named native dialog; its quotation link selects the corresponding service and moves to the form.
-- Form: required fields and phone format use native validation. A completed test request produces a labelled, local review summary. Details are neither submitted nor persisted.
-- Video: the local MP4 plays; the pause control stops it. A poster remains available. Reduced-motion/save-data handling was reviewed in source; OS-level preference emulation was not tested.
-- Media: no broken image resources in the inspected page. WebP files and a compressed silent video are served locally. Fonts currently load from Google Fonts with fallbacks.
-- Browser console: no observed page errors during the primary interaction checks.
-- User-supplied mark: website copy normalized by removing unsupported SVG page wrappers. Original logo-pack files remain intact.
+- Eleven domain/SEO tests pass. Astro checks 45 files with zero errors, warnings or hints.
+- Preview and simulated production artifacts pass metadata, routes, sitemap, robots, 404 and asset verification. The final local artifact is restored to noindex preview mode.
+- All ten English/Arabic pages reviewed at 320, 390, 768 and 1440 px: no horizontal document overflow once layout transitions settle.
+- Header contains the logo, navigation and language control in one centered compact bar on scroll. Services retains a standalone page link and a separate dropdown control.
+- Every navigation destination and the home About button resolves to a standalone locale page. Service enquiry links preselect the requested service on Contact.
+- Services use a configurable scroll-snap carousel with previous/next controls and RTL-aware movement. No invented portfolio projects are shown.
+- The final hero plays the replacement residential footage full-width with readable content and buttons over it. The silent 10-second H.264 asset is about 315 KB, with a 22 KB WebP poster. Playback controls and reduced-motion/save-data handling remain available.
+- Vercel import configuration is committed; no deployment has been made from this workspace. Review builds remain noindex by default.
+- The quotation form only creates a local review summary; it does not deliver an enquiry. Company details, actual projects and production form delivery remain later work.
 
-Screenshots are in `docs/previews/`: full English/Arabic desktop pages and phone hero previews. This is Chromium-based browser QA; Safari, physical devices, screen readers and measured Core Web Vitals remain for the full implementation stage.
-
-The concept remains noindex. Production SEO, company-specific structured data, sitemap, real contact delivery and privacy handling are not represented as complete.
+Browser checks use Chromium. Physical iOS/Android devices, Safari, screen readers and measured Core Web Vitals remain for launch verification. Generated screenshots in `docs/previews/` are excluded from Git.

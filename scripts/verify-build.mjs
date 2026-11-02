@@ -8,9 +8,17 @@ const sitemap = await read('sitemap.xml');
 const robots = await read('robots.txt');
 const headers = await read('_headers');
 
-for (const [file, locale, dir, route] of [
-  ['index.html', 'en', 'ltr', '/'],
-  ['ar/index.html', 'ar', 'rtl', '/ar/'],
+for (const [file, locale, dir, route, eligible] of [
+  ['index.html', 'en', 'ltr', '/', true],
+  ['ar/index.html', 'ar', 'rtl', '/ar/', true],
+  ['about/index.html', 'en', 'ltr', '/about/', true],
+  ['ar/about/index.html', 'ar', 'rtl', '/ar/about/', true],
+  ['contact/index.html', 'en', 'ltr', '/contact/', true],
+  ['ar/contact/index.html', 'ar', 'rtl', '/ar/contact/', true],
+  ['services/index.html', 'en', 'ltr', '/services/', true],
+  ['ar/services/index.html', 'ar', 'rtl', '/ar/services/', true],
+  ['our-works/index.html', 'en', 'ltr', '/our-works/', false],
+  ['ar/our-works/index.html', 'ar', 'rtl', '/ar/our-works/', false],
 ]) {
   const html = await read(file);
   assert.match(html, new RegExp(`<html[^>]*lang="${locale}"`));
@@ -22,18 +30,17 @@ for (const [file, locale, dir, route] of [
   );
   assert.match(html, /<meta name="description" content="[^"]+"/);
   assert.match(html, /<meta name="robots" content="(?:index|noindex), follow/);
-  if (info.origin) {
+  if (info.origin && eligible) {
     assert.ok(
       html.includes(`rel="canonical" href="${info.origin}${route}"`),
       `${file}: canonical mismatch`,
     );
     for (const language of ['en-AE', 'ar-AE', 'x-default'])
       assert.ok(html.includes(`hreflang="${language}"`));
-    assert.ok(
-      html.includes(
-        `property="og:image" content="${info.origin}/images/dubai.webp"`,
-      ),
-    );
+    const socialImage = html.match(/property="og:image" content="([^"]+)"/);
+    assert.ok(socialImage, 'Social image must use the configured domain');
+    assert.equal(new URL(socialImage[1]).origin, info.origin);
+    await access(join('dist', new URL(socialImage[1]).pathname));
     const jsonLd = html.match(
       /<script type="application\/ld\+json">([\s\S]*?)<\/script>/,
     );
@@ -52,7 +59,9 @@ for (const [file, locale, dir, route] of [
     assert.doesNotMatch(html, /rel="canonical"|hreflang=/);
   }
   assert.ok(
-    html.includes(`content="${info.indexable ? 'index' : 'noindex'}, follow`),
+    html.includes(
+      `content="${info.indexable && eligible ? 'index' : 'noindex'}, follow`,
+    ),
   );
   for (const match of html.matchAll(
     /(?:src|href)="(\/(?:_astro|brand|images)\/[^"?#]+)"/g,
@@ -65,7 +74,7 @@ assert.match(notFound, /noindex, follow/);
 assert.doesNotMatch(notFound, /rel="canonical"/);
 assert.match(robots, /Allow: \//);
 if (info.indexable) {
-  assert.equal((sitemap.match(/<url>/g) || []).length, 2);
+  assert.equal((sitemap.match(/<url>/g) || []).length, 8);
   assert.ok(robots.includes(`Sitemap: ${info.origin}/sitemap.xml`));
   assert.doesNotMatch(headers, /X-Robots-Tag: noindex/);
 } else {

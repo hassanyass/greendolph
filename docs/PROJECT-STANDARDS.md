@@ -38,3 +38,7 @@ The design concept is approved. The current stage establishes the real repositor
 - Until delivery is configured, explicitly identify the form as a local preview. Never claim that an unsent enquiry was submitted. Do not store contact details in browser storage or logs.
 - Production needs server validation, delivery/error states, appropriate spam protection, consent/privacy copy, retention and rate limits. Those are later implementation tasks.
 - Run `npm run check` and `npm run build`. Review desktop/mobile and both locales when browser automation is available. Verify navigation, service dialogs, video controls, form validation and the honest preview summary. Record any QA limits.
+
+## Approved navigation and motion direction
+
+Use a compact-on-scroll header, a separately clickable Services page link and accessible service dropdown, and an Our Works destination. Keep the video full-width and screen-filling, with content and calls to action over the footage. On scroll, shrink the complete navigation group into one centered floating bar, including the logo and language control. Every primary navigation item must lead to a separate locale page, and the home About button must lead to the full About page. Services are a data-driven, swipeable carousel with previous/next controls and RTL-aware motion. Avoid diagonal arrow glyphs and report-like numbered section labels. Scope the current review to navigation, hero and service browsing; do not redesign the remaining sections.
