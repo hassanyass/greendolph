@@ -6,7 +6,7 @@
 - Header contains the logo, navigation and language control in one centered compact bar on scroll. Services retains a standalone page link and a separate dropdown control.
 - Every navigation destination and the home About button resolves to a standalone locale page. Service enquiry links preselect the requested service on Contact.
 - Services use a configurable scroll-snap carousel with previous/next controls and RTL-aware movement. No invented portfolio projects are shown.
-- The final hero plays the replacement residential footage full-width with readable content and buttons over it. The silent 10-second H.264 asset is about 315 KB, with a 22 KB WebP poster. Playback controls and reduced-motion/save-data handling remain available.
+- The final hero plays the replacement electrical-service footage full-width with readable content and buttons over it. The silent H.264 loop shows a technician testing a wall socket, with a matching WebP poster. Playback controls and reduced-motion/save-data handling remain available.
 - Vercel import configuration is committed; no deployment has been made from this workspace. Review builds remain noindex by default.
 - The quotation form only creates a local review summary; it does not deliver an enquiry. Company details, actual projects and production form delivery remain later work.
 

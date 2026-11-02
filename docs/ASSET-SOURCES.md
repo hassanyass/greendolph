@@ -28,4 +28,14 @@ No third-party icon set or animation snippet is shipped. ControlIcon contains mi
 
 ## Current hero footage
 
-`public/images/property-care.mp4` and `property-care.webp`: [A Modern Living Room](https://www.pexels.com/video/a-modern-living-room-7533207/) by Max Vakhtbovych, under the [Pexels licence](https://www.pexels.com/license/). Illustrative residential space, not a completed company project. Downloaded original 4K footage, trimmed to 10 seconds, compressed to silent 1280 × 720 H.264 at 24 fps (about 315 KB); WebP poster about 22 KB. Calm architectural footage replaces the electrical-control-panel clip after review.
+`public/images/electrical-service.mp4` and `electrical-service.webp`: [Technician attendance](https://www.pexels.com/video/technician-attendance-18780266/) by Johnny Chen, under the [Pexels licence](https://www.pexels.com/license/). A technician tests a residential wall socket with a multimeter. Illustrative service work, not company staff or a completed company project. Original 4K landscape footage converted to a silent 1280 × 720 H.264 loop at 24 fps with a matching WebP poster.
+
+## Hero selection review
+
+Reviewed Pexels, Pixabay, Mixkit, Vecteezy, Envato and Storyblocks after the residential-interior footage was rejected. The selected Pexels clip depicts an actual service task rather than a furnished room, industrial controls or unrelated construction.
+
+Closer AC-specific alternatives requiring a paid licence:
+- [Technician testing industrial air conditioning with a multimeter](https://elements.envato.com/resistance-test-of-temperature-sensors-in-the-cool-GNB86J5) by vogofilms, Envato; landscape, 14 seconds.
+- [Technician checking an air conditioner](https://www.storyblocks.com/video/stock/black-technician-in-uniform-check-air-conditioner-air-condition-maintenance-service-352991962) by voffka23, Storyblocks; 14 seconds.
+
+No paid footage was purchased or included. Mixkit's electrician-in-Vietnam clip was excluded because its free download is restricted to personal use. Avoid using this illustrative stock as an Our Works project.
