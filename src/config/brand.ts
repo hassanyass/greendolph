@@ -48,9 +48,5 @@ export class Brand {
 
 export const brand = new Brand();
 export const media = {
-  hero: '/images/site-installation.webp',
-  video: '/images/site-installation.mp4',
-  heroWidth: 1280,
-  heroHeight: 720,
   interior: '/images/interior.webp',
 };

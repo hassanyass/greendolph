@@ -43,9 +43,11 @@ The service panels and detail pages use these [Pexels photographs](https://www.p
 
 The homepage enquiry section uses [Measuring a wall](https://www.pexels.com/photo/a-construction-worker-holding-a-pencil-and-measuring-tape-5493676/) by Antoni Shkraba. Its WebP crops are under `public/images/home/`. The split image and content layout draws on [ScrewFast’s FeaturesGeneral](https://github.com/mearashadowfax/ScrewFast/blob/main/src/components/sections/features/FeaturesGeneral.astro), under the [MIT licence](https://github.com/mearashadowfax/ScrewFast/blob/main/LICENSE).
 
-## Current hero footage
+## Homepage blueprint and share image
 
-`public/images/site-installation.mp4` and `site-installation.webp` use [Construction Worker Installing Electrical Wiring](https://www.pexels.com/video/construction-worker-installing-electrical-wiring-34572318/) by Sergei Starostin under the [Pexels licence](https://www.pexels.com/license/). The illustrative site preparation clip is a silent 4.5-second 1280 × 720 H.264 sequence at 24 fps. The poster is a still near the end of the clip.
+The homepage blueprint is an original SVG with a CSS grid and a single line animation. [Magic UI’s Animated Grid Pattern](https://magicui.design/docs/components/animated-grid-pattern) served as a visual reference.
+
+The social share image at `public/images/site-installation.webp` is a still from [Construction Worker Installing Electrical Wiring](https://www.pexels.com/video/construction-worker-installing-electrical-wiring-34572318/) by Sergei Starostin under the [Pexels licence](https://www.pexels.com/license/).
 
 ## Our Works photographs
 

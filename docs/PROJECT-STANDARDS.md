@@ -24,7 +24,7 @@ Review each phase and push the checked changes to GitHub for peer review. Begin 
 - Design for phones first, then check 320, 390, 768 and 1440 px widths in both languages. No horizontal page overflow or clipped Arabic text.
 - Arabic has a real `/ar/` page, document `lang=ar`, `dir=rtl`, natural Arabic copy and CSS logical properties. Numbers and phone inputs retain the appropriate direction. Mirror directional controls rather than logos or photographs.
 - Keep navigation keyboard-operable. Menu announces its state, closes on selection/Escape, and exposes a readable focus state. Dialogs have names, keyboard dismissal and focus restoration.
-- Provide labels, visible focus, suitable contrast and approximately 44 px interaction targets. Honour reduced motion and save-data preferences. The decorative hero uses a poster and a short muted clip that plays once for less than five seconds.
+- Provide labels, visible focus, suitable contrast and approximately 44 px interaction targets. The decorative hero draws the technical illustration once and shows the complete drawing immediately with reduced motion enabled.
 
 ## UAE search foundation
 
@@ -44,8 +44,8 @@ Review each phase and push the checked changes to GitHub for peer review. Begin 
 
 - Until delivery is configured, explicitly identify the form as a local preview. Never claim that an unsent enquiry was submitted. Do not store contact details in browser storage or logs.
 - Formspree handles delivery and spam filtering when an ID is configured. Keep localized validation and retry states, disclose processing in the quotation form, and confirm provider settings, data retention and inbox receipt before launch.
-- Run `npm run check` and `npm run build`. Review desktop/mobile and both locales when browser automation is available. Verify navigation, the service carousel, single-play hero footage and its reduced-motion fallback, form validation and the honest preview summary. Record any QA limits.
+- Run `npm run check` and `npm run build`. Review desktop/mobile and both locales when browser automation is available. Verify navigation, the service carousel, the hero illustration and its reduced-motion fallback, form validation and the honest preview summary. Record any QA limits.
 
 ## Approved navigation and motion direction
 
-Use a compact-on-scroll header, a separately clickable Services page link and accessible service dropdown, and an Our Works destination. Keep the video full-width and screen-filling, with content and calls to action over the footage. On scroll, shrink the complete navigation group into one centered floating bar, including the logo and language control. Every primary navigation item must lead to a separate locale page, and the home About button must lead to the full About page. Services are a data-driven, swipeable carousel with previous/next controls and RTL-aware motion. Avoid diagonal arrow glyphs and report-like numbered section labels.
+Use a compact-on-scroll header, a separately clickable Services page link and accessible service dropdown, and an Our Works destination. Pair the hero headline and actions with the technical blueprint, stacking the drawing below the copy on narrow screens. On scroll, shrink the complete navigation group into one centered floating bar, including the logo and language control. Every primary navigation item must lead to a separate locale page, and the home About button must lead to the full About page. Services are a data-driven, swipeable carousel with previous/next controls and RTL-aware motion. Avoid diagonal arrow glyphs and report-like numbered section labels.

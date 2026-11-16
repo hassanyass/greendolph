@@ -225,39 +225,6 @@ class ServiceCarousel {
   }
 }
 
-function playHeroOnce() {
-  const video = document.querySelector<HTMLVideoElement>('#hero-video');
-  const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  const connection = (
-    navigator as Navigator & { connection?: { saveData: boolean } }
-  ).connection;
-  if (!video?.dataset.src || motion.matches || connection?.saveData) return;
-
-  const pause = () => video.pause();
-  video.addEventListener('playing', () => video.classList.add('ready'), {
-    once: true,
-  });
-  video.addEventListener('error', () => video.classList.remove('ready'), {
-    once: true,
-  });
-  const pageVisibility = () => {
-    if (document.hidden) pause();
-  };
-  const motionChange = () => {
-    if (motion.matches) pause();
-  };
-  document.addEventListener('visibilitychange', pageVisibility);
-  motion.addEventListener('change', motionChange);
-  const cleanup = () => {
-    document.removeEventListener('visibilitychange', pageVisibility);
-    motion.removeEventListener('change', motionChange);
-  };
-  video.addEventListener('ended', cleanup, { once: true });
-  video.muted = true;
-  video.src = video.dataset.src;
-  video.play().catch(cleanup);
-}
-
 function revealHomeProcess() {
   const section = document.querySelector('[data-home-process]');
   if (
@@ -290,7 +257,6 @@ function followLegacyServiceLink() {
 followLegacyServiceLink();
 window.addEventListener('hashchange', followLegacyServiceLink);
 new SiteNavigation();
-playHeroOnce();
 revealHomeProcess();
 document
   .querySelectorAll<HTMLFormElement>('#quote-form')

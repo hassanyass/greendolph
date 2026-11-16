@@ -1,5 +1,5 @@
 ---
-import { media } from '../config/brand';
+import HeroBlueprint from './HeroBlueprint.astro';
 import { routes } from '../domain/routes';
 import { copy, type Locale } from '../config/content';
 const { locale } = Astro.props as { locale: Locale };
@@ -7,41 +7,26 @@ const t = copy[locale];
 ---
 
 <section class="hero" id="home" aria-labelledby="hero-title">
-  <div class="hero-media">
-    <img
-      class="hero-poster"
-      src={media.hero}
-      alt=""
-      width={media.heroWidth}
-      height={media.heroHeight}
-      fetchpriority="high"
-    />
-    <video
-      id="hero-video"
-      class="hero-video"
-      muted
-      playsinline
-      preload="none"
-      poster={media.hero}
-      aria-hidden="true"
-      data-src={media.video}
-    ></video>
-  </div>
-  <div class="hero-shade"></div>
-  <div class="hero-copy">
-    <p class="eyebrow">{t.eyebrow}</p>
-    <h1 id="hero-title">
-      {t.heroTop}
-      <span>{t.heroBottom}</span>
-    </h1>
-    <p class="hero-description">{t.heroText}</p>
-    <div class="hero-buttons">
-      <a href={routes.enquiry(locale)} class="button">
-        {t.quote}
-      </a>
-      <a href={routes.path('services', locale)} class="button button-secondary">
-        {t.explore}
-      </a>
+  <div class="hero-layout">
+    <div class="hero-copy">
+      <p class="eyebrow">{t.eyebrow}</p>
+      <h1 id="hero-title">
+        {t.heroTop}
+        <span>{t.heroBottom}</span>
+      </h1>
+      <p class="hero-description">{t.heroText}</p>
+      <div class="hero-buttons">
+        <a href={routes.enquiry(locale)} class="button">
+          {t.quote}
+        </a>
+        <a
+          href={routes.path('services', locale)}
+          class="button button-secondary"
+        >
+          {t.explore}
+        </a>
+      </div>
     </div>
+    <HeroBlueprint />
   </div>
 </section>
