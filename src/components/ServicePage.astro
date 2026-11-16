@@ -2,8 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { brand } from '../config/brand';
 import { copy, type Locale } from '../config/content';
+import {
+  servicePhotoPath,
+  servicePresentation,
+} from '../config/service-presentation';
 import { routes } from '../domain/routes';
 import type { Service } from '../domain/service';
+import ControlIcon from './ControlIcon.astro';
+import ServicePhoto from './ServicePhoto.astro';
 
 interface Props {
   locale: Locale;
@@ -12,6 +18,7 @@ interface Props {
 const { locale, service } = Astro.props;
 const t = copy[locale];
 const name = locale === 'ar' ? brand.arabicName : brand.name;
+const design = servicePresentation(service.id);
 ---
 
 <BaseLayout
@@ -21,29 +28,54 @@ const name = locale === 'ar' ? brand.arabicName : brand.name;
   description={service.description[locale]}
   service={service}
 >
-  <div class="page-intro">
-    <a class="text-link" href={routes.path('services', locale)}>
-      {t.viewServices}
-    </a>
-    <h1>{service.licenceTitle[locale]}</h1>
-    <p>{service.description[locale]}</p>
-  </div>
-  <section class="section service-summary" aria-labelledby="quote-scope">
-    {service.image && (
-      <img
-        src={service.image.src}
-        alt={service.image.alt[locale]}
-        width="800"
-        height="600"
-        loading="lazy"
-      />
-    )}
-    <div>
-      <h2 id="quote-scope">{t.serviceQuoteHeading}</h2>
-      <p>{service.detail[locale]}</p>
-      <a class="button" href={routes.enquiry(locale, service.id)}>
-        {t.quote}
-      </a>
-    </div>
-  </section>
+  <article class="service-profile" style={`--service-tint:${design.tint}`}>
+    <header
+      class="section service-profile-heading"
+      data-photo-placement={design.placement}
+    >
+      <div class="service-profile-copy">
+        <a class="text-link" href={routes.path('services', locale)}>
+          <ControlIcon name="previous" />
+          {t.viewServices}
+        </a>
+        <h1>{service.title[locale]}</h1>
+        <p>{service.description[locale]}</p>
+        <a class="button" href={routes.enquiry(locale, service.id)}>
+          {t.quote}
+        </a>
+      </div>
+      <div class="service-profile-photo">
+        <ServicePhoto
+          id={service.id}
+          sizes="(max-width: 800px) 90vw, 51vw"
+          alt={design.leadAlt[locale]}
+          priority
+        />
+      </div>
+    </header>
+    <section class="section service-brief" aria-labelledby="quote-scope">
+      <div class="service-brief-copy">
+        <h2 id="quote-scope">{t.serviceQuoteHeading}</h2>
+        <ul>
+          {design.enquiry[locale].map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+        <p class="service-licence">
+          <strong>{t.serviceLicenceLabel}</strong>
+          {service.licenceTitle[locale]}
+        </p>
+      </div>
+      <div class="service-brief-photo">
+        <img
+          src={`${servicePhotoPath(service.id)}-detail.webp`}
+          alt={design.detailAlt[locale]}
+          width="560"
+          height="560"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </section>
+  </article>
 </BaseLayout>

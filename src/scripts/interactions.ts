@@ -118,19 +118,31 @@ class SiteNavigation {
 
 class ServiceCarousel {
   private track: HTMLElement;
+  private cards: HTMLElement[];
+  private selectors: HTMLAnchorElement[];
   private previous: HTMLButtonElement | null;
   private next: HTMLButtonElement | null;
   private index = 0;
-  private lastIndex = 0;
-  private visible = 1;
   private rtl = document.documentElement.dir === 'rtl';
   private motion = matchMedia('(prefers-reduced-motion: reduce)');
   constructor(private section: HTMLElement) {
     this.track = section.querySelector<HTMLElement>('.service-track')!;
+    this.cards = [...this.track.querySelectorAll<HTMLElement>('.service-card')];
+    this.selectors = [
+      ...section.querySelectorAll<HTMLAnchorElement>('[data-service-slide]'),
+    ];
     this.previous = section.querySelector<HTMLButtonElement>('[data-previous]');
     this.next = section.querySelector<HTMLButtonElement>('[data-next]');
     this.previous?.addEventListener('click', () => this.go(this.index - 1));
     this.next?.addEventListener('click', () => this.go(this.index + 1));
+    this.selectors.forEach((link, index) => {
+      link.addEventListener('click', (event) => {
+        if (event.metaKey || event.ctrlKey || event.altKey || event.shiftKey)
+          return;
+        event.preventDefault();
+        this.go(index);
+      });
+    });
     this.track.addEventListener('scroll', () => this.update(), {
       passive: true,
     });
@@ -146,7 +158,7 @@ class ServiceCarousel {
         ArrowRight: this.index + (this.rtl ? -1 : 1),
         ArrowLeft: this.index + (this.rtl ? 1 : -1),
         Home: 0,
-        End: this.lastIndex,
+        End: this.cards.length - 1,
       };
       if (event.key in moves) {
         event.preventDefault();
@@ -158,50 +170,56 @@ class ServiceCarousel {
     this.update();
   }
   private update() {
-    const cards = [
-      ...this.track.querySelectorAll<HTMLElement>('.service-card'),
-    ];
-    if (!cards.length) return;
+    if (!this.cards.length) return;
+    const lastIndex = this.cards.length - 1;
     const gap = Number.parseFloat(getComputedStyle(this.track).columnGap) || 0;
-    const step = cards[0].getBoundingClientRect().width + gap;
-    this.visible = Math.max(
-      1,
-      Math.round((this.track.clientWidth + gap) / step),
-    );
-    this.lastIndex = Math.max(0, cards.length - this.visible);
+    const step = this.cards[0].getBoundingClientRect().width + gap;
     this.index = Math.min(
-      this.lastIndex,
+      lastIndex,
       Math.max(0, Math.round(Math.abs(this.track.scrollLeft) / step)),
     );
+    if (!this.selectors[this.index]?.hasAttribute('aria-current')) {
+      this.selectors.forEach((link, index) => {
+        this.cards[index].classList.toggle(
+          'service-card-current',
+          index === this.index,
+        );
+        if (index === this.index) link.setAttribute('aria-current', 'true');
+        else link.removeAttribute('aria-current');
+      });
+      this.showSelector();
+    }
     if (this.previous) this.previous.disabled = this.index === 0;
-    if (this.next) this.next.disabled = this.index === this.lastIndex;
+    if (this.next) this.next.disabled = this.index === lastIndex;
     const status = this.section.querySelector<HTMLElement>('.carousel-status');
     const formatter = new Intl.NumberFormat(document.documentElement.lang);
-    const first = this.index + 1;
-    const last = Math.min(cards.length, this.index + this.visible);
-    const range =
-      first === last
-        ? formatter.format(first)
-        : `${formatter.format(first)}–${formatter.format(last)}`;
     const text =
       this.section.dataset.status
-        ?.replace('{range}', range)
-        .replace('{total}', formatter.format(cards.length)) ?? '';
+        ?.replace('{range}', formatter.format(this.index + 1))
+        .replace('{total}', formatter.format(this.cards.length)) ?? '';
     if (status && status.textContent !== text) status.textContent = text;
   }
+  private showSelector() {
+    const link = this.selectors[this.index];
+    const rail = link?.closest('ul');
+    if (!rail) return;
+    const edge = rail.getBoundingClientRect();
+    const item = link.getBoundingClientRect();
+    if (item.left < edge.left) rail.scrollLeft += item.left - edge.left;
+    else if (item.right > edge.right)
+      rail.scrollLeft += item.right - edge.right;
+  }
   private go(index: number) {
-    index = Math.min(this.lastIndex, Math.max(0, index));
     const card =
-      this.track.querySelectorAll<HTMLElement>('.service-card')[index];
+      this.cards[Math.min(this.cards.length - 1, Math.max(0, index))];
     if (!card) return;
     const edge = this.track.getBoundingClientRect();
     const target = card.getBoundingClientRect();
-    const style = getComputedStyle(this.track);
     const delta = this.rtl
-      ? target.right - edge.right + Number.parseFloat(style.paddingRight)
-      : target.left - edge.left - Number.parseFloat(style.paddingLeft);
-    this.track.scrollBy({
-      left: delta,
+      ? target.right - edge.right
+      : target.left - edge.left;
+    this.track.scrollTo({
+      left: this.track.scrollLeft + delta,
       behavior: this.motion.matches ? 'instant' : 'smooth',
     });
   }

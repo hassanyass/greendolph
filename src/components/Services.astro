@@ -1,13 +1,12 @@
 ---
 import { services } from '../config/services';
 import { copy, type Locale } from '../config/content';
-import { experience } from '../config/experience';
 import { routes } from '../domain/routes';
-import { homeServicePhotos } from '../config/home-photos';
+import { servicePresentation } from '../config/service-presentation';
 import ControlIcon from './ControlIcon.astro';
+import ServicePhoto from './ServicePhoto.astro';
 const { locale } = Astro.props as { locale: Locale };
 const t = copy[locale];
-const { desktopVisible, tabletVisible, mobileVisible } = experience.carousel;
 ---
 
 <section
@@ -16,7 +15,6 @@ const { desktopVisible, tabletVisible, mobileVisible } = experience.carousel;
   aria-labelledby="services-title"
   data-carousel
   data-status={t.carouselStatus}
-  style={`--cards-desktop:${desktopVisible};--cards-tablet:${tabletVisible};--cards-mobile:${mobileVisible}`}
 >
   <div class="services-heading">
     <h2 id="services-title">{t.servicesLabel}</h2>
@@ -25,6 +23,7 @@ const { desktopVisible, tabletVisible, mobileVisible } = experience.carousel;
     </a>
   </div>
   <div class="carousel-controls">
+    <span class="carousel-status" aria-live="polite" aria-atomic="true"></span>
     <div class="carousel-buttons">
       <button
         type="button"
@@ -46,8 +45,16 @@ const { desktopVisible, tabletVisible, mobileVisible } = experience.carousel;
         <ControlIcon name="next" />
       </button>
     </div>
-    <span class="carousel-status" aria-live="polite" aria-atomic="true"></span>
   </div>
+  <ul class="service-selector" aria-label={t.carouselLabel}>
+    {services.map((service, index) => (
+      <li>
+        <a href={`#service-${service.id}`} data-service-slide={index}>
+          {service.title[locale]}
+        </a>
+      </li>
+    ))}
+  </ul>
   <div
     class="service-track"
     id="service-track"
@@ -56,32 +63,29 @@ const { desktopVisible, tabletVisible, mobileVisible } = experience.carousel;
     tabindex="0"
   >
     {services.map((service) => {
-      const photo = homeServicePhotos[service.id];
+      const design = servicePresentation(service.id);
       return (
-        <article class="service-card" id={`service-${service.id}`}>
+        <article
+          class="service-card"
+          id={`service-${service.id}`}
+          style={`--service-tint:${design.tint}`}
+        >
           <a
             class="service-card-link"
             href={routes.service(service.id).paths[locale]}
           >
-            <div class="service-card-photo">
-              {photo && (
-                <img
-                  src={`${photo}-320.webp`}
-                  srcset={`${photo}-320.webp 320w, ${photo}-640.webp 640w`}
-                  sizes="(max-width: 359px) 78vw, (max-width: 700px) 43vw, (max-width: 999px) 29vw, 22vw"
-                  width="640"
-                  height="800"
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                />
-              )}
-            </div>
             <div class="service-card-caption">
               <h3>{service.title[locale]}</h3>
-              <span class="service-card-arrow">
+              <span class="service-card-action">
+                {t.serviceExplore}
                 <ControlIcon name="next" />
               </span>
+            </div>
+            <div class="service-card-photo">
+              <ServicePhoto
+                id={service.id}
+                sizes="(max-width: 700px) 90vw, 58vw"
+              />
             </div>
           </a>
         </article>

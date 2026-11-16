@@ -1,0 +1,24 @@
+---
+import { servicePhotoPath } from '../config/service-presentation';
+
+interface Props {
+  id: string;
+  sizes: string;
+  alt?: string;
+  priority?: boolean;
+}
+const { id, sizes, alt = '', priority = false } = Astro.props;
+const photo = servicePhotoPath(id);
+---
+
+<img
+  src={`${photo}-560.webp`}
+  srcset={`${photo}-560.webp 560w, ${photo}-1120.webp 1120w`}
+  {sizes}
+  width="1120"
+  height="700"
+  {alt}
+  loading={priority ? 'eager' : 'lazy'}
+  decoding="async"
+  fetchpriority={priority ? 'high' : undefined}
+/>

@@ -3,6 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { routes } from '../domain/routes';
 import { copy, type Locale } from '../config/content';
 import { legacyServiceIds, services } from '../config/services';
+import { servicePresentation } from '../config/service-presentation';
+import ControlIcon from './ControlIcon.astro';
+import ServicePhoto from './ServicePhoto.astro';
 
 interface Props {
   locale: Locale;
@@ -25,23 +28,38 @@ const legacyAnchor = (id: string) =>
     <p>{t.servicesPageDescription}</p>
   </div>
   <ul class="service-directory section">
-    {services.map((service) => (
-      <li id={legacyAnchor(service.id)} class="service-directory-card">
-        <h2>
-          <a href={routes.service(service.id).paths[locale]}>
-            {service.licenceTitle[locale]}
-          </a>
-        </h2>
-        <p>{service.description[locale]}</p>
-        <a
-          data-service-detail
-          class="service-link"
-          href={routes.service(service.id).paths[locale]}
-          aria-label={`${t.serviceExplore}: ${service.title[locale]}`}
+    {services.map((service, index) => {
+      const wide = index === 0 || index === 5;
+      return (
+        <li
+          id={legacyAnchor(service.id)}
+          class="service-directory-card"
+          data-wide={wide || undefined}
+          style={`--service-tint:${servicePresentation(service.id).tint}`}
         >
-          {t.serviceExplore}
-        </a>
-      </li>
-    ))}
+          <a
+            data-service-detail
+            class="service-directory-link"
+            href={routes.service(service.id).paths[locale]}
+          >
+            <div class="service-directory-photo">
+              <ServicePhoto
+                id={service.id}
+                sizes={
+                  wide
+                    ? '(max-width: 580px) 90vw, (max-width: 950px) 45vw, 59vw'
+                    : '(max-width: 580px) 90vw, (max-width: 950px) 45vw, 29vw'
+                }
+              />
+            </div>
+            <div class="service-directory-copy">
+              <h2>{service.title[locale]}</h2>
+              <p>{service.description[locale]}</p>
+              <ControlIcon name="next" />
+            </div>
+          </a>
+        </li>
+      );
+    })}
   </ul>
 </BaseLayout>
