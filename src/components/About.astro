@@ -27,7 +27,12 @@ const t = copy[locale];
       />
     </div>
     <div class="about-copy">
-      <img src={brand.logo} alt={brand.name} width="280" height="60" />
+      <img
+        src={brand.logo}
+        alt={brand.name}
+        width={brand.logoSize.width}
+        height={brand.logoSize.height}
+      />
       <h2 id="company-title">{t.aboutTitle}</h2>
       <p>{t.aboutText}</p>
       <p>{t.aboutDetail}</p>

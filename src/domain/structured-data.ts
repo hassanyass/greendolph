@@ -23,7 +23,7 @@ export class StructuredDataBuilder {
     readonly logoPath: string,
   ) {}
 
-  build() {
+  build(service?: { name: string; description: string; url: string }) {
     if (!this.site.origin) return null;
     const organization = {
       '@type':
@@ -56,9 +56,22 @@ export class StructuredDataBuilder {
           '@id': `${this.site.origin}/#website`,
           name: this.company.name,
           url: this.site.origin,
-          inLanguage: ['en-AE', 'ar-AE'],
+          inLanguage: ['en', 'ar'],
           publisher: { '@id': organization['@id'] },
         },
+        ...(service
+          ? [
+              {
+                '@type': 'Service',
+                '@id': `${service.url}#service`,
+                ...service,
+                provider: { '@id': organization['@id'] },
+                ...(this.company.serviceAreas.length
+                  ? { areaServed: this.company.serviceAreas }
+                  : {}),
+              },
+            ]
+          : []),
       ],
     };
   }

@@ -2,10 +2,11 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SeoHead from '../components/SeoHead.astro';
-import { brand, media } from '../config/brand';
+import { brand } from '../config/brand';
 import { copy } from '../config/content';
 import { site } from '../config/site';
 import { routes, type Locale, type PageDefinition } from '../domain/routes';
+import type { Service } from '../domain/service';
 import { PageMetadata } from '../domain/seo';
 import '../styles/global.css';
 
@@ -13,10 +14,12 @@ interface Props {
   locale: Locale;
   page?: PageDefinition;
   title?: string;
+  service?: Service;
   description?: string;
 }
 const {
   locale,
+  service,
   page = routes.page('home'),
   title = copy[locale].title,
   description = copy[locale].description,
@@ -27,7 +30,7 @@ const metadata = new PageMetadata(
   locale,
   title,
   description,
-  media.hero,
+  brand.shareImage.src,
   page.indexable,
 );
 ---
@@ -41,15 +44,12 @@ const metadata = new PageMetadata(
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <SeoHead metadata={metadata} />
+    <SeoHead metadata={metadata} service={service} />
     <meta name="theme-color" content={brand.colors.forest} />
-    <link rel="icon" type="image/svg+xml" href={brand.mark} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Readex+Pro:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="icon" type={brand.favicon.type} href={brand.favicon.src} />
+    {brand.typography.stylesheet && (
+      <link href={brand.typography.stylesheet} rel="stylesheet" />
+    )}
   </head>
   <body>
     <a href="#main" class="skip-link">

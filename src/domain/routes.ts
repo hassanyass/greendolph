@@ -1,6 +1,14 @@
+import { services } from '../config/services.ts';
+
 export type Locale = 'en' | 'ar';
 export type PageKey =
-  'home' | 'services' | 'works' | 'about' | 'contact' | 'notFound';
+  | 'home'
+  | 'services'
+  | 'works'
+  | 'about'
+  | 'contact'
+  | 'notFound'
+  | `service:${string}`;
 export const locales: readonly Locale[] = ['en', 'ar'];
 
 export interface PageDefinition {
@@ -26,6 +34,10 @@ export class RouteCatalog {
     return this.path(key, locale === 'en' ? 'ar' : 'en');
   }
 
+  service(id: string): PageDefinition {
+    return this.page(`service:${id}`);
+  }
+
   enquiry(locale: Locale, service?: string): string {
     return `${this.path('contact', locale)}${service ? `?service=${encodeURIComponent(service)}` : ''}`;
   }
@@ -45,6 +57,11 @@ export const routes = new RouteCatalog([
     paths: { en: '/services/', ar: '/ar/services/' },
     indexable: true,
   },
+  ...services.map(({ id }): PageDefinition => ({
+    key: `service:${id}`,
+    paths: { en: `/services/${id}/`, ar: `/ar/services/${id}/` },
+    indexable: true,
+  })),
   {
     key: 'works',
     paths: { en: '/our-works/', ar: '/ar/our-works/' },

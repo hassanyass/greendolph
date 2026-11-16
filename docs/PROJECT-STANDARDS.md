@@ -2,9 +2,16 @@
 
 ## Product and scope
 
-Aldolphin Alakhthar is a UAE technical services company. AC repair and installation and electrical works are confirmed service categories. Broader maintenance categories, exact legal/trading names, coverage, address, phone, hours and delivery promises need company confirmation before publication. Stock imagery depicts illustrative spaces or work, not this company's staff or portfolio.
+Aldolphin Alakhthar is a UAE technical services company. The ten active activities in the supplied trade licence define the services. Confirm the trading name, local coverage, address, contact details and permissions for project imagery before publication.
 
-The design concept is approved. The current stage establishes the real repository and deployment/SEO foundation; home-page revisions await the user’s detailed comments. The intended complete website will have Home, Services, service-detail pages, About and Contact, in English and Arabic. Preserve this review stage.
+## Approved rollout
+
+1. Build the ten bilingual service detail pages, portable deployment, search metadata, and replaceable identity settings.
+2. Add the email quotation form through a configurable Formspree form ID, direct WhatsApp, phone and email actions, and optional verified social profiles.
+3. Publish approved bilingual project content, enable the profile PDF download, and animate project cards with native web APIs and a reduced-motion fallback.
+4. Apply the supplied identity, test the selected host and actual contact delivery, and enable indexing on the approved .com after sign-off.
+
+Review each phase and push the checked changes to GitHub for peer review. Begin the next phase after approval. Use the supplied transcription as provisional content. Compare full English and Arabic activity titles against the original licence and obtain approval before public indexing. Keep full titles separate from concise navigation labels and editorial descriptions. Exclude licence status, printing details and contact fields from the service catalog.
 
 ## Replaceable brand and content
 
@@ -22,7 +29,7 @@ The design concept is approved. The current stage establishes the real repositor
 ## UAE search foundation
 
 - Generate readable HTML for each locale, with distinct titles, descriptions, one h1 and a meaningful heading hierarchy. Keep business copy specific and human; do not keyword-stuff emirate names or mass-produce city pages.
-- Before launch, use a confirmed HTTPS domain to emit canonical URLs, en-AE/ar-AE/x-default alternates, a sitemap, absolute social-image URLs and truthful LocalBusiness/Service structured data.
+- Before launch, use the confirmed HTTPS .com domain to emit canonical URLs, en/ar/x-default alternates, a sitemap, absolute social-image URLs and truthful LocalBusiness/Service structured data.
 - Keep previews `noindex` through page metadata and deployment headers. Permit crawling so search engines can read noindex. Enable indexing deliberately through SITE_ENV=production, SITE_URL and SITE_INDEXABLE=true only for a finished launch. Avoid invented addresses, ratings, response times, 24/7 claims or service-area claims.
 - Confirm trading name, NAP (name/address/phone), geographic coverage and Google Business Profile details. Use actual company project photographs where available. Search ranking is an outcome to measure, not a promise.
 - Optimize images, font delivery and video before launch. Target good Core Web Vitals; lazy-load below-fold media and reserve image dimensions.
@@ -41,4 +48,4 @@ The design concept is approved. The current stage establishes the real repositor
 
 ## Approved navigation and motion direction
 
-Use a compact-on-scroll header, a separately clickable Services page link and accessible service dropdown, and an Our Works destination. Keep the video full-width and screen-filling, with content and calls to action over the footage. On scroll, shrink the complete navigation group into one centered floating bar, including the logo and language control. Every primary navigation item must lead to a separate locale page, and the home About button must lead to the full About page. Services are a data-driven, swipeable carousel with previous/next controls and RTL-aware motion. Avoid diagonal arrow glyphs and report-like numbered section labels. Scope the current review to navigation, hero and service browsing; do not redesign the remaining sections.
+Use a compact-on-scroll header, a separately clickable Services page link and accessible service dropdown, and an Our Works destination. Keep the video full-width and screen-filling, with content and calls to action over the footage. On scroll, shrink the complete navigation group into one centered floating bar, including the logo and language control. Every primary navigation item must lead to a separate locale page, and the home About button must lead to the full About page. Services are a data-driven, swipeable carousel with previous/next controls and RTL-aware motion. Avoid diagonal arrow glyphs and report-like numbered section labels.

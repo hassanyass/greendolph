@@ -83,7 +83,7 @@ test('unconfigured builds stay out of search without inventing a canonical domai
     'en',
     'Home',
     'Description',
-    '/images/technical-care.webp',
+    '/images/electrical-service.webp',
   );
   assert.equal(page.canonical, null);
   assert.equal(page.robots, 'noindex, follow');
@@ -114,14 +114,14 @@ test('indexing cannot be enabled without a production origin', () => {
   assert.throws(() => new SiteConfiguration({ SITE_INDEXABLE: 'yes' }));
 });
 
-test('locale pages have distinct canonicals and reciprocal UAE alternates', () => {
+test('locale pages have distinct canonicals and reciprocal language alternates', () => {
   const english = new PageMetadata(
     production(),
     routes.page('home'),
     'en',
     'English',
     'Description',
-    '/images/technical-care.webp',
+    '/images/electrical-service.webp',
   );
   const arabic = new PageMetadata(
     production(),
@@ -129,16 +129,19 @@ test('locale pages have distinct canonicals and reciprocal UAE alternates', () =
     'ar',
     'العربية',
     'الوصف',
-    '/images/technical-care.webp',
+    '/images/electrical-service.webp',
   );
   assert.equal(english.canonical, 'https://example.com/');
   assert.equal(arabic.canonical, 'https://example.com/ar/');
   assert.deepEqual(english.alternates, arabic.alternates);
   assert.deepEqual(
     arabic.alternates.map((item) => item.language),
-    ['en-AE', 'ar-AE', 'x-default'],
+    ['en', 'ar', 'x-default'],
   );
-  assert.equal(arabic.image, 'https://example.com/images/technical-care.webp');
+  assert.equal(
+    arabic.image,
+    'https://example.com/images/electrical-service.webp',
+  );
 });
 
 test('sitemap contains only implemented, indexable locale routes', () => {
@@ -146,7 +149,7 @@ test('sitemap contains only implemented, indexable locale routes', () => {
     ...routes.pages,
     { key: 'notFound', paths: { en: '/404/', ar: '/404/' }, indexable: false },
   ]).render();
-  assert.equal((xml.match(/<url>/g) || []).length, 8);
+  assert.equal((xml.match(/<url>/g) || []).length, 28);
   assert.match(xml, /<loc>https:\/\/example.com\/ar\/<\/loc>/);
   assert.match(xml, /<loc>https:\/\/example.com\/services\/<\/loc>/);
   assert.doesNotMatch(xml, /404|our-works/);
@@ -159,7 +162,7 @@ test('unindexable pages never canonicalize to the home page', () => {
     'en',
     '404',
     'Not found',
-    '/images/technical-care.webp',
+    '/images/electrical-service.webp',
   );
   assert.equal(page.canonical, null);
   assert.equal(page.robots, 'noindex, follow');

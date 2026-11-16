@@ -1,9 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { routes } from '../domain/routes';
-import { copy, services, type Locale } from '../config/content';
-const { locale } = Astro.props as { locale: Locale };
+import { copy, type Locale } from '../config/content';
+import { legacyServiceIds, services } from '../config/services';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
 const t = copy[locale];
+const legacyAnchor = (id: string) =>
+  Object.entries(legacyServiceIds).find(([, target]) => target === id)?.[0] ??
+  id;
 ---
 
 <BaseLayout
@@ -12,33 +20,28 @@ const t = copy[locale];
   title={t.servicesPageTitle}
   description={t.servicesPageDescription}
 >
-  <div class="page-intro">
-    <p class="eyebrow">{t.servicesLabel}</p>
+  <div class="page-intro" id="maintenance">
     <h1>{t.servicesPageHeading}</h1>
-    <p>{t.servicesText}</p>
+    <p>{t.servicesPageDescription}</p>
   </div>
-  <div class="service-directory section">
+  <ul class="service-directory section">
     {services.map((service) => (
-      <section
-        class="service-detail"
-        id={service.id}
-        aria-labelledby={`heading-${service.id}`}
-      >
-        <img
-          src={service.image}
-          alt={service.alt[locale]}
-          width="800"
-          height="600"
-          loading="lazy"
-        />
-        <div>
-          <h2 id={`heading-${service.id}`}>{service.title[locale]}</h2>
-          <p>{service.detail[locale]}</p>
-          <a class="button" href={routes.enquiry(locale, service.id)}>
-            {t.dialogQuote}
+      <li id={legacyAnchor(service.id)} class="service-directory-card">
+        <h2>
+          <a href={routes.service(service.id).paths[locale]}>
+            {service.licenceTitle[locale]}
           </a>
-        </div>
-      </section>
+        </h2>
+        <p>{service.description[locale]}</p>
+        <a
+          data-service-detail
+          class="service-link"
+          href={routes.service(service.id).paths[locale]}
+          aria-label={`${t.serviceExplore}: ${service.title[locale]}`}
+        >
+          {t.serviceExplore}
+        </a>
+      </li>
     ))}
-  </div>
+  </ul>
 </BaseLayout>

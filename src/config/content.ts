@@ -1,60 +1,12 @@
-import { Service, type Localized } from '../domain/service';
 export type { Locale } from '../domain/routes';
+import type { Localized } from '../domain/service';
 export type { Localized } from '../domain/service';
-
-export const services = [
-  new Service(
-    'ac',
-    { en: 'Air conditioning', ar: 'التكييف' },
-    { en: 'Comfort, in every degree.', ar: 'راحة في كل درجة.' },
-    {
-      en: 'AC repair, installation and maintenance for your space. Tell us about your system and the issue so we can understand the work and prepare a quotation.',
-      ar: 'إصلاح وتركيب وصيانة أجهزة التكييف لمساحتك. أخبرنا بنوع الجهاز والمشكلة لنفهم احتياجاتك ونُعد عرض سعر مناسباً.',
-    },
-    '/images/ac.webp',
-    {
-      en: 'Technician maintaining an air conditioning unit',
-      ar: 'فني يقوم بصيانة وحدة تكييف',
-    },
-  ),
-  new Service(
-    'electrical',
-    { en: 'Electrical works', ar: 'الأعمال الكهربائية' },
-    { en: 'Keep everyday life connected.', ar: 'لتستمر تفاصيل يومك.' },
-    {
-      en: 'Electrical repairs and installation work. Describe the fittings, lighting or electrical issue you need help with. The scope and requirements will be confirmed before work is agreed.',
-      ar: 'أعمال الإصلاح والتركيب الكهربائية. وضّح احتياجاتك من التوصيلات أو الإضاءة أو الأعطال الكهربائية، ليتم تحديد نطاق العمل ومتطلباته قبل الاتفاق.',
-    },
-    '/images/electrical.webp',
-    {
-      en: 'Electrician working on an electrical control panel',
-      ar: 'فني كهربائي يعمل على لوحة تحكم كهربائية',
-    },
-  ),
-  new Service(
-    'maintenance',
-    { en: 'Property maintenance', ar: 'صيانة العقارات' },
-    {
-      en: 'A little care. A lasting difference.',
-      ar: 'عناية بسيطة، وأثر يدوم.',
-    },
-    {
-      en: 'Have several maintenance jobs in mind? Share your requirements and property type. We will review which works we can provide and confirm the scope in your quotation.',
-      ar: 'هل لديك عدة أعمال صيانة؟ شاركنا متطلباتك ونوع العقار لنراجع الأعمال التي يمكننا تقديمها ونحدّد نطاقها في عرض السعر.',
-    },
-    '/images/interior.webp',
-    {
-      en: 'Bright living space with natural materials and carefully finished surfaces',
-      ar: 'مساحة معيشة مضيئة بخامات طبيعية وتشطيبات متقنة',
-    },
-  ),
-];
 
 export const copy = {
   en: {
     title: 'Technical Services in the UAE | Aldolphin Alakhthar',
     description:
-      'Explore AC repair, installation and electrical works from Aldolphin Alakhthar, a UAE technical services company. Discuss your property and request a quotation.',
+      'Explore licensed technical services in the UAE, including air conditioning, electromechanical equipment and building finishes. Discuss your property and request a quotation.',
     nav: ['Home', 'Services', 'About us', 'Contact', 'Our works'],
     aboutPageTitle: 'About Us | Aldolphin Alakhthar Technical Services',
     aboutPageDescription:
@@ -62,7 +14,7 @@ export const copy = {
     aboutPageHeading: 'Care for your space. Clarity at every step.',
     contactPageTitle: 'Contact | Aldolphin Alakhthar Technical Services',
     contactPageDescription:
-      'Discuss your AC, electrical or property maintenance requirements with Aldolphin Alakhthar.',
+      'Discuss your installation, maintenance or finishing requirements with Aldolphin Alakhthar.',
     contactPageHeading: 'Let’s talk about your space.',
     servicesMenu: 'Show services',
     previousService: 'Previous services',
@@ -72,8 +24,9 @@ export const copy = {
     viewServices: 'View all services',
     servicesPageTitle: 'Technical Services in the UAE | Our Services',
     servicesPageDescription:
-      'Explore air conditioning, electrical works and property maintenance with Aldolphin Alakhthar in the UAE.',
-    servicesPageHeading: 'Let’s take care of your space.',
+      'Explore ten licensed technical services in the UAE, including air conditioning, electromechanical equipment, building cleaning and interior finishes.',
+    servicesPageHeading: 'Technical services in the UAE',
+    serviceQuoteHeading: 'What to share for a quotation',
     worksPageTitle: 'Our Works | Aldolphin Alakhthar',
     worksPageDescription:
       'Project stories from Aldolphin Alakhthar Technical Services.',
@@ -91,17 +44,12 @@ export const copy = {
     heroTop: 'Technical care.',
     heroBottom: 'For your everyday.',
     heroText:
-      'AC repair, installations and electrical works for homes and workplaces in the UAE. Tell us what you need. We’ll help you take the next step.',
+      'Installation, maintenance and finishing services for homes and workplaces in the UAE. Tell us what you need and we’ll help define the scope.',
     explore: 'Explore our services',
     pause: 'Pause video',
     play: 'Play video',
     heroFoot: 'A little care goes a long way.',
     heroCaption: 'HERE FOR YOUR EVERYDAY',
-    strip: [
-      'AC repair & installation',
-      'Electrical works',
-      'Property maintenance',
-    ],
     servicesLabel: 'Our services',
     servicesTitle: 'The right care for your space.',
     servicesText:
@@ -111,7 +59,7 @@ export const copy = {
     aboutLabel: 'About Aldolphin',
     aboutTitle: 'The care behind\nyour everyday.',
     aboutText:
-      'We are Aldolphin Alakhthar, a technical services company based in the UAE. We help look after the practical things that keep homes and workplaces running, from air conditioning to electrical works.',
+      'We are Aldolphin Alakhthar, a technical services company based in the UAE. We help look after the practical things that keep homes and workplaces running, from air conditioning and electromechanical equipment to interior finishes.',
     aboutMore: 'More about us',
     aboutDetail:
       'Every property has its own requirements. Our starting point is simple: understand what you need, discuss the work, and define the scope before moving forward. Tell us about your space and we can take the next step together.',
@@ -165,7 +113,7 @@ export const copy = {
   ar: {
     title: 'خدمات فنية في الإمارات | الدولفين الأخضر',
     description:
-      'تعرّف على خدمات إصلاح وتركيب التكييف والأعمال الكهربائية من الدولفين الأخضر، شركة خدمات فنية في الإمارات. أخبرنا باحتياجات عقارك واطلب عرض سعر.',
+      'تعرّف على خدمات الدولفين الأخضر الفنية في الإمارات، ومنها التكييف والمعدات الكهروميكانيكية وتشطيبات المباني، واطلب عرض سعر.',
     nav: ['الرئيسية', 'خدماتنا', 'من نحن', 'تواصل معنا', 'أعمالنا'],
     aboutPageTitle: 'من نحن | الدولفين الأخضر للخدمات الفنية',
     aboutPageDescription:
@@ -173,7 +121,7 @@ export const copy = {
     aboutPageHeading: 'عناية بمساحتك، ووضوح في كل خطوة.',
     contactPageTitle: 'تواصل معنا | الدولفين الأخضر للخدمات الفنية',
     contactPageDescription:
-      'شاركنا احتياجاتك من التكييف والأعمال الكهربائية وصيانة العقارات لدى الدولفين الأخضر.',
+      'شارك الدولفين الأخضر احتياجاتك من أعمال التركيب والصيانة والتشطيب.',
     contactPageHeading: 'لنتحدث عن مساحتك.',
     servicesMenu: 'عرض الخدمات',
     previousService: 'الخدمات السابقة',
@@ -183,8 +131,9 @@ export const copy = {
     viewServices: 'عرض جميع الخدمات',
     servicesPageTitle: 'خدماتنا الفنية في الإمارات | الدولفين الأخضر',
     servicesPageDescription:
-      'تعرّف على خدمات التكييف والأعمال الكهربائية وصيانة العقارات من الدولفين الأخضر في الإمارات.',
-    servicesPageHeading: 'لنعتني بمساحتك معاً.',
+      'تعرّف على عشر خدمات فنية مرخّصة في الإمارات، تشمل التكييف والمعدات الكهروميكانيكية وتنظيف المباني والتشطيبات الداخلية.',
+    servicesPageHeading: 'الخدمات الفنية في الإمارات',
+    serviceQuoteHeading: 'معلومات تساعدنا في إعداد عرض السعر',
     worksPageTitle: 'أعمالنا | الدولفين الأخضر',
     worksPageDescription: 'قصص مشاريع الدولفين الأخضر للخدمات الفنية.',
     worksHeading: 'أعمالنا، عن قرب.',
@@ -200,13 +149,12 @@ export const copy = {
     heroTop: 'عناية فنية.',
     heroBottom: 'لراحة كل يوم.',
     heroText:
-      'إصلاح وتركيب التكييف وأعمال الكهرباء للمنازل وأماكن العمل في الإمارات. أخبرنا بما تحتاجه، لنساعدك في الخطوة التالية.',
+      'خدمات التركيب والصيانة والتشطيب للمنازل وأماكن العمل في الإمارات. أخبرنا بما تحتاجه لنحدّد نطاق العمل.',
     explore: 'تعرّف على خدماتنا',
     pause: 'إيقاف الفيديو',
     play: 'تشغيل الفيديو',
     heroFoot: 'القليل من العناية يصنع الكثير.',
     heroCaption: 'نهتم بتفاصيل يومك',
-    strip: ['إصلاح وتركيب التكييف', 'الأعمال الكهربائية', 'صيانة العقارات'],
     servicesLabel: 'خدماتنا',
     servicesTitle: 'العناية التي تحتاجها مساحتك.',
     servicesText:
@@ -216,7 +164,7 @@ export const copy = {
     aboutLabel: 'من نحن',
     aboutTitle: 'عناية تُحدث فرقاً\nفي تفاصيل يومك.',
     aboutText:
-      'نحن الدولفين الأخضر، شركة خدمات فنية مقرها الإمارات العربية المتحدة. نعتني بالتفاصيل العملية التي تُبقي المنازل وأماكن العمل في أفضل حال، من التكييف إلى الأعمال الكهربائية.',
+      'نحن الدولفين الأخضر، شركة خدمات فنية مقرها الإمارات العربية المتحدة. نعتني بالتفاصيل العملية التي تُبقي المنازل وأماكن العمل في أفضل حال، من التكييف والمعدات الكهروميكانيكية إلى التشطيبات الداخلية.',
     aboutMore: 'المزيد عن شركتنا',
     aboutDetail:
       'لكل عقار احتياجاته الخاصة. نبدأ بفهم ما تحتاجه، ومناقشة الأعمال، وتحديد نطاقها قبل المضي قدماً. أخبرنا عن مساحتك لنحدّد الخطوة التالية معاً.',

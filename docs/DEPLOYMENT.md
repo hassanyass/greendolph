@@ -18,11 +18,17 @@ By default, pages carry `noindex, follow`, the sitemap contains no public page e
 
 Without a configured origin, canonical and social-image URLs are omitted rather than emitted with a fake hostname. With an origin, canonicals and alternates can be inspected even while indexing stays disabled.
 
-For the finished website, configure the actual `SITE_URL`, set `SITE_ENV=production`, and deliberately set `SITE_INDEXABLE=true`. An invalid origin or an attempt to index a preview build fails with a clear error. Canonicals, en-AE/ar-AE/x-default alternates, Open Graph URLs and sitemap entries derive from that origin and the shared route catalog.
+For the finished website, configure the approved HTTPS .com origin as `SITE_URL`, set `SITE_ENV=production`, and deliberately set `SITE_INDEXABLE=true`. An invalid origin or an attempt to index a preview build fails with a clear error. Canonicals, en/ar/x-default alternates, Open Graph URLs and sitemap entries derive from that origin and the shared route catalog.
 
-The current sitemap advertises the implemented English and Arabic Home, Services, About and Contact routes; Our Works stays excluded until actual projects are supplied. The 404 is always noindex and never canonicalizes to the home page. Structured data currently describes the Organization and WebSite when an origin exists; LocalBusiness is emitted only after a real address and phone are supplied in `CompanyProfile`. No fabricated ratings, opening hours or geographic coverage are inserted.
+The current sitemap advertises the implemented English and Arabic Home, Services, the ten service detail pages, About and Contact routes; Our Works stays excluded until actual projects are supplied. The 404 is always noindex and never canonicalizes to the home page. Structured data currently describes the Organization and WebSite when an origin exists, with Service on each service detail page; LocalBusiness is emitted only after a real address and phone are supplied in `CompanyProfile`. No fabricated ratings, opening hours or geographic coverage are inserted.
 
-Before enabling indexing, complete the agreed pages and real enquiry path, confirm the company's trading name/address/phone and actual service coverage, and provide appropriate privacy text. Search Console verification and Google Business Profile management need the selected domain and company account access. No ranking guarantee is implied.
+Before enabling indexing, approve the English and Arabic licence transcription, complete the agreed pages and real enquiry path, confirm the company's trading name/address/phone and actual service coverage, and provide appropriate privacy text. Search Console verification and Google Business Profile management need the selected domain and company account access. No ranking guarantee is implied.
+
+## Publish on a static host
+
+Run `npm ci`, `npm run build` and `npm run verify:build` using the pinned Node version. Upload the contents of `dist/` to the host's document root. Serve directory URLs with their index pages, preserve trailing slashes and configure `404.html` with status 404. Configure HTTPS and redirect other public hostnames to the canonical origin. Keep the peer review deployment in preview mode until launch approval.
+
+After launch, verify the .com in Google Search Console and Bing Webmaster Tools, submit `/sitemap.xml` to both and verify crawling. Track UAE and Saudi search impressions as separate markets. The public site describes verified UAE operations. Add country-specific pages and listings only when Saudi operations are approved.
 
 ## Vercel peer review
 
@@ -42,7 +48,7 @@ After import, check `/`, `/ar/`, all navigation destinations and a missing URL. 
 
 Deploy at the domain root. GitHub project-subpath hosting such as `/greendolph/` is not configured. Do not add an SPA catch-all rewrite: pages are generated HTML and missing paths should return 404.
 
-The build produces cache and basic response headers. Hashed Astro assets are immutable; HTML revalidates; images use a shorter cache. Fonts currently use Google Fonts with local fallbacks. Self-hosted font subsets, measured Core Web Vitals and cross-browser checks can be finalized with the home-page implementation.
+The build produces cache and basic response headers. Hashed Astro assets are immutable; HTML revalidates; images use a shorter cache. Fonts currently use Google Fonts with local fallbacks. Measure Core Web Vitals and check supported browsers during final launch verification.
 
 ## Verify production SEO without choosing a domain
 

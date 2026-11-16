@@ -7,7 +7,14 @@ description: Build or revise the Aldolphin Alakhthar UAE technical-services webs
 
 Use the `greendolph` repository (remote `https://github.com/hassanyass/greendolph.git`) as the source of truth. The earlier `aldolphin-website` folder is the preserved concept, not the active project. Read `docs/PROJECT-STANDARDS.md` before editing; read `docs/ASSET-SOURCES.md` when selecting media and `docs/DEPLOYMENT.md` before changing deployment or indexing behavior. Resolve these paths relative to the repository.
 
-The visual concept is approved. Repository and SEO/deployment foundations are established; await the user's detailed home-page comments before redesigning the approved sections. Follow later user instructions when the stage changes.
+Use the approved rollout in `docs/PROJECT-STANDARDS.md`. Finish each phase for review and wait for approval before starting the next.
+
+1. Build the ten licensed activities in English and Arabic, generic language alternates on the future .com, portable static output, and central brand settings.
+2. Add inbox delivery with a configurable Formspree form ID, direct WhatsApp, phone and email actions, and optional Instagram, Facebook and TikTok links.
+3. Add approved project data, company profile PDF download, and native motion with a reduced-motion fallback.
+4. Apply final visual identity, verify the selected host and contact delivery, and enable production indexing after sign-off.
+
+Use `src/config/services.ts` for the ten licence activities in the supplied order. Treat supplied Arabic OCR as provisional until checked against the original licence and approved. Preserve the exact approved full titles, use concise localized navigation labels, and keep licence administrative fields out of the catalog. Describe only confirmed UAE operations. Keep Saudi visibility measurement separate from claims of Saudi coverage.
 
 Original logo assets and colours are provisional. Configure branding in `src/config/brand.ts`, verified company facts in `src/config/company.ts`, copy in `src/config/content.ts`, service models in `src/domain/service.ts`, and routes in `src/domain/routes.ts`. Reuse the shared Astro layout and components. Keep classes for useful domain and interaction behavior; avoid ceremonial inheritance.
 

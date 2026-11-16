@@ -23,7 +23,12 @@ const t = copy[locale];
         loading="lazy"
       />
       <div class="image-caption">
-        <img src={brand.mark} alt="" width="76" height="76" />
+        <img
+          src={brand.mark}
+          alt=""
+          width={brand.markSize.width}
+          height={brand.markSize.height}
+        />
         <span>{t.aboutNote}</span>
       </div>
     </div>
@@ -35,7 +40,12 @@ const t = copy[locale];
         {t.aboutMore}
       </a>
       <div class="about-signature">
-        <img src={brand.logo} alt={brand.name} width="280" height="60" />
+        <img
+          src={brand.logo}
+          alt={brand.name}
+          width={brand.logoSize.width}
+          height={brand.logoSize.height}
+        />
       </div>
     </div>
   </section>

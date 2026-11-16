@@ -1,4 +1,5 @@
 ---
+import { services } from '../config/services';
 import { brand } from '../config/brand';
 import {
   routes,
@@ -6,7 +7,7 @@ import {
   navigationHref,
   type PageKey,
 } from '../domain/routes';
-import { copy, services, type Locale } from '../config/content';
+import { copy, type Locale } from '../config/content';
 import { experience } from '../config/experience';
 import ControlIcon from './ControlIcon.astro';
 const { locale, page = 'home' } = Astro.props as {
@@ -14,6 +15,7 @@ const { locale, page = 'home' } = Astro.props as {
   page?: PageKey;
 };
 const t = copy[locale];
+const onService = page.startsWith('service:');
 ---
 
 <header
@@ -23,7 +25,12 @@ const t = copy[locale];
 >
   <div class="header-inner">
     <a href={routes.path('home', locale)} class="brand" aria-label={brand.name}>
-      <img src={brand.logo} alt={brand.name} width="280" height="60" />
+      <img
+        src={brand.logo}
+        alt={brand.name}
+        width={brand.logoSize.width}
+        height={brand.logoSize.height}
+      />
     </a>
     <nav aria-label={t.menu} id="main-nav">
       {navigation.map((item) =>
@@ -32,7 +39,10 @@ const t = copy[locale];
             <div class="nav-services-label">
               <a
                 href={navigationHref(item, locale)}
-                class:list={['nav-link', { active: page === 'services' }]}
+                class:list={[
+                  'nav-link',
+                  { active: page === 'services' || onService },
+                ]}
                 data-nav-section="services"
                 aria-current={page === 'services' ? 'page' : undefined}
               >
@@ -52,14 +62,8 @@ const t = copy[locale];
               <ul>
                 {services.map((service) => (
                   <li>
-                    <a
-                      href={`${routes.path('services', locale)}#${service.id}`}
-                    >
-                      <img src={service.image} width="48" height="48" alt="" />
-                      <span>
-                        <strong>{service.title[locale]}</strong>
-                        <span>{service.description[locale]}</span>
-                      </span>
+                    <a href={routes.service(service.id).paths[locale]}>
+                      {service.title[locale]}
                     </a>
                   </li>
                 ))}

@@ -10,7 +10,7 @@ export interface BusinessAddress {
 
 export class CompanyProfile {
   readonly name = brand.name;
-  readonly arabicName = 'الدولفين الأخضر';
+  readonly arabicName = brand.arabicName;
   readonly phone: string | null = null;
   readonly email: string | null = null;
   readonly address: BusinessAddress | null = null;

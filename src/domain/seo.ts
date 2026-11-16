@@ -26,7 +26,7 @@ export class PageMetadata {
     if (!this.site.origin || !this.page.indexable) return [];
     return [
       ...locales.map((locale) => ({
-        language: `${locale}-AE`,
+        language: locale,
         url: this.site.absolute(this.page.paths[locale])!,
       })),
       { language: 'x-default', url: this.site.absolute(this.page.paths.en)! },
@@ -53,7 +53,7 @@ export class SitemapGenerator {
               const alternate = locales
                 .map(
                   (language) =>
-                    `<xhtml:link rel="alternate" hreflang="${language}-AE" href="${escapeXml(this.site.absolute(page.paths[language])!)}"/>`,
+                    `<xhtml:link rel="alternate" hreflang="${language}" href="${escapeXml(this.site.absolute(page.paths[language])!)}"/>`,
                 )
                 .join('');
               return `<url><loc>${escapeXml(this.site.absolute(page.paths[locale])!)}</loc>${alternate}<xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(this.site.absolute(page.paths.en)!)}"/></url>`;

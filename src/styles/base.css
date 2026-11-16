@@ -16,8 +16,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 html[dir='rtl'] {
-  --font-body: 'Readex Pro', sans-serif;
-  --font-heading: 'Readex Pro', sans-serif;
+  --font-body: var(--font-ar-body);
+  --font-heading: var(--font-ar-heading);
 }
 button,
 input,

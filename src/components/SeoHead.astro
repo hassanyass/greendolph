@@ -2,14 +2,24 @@
 import type { PageMetadata } from '../domain/seo';
 import { serializeJsonLd } from '../domain/seo';
 import { company } from '../config/company';
-import { brand, media } from '../config/brand';
+import { brand } from '../config/brand';
 import { StructuredDataBuilder } from '../domain/structured-data';
+import type { Service } from '../domain/service';
 interface Props {
+  service?: Service;
   metadata: PageMetadata;
 }
-const { metadata } = Astro.props;
+const { metadata, service } = Astro.props;
 const { site, locale } = metadata;
-const schema = new StructuredDataBuilder(site, company, brand.logo).build();
+const schema = new StructuredDataBuilder(site, company, brand.logo).build(
+  service && metadata.canonical
+    ? {
+        name: service.licenceTitle[locale],
+        description: metadata.description,
+        url: metadata.canonical,
+      }
+    : undefined,
+);
 ---
 
 <title>{metadata.title}</title>
@@ -33,8 +43,11 @@ const schema = new StructuredDataBuilder(site, company, brand.logo).build();
   <>
     <meta property="og:image" content={metadata.image} />
     <meta property="og:image:alt" content={metadata.title} />
-    <meta property="og:image:width" content={String(media.heroWidth)} />
-    <meta property="og:image:height" content={String(media.heroHeight)} />
+    <meta property="og:image:width" content={String(brand.shareImage.width)} />
+    <meta
+      property="og:image:height"
+      content={String(brand.shareImage.height)}
+    />
   </>
 )}
 <meta name="twitter:card" content="summary_large_image" />

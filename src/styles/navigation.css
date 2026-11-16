@@ -114,7 +114,7 @@ html {
   align-items: center;
   min-width: 44px;
   min-height: 44px;
-  font-family: 'Readex Pro', sans-serif;
+  font-family: var(--font-ar-body);
   font-size: 13px;
 }
 .language:hover {
@@ -184,6 +184,8 @@ html {
   list-style: none;
   margin: 0;
   padding: 0;
+  max-height: max(132px, calc(100dvh - var(--nav-current-height) - 110px));
+  overflow-y: auto;
 }
 .services-dropdown li a {
   display: flex;
@@ -191,30 +193,12 @@ html {
   gap: 13px;
   padding: 12px;
   border-radius: 10px;
-  min-height: 70px;
+  min-height: 44px;
   transition: background 180ms;
 }
 .services-dropdown li a:hover,
 .services-dropdown li a:focus-visible {
   background: var(--mist);
-}
-.services-dropdown img {
-  width: 48px;
-  height: 48px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-.services-dropdown strong {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-}
-.services-dropdown li a span span {
-  display: block;
-  margin-top: 4px;
-  font-size: 11px;
-  line-height: 1.6;
-  color: var(--muted);
 }
 .dropdown-overview {
   display: block;
@@ -324,18 +308,14 @@ html {
     box-shadow: none;
     border: 0;
   }
+  .services-dropdown ul {
+    max-height: none;
+  }
   .services-dropdown::before {
     display: none;
   }
   .services-dropdown li a {
     padding: 8px 12px;
-  }
-  .services-dropdown img {
-    width: 40px;
-    height: 40px;
-  }
-  .services-dropdown li a span span {
-    display: none;
   }
   .dropdown-overview {
     border: 0;

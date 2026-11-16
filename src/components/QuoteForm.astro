@@ -1,5 +1,6 @@
 ---
-import { services, emirates, copy, type Locale } from '../config/content';
+import { services } from '../config/services';
+import { emirates, copy, type Locale } from '../config/content';
 const { locale } = Astro.props as { locale: Locale };
 const t = copy[locale];
 ---
@@ -15,7 +16,7 @@ const t = copy[locale];
       <span></span>
     </div>
   </div>
-  <form id="quote-form">
+  <form id="quote-form" method="post">
     <div class="form-grid">
       <label>
         <span>{t.name}</span>
@@ -64,7 +65,7 @@ const t = copy[locale];
         ></textarea>
       </label>
     </div>
-    <button class="button form-submit" type="submit">
+    <button class="button form-submit" type="submit" disabled>
       {t.submit}
     </button>
     <p class="form-note">{t.formNote}</p>

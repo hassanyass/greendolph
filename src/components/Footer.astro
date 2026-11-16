@@ -20,8 +20,8 @@ const t = copy[locale];
       <img
         src={brand.inverseLogo}
         alt={brand.name}
-        width="300"
-        height="64"
+        width={brand.inverseLogoSize.width}
+        height={brand.inverseLogoSize.height}
         loading="lazy"
       />
       <p>{t.footerText}</p>

@@ -1,7 +1,8 @@
 ---
+import { featuredServiceIds, services } from '../config/services';
 import { media } from '../config/brand';
 import { routes } from '../domain/routes';
-import { copy, services, type Locale } from '../config/content';
+import { copy, type Locale } from '../config/content';
 import ControlIcon from './ControlIcon.astro';
 const { locale } = Astro.props as { locale: Locale };
 const t = copy[locale];
@@ -46,11 +47,13 @@ const t = copy[locale];
       </a>
     </div>
     <div class="hero-service-links" aria-label={t.carouselLabel}>
-      {services.map((service) => (
-        <a href={`${routes.path('services', locale)}#${service.id}`}>
-          {service.title[locale]}
-        </a>
-      ))}
+      {services
+        .filter((service) => featuredServiceIds.includes(service.id))
+        .map((service) => (
+          <a href={routes.service(service.id).paths[locale]}>
+            {service.title[locale]}
+          </a>
+        ))}
     </div>
   </div>
   <div class="hero-video-caption">

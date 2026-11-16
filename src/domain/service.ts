@@ -1,13 +1,19 @@
 import type { Locale } from './routes';
+
 export type Localized = Record<Locale, string>;
+
+export interface ServiceImage {
+  src: string;
+  alt: Localized;
+}
 
 export class Service {
   constructor(
-    public readonly id: string,
-    public readonly title: Localized,
-    public readonly description: Localized,
-    public readonly detail: Localized,
-    public readonly image: string,
-    public readonly alt: Localized,
+    readonly id: string,
+    readonly licenceTitle: Localized,
+    readonly title: Localized,
+    readonly description: Localized,
+    readonly detail: Localized,
+    readonly image?: ServiceImage,
   ) {}
 }
