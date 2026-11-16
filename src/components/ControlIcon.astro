@@ -1,6 +1,6 @@
 ---
 interface Props {
-  name: 'previous' | 'next' | 'down' | 'play' | 'pause';
+  name: 'previous' | 'next' | 'down' | 'play' | 'pause' | 'download';
   class?: string;
 }
 const { name, class: className } = Astro.props;
@@ -21,6 +21,7 @@ const { name, class: className } = Astro.props;
 >
   {name === 'previous' && <path d="m14 6-6 6 6 6" />}
   {name === 'next' && <path d="m10 6 6 6-6 6" />}
+  {name === 'download' && <path d="M12 3v12m-5-5 5 5 5-5M5 15v5h14v-5" />}
   {name === 'down' && <path d="m6 9 6 6 6-6" />}
   {name === 'play' && <path d="m9 5 10 7-10 7z" />}
   {name === 'pause' && (

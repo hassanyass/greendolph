@@ -32,11 +32,27 @@ const hasProfile = existsSync(`public${companyProfilePath}`);
         <h1 id="works-title">{title}</h1>
         <p>{t.intro}</p>
       </div>
-      {hasProfile && (
-        <a class="button profile-download" href={companyProfilePath} download>
-          {t.download}
-        </a>
-      )}
+      <div class="work-profile">
+        {hasProfile ? (
+          <a class="button profile-download" href={companyProfilePath} download>
+            <ControlIcon name="download" />
+            {t.download}
+          </a>
+        ) : (
+          <>
+            <button
+              class="button profile-download"
+              type="button"
+              disabled
+              aria-describedby="profile-availability"
+            >
+              <ControlIcon name="download" />
+              {t.download}
+            </button>
+            <p id="profile-availability">{t.profileSoon}</p>
+          </>
+        )}
+      </div>
     </div>
     <div class="work-cards">
       {projects.map((project, index) => {

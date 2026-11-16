@@ -9,8 +9,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: end;
-  gap: 22px;
+  align-items: center;
+  gap: 22px 32px;
+  padding-block-end: clamp(20px, 3vw, 34px);
+  border-block-end: 1px solid var(--line);
   margin-block-end: clamp(24px, 4vw, 54px);
 }
 
@@ -23,11 +25,37 @@
   text-wrap: balance;
 }
 
-.work-index-intro p {
+.work-index-intro > div:first-child p {
   max-width: 49ch;
   margin-block-start: 14px;
   color: var(--muted);
   line-height: 1.7;
+}
+
+/* The profile lives alongside the introduction in either locale. */
+.work-profile {
+  display: grid;
+  justify-items: start;
+  gap: 7px;
+}
+
+.work-profile .profile-download {
+  gap: 10px;
+  border-radius: 8px;
+}
+
+.work-profile .profile-download:disabled {
+  border: 1px solid var(--line);
+  background: var(--mist);
+  color: var(--muted);
+  opacity: 1;
+  cursor: default;
+}
+
+.work-profile p {
+  color: var(--muted);
+  font-size: 0.82rem;
+  padding-inline: 2px;
 }
 
 .work-cards {
@@ -45,13 +73,12 @@
   display: grid;
   grid-template-rows: auto 1fr;
   overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: var(--white);
+  border-block-end: 1px solid var(--line);
 }
 
 .work-card-image {
   aspect-ratio: 16 / 10;
+  border-radius: 8px;
   overflow: hidden;
   background: var(--mist);
 }
@@ -69,7 +96,7 @@
   flex-direction: column;
   align-items: start;
   gap: 12px;
-  padding: clamp(20px, 4vw, 52px);
+  padding-block: clamp(16px, 2.4vw, 30px) 12px;
 }
 
 .work-location {
@@ -122,8 +149,31 @@
 }
 
 .work-feature .work-card-link {
+  border: 0;
+  border-radius: 8px;
   background: var(--forest);
   color: var(--white);
+}
+
+.work-feature .work-card-image {
+  border-radius: 0;
+}
+
+.work-feature .work-card-body {
+  padding: clamp(20px, 4vw, 54px);
+}
+
+.work-feature .work-location {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.work-feature .work-location::before {
+  content: '';
+  inline-size: 20px;
+  block-size: 1px;
+  background: currentColor;
 }
 
 .work-feature :is(.work-location, .work-link) {
@@ -136,7 +186,7 @@
 
 .work-text .work-card-link {
   grid-template-rows: 1fr;
-  background: var(--mist);
+  border-block-start: 1px solid var(--line);
 }
 
 .work-text .work-card-body {
@@ -300,6 +350,10 @@
 }
 
 @media (min-width: 900px) {
+  .work-cards {
+    grid-template-columns: minmax(0, 1.16fr) minmax(0, 1fr);
+  }
+
   .work-feature .work-card-link {
     grid-template: auto / minmax(0, 1.35fr) minmax(0, 1fr);
   }
@@ -343,6 +397,14 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .work-card-image img {
+    transition: transform 360ms ease-out;
+  }
+
+  .work-card-link:is(:hover, :focus-visible) .work-card-image img {
+    transform: scale(1.035);
+  }
+
   .work-card-enter {
     animation: work-card-arrive 440ms ease-out both;
   }

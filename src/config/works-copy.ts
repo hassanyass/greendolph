@@ -11,7 +11,8 @@ export const worksCopy = {
     previous: 'Previous photo',
     close: 'Close photo',
     open: 'Open photo',
-    download: 'Download company profile (PDF)',
+    download: 'Download company profile',
+    profileSoon: 'PDF coming soon',
   },
   ar: {
     intro: 'مشاريع الغرف الجاهزة والتشطيبات الداخلية والتكييف في الإمارات.',
@@ -24,6 +25,7 @@ export const worksCopy = {
     previous: 'الصورة السابقة',
     close: 'إغلاق الصورة',
     open: 'عرض الصورة',
-    download: 'تنزيل ملف الشركة (PDF)',
+    download: 'تنزيل ملف الشركة',
+    profileSoon: 'ملف PDF قريباً',
   },
 };

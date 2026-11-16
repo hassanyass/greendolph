@@ -52,7 +52,7 @@ After import, check `/`, `/ar/`, all navigation destinations and a missing URL. 
 
 ## Company profile download
 
-Add the approved PDF at `public/downloads/aldolphin-company-profile.pdf` and rebuild. The bilingual Our Works pages show the download link when this file exists. Keep the final PDF small enough for mobile download and open it from both pages during launch verification.
+Add the approved PDF at `public/downloads/aldolphin-company-profile.pdf` and rebuild. The bilingual Our Works pages show a disabled download button with a coming soon note until the file is present. The button then becomes a direct PDF download. Keep the final PDF small enough for mobile download and open it from both pages during launch verification.
 
 ## Host settings
 
