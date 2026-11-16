@@ -18,6 +18,9 @@ const t = worksCopy[locale];
 const location = project.location[locale];
 const title = project.title[locale];
 const cover = project.photos[0];
+const photoHeading = project.illustrativePhotos
+  ? t.illustrativePhotos
+  : t.photos;
 const related = services.filter(({ id }) => project.serviceIds.includes(id));
 ---
 
@@ -27,12 +30,14 @@ const related = services.filter(({ id }) => project.serviceIds.includes(id));
   title={`${title} · ${location} | ${locale === 'ar' ? brand.arabicName : brand.name}`}
   description={project.summary[locale]}
   shareImage={
-    cover && {
-      src: cover.src,
-      width: cover.width,
-      height: cover.height,
-      alt: cover.caption[locale],
-    }
+    cover && !project.illustrativePhotos
+      ? {
+          src: cover.src,
+          width: cover.width,
+          height: cover.height,
+          alt: cover.caption[locale],
+        }
+      : undefined
   }
 >
   <article class="work-project" data-project-gallery={cover ? '' : undefined}>
@@ -47,6 +52,9 @@ const related = services.filter(({ id }) => project.serviceIds.includes(id));
         <p class="work-location">{location}</p>
         <h1>{title}</h1>
         <p class="work-summary">{project.summary[locale]}</p>
+        {project.illustrativePhotos && (
+          <small class="work-image-note">{t.illustrativePhotos}</small>
+        )}
       </div>
       {cover && (
         <a
@@ -83,7 +91,7 @@ const related = services.filter(({ id }) => project.serviceIds.includes(id));
     )}
     {project.photos.length > 1 && (
       <section class="work-project-section" aria-labelledby="work-photos-title">
-        <h2 id="work-photos-title">{t.photos}</h2>
+        <h2 id="work-photos-title">{photoHeading}</h2>
         <div class="work-gallery">
           {project.photos.slice(1).map((photo) => (
             <figure>
@@ -126,7 +134,7 @@ const related = services.filter(({ id }) => project.serviceIds.includes(id));
       </section>
     )}
     {cover && (
-      <dialog class="project-viewer" aria-label={t.photos}>
+      <dialog class="project-viewer" aria-label={photoHeading}>
         <div class="viewer-toolbar">
           <form method="dialog">
             <button class="button button-small" autofocus>

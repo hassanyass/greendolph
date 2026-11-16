@@ -89,6 +89,9 @@ const hasProfile = existsSync(`public${companyProfilePath}`);
                 <p class="work-location">{project.location[locale]}</p>
                 <h2>{project.title[locale]}</h2>
                 <p class="work-summary">{project.summary[locale]}</p>
+                {project.illustrativePhotos && (
+                  <small class="work-image-note">{t.illustrativePhotos}</small>
+                )}
                 <span class="work-link">
                   {t.view}
                   <ControlIcon name="next" />

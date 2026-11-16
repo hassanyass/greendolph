@@ -118,6 +118,13 @@
   max-width: 55ch;
 }
 
+.work-image-note {
+  display: block;
+  margin-block-start: 8px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
 .work-link {
   display: inline-flex;
   align-items: center;

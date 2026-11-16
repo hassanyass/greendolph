@@ -3,6 +3,7 @@ import {
   alAjbanPhotos,
   alAwirPhotos,
   nadAlShebaPhotos,
+  sharjahPhotos,
 } from './project-photos.ts';
 
 export const companyProfilePath = '/downloads/aldolphin-company-profile.pdf';
@@ -171,8 +172,23 @@ export const projects: readonly Project[] = [
       en: 'Supply and installation of air conditioning units for a project in Sharjah.',
       ar: 'توريد وتركيب أجهزة التكييف ضمن مشروع في الشارقة.',
     },
-    scope: [],
-    photos: [],
+    scope: [
+      {
+        title: { en: 'Air conditioning units', ar: 'أجهزة التكييف' },
+        items: [
+          {
+            en: 'Supplied the air conditioning units for the project.',
+            ar: 'توريد أجهزة التكييف للمشروع.',
+          },
+          {
+            en: 'Installed the supplied units on site in Sharjah.',
+            ar: 'تركيب الأجهزة المورّدة في موقع المشروع في الشارقة.',
+          },
+        ],
+      },
+    ],
+    photos: sharjahPhotos,
+    illustrativePhotos: true,
     serviceIds: ['air-conditioning'],
     indexable: false,
   },

@@ -95,3 +95,14 @@ export const alAjbanPhotos = [
     ar: 'زاوية خارجية تظهر جدار الألواح وحافة السقف',
   }),
 ] as const;
+
+export const sharjahPhotos = [
+  new ProjectPhoto('/images/projects/sharjah/wall-mounted-ac', 1440, 960, {
+    en: 'Illustrative photo of a wall-mounted air conditioner',
+    ar: 'صورة توضيحية لمكيّف هواء مثبت على الحائط',
+  }),
+  new ProjectPhoto('/images/projects/sharjah/ac-technician', 1440, 2160, {
+    en: 'Illustrative photo of a technician working on an air conditioner',
+    ar: 'صورة توضيحية لفني يعمل على وحدة تكييف',
+  }),
+] as const;

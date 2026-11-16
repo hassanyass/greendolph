@@ -189,18 +189,20 @@ for (const prefix of ['', 'ar/']) {
     const page = await read(`${route.slice(1)}index.html`);
     assert.ok(page.includes(`href="/${alternate}our-works/${project}/"`));
     assert.ok(page.includes(`href="/${prefix}services/air-conditioning/"`));
-    if (project !== 'sharjah') {
-      assert.match(page, /<a[^>]+ data-project-photo(?:[=> ]|$)/);
-      for (const match of page.matchAll(/srcset="([^"]+)"/g)) {
-        for (const candidate of match[1].split(', ')) {
-          await access(join('dist', candidate.split(' ')[0]));
-        }
+    assert.match(page, /<a[^>]+ data-project-photo(?:[=> ]|$)/);
+    const imageVariants = [...page.matchAll(/srcset="([^"]+)"/g)];
+    assert.ok(imageVariants.length > 0);
+    for (const [, candidates] of imageVariants) {
+      for (const candidate of candidates.split(', ')) {
+        await access(join('dist', candidate.split(' ')[0]));
       }
-      if (info.indexable)
-        assert.ok(sitemap.includes(`<loc>${info.origin}${route}</loc>`));
-    } else {
-      assert.doesNotMatch(page, /<a[^>]+ data-project-photo(?:[=> ]|$)/);
+    }
+    if (project === 'sharjah') {
+      assert.ok(directory.includes('work-image-note'));
+      assert.ok(page.includes('work-image-note'));
       assert.ok(!sitemap.includes(route));
+    } else if (info.indexable) {
+      assert.ok(sitemap.includes(`<loc>${info.origin}${route}</loc>`));
     }
   }
 }

@@ -42,6 +42,7 @@ export interface Project {
   summary: Localized;
   scope: readonly ProjectScope[];
   photos: readonly ProjectPhoto[];
+  illustrativePhotos?: boolean;
   serviceIds: readonly string[];
   indexable: boolean;
 }
