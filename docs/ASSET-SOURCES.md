@@ -35,7 +35,12 @@ No third-party icon set or animation snippet is shipped. ControlIcon contains mi
 Reviewed Pexels, Pixabay, Mixkit, Vecteezy, Envato and Storyblocks after the residential-interior footage was rejected. The selected Pexels clip depicts an actual service task rather than a furnished room, industrial controls or unrelated construction.
 
 Closer AC-specific alternatives requiring a paid licence:
+
 - [Technician testing industrial air conditioning with a multimeter](https://elements.envato.com/resistance-test-of-temperature-sensors-in-the-cool-GNB86J5) by vogofilms, Envato; landscape, 14 seconds.
 - [Technician checking an air conditioner](https://www.storyblocks.com/video/stock/black-technician-in-uniform-check-air-conditioner-air-condition-maintenance-service-352991962) by voffka23, Storyblocks; 14 seconds.
 
 No paid footage was purchased or included. Mixkit's electrician-in-Vietnam clip was excluded because its free download is restricted to personal use. Avoid using this illustrative stock as an Our Works project.
+
+## Our Works photographs
+
+The owner supplied project descriptions and photographs in `aldolphin-website/ourwork`. Nad Al Sheba, Al Awir and Al Ajban use selected photos from their respective folders. Their website copies under `public/images/projects/` use 480, 960 and up to 1440 pixel WebP widths, preserving orientation and excluding source metadata. Thumbnail crops keep cards aligned. The gallery viewer opens the uncropped images. Sharjah has a written description and uses a text card.

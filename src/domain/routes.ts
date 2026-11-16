@@ -1,3 +1,4 @@
+import { projects } from '../config/projects.ts';
 import { services } from '../config/services.ts';
 
 export type Locale = 'en' | 'ar';
@@ -8,7 +9,8 @@ export type PageKey =
   | 'about'
   | 'contact'
   | 'notFound'
-  | `service:${string}`;
+  | `service:${string}`
+  | `project:${string}`;
 export const locales: readonly Locale[] = ['en', 'ar'];
 
 export interface PageDefinition {
@@ -38,6 +40,10 @@ export class RouteCatalog {
     return this.page(`service:${id}`);
   }
 
+  project(id: string): PageDefinition {
+    return this.page(`project:${id}`);
+  }
+
   enquiry(locale: Locale, service?: string): string {
     return `${this.path('contact', locale)}${service ? `?service=${encodeURIComponent(service)}` : ''}`;
   }
@@ -65,8 +71,13 @@ export const routes = new RouteCatalog([
   {
     key: 'works',
     paths: { en: '/our-works/', ar: '/ar/our-works/' },
-    indexable: false,
+    indexable: projects.some((project) => project.indexable),
   },
+  ...projects.map(({ id, indexable }): PageDefinition => ({
+    key: `project:${id}`,
+    paths: { en: `/our-works/${id}/`, ar: `/ar/our-works/${id}/` },
+    indexable,
+  })),
 ]);
 
 export const navigation = [

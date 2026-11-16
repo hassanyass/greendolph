@@ -1,0 +1,356 @@
+.work-index,
+.work-project {
+  max-width: 1520px;
+  margin-inline: auto;
+  padding: clamp(32px, 5vw, 74px) var(--gutter) clamp(64px, 8vw, 120px);
+}
+
+.work-index-intro {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  gap: 22px;
+  margin-block-end: clamp(24px, 4vw, 54px);
+}
+
+.work-index h1,
+.work-project h1 {
+  font-size: clamp(37px, 6vw, 86px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.work-index-intro p {
+  max-width: 49ch;
+  margin-block-start: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.work-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 36px);
+}
+
+.work-card {
+  display: grid;
+  min-inline-size: 0;
+}
+
+.work-card-link {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+}
+
+.work-card-image {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--mist);
+}
+
+.work-card-image img,
+.work-project-cover img,
+.work-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.work-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 12px;
+  padding: clamp(20px, 4vw, 52px);
+}
+
+.work-location {
+  color: var(--green);
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.work-card h2 {
+  font-size: clamp(22px, 3vw, 42px);
+  font-weight: 500;
+  line-height: 1.23;
+  text-wrap: balance;
+}
+
+.work-summary {
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 55ch;
+}
+
+.work-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-block-size: 44px;
+  color: var(--green);
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.work-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+.work-card .work-link {
+  margin-block-start: auto;
+}
+
+.work-card-link:is(:hover, :focus-visible) .work-link,
+.work-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.work-feature,
+.work-text {
+  grid-column: 1 / -1;
+}
+
+.work-feature .work-card-link {
+  background: var(--forest);
+  color: var(--white);
+}
+
+.work-feature :is(.work-location, .work-link) {
+  color: var(--accent);
+}
+
+.work-feature .work-summary {
+  color: var(--white);
+}
+
+.work-text .work-card-link {
+  grid-template-rows: 1fr;
+  background: var(--mist);
+}
+
+.work-text .work-card-body {
+  padding-block: clamp(18px, 2vw, 28px);
+}
+
+.work-text h2 {
+  font-size: clamp(22px, 2.1vw, 32px);
+}
+
+.work-back {
+  margin-block-end: clamp(16px, 3vw, 36px);
+}
+
+.work-project-intro {
+  display: grid;
+  align-items: center;
+  gap: clamp(22px, 5vw, 72px);
+  padding-block-end: clamp(32px, 5vw, 72px);
+}
+
+.work-project-intro h1 {
+  font-size: clamp(35px, 5vw, 72px);
+  margin-block: 12px 20px;
+}
+
+.work-project-cover {
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--mist);
+}
+
+.work-project-section {
+  padding-block: clamp(25px, 5vw, 60px);
+  border-block-start: 1px solid var(--line);
+}
+
+.work-project-section h2 {
+  font-size: clamp(25px, 3.5vw, 42px);
+  font-weight: 500;
+  margin-block-end: clamp(14px, 3vw, 32px);
+}
+
+.work-scope,
+.work-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 285px), 1fr));
+  gap: 24px;
+}
+
+.work-scope > div {
+  padding: 20px;
+  border-radius: 12px;
+  background: var(--mist);
+}
+
+.work-scope h3 {
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
+.work-scope ul {
+  padding-inline-start: 1.15rem;
+  margin-block: 12px 0;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.work-scope li + li {
+  margin-block-start: 7px;
+}
+
+.work-gallery figure,
+.project-viewer figure {
+  margin: 0;
+}
+
+.work-gallery a {
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--mist);
+}
+
+.work-gallery img {
+  object-position: center;
+}
+
+.work-gallery figcaption {
+  margin-block-start: 8px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.work-related ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 26px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.project-viewer {
+  width: min(1000px, calc(100% - 24px));
+  max-height: calc(100dvh - 24px);
+  padding: 14px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.project-viewer::backdrop {
+  background: rgb(0 0 0 / 0.73);
+}
+
+.viewer-toolbar,
+.viewer-controls {
+  display: flex;
+  justify-content: end;
+  gap: 8px;
+}
+
+.project-viewer img {
+  width: 100%;
+  height: min(65dvh, 680px);
+  object-fit: contain;
+  margin-block-start: 10px;
+  background: var(--mist);
+}
+
+.project-viewer figcaption {
+  margin-block: 8px;
+  min-block-size: 2em;
+  line-height: 1.45;
+}
+
+.viewer-controls button {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--green);
+}
+
+[dir='rtl'] :is(.work-link, .viewer-controls) svg {
+  rotate: 180deg;
+}
+
+[dir='rtl'] :is(.work-index, .work-project) h1 {
+  line-height: 1.3;
+  letter-spacing: normal;
+}
+
+@media (min-width: 900px) {
+  .work-feature .work-card-link {
+    grid-template: auto / minmax(0, 1.35fr) minmax(0, 1fr);
+  }
+
+  .work-feature .work-card-image {
+    aspect-ratio: auto;
+    min-block-size: 420px;
+    position: relative;
+  }
+
+  .work-feature img {
+    position: absolute;
+    inset: 0;
+  }
+
+  .work-project-with-photo {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.22fr);
+  }
+
+  .work-text .work-card-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .work-text .work-card-body > :not(.work-link) {
+    grid-column: 1;
+  }
+
+  .work-text .work-link {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    margin: 0;
+  }
+}
+
+@media (max-width: 699px) {
+  .work-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .work-card-enter {
+    animation: work-card-arrive 440ms ease-out both;
+  }
+
+  @keyframes work-card-arrive {
+    from {
+      opacity: 0.82;
+      transform: translateY(12px);
+    }
+  }
+}

@@ -7,9 +7,10 @@ import { StructuredDataBuilder } from '../domain/structured-data';
 import type { Service } from '../domain/service';
 interface Props {
   service?: Service;
+  shareImage: { width: number; height: number; alt: string };
   metadata: PageMetadata;
 }
-const { metadata, service } = Astro.props;
+const { metadata, service, shareImage } = Astro.props;
 const { site, locale } = metadata;
 const schema = new StructuredDataBuilder(site, company, brand.logo).build(
   service && metadata.canonical
@@ -42,12 +43,9 @@ const schema = new StructuredDataBuilder(site, company, brand.logo).build(
 {metadata.image && (
   <>
     <meta property="og:image" content={metadata.image} />
-    <meta property="og:image:alt" content={metadata.title} />
-    <meta property="og:image:width" content={String(brand.shareImage.width)} />
-    <meta
-      property="og:image:height"
-      content={String(brand.shareImage.height)}
-    />
+    <meta property="og:image:alt" content={shareImage.alt} />
+    <meta property="og:image:width" content={String(shareImage.width)} />
+    <meta property="og:image:height" content={String(shareImage.height)} />
   </>
 )}
 <meta name="twitter:card" content="summary_large_image" />

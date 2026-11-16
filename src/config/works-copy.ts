@@ -1,0 +1,29 @@
+export const worksCopy = {
+  en: {
+    intro:
+      'Prefabricated rooms, interior fit-outs and air conditioning projects in the UAE.',
+    view: 'View project',
+    back: 'All projects',
+    scope: 'Scope of work',
+    photos: 'Project photos',
+    services: 'Related services',
+    next: 'Next photo',
+    previous: 'Previous photo',
+    close: 'Close photo',
+    open: 'Open photo',
+    download: 'Download company profile (PDF)',
+  },
+  ar: {
+    intro: 'مشاريع الغرف الجاهزة والتشطيبات الداخلية والتكييف في الإمارات.',
+    view: 'عرض المشروع',
+    back: 'جميع المشاريع',
+    scope: 'نطاق العمل',
+    photos: 'صور المشروع',
+    services: 'الخدمات ذات الصلة',
+    next: 'الصورة التالية',
+    previous: 'الصورة السابقة',
+    close: 'إغلاق الصورة',
+    open: 'عرض الصورة',
+    download: 'تنزيل ملف الشركة (PDF)',
+  },
+};

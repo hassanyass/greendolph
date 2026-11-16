@@ -85,7 +85,8 @@ const onService = page.startsWith('service:');
                 active:
                   page === 'home'
                     ? item.section === 'home'
-                    : item.page === page,
+                    : item.page === page ||
+                      (item.page === 'works' && page.startsWith('project:')),
               },
             ]}
             data-nav-section={item.section}

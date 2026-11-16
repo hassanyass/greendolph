@@ -1,0 +1,155 @@
+---
+import { brand } from '../config/brand';
+import { services } from '../config/services';
+import { worksCopy } from '../config/works-copy';
+import type { Project } from '../domain/project';
+import { routes, type Locale } from '../domain/routes';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ControlIcon from './ControlIcon.astro';
+import ProjectImage from './ProjectImage.astro';
+import '../styles/works.css';
+
+interface Props {
+  locale: Locale;
+  project: Project;
+}
+const { locale, project } = Astro.props;
+const t = worksCopy[locale];
+const location = project.location[locale];
+const title = project.title[locale];
+const cover = project.photos[0];
+const related = services.filter(({ id }) => project.serviceIds.includes(id));
+---
+
+<BaseLayout
+  locale={locale}
+  page={routes.project(project.id)}
+  title={`${title} · ${location} | ${locale === 'ar' ? brand.arabicName : brand.name}`}
+  description={project.summary[locale]}
+  shareImage={
+    cover && {
+      src: cover.src,
+      width: cover.width,
+      height: cover.height,
+      alt: cover.caption[locale],
+    }
+  }
+>
+  <article class="work-project" data-project-gallery={cover ? '' : undefined}>
+    <a class="work-link work-back" href={routes.path('works', locale)}>
+      <ControlIcon name="previous" />
+      {t.back}
+    </a>
+    <div
+      class:list={['work-project-intro', { 'work-project-with-photo': cover }]}
+    >
+      <div>
+        <p class="work-location">{location}</p>
+        <h1>{title}</h1>
+        <p class="work-summary">{project.summary[locale]}</p>
+      </div>
+      {cover && (
+        <a
+          class="work-project-cover"
+          href={cover.src}
+          data-project-photo
+          aria-label={`${t.open} — ${cover.caption[locale]}`}
+        >
+          <ProjectImage
+            photo={cover}
+            locale={locale}
+            sizes="(min-width: 900px) 50vw, 90vw"
+            priority
+          />
+        </a>
+      )}
+    </div>
+    {project.scope.length > 0 && (
+      <section class="work-project-section" aria-labelledby="work-scope-title">
+        <h2 id="work-scope-title">{t.scope}</h2>
+        <div class="work-scope">
+          {project.scope.map(({ title, items }) => (
+            <div>
+              <h3>{title[locale]}</h3>
+              <ul>
+                {items.map((item) => (
+                  <li>{item[locale]}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+    {project.photos.length > 1 && (
+      <section class="work-project-section" aria-labelledby="work-photos-title">
+        <h2 id="work-photos-title">{t.photos}</h2>
+        <div class="work-gallery">
+          {project.photos.slice(1).map((photo) => (
+            <figure>
+              <a
+                href={photo.src}
+                data-project-photo
+                aria-label={`${t.open} — ${photo.caption[locale]}`}
+              >
+                <ProjectImage
+                  photo={photo}
+                  locale={locale}
+                  sizes="(min-width: 1080px) 28vw, (min-width: 700px) 43vw, 90vw"
+                />
+              </a>
+              <figcaption>{photo.caption[locale]}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+    )}
+    {related.length > 0 && (
+      <section
+        class="work-project-section work-related"
+        aria-labelledby="work-services-title"
+      >
+        <h2 id="work-services-title">{t.services}</h2>
+        <ul>
+          {related.map((service) => (
+            <li>
+              <a
+                class="work-link"
+                href={routes.service(service.id).paths[locale]}
+              >
+                {service.title[locale]}
+                <ControlIcon name="next" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+    {cover && (
+      <dialog class="project-viewer" aria-label={t.photos}>
+        <div class="viewer-toolbar">
+          <form method="dialog">
+            <button class="button button-small" autofocus>
+              {t.close}
+            </button>
+          </form>
+        </div>
+        <figure>
+          <img alt="" />
+          <figcaption aria-live="polite"></figcaption>
+        </figure>
+        {project.photos.length > 1 && (
+          <div class="viewer-controls">
+            <button type="button" data-previous aria-label={t.previous}>
+              <ControlIcon name="previous" />
+            </button>
+            <button type="button" data-next aria-label={t.next}>
+              <ControlIcon name="next" />
+            </button>
+          </div>
+        )}
+      </dialog>
+    )}
+  </article>
+  <script src="../scripts/project-gallery.ts"></script>
+</BaseLayout>

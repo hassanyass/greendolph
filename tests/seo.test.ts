@@ -5,6 +5,7 @@ import {
   type BusinessIdentity,
 } from '../src/domain/structured-data.ts';
 import { SiteConfiguration } from '../src/config/site-configuration.mjs';
+import { projects } from '../src/config/projects.ts';
 import { routes } from '../src/domain/routes.ts';
 import {
   PageMetadata,
@@ -149,10 +150,15 @@ test('sitemap contains only implemented, indexable locale routes', () => {
     ...routes.pages,
     { key: 'notFound', paths: { en: '/404/', ar: '/404/' }, indexable: false },
   ]).render();
-  assert.equal((xml.match(/<url>/g) || []).length, 28);
+  assert.equal((xml.match(/<url>/g) || []).length, 36);
   assert.match(xml, /<loc>https:\/\/example.com\/ar\/<\/loc>/);
   assert.match(xml, /<loc>https:\/\/example.com\/services\/<\/loc>/);
-  assert.doesNotMatch(xml, /404|our-works/);
+  assert.doesNotMatch(xml, /404|our-works\/sharjah/);
+  for (const project of projects.filter((project) => project.indexable)) {
+    for (const path of Object.values(routes.project(project.id).paths)) {
+      assert.ok(xml.includes(`<loc>https://example.com${path}</loc>`));
+    }
+  }
 });
 
 test('unindexable pages never canonicalize to the home page', () => {

@@ -1,11 +1,47 @@
-import type { Localized } from './service';
+import type { Localized } from './service.ts';
 
-export class Project {
+export class ProjectPhoto {
   constructor(
-    readonly id: string,
-    readonly title: Localized,
-    readonly summary: Localized,
-    readonly image: string,
-    readonly imageAlt: Localized,
+    readonly path: string,
+    readonly width: number,
+    readonly height: number,
+    readonly caption: Localized,
   ) {}
+
+  get src() {
+    return this.variant(this.width);
+  }
+
+  get preview() {
+    return this.variant(Math.min(this.width, 960));
+  }
+
+  get srcset() {
+    const widths = new Set(
+      [480, 960, this.width].map((width) => Math.min(width, this.width)),
+    );
+    return [...widths]
+      .map((width) => `${this.variant(width)} ${width}w`)
+      .join(', ');
+  }
+
+  private variant(width: number) {
+    return `${this.path}-${width}.webp`;
+  }
+}
+
+export interface ProjectScope {
+  title: Localized;
+  items: readonly Localized[];
+}
+
+export interface Project {
+  id: string;
+  location: Localized;
+  title: Localized;
+  summary: Localized;
+  scope: readonly ProjectScope[];
+  photos: readonly ProjectPhoto[];
+  serviceIds: readonly string[];
+  indexable: boolean;
 }

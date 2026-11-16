@@ -16,6 +16,19 @@ const listSlugs = async (prefix) =>
 const slugs = await listSlugs('');
 assert.equal(slugs.length, 10);
 assert.deepEqual(await listSlugs('ar/'), slugs);
+const listProjects = async (prefix) =>
+  (await readdir(`dist/${prefix}our-works`, { withFileTypes: true }))
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort();
+const projectSlugs = await listProjects('');
+assert.deepEqual(projectSlugs, [
+  'al-ajban',
+  'al-awir',
+  'nad-al-sheba',
+  'sharjah',
+]);
+assert.deepEqual(await listProjects('ar/'), projectSlugs);
 const titles = new Set();
 const descriptions = new Set();
 for (const [file, locale, dir, route, eligible, slug] of [
@@ -45,8 +58,24 @@ for (const [file, locale, dir, route, eligible, slug] of [
       slug,
     ],
   ]),
-  ['our-works/index.html', 'en', 'ltr', '/our-works/', false],
-  ['ar/our-works/index.html', 'ar', 'rtl', '/ar/our-works/', false],
+  ['our-works/index.html', 'en', 'ltr', '/our-works/', true],
+  ['ar/our-works/index.html', 'ar', 'rtl', '/ar/our-works/', true],
+  ...projectSlugs.flatMap((project) => [
+    [
+      `our-works/${project}/index.html`,
+      'en',
+      'ltr',
+      `/our-works/${project}/`,
+      project !== 'sharjah',
+    ],
+    [
+      `ar/our-works/${project}/index.html`,
+      'ar',
+      'rtl',
+      `/ar/our-works/${project}/`,
+      project !== 'sharjah',
+    ],
+  ]),
 ]) {
   const html = await read(file);
   assert.match(html, new RegExp(`<html[^>]*lang="${locale}"`));
@@ -146,12 +175,42 @@ for (const prefix of ['', 'ar/']) {
     assert.ok(contact.includes(`value="${slug}"`));
   }
 }
+for (const prefix of ['', 'ar/']) {
+  const directory = await read(`${prefix}our-works/index.html`);
+  const profile = directory.match(/href="(\/downloads\/[^"]+\.pdf)" download/);
+  if (profile) {
+    const pdf = await readFile(join('dist', profile[1]));
+    assert.equal(pdf.subarray(0, 5).toString(), '%PDF-');
+  }
+  for (const project of projectSlugs) {
+    const route = `/${prefix}our-works/${project}/`;
+    const alternate = prefix ? '' : 'ar/';
+    assert.ok(directory.includes(`href="${route}"`));
+    const page = await read(`${route.slice(1)}index.html`);
+    assert.ok(page.includes(`href="/${alternate}our-works/${project}/"`));
+    assert.ok(page.includes(`href="/${prefix}services/air-conditioning/"`));
+    if (project !== 'sharjah') {
+      assert.match(page, /<a[^>]+ data-project-photo(?:[=> ]|$)/);
+      for (const match of page.matchAll(/srcset="([^"]+)"/g)) {
+        for (const candidate of match[1].split(', ')) {
+          await access(join('dist', candidate.split(' ')[0]));
+        }
+      }
+      if (info.indexable)
+        assert.ok(sitemap.includes(`<loc>${info.origin}${route}</loc>`));
+    } else {
+      assert.doesNotMatch(page, /<a[^>]+ data-project-photo(?:[=> ]|$)/);
+      assert.ok(!sitemap.includes(route));
+    }
+  }
+}
+
 const notFound = await read('404.html');
 assert.match(notFound, /noindex, follow/);
 assert.doesNotMatch(notFound, /rel="canonical"/);
 assert.match(robots, /Allow: \//);
 if (info.indexable) {
-  assert.equal((sitemap.match(/<url>/g) || []).length, 28);
+  assert.equal((sitemap.match(/<url>/g) || []).length, 36);
   assert.ok(robots.includes(`Sitemap: ${info.origin}/sitemap.xml`));
   assert.doesNotMatch(headers, /X-Robots-Tag: noindex/);
 } else {

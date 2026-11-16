@@ -200,45 +200,6 @@ html[dir='rtl'] .service-link:hover svg {
   object-fit: cover;
   border-radius: 16px;
 }
-.works-content {
-  padding-top: 0;
-  min-height: 40vh;
-}
-.works-empty {
-  border-radius: 20px;
-  background: var(--mist);
-  padding: 40px;
-  max-width: 800px;
-}
-.works-empty h2 {
-  font-size: 26px;
-}
-.works-empty p {
-  color: var(--muted);
-  line-height: 1.85;
-  margin-block: 18px 25px;
-  max-width: 520px;
-}
-.works-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 30px;
-}
-.works-grid article img {
-  width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  border-radius: 14px;
-}
-.works-grid h2 {
-  font-size: 25px;
-  margin-top: 20px;
-}
-.works-grid p {
-  margin-top: 14px;
-  line-height: 1.8;
-  color: var(--muted);
-}
 html[dir='rtl'] .page-intro h1 {
   line-height: 1.5;
 }
@@ -292,15 +253,6 @@ html[dir='rtl'] .page-intro h1 {
   }
   .page-intro h1 {
     font-size: 38px;
-  }
-  .works-empty {
-    padding: 25px;
-  }
-  .works-empty h2 {
-    font-size: 24px;
-  }
-  .works-grid {
-    grid-template-columns: 1fr;
   }
 }
 @media (prefers-reduced-motion: reduce) {

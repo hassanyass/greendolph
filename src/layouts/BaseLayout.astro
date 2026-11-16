@@ -17,6 +17,7 @@ interface Props {
   title?: string;
   service?: Service;
   description?: string;
+  shareImage?: { src: string; width: number; height: number; alt: string };
 }
 const {
   locale,
@@ -24,6 +25,7 @@ const {
   page = routes.page('home'),
   title = copy[locale].title,
   description = copy[locale].description,
+  shareImage = { ...brand.shareImage, alt: title },
 } = Astro.props;
 const metadata = new PageMetadata(
   site,
@@ -31,7 +33,7 @@ const metadata = new PageMetadata(
   locale,
   title,
   description,
-  brand.shareImage.src,
+  shareImage.src,
   page.indexable,
 );
 ---
@@ -45,7 +47,7 @@ const metadata = new PageMetadata(
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <SeoHead metadata={metadata} service={service} />
+    <SeoHead metadata={metadata} service={service} shareImage={shareImage} />
     <meta name="theme-color" content={brand.colors.forest} />
     <link rel="icon" type={brand.favicon.type} href={brand.favicon.src} />
     {brand.typography.stylesheet && (

@@ -1,0 +1,31 @@
+---
+import type { ProjectPhoto } from '../domain/project';
+import type { Locale } from '../domain/routes';
+
+interface Props {
+  photo: ProjectPhoto;
+  locale: Locale;
+  sizes: string;
+  priority?: boolean;
+  decorative?: boolean;
+}
+const {
+  photo,
+  locale,
+  sizes,
+  priority = false,
+  decorative = false,
+} = Astro.props;
+---
+
+<img
+  src={photo.preview}
+  srcset={photo.srcset}
+  sizes={sizes}
+  width={photo.width}
+  height={photo.height}
+  alt={decorative ? '' : photo.caption[locale]}
+  loading={priority ? 'eager' : 'lazy'}
+  fetchpriority={priority ? 'high' : undefined}
+  decoding={priority ? undefined : 'async'}
+/>

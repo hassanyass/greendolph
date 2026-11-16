@@ -20,7 +20,7 @@ Without a configured origin, canonical and social-image URLs are omitted rather 
 
 For the finished website, configure the approved HTTPS .com origin as `SITE_URL`, set `SITE_ENV=production`, and deliberately set `SITE_INDEXABLE=true`. An invalid origin or an attempt to index a preview build fails with a clear error. Canonicals, en/ar/x-default alternates, Open Graph URLs and sitemap entries derive from that origin and the shared route catalog.
 
-The current sitemap advertises the implemented English and Arabic Home, Services, the ten service detail pages, About and Contact routes; Our Works stays excluded until actual projects are supplied. The 404 is always noindex and never canonicalizes to the home page. Structured data currently describes the Organization and WebSite when an origin exists, with Service on each service detail page; LocalBusiness is emitted only after a real address and phone are supplied in `CompanyProfile`. No fabricated ratings, opening hours or geographic coverage are inserted.
+The current sitemap advertises the implemented English and Arabic Home, Services, the ten service detail pages, About and Contact routes; Our Works and the three photographed projects are eligible after the main site is configured for indexing. The short Sharjah entry remains noindex until its case study is expanded. The 404 is always noindex and never canonicalizes to the home page. Structured data currently describes the Organization and WebSite when an origin exists, with Service on each service detail page; LocalBusiness is emitted only after a real address and phone are supplied in `CompanyProfile`. No fabricated ratings, opening hours or geographic coverage are inserted.
 
 Before enabling indexing, approve the English and Arabic licence transcription, complete the agreed pages and real enquiry path, confirm the company's trading name/address/phone and actual service coverage, and provide appropriate privacy text. Search Console verification and Google Business Profile management need the selected domain and company account access. No ranking guarantee is implied.
 
@@ -49,6 +49,10 @@ After import, check `/`, `/ar/`, all navigation destinations and a missing URL. 
 - [Formspree form setup](https://help.formspree.io/articles/building-your-form/building-an-html-form/)
 - [Formspree honeypot filtering](https://help.formspree.io/articles/building-your-form/honeypot-spam-filtering/)
 - [WhatsApp click to chat](https://faq.whatsapp.com/5913398998672934)
+
+## Company profile download
+
+Add the approved PDF at `public/downloads/aldolphin-company-profile.pdf` and rebuild. The bilingual Our Works pages show the download link when this file exists. Keep the final PDF small enough for mobile download and open it from both pages during launch verification.
 
 ## Host settings
 
