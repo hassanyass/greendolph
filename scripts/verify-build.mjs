@@ -160,9 +160,15 @@ for (const [file, locale, dir, route, eligible, slug] of [
     ),
   );
   for (const match of html.matchAll(
-    /(?:src|href)="(\/(?:_astro|brand|images|icons)\/[^"?#]+)"/g,
+    /(?:src|href)="(\/(?:_astro|brand|images)\/[^"?#]+)"/g,
   )) {
     await access(join('dist', match[1]));
+  }
+  for (const [, candidates] of html.matchAll(/srcset="([^"]+)"/g)) {
+    for (const candidate of candidates.split(',')) {
+      const [image] = candidate.trim().split(/\s+/);
+      if (image.startsWith('/images/')) await access(join('dist', image));
+    }
   }
 }
 for (const prefix of ['', 'ar/']) {
@@ -190,13 +196,7 @@ for (const prefix of ['', 'ar/']) {
     assert.ok(page.includes(`href="/${alternate}our-works/${project}/"`));
     assert.ok(page.includes(`href="/${prefix}services/air-conditioning/"`));
     assert.match(page, /<a[^>]+ data-project-photo(?:[=> ]|$)/);
-    const imageVariants = [...page.matchAll(/srcset="([^"]+)"/g)];
-    assert.ok(imageVariants.length > 0);
-    for (const [, candidates] of imageVariants) {
-      for (const candidate of candidates.split(', ')) {
-        await access(join('dist', candidate.split(' ')[0]));
-      }
-    }
+    assert.match(page, /srcset="[^"]+"/);
     if (project === 'sharjah') {
       assert.ok(directory.includes('work-image-note'));
       assert.ok(page.includes('work-image-note'));

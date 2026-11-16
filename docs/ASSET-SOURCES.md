@@ -24,7 +24,25 @@ Checked 2 November 2026. Free tiers and licences vary by asset; retain the actua
 | `public/images/interior.webp`   | [Modern Living Room Interior](https://www.pexels.com/photo/modern-living-room-interior-15824912/) by Curtis Adams � Pexels licence                      | Illustrative living space; not a completed company project.                                                                                |
 | `public/images/electrical.webp` | [A man is working on an electrical panel](https://www.pexels.com/photo/a-man-is-working-on-an-electrical-panel-27928762/) by ranjeet . � Pexels licence | Illustrative electrical work; not company staff.                                                                                           |
 
-The homepage uses selected [Tabler outline icons](https://github.com/tabler/tabler-icons) for its service and process illustrations. The MIT license ships with the local SVG files under `public/icons/tabler/`. Navigation uses the site’s existing control icons.
+## Homepage service and process photographs
+
+These illustrative [Pexels photographs](https://www.pexels.com/license/) are kept as responsive WebP crops under `public/images/home/`. They illustrate the trades and the enquiry process.
+
+| Crop                        | Original photo and creator                                                                                                                                |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Electromechanical equipment | [Electrical panel](https://www.pexels.com/photo/a-man-is-working-on-an-electrical-panel-27928762/) by ranjeet .                                           |
+| Ceilings and partitions     | [Drywall installation](https://www.pexels.com/photo/man-doing-construction-work-inside-house-11427524/) by Jimmy Nilsson Masth                            |
+| Air conditioning            | [Outdoor air-conditioning equipment](https://www.pexels.com/photo/air-conditioner-near-ladder-14522790/) by Zechen Li                                     |
+| Carpentry                   | [Hands using a hammer and chisel](https://www.pexels.com/photo/hands-of-anonymous-woodworker-using-hammer-and-chisel-in-carpentry-5974417/) by Ono Kosuki |
+| Building cleaning           | [Cleaning a window](https://www.pexels.com/photo/a-person-cleaning-a-glass-window-4440540/) by Polina Tankilevitch                                        |
+| Plumbing                    | [Pipe repair](https://www.pexels.com/photo/plumber-repairing-pipe-with-wrench-indoors-32588548/) by Bulat843                                              |
+| Engraving and ornamentation | [Wood carving](https://www.pexels.com/photo/close-up-of-man-carving-in-wood-16237417/) by eduwood                                                         |
+| Painting                    | [Paint roller](https://www.pexels.com/photo/close-up-shot-of-a-person-holding-a-paint-roller-with-brown-paint-5798972/) by Ivan S                         |
+| Plaster                     | [Plastering a wall](https://www.pexels.com/photo/a-construction-worker-working-on-the-wall-of-a-house-5493658/) by Antoni Shkraba                         |
+| Tiling                      | [Aligning tiles with levelers](https://www.pexels.com/photo/a-close-up-shot-of-a-person-putting-tile-levelers-11806490/) by Vladimir Srajber              |
+| How it works                | [Measuring a wall](https://www.pexels.com/photo/a-construction-worker-holding-a-pencil-and-measuring-tape-5493676/) by Antoni Shkraba                     |
+
+The custom Astro and CSS layouts adapt the cropped picture treatment from [ScrewFast’s CardInsight](https://github.com/mearashadowfax/ScrewFast/blob/main/src/components/ui/cards/CardInsight.astro) and the image and content hierarchy from [ScrewFast’s FeaturesGeneral](https://github.com/mearashadowfax/ScrewFast/blob/main/src/components/sections/features/FeaturesGeneral.astro). The upstream project is [MIT-licensed](https://github.com/mearashadowfax/ScrewFast/blob/main/LICENSE).
 
 ## Current hero footage
 

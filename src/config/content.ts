@@ -54,16 +54,16 @@ export const copy = {
     processTitle: 'From a small fix\nto your next project.',
     steps: [
       {
-        title: 'Tell us what you need',
+        title: 'Send the details',
         text: 'Choose a service and share a few details about your space.',
       },
       {
-        title: 'Let’s understand the work',
+        title: 'Define the scope',
         text: 'Discuss the requirements, location and a suitable scope.',
       },
       {
-        title: 'Agree on the next step',
-        text: 'Review your quotation before arranging the work.',
+        title: 'Review your quote',
+        text: 'Review the proposed work and price before arranging the service.',
       },
     ],
     contactLabel: 'Let’s talk',
@@ -145,16 +145,16 @@ export const copy = {
     processTitle: 'من إصلاح بسيط\nإلى مشروعك القادم.',
     steps: [
       {
-        title: 'أخبرنا بما تحتاجه',
+        title: 'أرسل تفاصيل طلبك',
         text: 'اختر الخدمة وشاركنا بعض التفاصيل عن مساحتك.',
       },
       {
-        title: 'لنفهم متطلبات العمل',
+        title: 'نحدّد نطاق العمل',
         text: 'نناقش الاحتياجات والموقع ونطاق العمل المناسب.',
       },
       {
-        title: 'نتفق على الخطوة التالية',
-        text: 'راجع عرض السعر قبل ترتيب تنفيذ الأعمال.',
+        title: 'راجع عرض السعر',
+        text: 'اطّلع على الأعمال المقترحة وتكلفتها قبل ترتيب التنفيذ.',
       },
     ],
     contactLabel: 'لنتواصل',
