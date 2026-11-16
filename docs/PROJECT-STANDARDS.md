@@ -43,7 +43,7 @@ Review each phase and push the checked changes to GitHub for peer review. Begin 
 ## Forms and verification
 
 - Until delivery is configured, explicitly identify the form as a local preview. Never claim that an unsent enquiry was submitted. Do not store contact details in browser storage or logs.
-- Production needs server validation, delivery/error states, appropriate spam protection, consent/privacy copy, retention and rate limits. Those are later implementation tasks.
+- Formspree handles delivery and spam filtering when an ID is configured. Keep localized validation and retry states, disclose processing in the quotation form, and confirm provider settings, data retention and inbox receipt before launch.
 - Run `npm run check` and `npm run build`. Review desktop/mobile and both locales when browser automation is available. Verify navigation, service dialogs, video controls, form validation and the honest preview summary. Record any QA limits.
 
 ## Approved navigation and motion direction

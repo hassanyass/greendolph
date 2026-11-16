@@ -86,7 +86,7 @@ export const copy = {
     contactText:
       'A repair, an installation, or something you’d like to discuss. Start with a few details.',
     formNote:
-      'Concept preview: this form lets you review your request. It does not send an enquiry.',
+      'Local preview. Review your request here before email delivery is enabled.',
     name: 'Your name',
     phone: 'Phone number',
     service: 'Service',
@@ -97,8 +97,7 @@ export const copy = {
     detailsHint: 'Property type, the issue, and anything else we should know…',
     submit: 'Review my request',
     reviewTitle: 'Your request, ready to review',
-    reviewText:
-      'This is a local preview only. Your details have not been sent or saved. Contact delivery will be connected in the next stage.',
+    reviewText: 'Your details stay on this page during the local preview.',
     edit: 'Edit request',
     footerText: 'Technical care. Thoughtfully done.',
     footerLocation: 'Based in the United Arab Emirates',
@@ -190,7 +189,7 @@ export const copy = {
     contactTitle: 'كيف يمكننا\nالعناية بمساحتك؟',
     contactText: 'إصلاح أو تركيب أو عمل تود مناقشته. لنبدأ ببعض التفاصيل.',
     formNote:
-      'معاينة التصميم: يمكنك مراجعة طلبك هنا، ولن يتم إرسال أي استفسار.',
+      'معاينة محلية. يمكنك مراجعة طلبك هنا قبل تفعيل الإرسال عبر البريد الإلكتروني.',
     name: 'الاسم',
     phone: 'رقم الهاتف',
     service: 'الخدمة',
@@ -201,8 +200,7 @@ export const copy = {
     detailsHint: 'نوع العقار والمشكلة وأي تفاصيل أخرى تود مشاركتها…',
     submit: 'مراجعة طلبي',
     reviewTitle: 'طلبك جاهز للمراجعة',
-    reviewText:
-      'هذه معاينة محلية فقط. لم يتم إرسال بياناتك أو حفظها. سيتم ربط وسيلة التواصل في المرحلة التالية.',
+    reviewText: 'تبقى بياناتك في هذه الصفحة أثناء المعاينة المحلية.',
     edit: 'تعديل الطلب',
     footerText: 'عناية فنية. باهتمام يستحقه مكانك.',
     footerLocation: 'مقرنا الإمارات العربية المتحدة',

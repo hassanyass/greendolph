@@ -36,7 +36,19 @@ Import `hassanyass/greendolph`, choose branch `main`, and leave Root Directory a
 
 For this review, use `SITE_ENV=preview` and `SITE_INDEXABLE=false` for both Production and Preview environments; leave `SITE_URL` unset until a stable review URL or production domain is chosen. The default build already uses these noindex settings, including on the main-branch deployment. Vercel does not consume the generated `_headers`; page robots metadata protects the review build and `vercel.json` supplies its response headers. Keep future public indexing controlled through the environment settings above.
 
-After import, check `/`, `/ar/`, all navigation destinations and a missing URL. The quotation form remains a local request review until delivery is implemented. Deployment has not been performed from this workspace.
+After import, check `/`, `/ar/`, all navigation destinations and a missing URL. The quotation form uses local review when the Formspree form ID is blank. Deployment has not been performed from this workspace.
+
+## Enable quotation delivery and contact links
+
+1. Create a company-owned Formspree form and verify the inbox under Target Email. Copy only its public form ID from Integration into `FORMSPREE_FORM_ID` and rebuild. A blank ID enables local review. Use a separate test form for reviewer deployments where email delivery is needed.
+2. Submit a test quotation from each language and confirm receipt in the inbox. The website reports accepted submission after a successful provider response. The form includes Formspree’s `_gotcha` filter. Confirm the service’s spam controls, expected quota, and retention settings in the account before launch.
+3. Set `CONTACT_WHATSAPP` to the verified WhatsApp number in international format (a plus sign and digits) to enable the Contact action and mobile shortcut. The licence phone remains a separate call link.
+4. Supply `CONTACT_EMAIL`, `CONTACT_INSTAGRAM`, `CONTACT_FACEBOOK` and `CONTACT_TIKTOK` when ready. The social settings take full HTTPS profile URLs. Leave unknown values blank. See `.env.example` for all settings. Rebuild after any changes and verify each public link.
+5. If the chosen host adds a Content Security Policy, allow `https://formspree.io` in both `connect-src` and `form-action`. The standard form action is the fallback for browsers without JavaScript.
+
+- [Formspree form setup](https://help.formspree.io/articles/building-your-form/building-an-html-form/)
+- [Formspree honeypot filtering](https://help.formspree.io/articles/building-your-form/honeypot-spam-filtering/)
+- [WhatsApp click to chat](https://faq.whatsapp.com/5913398998672934)
 
 ## Host settings
 

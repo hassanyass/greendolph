@@ -1,0 +1,77 @@
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  margin-block-start: 22px;
+}
+
+.contact-actions a {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  min-block-size: 44px;
+  overflow-wrap: anywhere;
+}
+
+.contact .form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-inline-size: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.form-note summary {
+  display: list-item;
+  cursor: pointer;
+  padding-block: 8px;
+  color: var(--green);
+  font-size: 13px;
+}
+
+.quote-status:not(:empty) {
+  margin-block-start: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.quote-status:empty {
+  margin: 0;
+}
+
+.form-submit[aria-disabled='true'] {
+  opacity: 0.72;
+  cursor: wait;
+}
+
+.whatsapp-shortcut {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .contact .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .whatsapp-shortcut {
+    position: fixed;
+    z-index: 30;
+    inset-inline-end: 12px;
+    inset-block-end: calc(12px + env(safe-area-inset-bottom));
+    display: inline-flex;
+    min-block-size: 44px;
+    padding: 8px 16px;
+    border: 1px solid var(--white);
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--forest) 25%, transparent);
+  }
+
+  body:has(.whatsapp-shortcut) footer {
+    padding-block-end: calc(76px + env(safe-area-inset-bottom));
+  }
+
+  body:has(#quote-form :focus) .whatsapp-shortcut {
+    display: none;
+  }
+}

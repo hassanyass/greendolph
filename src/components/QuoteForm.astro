@@ -1,8 +1,12 @@
 ---
+import ContactLinks from './ContactLinks.astro';
+import { contactCopy } from '../config/contact-copy';
+import { quotationEndpoint } from '../config/quotation';
 import { services } from '../config/services';
 import { emirates, copy, type Locale } from '../config/content';
 const { locale } = Astro.props as { locale: Locale };
 const t = copy[locale];
+const formCopy = contactCopy[locale];
 ---
 
 <section class="contact section" id="contact" aria-labelledby="contact-title">
@@ -10,14 +14,15 @@ const t = copy[locale];
     <p class="eyebrow">{t.contactLabel}</p>
     <h2 id="contact-title">{t.contactTitle}</h2>
     <p>{t.contactText}</p>
+    <ContactLinks locale={locale} placement="form" />
     <div class="contact-motif" aria-hidden="true">
       <span></span>
       <span></span>
       <span></span>
     </div>
   </div>
-  <form id="quote-form" method="post">
-    <div class="form-grid">
+  <form id="quote-form" method="post" action={quotationEndpoint ?? undefined}>
+    <fieldset class="form-grid">
       <label>
         <span>{t.name}</span>
         <input name="name" autocomplete="name" required maxlength="90" />
@@ -30,7 +35,7 @@ const t = copy[locale];
           inputmode="tel"
           autocomplete="tel"
           required
-          pattern="\+?[0-9][0-9\s\-]{6,23}"
+          pattern="\+?(?=(?:[ \-]*[0-9٠-٩۰-۹]){7,15}[ \-]*$)[0-9٠-٩۰-۹][0-9٠-٩۰-۹ \-]*"
           maxlength="25"
           dir="ltr"
         />
@@ -64,18 +69,45 @@ const t = copy[locale];
           maxlength="1500"
         ></textarea>
       </label>
-    </div>
-    <button class="button form-submit" type="submit" disabled>
-      {t.submit}
+    </fieldset>
+    {quotationEndpoint ? (
+      <>
+        <input type="hidden" name="language" value={locale} />
+        <div hidden>
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+        </div>
+        <details class="form-note">
+          <summary>{formCopy.privacyTitle}</summary>
+          <p>{formCopy.privacyText}</p>
+        </details>
+      </>
+    ) : (
+      <p class="form-note">{t.formNote}</p>
+    )}
+    <button
+      class="button form-submit"
+      type="submit"
+      disabled={!quotationEndpoint}
+    >
+      {quotationEndpoint ? formCopy.send : t.submit}
     </button>
-    <p class="form-note">{t.formNote}</p>
-    <div id="quote-review" class="quote-review" hidden tabindex="-1">
-      <h3>{t.reviewTitle}</h3>
-      <p>{t.reviewText}</p>
-      <dl></dl>
-      <button type="button" class="text-link" id="edit-request">
-        {t.edit}
-      </button>
-    </div>
+    {quotationEndpoint && (
+      <p class="quote-status" role="status" aria-atomic="true"></p>
+    )}
+    {!quotationEndpoint && (
+      <noscript>
+        <p class="form-note">{formCopy.previewUnavailable}</p>
+      </noscript>
+    )}
+    {!quotationEndpoint && (
+      <div id="quote-review" class="quote-review" hidden tabindex="-1">
+        <h3>{t.reviewTitle}</h3>
+        <p>{t.reviewText}</p>
+        <dl></dl>
+        <button type="button" class="text-link" id="edit-request">
+          {t.edit}
+        </button>
+      </div>
+    )}
   </form>
 </section>

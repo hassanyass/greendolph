@@ -1,4 +1,5 @@
 ---
+import ContactLinks from './ContactLinks.astro';
 import { brand } from '../config/brand';
 import { copy, type Locale } from '../config/content';
 import {
@@ -36,6 +37,7 @@ const t = copy[locale];
     <div class="footer-cta">
       <p class="eyebrow">{t.footerContact}</p>
       <a href={routes.enquiry(locale)}>{t.quote}</a>
+      <ContactLinks locale={locale} placement="footer" />
       <a
         class="footer-language"
         href={routes.alternate(page === 'notFound' ? 'home' : page, locale)}

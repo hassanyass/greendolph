@@ -1,3 +1,4 @@
+import { QuoteFormController } from './quote-form';
 import { legacyServiceIds } from '../config/services';
 
 class SiteNavigation {
@@ -260,65 +261,6 @@ class HeroVideo {
   }
 }
 
-class QuotePreview {
-  constructor() {
-    const form = document.querySelector<HTMLFormElement>('#quote-form');
-    const review = document.querySelector<HTMLElement>('#quote-review');
-    if (!form || !review) return;
-    const selectedService = new URLSearchParams(location.search).get('service');
-    const serviceSelect = form.querySelector<HTMLSelectElement>(
-      'select[name=service]',
-    );
-    const legacyValue = Object.entries(legacyServiceIds).find(
-      ([id]) => id === selectedService,
-    )?.[1];
-    const serviceId = legacyValue ?? selectedService;
-    const option = [...(serviceSelect?.options ?? [])].find(
-      (entry) => entry.value === serviceId,
-    );
-    if (option) option.selected = true;
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const list = review.querySelector('dl')!;
-      list.replaceChildren();
-      form
-        .querySelectorAll<
-          HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-        >('input, select, textarea')
-        .forEach((field) => {
-          const term = document.createElement('dt');
-          term.textContent =
-            field
-              .closest('label')
-              ?.querySelector('span')
-              ?.textContent?.trim() ?? field.name;
-          const value = document.createElement('dd');
-          value.textContent =
-            field instanceof HTMLSelectElement
-              ? field.selectedOptions[0].text
-              : field.value;
-          if (field.name === 'phone') value.dir = 'ltr';
-          list.append(term, value);
-        });
-      review.hidden = false;
-      review.focus();
-      review.scrollIntoView({
-        block: 'nearest',
-        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches
-          ? 'instant'
-          : 'smooth',
-      });
-    });
-    form
-      .querySelector<HTMLButtonElement>('button[type=submit]')
-      ?.removeAttribute('disabled');
-    document.getElementById('edit-request')?.addEventListener('click', () => {
-      review.hidden = true;
-      form.querySelector('input')?.focus();
-    });
-  }
-}
-
 function followLegacyServiceLink() {
   const legacyId = location.hash.slice(1);
   if (!Object.hasOwn(legacyServiceIds, legacyId)) return;
@@ -332,7 +274,9 @@ followLegacyServiceLink();
 window.addEventListener('hashchange', followLegacyServiceLink);
 new SiteNavigation();
 new HeroVideo();
-new QuotePreview();
+document
+  .querySelectorAll<HTMLFormElement>('#quote-form')
+  .forEach((form) => new QuoteFormController(form));
 document
   .querySelectorAll<HTMLElement>('[data-carousel]')
   .forEach((section) => new ServiceCarousel(section));

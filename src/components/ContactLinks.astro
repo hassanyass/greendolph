@@ -1,0 +1,54 @@
+---
+import { company } from '../config/company';
+import { contactCopy } from '../config/contact-copy';
+import type { Locale } from '../domain/routes';
+
+interface Props {
+  locale: Locale;
+  placement: 'form' | 'footer' | 'shortcut';
+}
+const { locale, placement } = Astro.props;
+const t = contactCopy[locale];
+const whatsapp = company.whatsappUrl;
+const socialLinks = [
+  { name: 'Instagram', url: company.social.instagram },
+  { name: 'Facebook', url: company.social.facebook },
+  { name: 'TikTok', url: company.social.tiktok },
+];
+---
+
+{placement === 'form' && (
+  <div class="contact-actions">
+    {whatsapp && (
+      <a class="button" href={whatsapp}>
+        {t.whatsapp}
+      </a>
+    )}
+    <a class="text-link" href={`tel:${company.phone}`}>
+      {t.call} <bdi dir="ltr">{company.phone}</bdi>
+    </a>
+    {company.email && (
+      <a class="text-link" href={`mailto:${company.email}`}>
+        <bdi dir="ltr">{company.email}</bdi>
+      </a>
+    )}
+  </div>
+)}
+{placement === 'footer' && (
+  <>
+    {company.email && <a href={`mailto:${company.email}`}>{t.email}</a>}
+    {socialLinks.map(
+      ({ name, url }) =>
+        url && (
+          <a href={url} lang="en">
+            {name}
+          </a>
+        ),
+    )}
+  </>
+)}
+{placement === 'shortcut' && whatsapp && (
+  <a class="button whatsapp-shortcut" href={whatsapp} aria-label={t.whatsapp}>
+    {t.whatsappShort}
+  </a>
+)}
