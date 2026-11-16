@@ -84,7 +84,7 @@ test('unconfigured builds stay out of search without inventing a canonical domai
     'en',
     'Home',
     'Description',
-    '/images/electrical-service.webp',
+    '/images/site-installation.webp',
   );
   assert.equal(page.canonical, null);
   assert.equal(page.robots, 'noindex, follow');
@@ -122,7 +122,7 @@ test('locale pages have distinct canonicals and reciprocal language alternates',
     'en',
     'English',
     'Description',
-    '/images/electrical-service.webp',
+    '/images/site-installation.webp',
   );
   const arabic = new PageMetadata(
     production(),
@@ -130,7 +130,7 @@ test('locale pages have distinct canonicals and reciprocal language alternates',
     'ar',
     'العربية',
     'الوصف',
-    '/images/electrical-service.webp',
+    '/images/site-installation.webp',
   );
   assert.equal(english.canonical, 'https://example.com/');
   assert.equal(arabic.canonical, 'https://example.com/ar/');
@@ -141,7 +141,7 @@ test('locale pages have distinct canonicals and reciprocal language alternates',
   );
   assert.equal(
     arabic.image,
-    'https://example.com/images/electrical-service.webp',
+    'https://example.com/images/site-installation.webp',
   );
 });
 
@@ -168,7 +168,7 @@ test('unindexable pages never canonicalize to the home page', () => {
     'en',
     '404',
     'Not found',
-    '/images/electrical-service.webp',
+    '/images/site-installation.webp',
   );
   assert.equal(page.canonical, null);
   assert.equal(page.robots, 'noindex, follow');

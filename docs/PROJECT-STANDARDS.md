@@ -24,7 +24,7 @@ Review each phase and push the checked changes to GitHub for peer review. Begin 
 - Design for phones first, then check 320, 390, 768 and 1440 px widths in both languages. No horizontal page overflow or clipped Arabic text.
 - Arabic has a real `/ar/` page, document `lang=ar`, `dir=rtl`, natural Arabic copy and CSS logical properties. Numbers and phone inputs retain the appropriate direction. Mirror directional controls rather than logos or photographs.
 - Keep navigation keyboard-operable. Menu announces its state, closes on selection/Escape, and exposes a readable focus state. Dialogs have names, keyboard dismissal and focus restoration.
-- Provide labels, visible focus, suitable contrast and approximately 44 px interaction targets. Honour reduced motion and save-data preferences. Video has a poster, muted playback and a pause control; it never blocks content.
+- Provide labels, visible focus, suitable contrast and approximately 44 px interaction targets. Honour reduced motion and save-data preferences. The decorative hero uses a poster and a short muted clip that plays once for less than five seconds.
 
 ## UAE search foundation
 
@@ -44,7 +44,7 @@ Review each phase and push the checked changes to GitHub for peer review. Begin 
 
 - Until delivery is configured, explicitly identify the form as a local preview. Never claim that an unsent enquiry was submitted. Do not store contact details in browser storage or logs.
 - Formspree handles delivery and spam filtering when an ID is configured. Keep localized validation and retry states, disclose processing in the quotation form, and confirm provider settings, data retention and inbox receipt before launch.
-- Run `npm run check` and `npm run build`. Review desktop/mobile and both locales when browser automation is available. Verify navigation, service dialogs, video controls, form validation and the honest preview summary. Record any QA limits.
+- Run `npm run check` and `npm run build`. Review desktop/mobile and both locales when browser automation is available. Verify navigation, the service carousel, single-play hero footage and its reduced-motion fallback, form validation and the honest preview summary. Record any QA limits.
 
 ## Approved navigation and motion direction
 

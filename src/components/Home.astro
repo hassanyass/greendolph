@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from './Hero.astro';
 import Services from './Services.astro';
+import { processIcons } from '../config/home-visuals';
+import '../styles/home-process.css';
 import QuoteForm from './QuoteForm.astro';
 import { routes } from '../domain/routes';
 import { brand, media } from '../config/brand';
@@ -49,16 +51,40 @@ const t = copy[locale];
       </div>
     </div>
   </section>
-  <section class="process section" aria-labelledby="process-title">
-    <p class="eyebrow">{t.processLabel}</p>
-    <h2 id="process-title">{t.processTitle}</h2>
-    <div class="steps">
-      {t.steps.map((s) => (
-        <article>
-          <h3>{s.title}</h3>
-          <p>{s.text}</p>
-        </article>
-      ))}
+  <section
+    class="home-process section"
+    aria-labelledby="process-title"
+    data-home-process
+  >
+    <div class="home-process-panel">
+      <div class="home-process-heading">
+        <div>
+          <p class="eyebrow">{t.processLabel}</p>
+          <h2 id="process-title">{t.homeProcessTitle}</h2>
+        </div>
+        <a class="text-link" href={routes.enquiry(locale)}>
+          {t.quote}
+        </a>
+      </div>
+      <ol class="home-process-steps">
+        {t.steps.map((step, index) => (
+          <li>
+            <span class="process-symbol">
+              <img
+                src={`/icons/tabler/${processIcons[index]}.svg`}
+                width="32"
+                height="32"
+                alt=""
+                loading="lazy"
+              />
+            </span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
   <QuoteForm locale={locale} />

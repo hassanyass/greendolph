@@ -3,6 +3,7 @@ import { services } from '../config/services';
 import { copy, type Locale } from '../config/content';
 import { experience } from '../config/experience';
 import { routes } from '../domain/routes';
+import { serviceIcons } from '../config/home-visuals';
 import ControlIcon from './ControlIcon.astro';
 const { locale } = Astro.props as { locale: Locale };
 const t = copy[locale];
@@ -17,11 +18,9 @@ const { desktopVisible, tabletVisible, mobileVisible } = experience.carousel;
   data-status={t.carouselStatus}
   style={`--cards-desktop:${desktopVisible};--cards-tablet:${tabletVisible};--cards-mobile:${mobileVisible}`}
 >
-  <p class="eyebrow">{t.servicesLabel}</p>
   <div class="services-heading">
     <div>
-      <h2 id="services-title">{t.servicesTitle}</h2>
-      <p>{t.servicesText}</p>
+      <h2 id="services-title">{t.servicesLabel}</h2>
     </div>
     <a class="text-link" href={routes.path('services', locale)}>
       {t.viewServices}
@@ -60,21 +59,22 @@ const { desktopVisible, tabletVisible, mobileVisible } = experience.carousel;
   >
     {services.map((service) => (
       <article class="service-card" id={`service-${service.id}`}>
-        <div class="service-card-copy">
-          <h3>
-            <a href={routes.service(service.id).paths[locale]}>
-              {service.title[locale]}
-            </a>
-          </h3>
-          <p>{service.description[locale]}</p>
-          <a
-            class="service-link"
-            href={routes.service(service.id).paths[locale]}
-          >
-            {t.serviceExplore}
+        <a
+          class="service-card-link"
+          href={routes.service(service.id).paths[locale]}
+        >
+          <img
+            src={`/icons/tabler/${serviceIcons[service.id] ?? 'bolt'}.svg`}
+            class="service-glyph"
+            width="30"
+            height="30"
+            alt=""
+          />
+          <h3>{service.title[locale]}</h3>
+          <span class="service-card-arrow">
             <ControlIcon name="next" />
-          </a>
-        </div>
+          </span>
+        </a>
       </article>
     ))}
   </div>

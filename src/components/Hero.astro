@@ -1,9 +1,7 @@
 ---
-import { featuredServiceIds, services } from '../config/services';
 import { media } from '../config/brand';
 import { routes } from '../domain/routes';
 import { copy, type Locale } from '../config/content';
-import ControlIcon from './ControlIcon.astro';
 const { locale } = Astro.props as { locale: Locale };
 const t = copy[locale];
 ---
@@ -22,7 +20,6 @@ const t = copy[locale];
       id="hero-video"
       class="hero-video"
       muted
-      loop
       playsinline
       preload="none"
       poster={media.hero}
@@ -46,31 +43,5 @@ const t = copy[locale];
         {t.explore}
       </a>
     </div>
-    <div class="hero-service-links" aria-label={t.carouselLabel}>
-      {services
-        .filter((service) => featuredServiceIds.includes(service.id))
-        .map((service) => (
-          <a href={routes.service(service.id).paths[locale]}>
-            {service.title[locale]}
-          </a>
-        ))}
-    </div>
-  </div>
-  <div class="hero-video-caption">
-    <span>{t.heroFoot}</span>
-    <button
-      class="video-control"
-      type="button"
-      aria-label={t.play}
-      data-play={t.play}
-      data-pause={t.pause}
-    >
-      <span data-video-icon="play">
-        <ControlIcon name="play" />
-      </span>
-      <span data-video-icon="pause" hidden>
-        <ControlIcon name="pause" />
-      </span>
-    </button>
   </div>
 </section>

@@ -87,27 +87,46 @@
         var(--cards-visible)
     );
   min-width: 0;
+  display: flex;
   scroll-snap-align: start;
-  scroll-margin-inline: 0;
-  border-radius: 16px;
+}
+.service-card-link {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 13px;
+  padding: clamp(12px, 2vw, 22px);
   background: var(--white);
   border: 1px solid var(--line);
-  overflow: hidden;
+  border-radius: 12px;
 }
-.service-card-copy {
-  padding: 23px 25px 21px;
+.service-card-link:is(:hover, :focus-visible) {
+  background: var(--mist);
+  border-color: color-mix(in srgb, var(--green) 46%, var(--line));
+}
+.service-glyph {
+  box-sizing: content-box;
+  padding: 9px;
+  border-radius: 10px;
+  background: var(--mist);
 }
 .service-card h3 {
-  font-size: 22px;
-  font-weight: 550;
-  letter-spacing: -0.025em;
+  font-size: clamp(0.9rem, 1.4vw, 1.12rem);
+  font-weight: 620;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
 }
-.service-card-copy p {
-  margin-top: 9px;
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--muted);
+.service-card-arrow {
+  color: var(--green);
+  margin-block-start: auto;
+  align-self: end;
 }
+[dir='rtl'] .service-card-arrow svg {
+  rotate: 180deg;
+}
+
 .service-link {
   display: inline-flex;
   align-items: center;
@@ -208,12 +227,6 @@ html[dir='rtl'] .page-intro h1 {
     --cards-visible: var(--cards-tablet, 2);
     --card-gap: 18px;
   }
-  .service-card-copy {
-    padding: 19px;
-  }
-  .service-card h3 {
-    font-size: 20px;
-  }
 }
 @media (max-width: 700px) {
   .services {
@@ -238,12 +251,6 @@ html[dir='rtl'] .page-intro h1 {
     --cards-visible: var(--cards-mobile, 1);
     --card-gap: 16px;
   }
-  .service-card-copy {
-    padding: 21px;
-  }
-  .service-card h3 {
-    font-size: 22px;
-  }
   .service-directory {
     gap: 24px;
   }
@@ -253,6 +260,11 @@ html[dir='rtl'] .page-intro h1 {
   }
   .page-intro h1 {
     font-size: 38px;
+  }
+}
+@media (max-width: 359px) {
+  .service-track {
+    --cards-visible: 1;
   }
 }
 @media (prefers-reduced-motion: reduce) {

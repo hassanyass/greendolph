@@ -9,7 +9,7 @@ export class Brand {
   readonly inverseLogoSize = this.logoSize;
   readonly markSize = { width: 76, height: 76 };
   readonly shareImage = {
-    src: '/images/electrical-service.webp',
+    src: '/images/site-installation.webp',
     width: 1280,
     height: 720,
   };
@@ -48,8 +48,8 @@ export class Brand {
 
 export const brand = new Brand();
 export const media = {
-  hero: '/images/electrical-service.webp',
-  video: '/images/electrical-service.mp4',
+  hero: '/images/site-installation.webp',
+  video: '/images/site-installation.mp4',
   heroWidth: 1280,
   heroHeight: 720,
   interior: '/images/interior.webp',

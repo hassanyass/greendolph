@@ -207,58 +207,57 @@ class ServiceCarousel {
   }
 }
 
-class HeroVideo {
-  private video = document.querySelector<HTMLVideoElement>('#hero-video');
-  private button = document.querySelector<HTMLButtonElement>('.video-control');
-  private motion = matchMedia('(prefers-reduced-motion: reduce)');
-  constructor() {
-    if (!this.video || !this.button) return;
-    this.video.muted = true;
-    this.video.addEventListener('playing', () => {
-      this.video?.classList.add('ready');
-      this.update(true);
-    });
-    this.video.addEventListener('pause', () => this.update(false));
-    this.video.addEventListener('error', () => {
-      this.video?.classList.remove('ready');
-      if (this.button) this.button.hidden = true;
-    });
-    this.button.addEventListener('click', () =>
-      this.video?.paused ? this.play() : this.video?.pause(),
-    );
-    this.motion.addEventListener('change', () => {
-      if (this.motion.matches) this.video?.pause();
-    });
-    const connection = (
-      navigator as Navigator & { connection?: { saveData: boolean } }
-    ).connection;
-    if (!this.motion.matches && !connection?.saveData) this.play();
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) this.video?.pause();
-    });
-  }
-  private async play() {
-    if (!this.video) return;
-    if (!this.video.getAttribute('src'))
-      this.video.src = this.video.dataset.src!;
-    try {
-      await this.video.play();
-    } catch {
-      this.update(false);
-    }
-  }
-  private update(playing: boolean) {
-    if (!this.button) return;
-    this.button.setAttribute(
-      'aria-label',
-      (playing ? this.button.dataset.pause : this.button.dataset.play)!,
-    );
-    this.button.setAttribute('aria-pressed', String(playing));
-    this.button.querySelector<HTMLElement>('[data-video-icon=play]')!.hidden =
-      playing;
-    this.button.querySelector<HTMLElement>('[data-video-icon=pause]')!.hidden =
-      !playing;
-  }
+function playHeroOnce() {
+  const video = document.querySelector<HTMLVideoElement>('#hero-video');
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  const connection = (
+    navigator as Navigator & { connection?: { saveData: boolean } }
+  ).connection;
+  if (!video?.dataset.src || motion.matches || connection?.saveData) return;
+
+  const pause = () => video.pause();
+  video.addEventListener('playing', () => video.classList.add('ready'), {
+    once: true,
+  });
+  video.addEventListener('error', () => video.classList.remove('ready'), {
+    once: true,
+  });
+  const pageVisibility = () => {
+    if (document.hidden) pause();
+  };
+  const motionChange = () => {
+    if (motion.matches) pause();
+  };
+  document.addEventListener('visibilitychange', pageVisibility);
+  motion.addEventListener('change', motionChange);
+  const cleanup = () => {
+    document.removeEventListener('visibilitychange', pageVisibility);
+    motion.removeEventListener('change', motionChange);
+  };
+  video.addEventListener('ended', cleanup, { once: true });
+  video.muted = true;
+  video.src = video.dataset.src;
+  video.play().catch(cleanup);
+}
+
+function revealHomeProcess() {
+  const section = document.querySelector('[data-home-process]');
+  if (
+    !section ||
+    !('IntersectionObserver' in window) ||
+    matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
+    return;
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry?.isIntersecting) return;
+      section.classList.add('process-visible');
+      observer.disconnect();
+    },
+    { threshold: 0.2 },
+  );
+  observer.observe(section);
 }
 
 function followLegacyServiceLink() {
@@ -273,7 +272,8 @@ function followLegacyServiceLink() {
 followLegacyServiceLink();
 window.addEventListener('hashchange', followLegacyServiceLink);
 new SiteNavigation();
-new HeroVideo();
+playHeroOnce();
+revealHomeProcess();
 document
   .querySelectorAll<HTMLFormElement>('#quote-form')
   .forEach((form) => new QuoteFormController(form));

@@ -159,11 +159,6 @@ export const services: readonly Service[] = [
   ),
 ];
 
-export const featuredServiceIds: readonly string[] = [
-  'air-conditioning',
-  'electromechanical',
-];
-
 export const legacyServiceIds = {
   ac: 'air-conditioning',
   electrical: 'electromechanical',

@@ -24,22 +24,11 @@ Checked 2 November 2026. Free tiers and licences vary by asset; retain the actua
 | `public/images/interior.webp`   | [Modern Living Room Interior](https://www.pexels.com/photo/modern-living-room-interior-15824912/) by Curtis Adams � Pexels licence                      | Illustrative living space; not a completed company project.                                                                                |
 | `public/images/electrical.webp` | [A man is working on an electrical panel](https://www.pexels.com/photo/a-man-is-working-on-an-electrical-panel-27928762/) by ranjeet . � Pexels licence | Illustrative electrical work; not company staff.                                                                                           |
 
-No third-party icon set or animation snippet is shipped. ControlIcon contains minimal, code-native SVG controls for navigation, playback and the service carousel. Decorative diagonal arrows have been removed. User-provided trade pictograms remain available for later selection.
+The homepage uses selected [Tabler outline icons](https://github.com/tabler/tabler-icons) for its service and process illustrations. The MIT license ships with the local SVG files under `public/icons/tabler/`. Navigation uses the site’s existing control icons.
 
 ## Current hero footage
 
-`public/images/electrical-service.mp4` and `electrical-service.webp`: [Technician attendance](https://www.pexels.com/video/technician-attendance-18780266/) by Johnny Chen, under the [Pexels licence](https://www.pexels.com/license/). A technician tests a residential wall socket with a multimeter. Illustrative service work, not company staff or a completed company project. Original 4K landscape footage converted to a silent 1280 × 720 H.264 loop at 24 fps with a matching WebP poster.
-
-## Hero selection review
-
-Reviewed Pexels, Pixabay, Mixkit, Vecteezy, Envato and Storyblocks after the residential-interior footage was rejected. The selected Pexels clip depicts an actual service task rather than a furnished room, industrial controls or unrelated construction.
-
-Closer AC-specific alternatives requiring a paid licence:
-
-- [Technician testing industrial air conditioning with a multimeter](https://elements.envato.com/resistance-test-of-temperature-sensors-in-the-cool-GNB86J5) by vogofilms, Envato; landscape, 14 seconds.
-- [Technician checking an air conditioner](https://www.storyblocks.com/video/stock/black-technician-in-uniform-check-air-conditioner-air-condition-maintenance-service-352991962) by voffka23, Storyblocks; 14 seconds.
-
-No paid footage was purchased or included. Mixkit's electrician-in-Vietnam clip was excluded because its free download is restricted to personal use. Avoid using this illustrative stock as an Our Works project.
+`public/images/site-installation.mp4` and `site-installation.webp` use [Construction Worker Installing Electrical Wiring](https://www.pexels.com/video/construction-worker-installing-electrical-wiring-34572318/) by Sergei Starostin under the [Pexels licence](https://www.pexels.com/license/). The illustrative site preparation clip is a silent 4.5-second 1280 × 720 H.264 sequence at 24 fps. The poster is a still near the end of the clip.
 
 ## Our Works photographs
 

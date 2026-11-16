@@ -33,21 +33,13 @@ export const copy = {
     close: 'Close',
     quote: 'Request a quote',
     eyebrow: 'TECHNICAL SERVICES · UNITED ARAB EMIRATES',
-    heroTop: 'Technical care.',
-    heroBottom: 'For your everyday.',
+    heroTop: 'Installation, repairs',
+    heroBottom: 'and fit-outs.',
     heroText:
-      'Installation, maintenance and finishing services for homes and workplaces in the UAE. Tell us what you need and we’ll help define the scope.',
+      'AC, electromechanical and finishing work for homes and businesses in the UAE.',
     explore: 'Explore our services',
-    pause: 'Pause video',
-    play: 'Play video',
-    heroFoot: 'A little care goes a long way.',
-    heroCaption: 'HERE FOR YOUR EVERYDAY',
     servicesLabel: 'Our services',
-    servicesTitle: 'The right care for your space.',
-    servicesText:
-      'One place to start for your technical needs. Explore the work we do, then tell us what your space needs.',
     serviceExplore: 'Explore service',
-    allServices: 'Find the right service',
     aboutLabel: 'About Aldolphin',
     aboutTitle: 'The care behind\nyour everyday.',
     aboutText:
@@ -58,6 +50,7 @@ export const copy = {
     aboutNote: 'For the places that matter.',
     aboutImageAlt: 'A calm, thoughtfully maintained living space',
     processLabel: 'How it works',
+    homeProcessTitle: 'From enquiry to quotation',
     processTitle: 'From a small fix\nto your next project.',
     steps: [
       {
@@ -131,21 +124,13 @@ export const copy = {
     close: 'إغلاق',
     quote: 'اطلب عرض سعر',
     eyebrow: 'خدمات فنية · الإمارات العربية المتحدة',
-    heroTop: 'عناية فنية.',
-    heroBottom: 'لراحة كل يوم.',
+    heroTop: 'تركيب وصيانة',
+    heroBottom: 'وتشطيبات.',
     heroText:
-      'خدمات التركيب والصيانة والتشطيب للمنازل وأماكن العمل في الإمارات. أخبرنا بما تحتاجه لنحدّد نطاق العمل.',
+      'أعمال التكييف والمعدات الكهروميكانيكية والتشطيبات للمنازل والمنشآت في الإمارات.',
     explore: 'تعرّف على خدماتنا',
-    pause: 'إيقاف الفيديو',
-    play: 'تشغيل الفيديو',
-    heroFoot: 'القليل من العناية يصنع الكثير.',
-    heroCaption: 'نهتم بتفاصيل يومك',
     servicesLabel: 'خدماتنا',
-    servicesTitle: 'العناية التي تحتاجها مساحتك.',
-    servicesText:
-      'بداية واحدة لاحتياجاتك الفنية. تعرّف على أعمالنا وأخبرنا بما تحتاجه مساحتك.',
     serviceExplore: 'اكتشف الخدمة',
-    allServices: 'اختر الخدمة المناسبة',
     aboutLabel: 'من نحن',
     aboutTitle: 'عناية تُحدث فرقاً\nفي تفاصيل يومك.',
     aboutText:
@@ -155,7 +140,8 @@ export const copy = {
       'لكل عقار احتياجاته الخاصة. نبدأ بفهم ما تحتاجه، ومناقشة الأعمال، وتحديد نطاقها قبل المضي قدماً. أخبرنا عن مساحتك لنحدّد الخطوة التالية معاً.',
     aboutNote: 'للأماكن التي تعني لك الكثير.',
     aboutImageAlt: 'مساحة معيشة هادئة تحظى بالعناية',
-    processLabel: 'خطوات بسيطة',
+    processLabel: 'كيف نعمل',
+    homeProcessTitle: 'من الاستفسار إلى عرض السعر',
     processTitle: 'من إصلاح بسيط\nإلى مشروعك القادم.',
     steps: [
       {
