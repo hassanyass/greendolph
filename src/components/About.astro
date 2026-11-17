@@ -28,7 +28,9 @@ const t = copy[locale];
       />
     </div>
     <div class="about-copy">
-      <BrandLogo locale={locale} />
+      <div class="about-identity">
+        <BrandLogo locale={locale} variant="stacked" />
+      </div>
       <h2 id="company-title">{t.aboutTitle}</h2>
       <p>{t.aboutText}</p>
       <p>{t.aboutDetail}</p>
@@ -61,8 +63,15 @@ const t = copy[locale];
   .about-copy .button {
     margin-top: 26px;
   }
-  .about-copy > img {
-    width: 216px;
+  .about-identity {
+    border-inline-start: 4px solid var(--accent);
+    padding-block: 22px;
+    padding-inline: 24px;
+    background: var(--paper);
+  }
+  .about-identity :global(img) {
+    display: block;
+    width: clamp(132px, 19vw, 165px);
     height: auto;
   }
   .process > .button {

@@ -15,11 +15,6 @@ const formCopy = contactCopy[locale];
     <h2 id="contact-title">{t.contactTitle}</h2>
     <p>{t.contactText}</p>
     <ContactLinks locale={locale} placement="form" />
-    <div class="contact-motif" aria-hidden="true">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
   </div>
   <form id="quote-form" method="post" action={quotationEndpoint ?? undefined}>
     <fieldset class="form-grid">

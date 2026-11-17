@@ -15,20 +15,22 @@ export class Brand {
   readonly arabicName = 'الدولفين الأخضر';
   readonly logos = {
     en: {
-      primary: { src: '/brand/logo-en.svg', width: 342, height: 95 },
-      inverse: { src: '/brand/logo-inverse-en.png', width: 444, height: 363 },
+      primary: { src: '/brand/full-en.png', width: 890, height: 235 },
+      stacked: { src: '/brand/stacked-en.png', width: 657, height: 540 },
+      inverse: { src: '/brand/on-green-en.png', width: 650, height: 172 },
     },
     ar: {
-      primary: { src: '/brand/logo-ar.svg', width: 366, height: 97 },
-      inverse: { src: '/brand/logo-inverse-ar.png', width: 669, height: 177 },
+      primary: { src: '/brand/full-ar.png', width: 960, height: 231 },
+      stacked: { src: '/brand/stacked-ar.png', width: 716, height: 538 },
+      inverse: { src: '/brand/on-green-ar.png', width: 700, height: 170 },
     },
   };
   readonly mark = { src: '/brand/mark.svg', width: 121, height: 108 };
-  readonly favicon = { src: '/brand/favicon.svg', type: 'image/svg+xml' };
-  readonly shareImage = {
-    src: '/images/site-installation.webp',
-    width: 1280,
-    height: 720,
+  readonly favicon = { src: '/brand/app-icon.png', type: 'image/png' };
+  readonly pattern = '/brand/pattern.webp';
+  readonly shareImages = {
+    en: { src: '/brand/share-en.jpg', width: 1200, height: 630 },
+    ar: { src: '/brand/share-ar.jpg', width: 1200, height: 630 },
   };
   readonly typography = {
     en: {
@@ -60,6 +62,7 @@ export class Brand {
   cssVariables() {
     return Object.entries({
       ...this.colors,
+      'brand-pattern': `url("${this.pattern}")`,
       'font-en-body': this.typography.en.body,
       'font-en-heading': this.typography.en.heading,
       'font-ar-body': this.typography.ar.body,

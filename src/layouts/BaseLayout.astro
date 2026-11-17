@@ -25,7 +25,7 @@ const {
   page = routes.page('home'),
   title = copy[locale].title,
   description = copy[locale].description,
-  shareImage = { ...brand.shareImage, alt: title },
+  shareImage = { ...brand.shareImages[locale], alt: title },
 } = Astro.props;
 const metadata = new PageMetadata(
   site,

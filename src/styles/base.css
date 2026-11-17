@@ -225,15 +225,6 @@ textarea:focus-visible {
   margin-top: 15px;
   max-width: 420px;
 }
-.about-signature {
-  border-top: 1px solid var(--line);
-  margin-top: 32px;
-  padding-top: 20px;
-}
-.about-signature img {
-  width: 235px;
-  height: auto;
-}
 .process {
   background: var(--forest);
   color: var(--white);
@@ -283,22 +274,6 @@ textarea:focus-visible {
   font-size: 14px;
   line-height: 1.9;
   color: var(--muted);
-}
-.contact-motif {
-  display: flex;
-  gap: 10px;
-  margin-top: 60px;
-  overflow: hidden;
-  width: 125px;
-}
-.contact-motif span {
-  display: block;
-  width: 70px;
-  height: 70px;
-  border: 1px solid var(--green);
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-inline-end: -40px;
 }
 .form-grid {
   display: grid;
@@ -377,10 +352,23 @@ select {
   white-space: pre-wrap;
 }
 footer {
-  background: var(--ink);
+  background: var(--forest);
   border-block-start: 5px solid var(--accent);
   color: var(--white);
   padding: 58px var(--gutter) 24px;
+  position: relative;
+  isolation: isolate;
+}
+footer::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  block-size: 115px;
+  background: var(--brand-pattern) center / 146px auto repeat;
+  mask-image: linear-gradient(transparent, black);
+  opacity: 0.11;
+  pointer-events: none;
+  z-index: -1;
 }
 .footer-main {
   display: grid;
@@ -389,11 +377,9 @@ footer {
   padding-bottom: 50px;
 }
 .footer-brand > img {
-  width: 148px;
+  display: block;
+  width: min(100%, 228px);
   height: auto;
-}
-[dir='rtl'] .footer-brand > img {
-  width: 218px;
 }
 footer :is(a, button):focus-visible {
   outline-color: var(--accent);
@@ -557,9 +543,6 @@ html[dir='rtl'] .eyebrow {
   .about-copy > p:not(.eyebrow) {
     margin-top: 20px;
   }
-  .about-signature {
-    margin-top: 25px;
-  }
   .steps {
     grid-template-columns: 1fr;
     gap: 30px;
@@ -586,9 +569,6 @@ html[dir='rtl'] .eyebrow {
   .contact-intro > p:not(.eyebrow) {
     max-width: 100%;
     margin-top: 20px;
-  }
-  .contact-motif {
-    display: none;
   }
   .form-grid {
     gap: 25px 20px;

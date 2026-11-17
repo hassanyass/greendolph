@@ -49,7 +49,7 @@ The homepage enquiry section uses [Measuring a wall](https://www.pexels.com/phot
 
 The homepage blueprint is an original SVG. CSS animates airflow along the ducts and a scan across the partition plan. [Magic UI’s Animated Grid Pattern](https://magicui.design/docs/components/animated-grid-pattern) served as a visual reference for the background grid.
 
-The social share image at `public/images/site-installation.webp` is a still from [Construction Worker Installing Electrical Wiring](https://www.pexels.com/video/construction-worker-installing-electrical-wiring-34572318/) by Sergei Starostin under the [Pexels licence](https://www.pexels.com/license/).
+The previous social image at `public/images/site-installation.webp` is a still from [Construction Worker Installing Electrical Wiring](https://www.pexels.com/video/construction-worker-installing-electrical-wiring-34572318/) by Sergei Starostin under the [Pexels licence](https://www.pexels.com/license/).
 
 ## Our Works photographs
 
@@ -57,3 +57,7 @@ The owner supplied project descriptions and photographs in `aldolphin-website/ou
 
 - [Wall-mounted air conditioner in modern interior](https://www.pexels.com/photo/wall-mounted-air-conditioner-in-modern-interior-38788452/) by NEOSiAM 18+. Used on the Sharjah card and project cover.
 - [Man Repairing an Aircon](https://www.pexels.com/photo/man-repairing-an-aircon-5463580/) by José Andrés Pacheco Cortes. Used in the Sharjah gallery.
+
+## Official visual identity
+
+The light-background logos and stacked lockups come from page 8 of the supplied Khattaby Studio brand guide. The dark-background horizontal logos use supplied exports 03–04, and the share cards use exports 01–02. The favicon and footer pattern use the artwork on pages 15 and 18 of the guide. Use the guide's palette swatches for site surfaces and keep artwork in its supplied colors. Acumin Variable Concept requires the configured Adobe Fonts web project for English. Cairo is self-hosted.

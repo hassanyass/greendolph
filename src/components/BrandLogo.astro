@@ -4,7 +4,7 @@ import type { Locale } from '../domain/routes';
 
 interface Props {
   locale: Locale;
-  variant?: 'primary' | 'inverse' | 'mark';
+  variant?: 'primary' | 'stacked' | 'inverse' | 'mark';
   loading?: 'eager' | 'lazy';
 }
 const { locale, variant = 'primary', loading } = Astro.props;

@@ -15,7 +15,7 @@ Review each phase and push the checked changes to GitHub for peer review. Begin 
 
 ## Replaceable brand and content
 
-- Prototype logo and colours may change. Configure all brand assets and palette in `src/config/brand.ts`. Let CSS consume semantic variables; use `color-mix` for derived overlays and borders. Layout values belong in CSS, not business data.
+- Use the approved Khattaby Studio identity and preserve the supplied logo proportions and clear space. Keep wordmarks at least 120 px wide on the website. Configure all brand assets and palette in `src/config/brand.ts`. Let CSS consume semantic variables; use `color-mix` for derived overlays and borders. Layout values belong in CSS, not business data.
 - Put bilingual copy, services, emirates and media references in typed content/config objects. Reuse components rather than duplicating the page for Arabic. Use classes where they clarify domain models or interaction ownership; do not force inheritance into presentational markup.
 - Avoid decorative code abstractions, meaningless wrappers, unused packages, emoji icons, floating badges, invented labels and template filler. Use meaningful semantic HTML and ordinary, descriptive names.
 
