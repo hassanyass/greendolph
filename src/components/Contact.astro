@@ -13,14 +13,5 @@ const t = copy[locale];
   title={t.contactPageTitle}
   description={t.contactPageDescription}
 >
-  <div class="page-intro">
-    <p class="eyebrow">{t.contactLabel}</p>
-    <h1>{t.contactPageHeading}</h1>
-  </div>
-  <QuoteForm locale={locale} />
+  <QuoteForm locale={locale} standalone />
 </BaseLayout>
-<style>
-  .page-intro {
-    padding-bottom: 0;
-  }
-</style>

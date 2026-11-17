@@ -136,8 +136,20 @@ textarea:focus-visible {
 
 .section {
   padding: 96px var(--gutter);
-  max-width: 1600px;
+  max-width: var(--content-width);
   margin-inline: auto;
+}
+.page-heading {
+  font-family: var(--font-heading);
+  font-size: var(--page-heading-size);
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+[dir='rtl'] .page-heading {
+  line-height: 1.35;
+  letter-spacing: normal;
 }
 .section h2 {
   font-family: var(--font-heading);
@@ -235,7 +247,7 @@ textarea:focus-visible {
   padding-top: 105px;
   padding-bottom: 105px;
 }
-.contact h2 {
+.contact-intro h2 {
   margin-top: 20px;
 }
 .contact-intro > p:not(.eyebrow) {

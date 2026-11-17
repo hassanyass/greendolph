@@ -1,25 +1,19 @@
-.landing {
-  --landing-section-space: clamp(48px, 5.2vw, 80px);
-  --landing-column-gap: clamp(36px, 5vw, 72px);
-  --landing-panel-radius: 6px;
-}
-
 .landing :is(.services, .about, .home-process-layout, .contact.quote-section) {
-  padding-block: var(--landing-section-space);
+  padding-block: var(--section-space);
 }
 
 .landing .section h2 {
-  font-size: clamp(2rem, 3.45vw, 3.125rem);
+  font-size: var(--section-heading-size);
   text-wrap: balance;
 }
 
 .landing :is(.about, .home-process-layout, .quote-prep-layout, .quote-section) {
-  column-gap: var(--landing-column-gap);
+  column-gap: var(--section-column-gap);
 }
 
 .landing
   :is(.about-image, .service-card-link, .home-process-blueprint, .quote-panel) {
-  border-radius: var(--landing-panel-radius);
+  border-radius: var(--panel-radius);
 }
 
 .landing :is(.about-image, .service-card-link) {
@@ -56,10 +50,6 @@
 }
 
 @media (max-width: 800px) {
-  .landing {
-    --landing-column-gap: 28px;
-  }
-
   .landing
     :is(.about, .home-process-layout, .quote-prep-layout, .quote-section) {
     row-gap: 26px;

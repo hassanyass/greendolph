@@ -50,7 +50,7 @@ const related = services.filter(({ id }) => project.serviceIds.includes(id));
     >
       <div>
         <p class="work-location">{location}</p>
-        <h1>{title}</h1>
+        <h1 class="page-heading">{title}</h1>
         <p class="work-summary">{project.summary[locale]}</p>
         {project.illustrativePhotos && (
           <small class="work-image-note">{t.illustrativePhotos}</small>
@@ -103,7 +103,7 @@ const related = services.filter(({ id }) => project.serviceIds.includes(id));
                 <ProjectImage
                   photo={photo}
                   locale={locale}
-                  sizes="(min-width: 1080px) 28vw, (min-width: 700px) 43vw, 90vw"
+                  sizes="(min-width: 700px) 44vw, 90vw"
                 />
               </a>
               <figcaption>{photo.caption[locale]}</figcaption>

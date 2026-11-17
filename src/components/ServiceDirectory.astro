@@ -24,17 +24,15 @@ const legacyAnchor = (id: string) =>
   description={t.servicesPageDescription}
 >
   <div class="page-intro" id="maintenance">
-    <h1>{t.servicesPageHeading}</h1>
+    <h1 class="page-heading">{t.servicesPageHeading}</h1>
     <p>{t.servicesPageDescription}</p>
   </div>
   <ul class="service-directory section">
-    {services.map((service, index) => {
-      const wide = index === 0 || index === 5;
+    {services.map((service) => {
       return (
         <li
           id={legacyAnchor(service.id)}
           class="service-directory-card"
-          data-wide={wide || undefined}
           style={`--service-tint:${servicePresentation(service.id).tint}`}
         >
           <a
@@ -45,11 +43,7 @@ const legacyAnchor = (id: string) =>
             <div class="service-directory-photo">
               <ServicePhoto
                 id={service.id}
-                sizes={
-                  wide
-                    ? '(max-width: 580px) 90vw, (max-width: 950px) 45vw, 59vw'
-                    : '(max-width: 580px) 90vw, (max-width: 950px) 45vw, 29vw'
-                }
+                sizes="(max-width: 580px) 90vw, (max-width: 950px) 45vw, 29vw"
               />
             </div>
             <div class="service-directory-copy">

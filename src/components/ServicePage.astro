@@ -38,7 +38,7 @@ const design = servicePresentation(service.id);
           <ControlIcon name="previous" />
           {t.viewServices}
         </a>
-        <h1>{service.title[locale]}</h1>
+        <h1 class="page-heading">{service.title[locale]}</h1>
         <p>{service.description[locale]}</p>
         <a class="button" href={routes.enquiry(locale, service.id)}>
           {t.quote}

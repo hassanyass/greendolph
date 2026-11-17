@@ -156,49 +156,37 @@
 }
 
 .page-intro {
-  max-width: 1600px;
-  padding: 65px var(--gutter) 40px;
+  max-width: var(--content-width);
+  padding: var(--section-space) var(--gutter) var(--panel-gap);
   margin-inline: auto;
 }
-.page-intro h1 {
-  font-size: clamp(36px, 4vw, 58px);
-  line-height: 1.15;
-  font-weight: 500;
-  letter-spacing: -0.04em;
-  margin-top: 20px;
-}
 .page-intro > p:last-child {
-  max-width: 570px;
-  font-size: 15px;
+  max-inline-size: 55ch;
   color: var(--muted);
-  line-height: 1.85;
-  margin-top: 20px;
-}
-html[dir='rtl'] .page-intro h1 {
-  line-height: 1.5;
+  line-height: 1.7;
+  margin-block-start: 16px;
 }
 
 .service-directory {
-  padding-block-start: 0;
+  padding-block: 0 var(--section-space);
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(16px, 2vw, 30px);
+  gap: var(--panel-gap);
   list-style: none;
   margin-block: 0;
-}
-.service-directory-card[data-wide] {
-  grid-column: span 2;
 }
 .service-directory-link {
   display: grid;
   grid-template-rows: auto 1fr;
   min-block-size: 100%;
+  overflow: hidden;
+  border-radius: var(--panel-radius);
   color: var(--ink);
   background: var(--service-tint);
 }
 .service-directory-photo {
   overflow: hidden;
-  block-size: clamp(172px, 19vw, 300px);
+  aspect-ratio: 8 / 5;
 }
 .service-directory-copy {
   display: grid;
@@ -235,8 +223,8 @@ html[dir='rtl'] .page-intro h1 {
   grid-template-areas: 'copy photo';
   grid-template-columns: minmax(0, 0.78fr) minmax(0, 1fr);
   align-items: center;
-  gap: clamp(22px, 5vw, 88px);
-  padding-block: clamp(38px, 6vw, 96px);
+  gap: var(--section-column-gap);
+  padding-block: var(--section-space);
 }
 .service-profile-heading[data-photo-placement='start'] {
   grid-template-areas: 'photo copy';
@@ -254,17 +242,8 @@ html[dir='rtl'] .page-intro h1 {
   color: var(--green);
 }
 .service-profile-copy h1 {
-  font-family: var(--font-heading);
-  font-weight: 500;
-  font-size: clamp(1.65rem, 10.7cqi, 4.6rem);
-  line-height: 1.03;
-  letter-spacing: -0.042em;
+  font-size: min(var(--page-heading-size), clamp(1.85rem, 9cqi, 3.75rem));
   overflow-wrap: anywhere;
-  text-wrap: balance;
-}
-[dir='rtl'] .service-profile-copy h1 {
-  letter-spacing: 0;
-  line-height: 1.26;
 }
 .service-profile-copy p {
   max-inline-size: 42ch;
@@ -290,11 +269,11 @@ html[dir='rtl'] .page-intro h1 {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(180px, 0.53fr);
   align-items: center;
-  gap: clamp(24px, 7vw, 108px);
-  padding-block-start: 0;
+  gap: var(--section-column-gap);
+  padding-block: 0 var(--section-space);
 }
 .service-brief h2 {
-  font-size: clamp(1.65rem, 3.4vw, 3.25rem);
+  font-size: var(--section-heading-size);
   text-wrap: balance;
 }
 .service-brief ul {
@@ -380,9 +359,6 @@ html[dir='rtl'] .page-intro h1 {
   .service-directory {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .service-directory-card[data-wide] {
-    grid-column: auto;
-  }
 }
 @media (max-width: 800px) {
   .service-profile-heading,
@@ -407,19 +383,9 @@ html[dir='rtl'] .page-intro h1 {
   .service-brief-photo {
     max-inline-size: 360px;
   }
-  .page-intro {
-    padding-block: 32px;
-  }
-  .page-intro h1 {
-    font-size: 38px;
-  }
 }
 @media (max-width: 580px) {
   .service-directory {
     grid-template-columns: minmax(0, 1fr);
-  }
-  .service-directory-photo {
-    block-size: auto;
-    aspect-ratio: 8 / 5;
   }
 }

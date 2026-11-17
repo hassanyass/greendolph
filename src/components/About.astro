@@ -20,7 +20,9 @@ const a = aboutCopy[locale];
     <div class="section about-hero-layout">
       <div>
         <p class="eyebrow">{t.aboutLabel}</p>
-        <h1 id="about-heading">{t.aboutPageHeading}</h1>
+        <h1 class="page-heading" id="about-heading">
+          {t.aboutPageHeading}
+        </h1>
         <p class="about-lead">{a.intro}</p>
       </div>
       <div class="about-identity">
@@ -86,7 +88,26 @@ const a = aboutCopy[locale];
     display: grid;
     grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
     align-items: center;
-    gap: clamp(26px, 6vw, 90px);
+    gap: var(--section-column-gap);
+  }
+  .section {
+    padding-block: var(--section-space);
+  }
+  .section h2 {
+    font-size: var(--section-heading-size);
+    text-wrap: balance;
+  }
+  .about-page {
+    gap: var(--section-column-gap);
+  }
+  .about-copy h2 {
+    margin-block-start: 0;
+  }
+  .about-copy > p:not(.eyebrow) {
+    font-size: 1rem;
+    line-height: 1.7;
+    max-inline-size: 46ch;
+    margin-block-start: 16px;
   }
   .about-hero .eyebrow {
     color: var(--accent);
@@ -94,12 +115,6 @@ const a = aboutCopy[locale];
   .about-hero h1 {
     max-inline-size: 17ch;
     margin-block-start: 12px;
-    font-size: clamp(2rem, 5.2vw, 4.8rem);
-    line-height: 1.16;
-    text-wrap: balance;
-  }
-  :global([dir='rtl']) .about-hero h1 {
-    line-height: 1.35;
   }
   .about-lead {
     margin-block-start: 22px;
@@ -111,7 +126,8 @@ const a = aboutCopy[locale];
     place-items: center;
     background: var(--paper);
     border-block-end: 4px solid var(--accent);
-    padding: clamp(22px, 5vw, 64px);
+    border-radius: var(--panel-radius);
+    padding: clamp(22px, 4vw, 54px);
     min-inline-size: 0;
   }
   .about-identity :global(img) {
@@ -122,7 +138,9 @@ const a = aboutCopy[locale];
     border: 0;
   }
   .about-page .about-image {
-    height: clamp(280px, 43vw, 535px);
+    block-size: clamp(280px, 35vw, 460px);
+    border-radius: var(--panel-radius);
+    overflow: hidden;
   }
   .about-direction {
     background: var(--mist);
@@ -145,7 +163,7 @@ const a = aboutCopy[locale];
   .about-values dl {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 28px clamp(28px, 6vw, 90px);
+    gap: var(--panel-gap) var(--section-column-gap);
     margin-block: 30px;
   }
   .about-values dl div {

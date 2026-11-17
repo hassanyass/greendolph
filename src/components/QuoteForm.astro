@@ -5,7 +5,13 @@ import { contactCopy } from '../config/contact-copy';
 import { quotationEndpoint } from '../config/quotation';
 import { services } from '../config/services';
 import { emirates, copy, type Locale } from '../config/content';
-const { locale } = Astro.props as { locale: Locale };
+interface Props {
+  locale: Locale;
+  standalone?: boolean;
+}
+const { locale, standalone = false } = Astro.props;
+const ContactHeading = standalone ? 'h1' : 'h2';
+const FormHeading = standalone ? 'h2' : 'h3';
 const t = copy[locale];
 const formCopy = contactCopy[locale];
 ---
@@ -17,7 +23,12 @@ const formCopy = contactCopy[locale];
 >
   <div class="contact-intro">
     <p class="eyebrow">{t.contactLabel}</p>
-    <h2 id="contact-title">{t.contactTitle}</h2>
+    <ContactHeading
+      class:list={{ 'page-heading': standalone }}
+      id="contact-title"
+    >
+      {standalone ? t.contactPageHeading : t.contactTitle}
+    </ContactHeading>
     <p>{t.contactText}</p>
     <ContactLinks locale={locale} placement="form" />
   </div>
@@ -29,7 +40,9 @@ const formCopy = contactCopy[locale];
     aria-labelledby="quote-panel-title"
   >
     <div class="quote-panel-header">
-      <h3 id="quote-panel-title">{formCopy.formHeading}</h3>
+      <FormHeading class="quote-panel-title" id="quote-panel-title">
+        {formCopy.formHeading}
+      </FormHeading>
       <p>{formCopy.formRequired}</p>
     </div>
     <fieldset class="form-grid">

@@ -1,17 +1,21 @@
 .contact.quote-section {
   grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
-  gap: clamp(28px, 6vw, 92px);
+  gap: var(--section-column-gap);
   align-items: start;
-  padding-block: clamp(48px, 7vw, 104px);
+  padding-block: var(--section-space);
 }
 .quote-section .contact-intro {
-  padding-block-start: clamp(0px, 2vw, 22px);
+  padding-block-start: 0;
+}
+.quote-section .contact-intro .page-heading {
+  margin-block-start: 16px;
 }
 .quote-panel {
   min-inline-size: 0;
   background: var(--mist);
   border: 1px solid var(--line);
   border-block-start: 3px solid var(--green);
+  border-radius: var(--panel-radius);
   padding: clamp(16px, 3.5vw, 44px);
 }
 .quote-panel-header {
@@ -22,9 +26,12 @@
   gap: 5px 15px;
   margin-block-end: 22px;
 }
-.quote-panel-header h3 {
+.quote-section .quote-panel-header .quote-panel-title {
   color: var(--green);
   font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: normal;
 }
 .quote-panel-header p {
   color: var(--muted);
@@ -61,6 +68,7 @@
 @media (max-width: 800px) {
   .contact.quote-section {
     grid-template-columns: minmax(0, 1fr);
+    row-gap: 26px;
   }
   .quote-panel .form-submit {
     inline-size: 100%;
