@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { brand, media } from '../config/brand';
+import { media } from '../config/brand';
+import BrandLogo from './BrandLogo.astro';
 import { copy, type Locale } from '../config/content';
 import { routes } from '../domain/routes';
 const { locale } = Astro.props as { locale: Locale };
@@ -27,12 +28,7 @@ const t = copy[locale];
       />
     </div>
     <div class="about-copy">
-      <img
-        src={brand.logo}
-        alt={brand.name}
-        width={brand.logoSize.width}
-        height={brand.logoSize.height}
-      />
+      <BrandLogo locale={locale} />
       <h2 id="company-title">{t.aboutTitle}</h2>
       <p>{t.aboutText}</p>
       <p>{t.aboutDetail}</p>
@@ -52,7 +48,7 @@ const t = copy[locale];
         </article>
       ))}
     </div>
-    <a class="button" href={routes.enquiry(locale)}>
+    <a class="button button-light" href={routes.enquiry(locale)}>
       {t.quote}
     </a>
   </section>
@@ -64,6 +60,10 @@ const t = copy[locale];
   }
   .about-copy .button {
     margin-top: 26px;
+  }
+  .about-copy > img {
+    width: 216px;
+    height: auto;
   }
   .process > .button {
     margin-top: 36px;

@@ -87,7 +87,7 @@ textarea:focus-visible {
   border-radius: 10px;
 }
 .button:hover {
-  background: var(--forest);
+  background: var(--ink);
   transform: translateY(-2px);
 }
 .button-small {
@@ -193,7 +193,7 @@ textarea:focus-visible {
 .image-caption img {
   height: 48px;
   width: 48px;
-  object-fit: cover;
+  object-fit: contain;
 }
 .image-caption span {
   font-size: 13px;
@@ -377,7 +377,8 @@ select {
   white-space: pre-wrap;
 }
 footer {
-  background: var(--forest);
+  background: var(--ink);
+  border-block-start: 5px solid var(--accent);
   color: var(--white);
   padding: 58px var(--gutter) 24px;
 }
@@ -388,8 +389,14 @@ footer {
   padding-bottom: 50px;
 }
 .footer-brand > img {
-  width: 290px;
+  width: 148px;
   height: auto;
+}
+[dir='rtl'] .footer-brand > img {
+  width: 218px;
+}
+footer :is(a, button):focus-visible {
+  outline-color: var(--accent);
 }
 .footer-brand > p {
   font-size: 14px;
@@ -500,9 +507,6 @@ html[dir='rtl'] .eyebrow {
   .footer-main {
     gap: 30px;
     grid-template-columns: 1.4fr 0.6fr 1fr;
-  }
-  .footer-brand > img {
-    width: 245px;
   }
 }
 @media (max-width: 640px) {
@@ -615,9 +619,6 @@ html[dir='rtl'] .eyebrow {
   }
   .footer-brand {
     grid-column: 1/-1;
-  }
-  .footer-brand > img {
-    width: 270px;
   }
   .footer-brand > p {
     margin-top: 18px;

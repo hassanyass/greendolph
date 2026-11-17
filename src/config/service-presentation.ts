@@ -12,7 +12,7 @@ interface ServicePresentation {
 
 const presentation: Readonly<Record<string, ServicePresentation>> = {
   electromechanical: {
-    tint: '#dce7ec',
+    tint: 'color-mix(in srgb, var(--green) 12%, var(--white))',
     placement: 'end',
     leadAlt: {
       en: 'Electrical cabinet being serviced',
@@ -36,7 +36,7 @@ const presentation: Readonly<Record<string, ServicePresentation>> = {
     },
   },
   'ceilings-and-partitions': {
-    tint: '#dce5e2',
+    tint: 'color-mix(in srgb, var(--green) 8%, var(--white))',
     placement: 'start',
     leadAlt: {
       en: 'Suspended ceiling grid and glass partitions in an office',
@@ -60,7 +60,7 @@ const presentation: Readonly<Record<string, ServicePresentation>> = {
     },
   },
   'air-conditioning': {
-    tint: '#dce7e9',
+    tint: 'color-mix(in srgb, var(--green) 14%, var(--white))',
     placement: 'end',
     leadAlt: {
       en: 'Technician servicing an outdoor air-conditioning unit',
@@ -84,7 +84,7 @@ const presentation: Readonly<Record<string, ServicePresentation>> = {
     },
   },
   'carpentry-and-wood-flooring': {
-    tint: '#e8d4b8',
+    tint: 'color-mix(in srgb, var(--accent) 26%, var(--white))',
     placement: 'start',
     leadAlt: {
       en: 'Wood parquet laid in a herringbone pattern',
@@ -108,7 +108,7 @@ const presentation: Readonly<Record<string, ServicePresentation>> = {
     },
   },
   'building-cleaning': {
-    tint: '#dee6d5',
+    tint: 'color-mix(in srgb, var(--accent) 15%, var(--white))',
     placement: 'end',
     leadAlt: {
       en: 'Window being cleaned from inside a building',
@@ -132,7 +132,7 @@ const presentation: Readonly<Record<string, ServicePresentation>> = {
     },
   },
   'plumbing-and-sanitary': {
-    tint: '#d3e4e8',
+    tint: 'color-mix(in srgb, var(--green) 9%, var(--white))',
     placement: 'start',
     leadAlt: {
       en: 'Metal tap connected to a blue supply pipe',
@@ -156,7 +156,7 @@ const presentation: Readonly<Record<string, ServicePresentation>> = {
     },
   },
   'engraving-and-ornamentation': {
-    tint: '#e5d4c2',
+    tint: 'color-mix(in srgb, var(--accent) 22%, var(--white))',
     placement: 'end',
     leadAlt: {
       en: 'Openwork decorative panel with a carved floral pattern',
@@ -180,7 +180,7 @@ const presentation: Readonly<Record<string, ServicePresentation>> = {
     },
   },
   painting: {
-    tint: '#edd6cb',
+    tint: 'color-mix(in srgb, var(--accent) 16%, var(--white))',
     placement: 'start',
     leadAlt: {
       en: 'Painter applying a coating to an interior wall',
@@ -204,7 +204,7 @@ const presentation: Readonly<Record<string, ServicePresentation>> = {
     },
   },
   plaster: {
-    tint: '#e8e0cd',
+    tint: 'color-mix(in srgb, var(--accent) 11%, var(--white))',
     placement: 'end',
     leadAlt: {
       en: 'Worker applying plaster to a wall',
@@ -228,7 +228,7 @@ const presentation: Readonly<Record<string, ServicePresentation>> = {
     },
   },
   'floor-and-wall-tiling': {
-    tint: '#dedee9',
+    tint: 'color-mix(in srgb, var(--green) 11%, var(--white))',
     placement: 'start',
     leadAlt: {
       en: 'Gloved hand aligning tiles with levelling spacers',

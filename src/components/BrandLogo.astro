@@ -1,0 +1,16 @@
+---
+import { brand } from '../config/brand';
+import type { Locale } from '../domain/routes';
+
+interface Props {
+  locale: Locale;
+  variant?: 'primary' | 'inverse' | 'mark';
+  loading?: 'eager' | 'lazy';
+}
+const { locale, variant = 'primary', loading } = Astro.props;
+const decorative = variant === 'mark';
+const artwork = decorative ? brand.mark : brand.logos[locale][variant];
+const name = locale === 'ar' ? brand.arabicName : brand.name;
+---
+
+<img {...artwork} alt={decorative ? '' : name} {loading} />

@@ -160,7 +160,7 @@ for (const [file, locale, dir, route, eligible, slug] of [
     ),
   );
   for (const match of html.matchAll(
-    /(?:src|href)="(\/(?:_astro|brand|images)\/[^"?#]+)"/g,
+    /(?:src|href)="(\/(?:_astro|brand|fonts|images)\/[^"?#]+)"/g,
   )) {
     await access(join('dist', match[1]));
   }

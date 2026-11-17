@@ -6,7 +6,8 @@ import { homeProcessPhoto } from '../config/home-photos';
 import '../styles/home-process.css';
 import QuoteForm from './QuoteForm.astro';
 import { routes } from '../domain/routes';
-import { brand, media } from '../config/brand';
+import { media } from '../config/brand';
+import BrandLogo from './BrandLogo.astro';
 import { copy, type Locale } from '../config/content';
 const { locale } = Astro.props as { locale: Locale };
 const t = copy[locale];
@@ -25,12 +26,7 @@ const t = copy[locale];
         loading="lazy"
       />
       <div class="image-caption">
-        <img
-          src={brand.mark}
-          alt=""
-          width={brand.markSize.width}
-          height={brand.markSize.height}
-        />
+        <BrandLogo locale={locale} variant="mark" />
         <span>{t.aboutNote}</span>
       </div>
     </div>
@@ -42,12 +38,7 @@ const t = copy[locale];
         {t.aboutMore}
       </a>
       <div class="about-signature">
-        <img
-          src={brand.logo}
-          alt={brand.name}
-          width={brand.logoSize.width}
-          height={brand.logoSize.height}
-        />
+        <BrandLogo locale={locale} />
       </div>
     </div>
   </section>

@@ -12,7 +12,11 @@ interface Props {
 }
 const { metadata, service, shareImage } = Astro.props;
 const { site, locale } = metadata;
-const schema = new StructuredDataBuilder(site, company, brand.logo).build(
+const schema = new StructuredDataBuilder(
+  site,
+  company,
+  brand.logos[locale].primary.src,
+).build(
   service && metadata.canonical
     ? {
         name: service.licenceTitle[locale],

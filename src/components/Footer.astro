@@ -1,6 +1,6 @@
 ---
 import ContactLinks from './ContactLinks.astro';
-import { brand } from '../config/brand';
+import BrandLogo from './BrandLogo.astro';
 import { copy, type Locale } from '../config/content';
 import {
   routes,
@@ -18,13 +18,7 @@ const t = copy[locale];
 <footer>
   <div class="footer-main">
     <div class="footer-brand">
-      <img
-        src={brand.inverseLogo}
-        alt={brand.name}
-        width={brand.inverseLogoSize.width}
-        height={brand.inverseLogoSize.height}
-        loading="lazy"
-      />
+      <BrandLogo locale={locale} variant="inverse" loading="lazy" />
       <p>{t.footerText}</p>
       <span>{t.footerLocation}</span>
     </div>

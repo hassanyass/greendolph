@@ -64,7 +64,11 @@ Add the approved PDF at `public/downloads/aldolphin-company-profile.pdf` and reb
 
 Deploy at the domain root. GitHub project-subpath hosting such as `/greendolph/` is not configured. Do not add an SPA catch-all rewrite: pages are generated HTML and missing paths should return 404.
 
-The build produces cache and basic response headers. Hashed Astro assets are immutable; HTML revalidates; images use a shorter cache. Fonts currently use Google Fonts with local fallbacks. Measure Core Web Vitals and check supported browsers during final launch verification.
+The build produces cache and basic response headers. Hashed Astro assets are immutable; HTML revalidates; images use a shorter cache. Measure Core Web Vitals and check supported browsers during final launch verification.
+
+## Brand fonts
+
+Set `PUBLIC_ADOBE_FONTS_KIT_ID` to your Adobe Fonts web project ID once it includes Acumin Variable. English uses Inter as the fallback. Cairo is served locally for Arabic. [Adobe Fonts web setup](https://helpx.adobe.com/fonts/web/introduction/add-fonts-website.html)
 
 ## Verify production SEO without choosing a domain
 

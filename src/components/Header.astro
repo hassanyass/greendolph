@@ -1,6 +1,6 @@
 ---
 import { services } from '../config/services';
-import { brand } from '../config/brand';
+import BrandLogo from './BrandLogo.astro';
 import {
   routes,
   navigation,
@@ -24,13 +24,8 @@ const onService = page.startsWith('service:');
   data-expand-before={experience.navigation.expandBefore}
 >
   <div class="header-inner">
-    <a href={routes.path('home', locale)} class="brand" aria-label={brand.name}>
-      <img
-        src={brand.logo}
-        alt={brand.name}
-        width={brand.logoSize.width}
-        height={brand.logoSize.height}
-      />
+    <a href={routes.path('home', locale)} class="brand">
+      <BrandLogo locale={locale} />
     </a>
     <nav aria-label={t.menu} id="main-nav">
       {navigation.map((item) =>

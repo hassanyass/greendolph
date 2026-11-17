@@ -1,12 +1,13 @@
 .hero {
   overflow: hidden;
+  border-block-end: 5px solid var(--accent);
   background:
     radial-gradient(
       ellipse at 67% 48%,
-      color-mix(in srgb, var(--forest) 73%, var(--green)),
+      color-mix(in srgb, var(--accent) 10%, var(--forest)),
       transparent 70%
     ),
-    color-mix(in srgb, var(--forest) 75%, var(--ink));
+    var(--forest);
   color: var(--white);
 }
 .hero-layout {
@@ -56,11 +57,11 @@
 .hero .button {
   min-block-size: 50px;
   justify-content: center;
-  background: var(--white);
+  background: var(--accent);
   color: var(--forest);
 }
 .hero .button:hover {
-  background: var(--mist);
+  background: var(--white);
 }
 .hero .button-secondary {
   background: transparent;

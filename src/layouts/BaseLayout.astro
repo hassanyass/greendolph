@@ -50,6 +50,15 @@ const metadata = new PageMetadata(
     <SeoHead metadata={metadata} service={service} shareImage={shareImage} />
     <meta name="theme-color" content={brand.colors.forest} />
     <link rel="icon" type={brand.favicon.type} href={brand.favicon.src} />
+    {(locale === 'ar' || !brand.typography.stylesheet) && (
+      <link
+        rel="preload"
+        href={brand.typography[locale].preload}
+        as="font"
+        type="font/woff2"
+        crossorigin="anonymous"
+      />
+    )}
     {brand.typography.stylesheet && (
       <link href={brand.typography.stylesheet} rel="stylesheet" />
     )}
