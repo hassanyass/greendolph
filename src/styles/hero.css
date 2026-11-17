@@ -14,11 +14,10 @@
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
   align-items: center;
-  gap: clamp(8px, 2.4vw, 42px);
+  gap: clamp(14px, 2vw, 30px);
   max-inline-size: 1600px;
-  min-block-size: clamp(560px, 78svh, 790px);
   margin-inline: auto;
-  padding: clamp(36px, 5vw, 78px) var(--gutter);
+  padding: clamp(24px, 4.5svh, 48px) var(--gutter);
 }
 .hero .eyebrow {
   color: var(--accent);
@@ -76,11 +75,26 @@
   outline-color: var(--white);
 }
 
+@media (min-width: 761px) {
+  .hero-description {
+    margin-block-start: 16px;
+  }
+  .hero-buttons {
+    margin-block-start: 21px;
+  }
+}
+@media (min-width: 761px) and (max-height: 820px) {
+  .hero h1 {
+    font-size: clamp(38px, 4.9vw, 68px);
+  }
+  [dir='rtl'] .hero h1 {
+    font-size: clamp(37px, 4.35vw, 62px);
+  }
+}
 @media (max-width: 760px) {
   .hero-layout {
     grid-template-columns: minmax(0, 1fr);
     gap: clamp(17px, 4vw, 36px);
-    min-block-size: auto;
     padding-block: 37px 19px;
   }
   .hero h1,

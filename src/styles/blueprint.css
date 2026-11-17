@@ -135,6 +135,21 @@
   font-size: clamp(0.85rem, 1.2vw, 1rem);
 }
 
+@media (min-width: 761px) {
+  .hero-blueprint {
+    inline-size: min(100%, clamp(350px, 66svh, 680px));
+    justify-self: start;
+  }
+  .blueprint-summary {
+    position: absolute;
+    inset-block-start: 5%;
+    inset-inline: 0;
+    margin: 0;
+    text-align: center;
+    text-wrap: balance;
+  }
+}
+
 .journey-pipe {
   display: none;
 }

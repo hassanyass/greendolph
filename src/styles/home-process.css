@@ -105,6 +105,23 @@
 .home-process .button:focus-visible {
   outline-color: var(--white);
 }
+@media (min-width: 801px) {
+  #services.services,
+  #about.about,
+  .home-process > .home-process-layout,
+  .hero ~ .quote-section {
+    padding-block: clamp(48px, 5vw, 76px);
+  }
+  #about.about {
+    gap: clamp(36px, 5vw, 72px);
+  }
+  #about .about-image {
+    height: clamp(350px, 35vw, 460px);
+  }
+  .home-process-heading {
+    padding-block-start: 0;
+  }
+}
 @media (max-width: 1000px) {
   .home-process-steps li {
     grid-template-columns: minmax(0, 1fr);
