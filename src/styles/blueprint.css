@@ -93,8 +93,7 @@
   direction: ltr;
   font: 600 14px var(--font-body);
 }
-.blueprint-airflow,
-.blueprint-scan {
+.blueprint-airflow {
   opacity: 0;
 }
 .blueprint-airflow {
@@ -102,10 +101,6 @@
   stroke-width: 2;
   stroke-linecap: round;
   stroke-dasharray: 2.5 9.5;
-}
-.blueprint-scan path {
-  stroke: var(--accent);
-  stroke-width: 1;
 }
 .blueprint-toggle {
   position: absolute;
@@ -151,243 +146,223 @@
   }
 }
 
+.blueprint-summary {
+  color: var(--white);
+  margin: 0 0 12px;
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+}
+.blueprint-journey {
+  transform-origin: 259px 105px;
+}
+.journey-route,
+.journey-bridge,
+.journey-continuation {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.journey-fault {
+  stroke: var(--white);
+  stroke-width: 2;
+  opacity: 0;
+}
+.journey-leak {
+  fill: var(--white);
+  opacity: 0;
+}
+.journey-repair {
+  stroke: var(--accent);
+  stroke-width: 1;
+  opacity: 0;
+}
 @media (prefers-reduced-motion: no-preference) {
+  [data-blueprint-ready] .blueprint-journey path {
+    vector-effect: none;
+  }
+  [data-blueprint-ready] .blueprint-journey {
+    animation: journey-camera 22s ease-in-out infinite;
+  }
+  [data-blueprint-ready]
+    :is(.journey-route, .journey-bridge, .journey-continuation) {
+    stroke-dasharray: 100;
+    animation: journey-line 22s linear infinite;
+  }
+  [data-blueprint-ready] .journey-bridge {
+    animation-name: journey-bridge;
+  }
+  [data-blueprint-ready] .journey-continuation {
+    animation-name: journey-extend;
+  }
+  [data-blueprint-ready] .journey-fault {
+    stroke-dasharray: 100;
+    animation: journey-fault 22s linear infinite;
+  }
+  [data-blueprint-ready] .journey-leak {
+    animation: journey-leak 22s ease-in-out infinite;
+  }
+  [data-blueprint-ready] .journey-repair {
+    transform-origin: 259px 105px;
+    animation: journey-repair 22s ease-out infinite;
+  }
+  [data-blueprint-ready]
+    .journey-structure
+    path[pathLength]:not(.blueprint-airflow) {
+    stroke-dasharray: 100;
+    animation: journey-draw 22s ease-in-out infinite;
+  }
+  [data-blueprint-ready]
+    :is(
+      .blueprint-plane,
+      .blueprint-duct,
+      .blueprint-light,
+      .blueprint-edge,
+      .blueprint-duct-depth
+    ) {
+    fill-opacity: 0;
+  }
+  [data-blueprint-ready] :is(.blueprint-points, .blueprint-annotations) {
+    animation: journey-details 22s ease-in-out infinite;
+  }
   [data-blueprint-ready] .blueprint-airflow {
-    animation: blueprint-airflow 2.8s linear infinite;
-    opacity: 0.89;
+    animation: journey-flow 22s linear infinite;
   }
-  [data-blueprint-ready] .blueprint-airflow-branch {
-    animation-duration: 3.6s;
+  [data-blueprint-ready]:not([data-blueprint-running]) * {
+    animation-play-state: paused !important;
   }
-  [data-blueprint-ready] .blueprint-scan {
-    animation: blueprint-scan 9s ease-in-out infinite;
-  }
-  [data-blueprint-ready]:not([data-blueprint-running])
-    :is(.blueprint-airflow, .blueprint-scan) {
-    animation-play-state: paused;
-  }
-  @keyframes blueprint-airflow {
-    to {
-      stroke-dashoffset: -12;
+  @keyframes journey-camera {
+    0%,
+    24%,
+    100% {
+      transform: translate(20px, 120px) scale(1.35);
+    }
+    43%,
+    81% {
+      transform: translate(0, 0) scale(1);
     }
   }
-  @keyframes blueprint-scan {
+  @keyframes journey-line {
     0%,
     100% {
-      opacity: 0;
+      stroke-dashoffset: 100;
     }
     10%,
-    67% {
-      opacity: 0.8;
+    93% {
+      stroke-dashoffset: 0;
     }
-    78%,
+  }
+  @keyframes journey-fault {
+    0%,
+    9% {
+      opacity: 1;
+      stroke-dashoffset: 100;
+    }
+    13%,
+    20% {
+      opacity: 1;
+      stroke-dashoffset: 0;
+    }
+    25%,
     100% {
       opacity: 0;
-      transform: translateY(282px);
+      stroke-dashoffset: -100;
+    }
+  }
+  @keyframes journey-leak {
+    0%,
+    12% {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    15%,
+    19% {
+      opacity: 1;
+    }
+    24%,
+    100% {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+  }
+  @keyframes journey-repair {
+    0%,
+    19% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    22% {
+      opacity: 0.8;
+    }
+    28%,
+    100% {
+      opacity: 0;
+      transform: scale(1.8);
+    }
+  }
+  @keyframes journey-bridge {
+    0%,
+    20%,
+    100% {
+      stroke-dashoffset: 100;
+    }
+    26%,
+    92% {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes journey-extend {
+    0%,
+    26%,
+    100% {
+      stroke-dashoffset: 100;
+    }
+    46%,
+    88% {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes journey-draw {
+    0%,
+    37%,
+    100% {
+      stroke-dashoffset: 100;
+    }
+    60%,
+    78% {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes journey-details {
+    0%,
+    56%,
+    88%,
+    100% {
+      opacity: 0;
+    }
+    63%,
+    78% {
+      opacity: 1;
+    }
+  }
+  @keyframes journey-flow {
+    0%,
+    58% {
+      opacity: 0;
+      stroke-dashoffset: 0;
+    }
+    63%,
+    78% {
+      opacity: 0.9;
+    }
+    84%,
+    100% {
+      opacity: 0;
+      stroke-dashoffset: -60;
     }
   }
 }
 @media (prefers-reduced-motion: reduce) {
   .blueprint-toggle {
     display: none;
-  }
-}
-.blueprint-summary {
-  margin: 0 0 16px;
-  color: var(--white);
-  font-size: clamp(0.85rem, 1.2vw, 1rem);
-}
-.blueprint-story {
-  position: relative;
-  min-block-size: 74px;
-}
-.blueprint-caption {
-  position: absolute;
-  inset: 0;
-}
-.blueprint-caption strong {
-  display: block;
-  color: var(--accent);
-  font-size: clamp(1.15rem, 2vw, 1.5rem);
-}
-.blueprint-stage {
-  position: absolute;
-  inset-inline-start: 0;
-  margin-block-start: 6px;
-  color: var(--white);
-  font-size: 0.9rem;
-}
-.blueprint-scene,
-.blueprint-fault,
-.blueprint-repair {
-  opacity: 0;
-}
-.blueprint-building,
-.blueprint-caption:last-child,
-.blueprint-restored {
-  opacity: 1;
-}
-.blueprint-room {
-  stroke: var(--accent);
-  stroke-width: 1;
-  opacity: 0.22;
-}
-.blueprint-pipe {
-  stroke: var(--accent);
-  stroke-width: 18;
-  stroke-linejoin: round;
-}
-.blueprint-break {
-  stroke: var(--white);
-  stroke-width: 3;
-  stroke-linejoin: round;
-}
-.blueprint-fault-ring {
-  stroke: var(--white);
-  stroke-width: 1;
-  stroke-dasharray: 3 6;
-}
-.blueprint-drop {
-  fill: var(--white);
-}
-.blueprint-repair-ring {
-  stroke: var(--accent);
-  stroke-width: 2;
-  stroke-dasharray: 8 7;
-}
-.blueprint-tool {
-  stroke: var(--white);
-  stroke-width: 2;
-  fill: var(--forest);
-}
-.blueprint-flow {
-  stroke: var(--white);
-  stroke-width: 2;
-  stroke-dasharray: 5 4;
-}
-.blueprint-check {
-  stroke: var(--accent);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-@media (prefers-reduced-motion: no-preference) {
-  [data-blueprint-ready] .blueprint-scene {
-    animation: service-scene 24s linear infinite;
-    animation-delay: var(--scene-delay);
-  }
-  [data-blueprint-ready] .blueprint-fault {
-    animation: service-fault 24s linear infinite;
-    animation-delay: var(--scene-delay);
-  }
-  [data-blueprint-ready] .blueprint-repair {
-    animation: service-repair 24s linear infinite;
-    animation-delay: var(--scene-delay);
-  }
-  [data-blueprint-ready] .blueprint-restored {
-    animation: service-restored 24s linear infinite;
-    animation-delay: var(--scene-delay);
-  }
-  [data-blueprint-ready] .blueprint-building > g {
-    animation: service-assemble 24s ease-in-out infinite;
-    animation-delay: var(--scene-delay);
-  }
-  [data-blueprint-ready] .blueprint-flow {
-    animation: service-flow 24s linear infinite;
-    animation-delay: var(--scene-delay);
-  }
-  [data-blueprint-ready] .blueprint-drop {
-    animation: service-drop 24s linear infinite;
-    animation-delay: var(--scene-delay);
-  }
-  [data-blueprint-ready]:not([data-blueprint-running]) * {
-    animation-play-state: paused !important;
-  }
-  @keyframes service-scene {
-    0% {
-      opacity: 0;
-    }
-    2%,
-    30% {
-      opacity: 1;
-    }
-    33.333%,
-    100% {
-      opacity: 0;
-    }
-  }
-  @keyframes service-fault {
-    0%,
-    8% {
-      opacity: 1;
-    }
-    10%,
-    100% {
-      opacity: 0;
-    }
-  }
-  @keyframes service-repair {
-    0%,
-    9% {
-      opacity: 0;
-    }
-    11%,
-    18% {
-      opacity: 1;
-    }
-    20%,
-    100% {
-      opacity: 0;
-    }
-  }
-  @keyframes service-restored {
-    0%,
-    19% {
-      opacity: 0;
-    }
-    21%,
-    31% {
-      opacity: 1;
-    }
-    33.333%,
-    100% {
-      opacity: 0;
-    }
-  }
-  @keyframes service-assemble {
-    0%,
-    3% {
-      opacity: 0;
-      transform: translateY(-22px);
-    }
-    20%,
-    31% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    33.333%,
-    100% {
-      opacity: 0;
-      transform: translateY(0);
-    }
-  }
-  @keyframes service-flow {
-    0%,
-    20% {
-      stroke-dashoffset: 0;
-    }
-    33.333%,
-    100% {
-      stroke-dashoffset: -36;
-    }
-  }
-  @keyframes service-drop {
-    0% {
-      transform: translateY(-8px);
-    }
-    8%,
-    100% {
-      transform: translateY(30px);
-    }
   }
 }
