@@ -3,7 +3,9 @@ import type { Locale } from '../domain/routes';
 export const contactCopy = {
   en: {
     call: 'Call',
-    formHeading: 'Your request',
+    formHeading: 'Request a quote',
+    jobHeading: 'About the work',
+    callbackHeading: 'How to reach you',
     formRequired: 'All fields are required.',
     social: 'Social media',
     comingSoon: 'Coming soon',
@@ -30,7 +32,9 @@ export const contactCopy = {
   },
   ar: {
     call: 'اتصل بنا',
-    formHeading: 'تفاصيل طلبك',
+    formHeading: 'اطلب عرض سعر',
+    jobHeading: 'عن العمل المطلوب',
+    callbackHeading: 'بيانات التواصل',
     formRequired: 'جميع الحقول مطلوبة.',
     social: 'حسابات التواصل الاجتماعي',
     comingSoon: 'قريباً',

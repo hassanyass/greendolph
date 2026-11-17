@@ -36,10 +36,12 @@ const t = copy[locale];
     </div>
   </div>
   <div class="footer-bottom">
-    <span>
-      © {new Date().getFullYear()} {t.copyright}
-    </span>
-    <span>{t.rights}</span>
+    <p class="footer-legal">
+      <span>
+        © {new Date().getFullYear()} {t.copyright}
+      </span>
+      <span>{t.rights}</span>
+    </p>
     <a
       class="footer-language"
       href={routes.alternate(page === 'notFound' ? 'home' : page, locale)}

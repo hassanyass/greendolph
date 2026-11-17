@@ -31,6 +31,7 @@ export class QuoteFormController {
 
     const endpoint = form.getAttribute('action');
     const status = form.querySelector<HTMLElement>('.quote-status');
+    const editor = form.querySelector<HTMLElement>('.quote-editor');
     const review = form.querySelector<HTMLElement>('.quote-review');
     const list = review?.querySelector('dl');
     if (!(endpoint && status) && !(review && list)) return;
@@ -41,6 +42,7 @@ export class QuoteFormController {
       if (endpoint && status) {
         void this.deliver(endpoint, status, button);
       } else if (review && list) {
+        if (editor) editor.hidden = true;
         this.showReview(review, list);
       }
     });
@@ -48,7 +50,8 @@ export class QuoteFormController {
 
     review?.querySelector('#edit-request')?.addEventListener('click', () => {
       review.hidden = true;
-      form.querySelector('input')?.focus();
+      if (editor) editor.hidden = false;
+      this.fields()[0]?.focus();
     });
   }
 
@@ -89,19 +92,20 @@ export class QuoteFormController {
     status: HTMLElement,
     button: HTMLButtonElement,
   ) {
-    const fieldset = this.form.querySelector<HTMLFieldSetElement>('.form-grid');
+    const groups =
+      this.form.querySelectorAll<HTMLFieldSetElement>('.form-grid');
     const data = new FormData(this.form);
     for (const field of this.fields()) data.set(field.name, field.value.trim());
 
     this.pending = true;
-    if (fieldset) fieldset.disabled = true;
+    groups.forEach((group) => (group.disabled = true));
     button.setAttribute('aria-disabled', 'true');
     button.textContent = this.copy.sending;
     status.textContent = this.copy.sending;
 
     const outcome = await sendQuotation(endpoint, data);
     this.pending = false;
-    if (fieldset) fieldset.disabled = false;
+    groups.forEach((group) => (group.disabled = false));
     button.removeAttribute('aria-disabled');
     button.textContent =
       outcome === 'accepted' ? this.copy.send : this.copy.retry;

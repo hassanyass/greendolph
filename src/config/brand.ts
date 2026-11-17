@@ -33,7 +33,7 @@ export class Brand {
       inverse: { src: '/brand/on-green-ar.png', width: 700, height: 170 },
     },
   };
-  readonly mark = { src: '/brand/mark-on-green.svg', width: 121, height: 108 };
+  readonly mark = { src: '/brand/mark.svg', width: 121, height: 108 };
   readonly favicon = { src: '/brand/app-icon.png', type: 'image/png' };
   readonly pattern = '/brand/pattern.webp';
   readonly shareImages = {

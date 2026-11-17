@@ -320,19 +320,6 @@ footer {
   border-block-start: 5px solid var(--accent);
   color: var(--white);
   padding: 58px var(--gutter) 24px;
-  position: relative;
-  isolation: isolate;
-}
-footer::before {
-  content: '';
-  position: absolute;
-  inset: auto 0 0;
-  block-size: 115px;
-  background: var(--brand-pattern) center / 146px auto repeat;
-  mask-image: linear-gradient(transparent, black);
-  opacity: 0.11;
-  pointer-events: none;
-  z-index: -1;
 }
 .footer-main {
   display: grid;
@@ -385,7 +372,8 @@ footer :is(a, button):focus-visible {
   color: var(--accent);
 }
 .footer-bottom {
-  border-top: 1px solid color-mix(in srgb, var(--white) 19%, transparent);
+  border-block-start: 1px solid
+    color-mix(in srgb, var(--white) 24%, transparent);
   padding-top: 22px;
   display: flex;
   justify-content: space-between;

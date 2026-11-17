@@ -1,4 +1,9 @@
+footer :is(.footer-main, .footer-bottom) {
+  max-inline-size: calc(var(--content-width) - 2 * var(--gutter));
+  margin-inline: auto;
+}
 footer .footer-main {
+  padding-block-end: clamp(28px, 4vw, 48px);
   grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.65fr) minmax(0, 1fr);
   align-items: start;
   gap: 34px clamp(22px, 5vw, 80px);
@@ -76,10 +81,23 @@ footer .footer-main {
   white-space: nowrap;
 }
 footer .footer-bottom {
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding-block-start: 15px;
+  font-size: 0.8rem;
+}
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  font-size: 0.74rem;
+  gap: 4px 16px;
+  line-height: 1.55;
 }
 .footer-bottom .footer-language {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
   color: var(--white);
   text-decoration: underline;
   text-underline-offset: 3px;

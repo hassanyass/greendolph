@@ -12,11 +12,12 @@
 }
 .quote-panel {
   min-inline-size: 0;
-  background: var(--mist);
-  border: 1px solid var(--line);
-  border-block-start: 3px solid var(--green);
-  border-radius: var(--panel-radius);
-  padding: clamp(16px, 3.5vw, 44px);
+  border-block-start: 2px solid var(--green);
+  padding-block-start: clamp(16px, 2.4vw, 28px);
+}
+.quote-editor:not([hidden]) {
+  display: grid;
+  gap: clamp(20px, 3vw, 32px);
 }
 .quote-panel-header {
   display: flex;
@@ -24,11 +25,11 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 5px 15px;
-  margin-block-end: 22px;
+  margin-block-end: 4px;
 }
 .quote-section .quote-panel-header .quote-panel-title {
-  color: var(--green);
-  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  color: var(--ink);
+  font-size: clamp(1.35rem, 2.5vw, 2rem);
   font-weight: 600;
   line-height: 1.35;
   letter-spacing: normal;
@@ -39,7 +40,14 @@
 }
 .quote-panel .form-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 17px;
+  gap: 12px 20px;
+}
+.quote-panel .form-grid legend {
+  padding: 0;
+  margin-block-end: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--green);
 }
 .quote-panel .form-grid label {
   gap: 6px;
@@ -48,7 +56,7 @@
 }
 .quote-panel .form-grid :is(input, select, textarea) {
   background: var(--paper);
-  border: 1px solid color-mix(in srgb, var(--forest) 65%, var(--white));
+  border: 1px solid color-mix(in srgb, var(--muted) 64%, var(--paper));
   border-radius: 4px;
   min-inline-size: 0;
   padding: 10px 12px;
@@ -56,19 +64,46 @@
   font-size: 1rem;
 }
 .quote-panel .form-grid textarea {
-  min-block-size: 116px;
+  min-block-size: 104px;
+}
+.quote-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 18px;
+  padding-block-start: 16px;
+  border-block-start: 1px solid var(--line);
+}
+.quote-panel :is(.form-note, .form-submit) {
+  margin-block-start: 0;
 }
 .quote-panel .form-note {
+  flex: 1 1 240px;
   font-size: 0.8rem;
-  margin-block-start: 16px;
+}
+.quote-actions .quote-status:not(:empty) {
+  flex-basis: 100%;
 }
 .quote-panel .quote-review {
+  margin: 0;
+  padding: 0;
+  border: 0;
   background: var(--paper);
+}
+.quote-panel .quote-review dl {
+  border-block: 1px solid var(--line);
+  padding-block: 16px;
+  margin-block: 16px;
 }
 @media (max-width: 800px) {
   .contact.quote-section {
     grid-template-columns: minmax(0, 1fr);
     row-gap: 26px;
+  }
+  .quote-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
   }
   .quote-panel .form-submit {
     inline-size: 100%;

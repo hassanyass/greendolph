@@ -37,91 +37,104 @@ const formCopy = contactCopy[locale];
     class="quote-panel"
     method="post"
     action={quotationEndpoint ?? undefined}
-    aria-labelledby="quote-panel-title"
+    aria-labelledby="contact-title"
   >
-    <div class="quote-panel-header">
-      <FormHeading class="quote-panel-title" id="quote-panel-title">
-        {formCopy.formHeading}
-      </FormHeading>
-      <p>{formCopy.formRequired}</p>
+    <div class="quote-editor">
+      <div class="quote-panel-header">
+        <FormHeading class="quote-panel-title" id="quote-panel-title">
+          {formCopy.formHeading}
+        </FormHeading>
+        <p>{formCopy.formRequired}</p>
+      </div>
+      <fieldset class="form-grid">
+        <legend>{formCopy.jobHeading}</legend>
+        <label>
+          <span id="service-label">{t.service}</span>
+          <select name="service" aria-labelledby="service-label" required>
+            <option value="">{t.choose}</option>
+            {services.map((s) => (
+              <option value={s.id}>{s.title[locale]}</option>
+            ))}
+            <option value="other">{t.other}</option>
+          </select>
+        </label>
+        <label>
+          <span id="emirate-label">{t.location}</span>
+          <select name="emirate" aria-labelledby="emirate-label" required>
+            <option value="">{t.locationChoose}</option>
+            {emirates.map((e) => (
+              <option value={e[locale]}>{e[locale]}</option>
+            ))}
+          </select>
+        </label>
+        <label class="form-wide">
+          <span>{t.details}</span>
+          <textarea
+            name="details"
+            rows="3"
+            placeholder={t.detailsHint}
+            required
+            maxlength="1500"
+          ></textarea>
+        </label>
+      </fieldset>
+      <fieldset class="form-grid">
+        <legend>{formCopy.callbackHeading}</legend>
+        <label>
+          <span>{t.name}</span>
+          <input name="name" autocomplete="name" required maxlength="90" />
+        </label>
+        <label>
+          <span>{t.phone}</span>
+          <input
+            name="phone"
+            type="tel"
+            inputmode="tel"
+            autocomplete="tel"
+            required
+            pattern="\+?(?=(?:[ \-]*[0-9٠-٩۰-۹]){7,15}[ \-]*$)[0-9٠-٩۰-۹][0-9٠-٩۰-۹ \-]*"
+            maxlength="25"
+            dir="ltr"
+          />
+        </label>
+      </fieldset>
+      <div class="quote-actions">
+        {quotationEndpoint ? (
+          <>
+            <input type="hidden" name="language" value={locale} />
+            <div hidden>
+              <input
+                type="text"
+                name="_gotcha"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
+            <details class="form-note">
+              <summary>{formCopy.privacyTitle}</summary>
+              <p>{formCopy.privacyText}</p>
+            </details>
+          </>
+        ) : (
+          <p class="form-note">{t.formNote}</p>
+        )}
+        <button
+          class="button form-submit"
+          type="submit"
+          disabled={!quotationEndpoint}
+        >
+          {quotationEndpoint ? formCopy.send : t.submit}
+        </button>
+        {quotationEndpoint && (
+          <p class="quote-status" role="status" aria-atomic="true"></p>
+        )}
+      </div>
+      {!quotationEndpoint && (
+        <noscript>
+          <p class="form-note">{formCopy.previewUnavailable}</p>
+        </noscript>
+      )}
     </div>
-    <fieldset class="form-grid">
-      <label>
-        <span>{t.name}</span>
-        <input name="name" autocomplete="name" required maxlength="90" />
-      </label>
-      <label>
-        <span>{t.phone}</span>
-        <input
-          name="phone"
-          type="tel"
-          inputmode="tel"
-          autocomplete="tel"
-          required
-          pattern="\+?(?=(?:[ \-]*[0-9٠-٩۰-۹]){7,15}[ \-]*$)[0-9٠-٩۰-۹][0-9٠-٩۰-۹ \-]*"
-          maxlength="25"
-          dir="ltr"
-        />
-      </label>
-      <label>
-        <span id="service-label">{t.service}</span>
-        <select name="service" aria-labelledby="service-label" required>
-          <option value="">{t.choose}</option>
-          {services.map((s) => (
-            <option value={s.id}>{s.title[locale]}</option>
-          ))}
-          <option value="other">{t.other}</option>
-        </select>
-      </label>
-      <label>
-        <span id="emirate-label">{t.location}</span>
-        <select name="emirate" aria-labelledby="emirate-label" required>
-          <option value="">{t.locationChoose}</option>
-          {emirates.map((e) => (
-            <option value={e[locale]}>{e[locale]}</option>
-          ))}
-        </select>
-      </label>
-      <label class="form-wide">
-        <span>{t.details}</span>
-        <textarea
-          name="details"
-          rows="3"
-          placeholder={t.detailsHint}
-          required
-          maxlength="1500"
-        ></textarea>
-      </label>
-    </fieldset>
-    {quotationEndpoint ? (
-      <>
-        <input type="hidden" name="language" value={locale} />
-        <div hidden>
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
-        </div>
-        <details class="form-note">
-          <summary>{formCopy.privacyTitle}</summary>
-          <p>{formCopy.privacyText}</p>
-        </details>
-      </>
-    ) : (
-      <p class="form-note">{t.formNote}</p>
-    )}
-    <button
-      class="button form-submit"
-      type="submit"
-      disabled={!quotationEndpoint}
-    >
-      {quotationEndpoint ? formCopy.send : t.submit}
-    </button>
-    {quotationEndpoint && (
-      <p class="quote-status" role="status" aria-atomic="true"></p>
-    )}
-    {!quotationEndpoint && (
-      <noscript>
-        <p class="form-note">{formCopy.previewUnavailable}</p>
-      </noscript>
-    )}
     {!quotationEndpoint && (
       <div id="quote-review" class="quote-review" hidden tabindex="-1">
         <h3>{t.reviewTitle}</h3>

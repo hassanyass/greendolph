@@ -60,6 +60,6 @@ The owner supplied project descriptions and photographs in `aldolphin-website/ou
 
 ## Official visual identity
 
-The light-background logos and stacked lockups come from page 8 of the supplied Khattaby Studio brand guide. The dark-background horizontal logos use supplied exports 03–04. The transparent stacked logos and share cards use exports 01–02. The homepage panel uses the dolphin symbol in the guide’s lime accent. The favicon and footer pattern use the artwork on pages 15 and 18 of the guide. Use the guide's palette swatches for site surfaces and keep artwork in its supplied colors. Acumin Variable Concept requires the configured Adobe Fonts web project for English. Cairo is self-hosted.
+The light-background logos and stacked lockups come from page 8 of the supplied Khattaby Studio brand guide. The dark-background horizontal logos use supplied exports 03–04. The transparent stacked logos and share cards use exports 01–02. The homepage uses the guide’s green dolphin symbol on white. The favicon and archived pattern asset use the artwork on pages 15 and 18 of the guide. Use the guide's palette swatches for site surfaces and keep artwork in its supplied colors. Acumin Variable Concept requires the configured Adobe Fonts web project for English. Cairo is self-hosted.
 
 The homepage quotation blueprint uses the [Lucide File Check Corner](https://lucide.dev/icons/file-check-corner) drawing. Footer channel marks are from [Simple Icons](https://simpleicons.org/). License notices ship in `public/icons/`.
