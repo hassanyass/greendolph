@@ -6,16 +6,16 @@ export const copy = {
   en: {
     title: 'Technical Services in the UAE | Aldolphin Alakhthar',
     description:
-      'Explore licensed technical services in the UAE, including air conditioning, electromechanical equipment and building finishes. Discuss your property and request a quotation.',
+      'Request a quote for AC installation, plumbing, electromechanical work or interior fit-outs for homes and businesses in the UAE.',
     nav: ['Home', 'Services', 'About us', 'Contact', 'Our works'],
     aboutPageTitle: 'About Us | Aldolphin Alakhthar Technical Services',
     aboutPageDescription:
-      'Meet Aldolphin Alakhthar, a UAE technical services company helping care for homes and workplaces.',
-    aboutPageHeading: 'Care for your space. Clarity at every step.',
+      'Meet the Aldolphin Alakhthar team and see how we scope installation, maintenance and fit-out work for UAE homes and businesses.',
+    aboutPageHeading: 'Technical services with a clear scope of work',
     contactPageTitle: 'Contact | Aldolphin Alakhthar Technical Services',
     contactPageDescription:
-      'Discuss your installation, maintenance or finishing requirements with Aldolphin Alakhthar.',
-    contactPageHeading: 'Let’s talk about your space.',
+      'Request a technical services quote from Aldolphin Alakhthar. Share your emirate, property type and the installation, maintenance or finishing work you need.',
+    contactPageHeading: 'Tell us what needs doing',
     servicesMenu: 'Show services',
     previousService: 'Previous services',
     nextService: 'Next services',
@@ -24,9 +24,30 @@ export const copy = {
     viewServices: 'View all services',
     servicesPageTitle: 'Technical Services in the UAE | Our Services',
     servicesPageDescription:
-      'Explore ten licensed technical services in the UAE, including air conditioning, electromechanical equipment, building cleaning and interior finishes.',
+      'Compare ten licensed technical services in the UAE, including AC and ventilation, plumbing, ceilings, painting, tiling and building cleaning.',
     servicesPageHeading: 'Technical services in the UAE',
     serviceQuoteHeading: 'What to share for a quotation',
+    serviceProjectsHeading: 'See this service in our projects',
+    servicesFaq: {
+      heading: 'Planning the job',
+      questions: [
+        {
+          question: 'What should I include in my request?',
+          answer:
+            'Share the emirate and area, property type, and what you need installed, maintained or finished. Approximate dimensions and your preferred timing help us identify what to check next.',
+        },
+        {
+          question: 'Can I request more than one service?',
+          answer:
+            'Yes. Choose the main service in the form and describe the other work in the same request. For a fit-out, tell us which parts of the space you’re changing.',
+        },
+        {
+          question: 'When might a site visit be needed?',
+          answer:
+            'We may need to see the site to check measurements, access or existing installations. Share your location and any access restrictions so we can confirm coverage and the next step.',
+        },
+      ],
+    },
     serviceLicenceLabel: 'Licensed activity',
     lang: 'العربية',
     langLabel: 'Switch to Arabic',
@@ -42,22 +63,22 @@ export const copy = {
       play: 'Play blueprint animation',
     },
     heroText:
-      'AC, electromechanical and finishing work for homes and businesses in the UAE.',
+      'AC, plumbing and interior fit-outs for homes and businesses in the UAE. Get a clear scope before work starts.',
     explore: 'Explore our services',
     servicesLabel: 'Our services',
     serviceExplore: 'Explore service',
     aboutLabel: 'About Aldolphin',
-    aboutTitle: 'The care behind\nyour everyday.',
+    aboutTitle: 'One team for your installations and finishes',
     aboutText:
-      'We are Aldolphin Alakhthar, a technical services company based in the UAE. We help look after the practical things that keep homes and workplaces running, from air conditioning and electromechanical equipment to interior finishes.',
+      'Aldolphin Alakhthar brings building services and interior finishes together. If your project involves AC, plumbing, ceilings or flooring, talk to us about how the work fits together.',
     aboutMore: 'More about us',
     viewOurWork: 'View our work',
-    aboutImageAlt: 'A calm, thoughtfully maintained living space',
+    aboutImageAlt: 'Living room with a sofa beside tall windows',
     processLabel: 'How it works',
     homeProcessTitle: 'From enquiry to quotation',
     quotePrep: {
       title: 'Before you request a quote',
-      text: 'A few details help us understand the work and what might need a closer look.',
+      text: 'Share what you know about the job. If we need measurements or a closer look, we’ll let you know.',
       items: [
         'The location and type of property',
         'What needs fixing, installing or finishing',
@@ -67,21 +88,21 @@ export const copy = {
     steps: [
       {
         title: 'Send the details',
-        text: 'Choose a service and share a few details about your space.',
+        text: 'Choose the service, tell us where the job is, and describe what needs attention.',
       },
       {
         title: 'Define the scope',
-        text: 'Discuss the requirements, location and a suitable scope.',
+        text: 'We review what you need and clarify access, materials and any details that require a site visit.',
       },
       {
         title: 'Review your quote',
-        text: 'Review the proposed work and price before arranging the service.',
+        text: 'Check the proposed work and price before agreeing on the next step.',
       },
     ],
     contactLabel: 'Let’s talk',
     contactTitle: 'What can we\ntake care of?',
     contactText:
-      'A repair, an installation, or something you’d like to discuss. Start with a few details.',
+      'Tell us what you want installed, maintained or finished. If you’re unsure which service to choose, describe the job in your own words.',
     formNote:
       'Local preview. Review your request here before email delivery is enabled.',
     name: 'Your name',
@@ -96,7 +117,8 @@ export const copy = {
     reviewTitle: 'Your request, ready to review',
     reviewText: 'Your details stay on this page during the local preview.',
     edit: 'Edit request',
-    footerText: 'Technical care. Thoughtfully done.',
+    footerText:
+      'AC, plumbing and interior fit-outs for UAE homes and businesses.',
     footerLocation: 'Based in the United Arab Emirates',
     footerNav: 'Explore',
     footerContact: 'Start a conversation',
@@ -109,16 +131,16 @@ export const copy = {
   ar: {
     title: 'خدمات فنية في الإمارات | الدولفين الأخضر',
     description:
-      'تعرّف على خدمات الدولفين الأخضر الفنية في الإمارات، ومنها التكييف والمعدات الكهروميكانيكية وتشطيبات المباني، واطلب عرض سعر.',
+      'اطلب عرض سعر لتركيب وصيانة التكييف والسباكة والمعدات الكهروميكانيكية والتشطيبات الداخلية للمنازل والمنشآت في الإمارات.',
     nav: ['الرئيسية', 'خدماتنا', 'من نحن', 'تواصل معنا', 'أعمالنا'],
     aboutPageTitle: 'من نحن | الدولفين الأخضر للخدمات الفنية',
     aboutPageDescription:
-      'تعرّف على الدولفين الأخضر، شركة خدمات فنية في الإمارات للعناية بالمنازل وأماكن العمل.',
-    aboutPageHeading: 'عناية بمساحتك، ووضوح في كل خطوة.',
+      'تعرّف على مؤسسة الدولفين الأخضر وطريقتها في تحديد نطاق أعمال التركيب والصيانة والتشطيبات للمنازل والمنشآت في الإمارات.',
+    aboutPageHeading: 'خدمات فنية بنطاق عمل واضح',
     contactPageTitle: 'تواصل معنا | الدولفين الأخضر للخدمات الفنية',
     contactPageDescription:
-      'شارك الدولفين الأخضر احتياجاتك من أعمال التركيب والصيانة والتشطيب.',
-    contactPageHeading: 'لنتحدث عن مساحتك.',
+      'اطلب عرض سعر من الدولفين الأخضر. شاركنا الإمارة ونوع العقار وتفاصيل أعمال التركيب أو الصيانة أو التشطيب المطلوبة.',
+    contactPageHeading: 'أخبرنا بما تحتاج إلى تنفيذه',
     servicesMenu: 'عرض الخدمات',
     previousService: 'الخدمات السابقة',
     nextService: 'الخدمات التالية',
@@ -127,9 +149,30 @@ export const copy = {
     viewServices: 'عرض جميع الخدمات',
     servicesPageTitle: 'خدماتنا الفنية في الإمارات | الدولفين الأخضر',
     servicesPageDescription:
-      'تعرّف على عشر خدمات فنية مرخّصة في الإمارات، تشمل التكييف والمعدات الكهروميكانيكية وتنظيف المباني والتشطيبات الداخلية.',
+      'تصفّح عشر خدمات فنية مرخّصة في الإمارات تشمل التكييف والتهوية والسباكة والأسقف والدهانات والتبليط وتنظيف المباني.',
     servicesPageHeading: 'الخدمات الفنية في الإمارات',
     serviceQuoteHeading: 'معلومات تساعدنا في إعداد عرض السعر',
+    serviceProjectsHeading: 'مشاريع نفّذنا فيها هذه الخدمة',
+    servicesFaq: {
+      heading: 'قبل طلب عرض السعر',
+      questions: [
+        {
+          question: 'ما التفاصيل التي أرسلها مع طلبي؟',
+          answer:
+            'اذكر الإمارة والمنطقة ونوع العقار، وصِف أعمال التركيب أو الصيانة أو التشطيب المطلوبة. تساعدنا المقاسات التقريبية والموعد المفضّل على تحديد ما يلزم التحقّق منه.',
+        },
+        {
+          question: 'هل يمكنني طلب أكثر من خدمة؟',
+          answer:
+            'نعم. اختر الخدمة الرئيسية في النموذج واذكر الأعمال الأخرى في الطلب نفسه. إذا كنت تخطّط للتشطيب، فحدّد أجزاء المساحة التي ترغب في تعديلها.',
+        },
+        {
+          question: 'متى قد نحتاج إلى معاينة الموقع؟',
+          answer:
+            'قد نحتاج إلى زيارة الموقع للتحقّق من المقاسات أو سهولة الدخول أو التركيبات القائمة. أرسل موقعك وأي قيود على الدخول لنؤكّد إمكانية تنفيذ العمل في منطقتك ونحدّد الخطوة التالية.',
+        },
+      ],
+    },
     serviceLicenceLabel: 'النشاط المرخّص',
     lang: 'English',
     langLabel: 'Switch to English',
@@ -145,22 +188,22 @@ export const copy = {
       play: 'تشغيل حركة المخطط',
     },
     heroText:
-      'أعمال التكييف والمعدات الكهروميكانيكية والتشطيبات للمنازل والمنشآت في الإمارات.',
+      'تكييف وسباكة وتشطيبات داخلية للمنازل والمنشآت في الإمارات. نوضّح لك نطاق العمل قبل البدء.',
     explore: 'تعرّف على خدماتنا',
     servicesLabel: 'خدماتنا',
     serviceExplore: 'اكتشف الخدمة',
     aboutLabel: 'من نحن',
-    aboutTitle: 'عناية تُحدث فرقاً\nفي تفاصيل يومك.',
+    aboutTitle: 'فريق واحد للتركيبات والتشطيبات',
     aboutText:
-      'نحن الدولفين الأخضر، شركة خدمات فنية مقرها الإمارات العربية المتحدة. نعتني بالتفاصيل العملية التي تُبقي المنازل وأماكن العمل في أفضل حال، من التكييف والمعدات الكهروميكانيكية إلى التشطيبات الداخلية.',
+      'تجمع مؤسسة الدولفين الأخضر بين خدمات المباني والتشطيبات الداخلية. إذا كان مشروعك يشمل التكييف أو السباكة أو تركيب الأسقف أو الأرضيات، فتواصل معنا لمناقشة تنسيق هذه الأعمال.',
     aboutMore: 'المزيد عن شركتنا',
     viewOurWork: 'شاهد أعمالنا',
-    aboutImageAlt: 'مساحة معيشة هادئة تحظى بالعناية',
+    aboutImageAlt: 'غرفة معيشة فيها أريكة بجوار نوافذ طويلة',
     processLabel: 'كيف نعمل',
     homeProcessTitle: 'من الاستفسار إلى عرض السعر',
     quotePrep: {
       title: 'قبل طلب عرض السعر',
-      text: 'تساعدنا بعض التفاصيل على فهم طبيعة العمل وتحديد ما قد يحتاج إلى معاينة.',
+      text: 'أرسل التفاصيل المتوفرة لديك. إذا احتجنا إلى قياسات أو معاينة للموقع، سنخبرك بذلك.',
       items: [
         'موقع العقار ونوعه',
         'ما يحتاج إلى إصلاح أو تركيب أو تشطيب',
@@ -170,20 +213,21 @@ export const copy = {
     steps: [
       {
         title: 'أرسل تفاصيل طلبك',
-        text: 'اختر الخدمة وشاركنا بعض التفاصيل عن مساحتك.',
+        text: 'اختر الخدمة وحدّد موقع العمل وصِف ما يحتاج إلى تركيب أو إصلاح أو تشطيب.',
       },
       {
         title: 'نحدّد نطاق العمل',
-        text: 'نناقش الاحتياجات والموقع ونطاق العمل المناسب.',
+        text: 'نراجع احتياجاتك ونوضّح متطلبات الدخول والمواد وأي تفاصيل تستلزم معاينة الموقع.',
       },
       {
         title: 'راجع عرض السعر',
-        text: 'اطّلع على الأعمال المقترحة وتكلفتها قبل ترتيب التنفيذ.',
+        text: 'راجع الأعمال المقترحة وتكلفتها قبل الاتفاق على الخطوة التالية.',
       },
     ],
     contactLabel: 'لنتواصل',
     contactTitle: 'كيف يمكننا\nالعناية بمساحتك؟',
-    contactText: 'إصلاح أو تركيب أو عمل تود مناقشته. لنبدأ ببعض التفاصيل.',
+    contactText:
+      'صف أعمال التركيب أو الصيانة أو التشطيب المطلوبة. وإذا لم تعرف اسم الخدمة المناسبة، اشرح لنا ما تريد تنفيذه بكلماتك.',
     formNote:
       'معاينة محلية. يمكنك مراجعة طلبك هنا قبل تفعيل الإرسال عبر البريد الإلكتروني.',
     name: 'الاسم',
@@ -198,7 +242,8 @@ export const copy = {
     reviewTitle: 'طلبك جاهز للمراجعة',
     reviewText: 'تبقى بياناتك في هذه الصفحة أثناء المعاينة المحلية.',
     edit: 'تعديل الطلب',
-    footerText: 'عناية فنية. باهتمام يستحقه مكانك.',
+    footerText:
+      'أعمال التكييف والسباكة والتشطيبات الداخلية للمنازل والمنشآت في الإمارات.',
     footerLocation: 'مقرنا الإمارات العربية المتحدة',
     footerNav: 'اكتشف',
     footerContact: 'لنبدأ الحديث',

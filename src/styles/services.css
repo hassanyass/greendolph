@@ -207,6 +207,46 @@
 .service-profile {
   background: color-mix(in srgb, var(--service-tint) 44%, var(--paper));
 }
+.services-faq {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+  gap: var(--panel-gap);
+  padding-block: 0 var(--section-space);
+}
+.services-faq .button {
+  margin-block-start: 16px;
+}
+.services-faq details {
+  border-block-start: 1px solid color-mix(in srgb, var(--ink) 24%, transparent);
+}
+.services-faq summary {
+  cursor: pointer;
+  min-block-size: 44px;
+  padding-block: 13px;
+  font-weight: 650;
+}
+.services-faq details p {
+  max-inline-size: 60ch;
+  padding-block-end: 16px;
+  line-height: 1.65;
+}
+.service-projects {
+  padding-block: 0 var(--section-space);
+}
+.service-projects ul {
+  padding-inline-start: 0;
+  margin-block: 12px 0;
+  list-style: none;
+}
+.service-projects .text-link {
+  gap: 8px;
+  min-block-size: 44px;
+}
+@media (max-width: 700px) {
+  .services-faq {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 .service-profile-heading {
   display: grid;
   grid-template-areas: 'copy photo';

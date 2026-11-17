@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { brand } from '../config/brand';
 import { copy, type Locale } from '../config/content';
+import { projects } from '../config/projects';
 import {
   servicePhotoPath,
   servicePresentation,
@@ -19,6 +20,9 @@ const { locale, service } = Astro.props;
 const t = copy[locale];
 const name = locale === 'ar' ? brand.arabicName : brand.name;
 const design = servicePresentation(service.id);
+const relatedProjects = projects.filter(
+  (project) => project.indexable && project.serviceIds.includes(service.id),
+);
 ---
 
 <BaseLayout
@@ -77,5 +81,28 @@ const design = servicePresentation(service.id);
         />
       </div>
     </section>
+    {relatedProjects.length > 0 && (
+      <section
+        class="section service-projects"
+        aria-labelledby="related-projects"
+      >
+        <h2 id="related-projects">{t.serviceProjectsHeading}</h2>
+        <ul>
+          {relatedProjects.map((project) => (
+            <li>
+              <a
+                class="text-link"
+                href={routes.project(project.id).paths[locale]}
+              >
+                <span>
+                  {project.title[locale]} · {project.location[locale]}
+                </span>
+                <ControlIcon name="next" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
   </article>
 </BaseLayout>

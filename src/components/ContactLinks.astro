@@ -10,6 +10,9 @@ interface Props {
 const { locale, placement } = Astro.props;
 const t = contactCopy[locale];
 const whatsapp = company.whatsappUrl;
+const displayPhone = (number: string) =>
+  number.replace(/^(\+971)(5\d)(\d{3})(\d{4})$/, '$1 $2 $3 $4');
+const phone = displayPhone(company.phone);
 const socialLinks = [
   {
     icon: 'instagram',
@@ -36,8 +39,15 @@ const socialLinks = [
         {t.whatsapp}
       </a>
     )}
-    <a class="text-link" href={`tel:${company.phone}`}>
-      {t.call} <bdi dir="ltr">{company.phone}</bdi>
+    <a
+      class="text-link contact-phone"
+      href={`tel:${company.phone}`}
+      aria-label={`${t.call} ${phone}`}
+    >
+      <span>{t.call}</span>
+      <bdi dir="ltr" class="contact-number">
+        {phone}
+      </bdi>
     </a>
     {company.email && (
       <a class="text-link" href={`mailto:${company.email}`}>
@@ -48,8 +58,15 @@ const socialLinks = [
 )}
 {placement === 'footer' && (
   <>
-    <a class="footer-contact-line" href={`tel:${company.phone}`}>
-      <span>{t.call}</span> <bdi dir="ltr">{company.phone}</bdi>
+    <a
+      class="footer-contact-line contact-phone"
+      href={`tel:${company.phone}`}
+      aria-label={`${t.call} ${phone}`}
+    >
+      <span>{t.call}</span>
+      <bdi dir="ltr" class="contact-number">
+        {phone}
+      </bdi>
     </a>
     {whatsapp ? (
       <a class="footer-contact-line" href={whatsapp}>
@@ -58,7 +75,10 @@ const socialLinks = [
           style="--channel-icon: url('/icons/whatsapp.svg')"
           aria-hidden="true"
         ></span>
-        <span>{t.whatsappShort}</span> <bdi dir="ltr">{company.whatsapp}</bdi>
+        <span>{t.whatsappShort}</span>
+        <bdi dir="ltr" class="contact-number">
+          {displayPhone(company.whatsapp ?? '')}
+        </bdi>
       </a>
     ) : (
       <span class="footer-contact-line footer-pending">

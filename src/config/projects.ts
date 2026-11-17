@@ -14,8 +14,8 @@ export const projects: readonly Project[] = [
     location: { en: 'Nad Al Sheba', ar: 'ند الشبا' },
     title: { en: 'Prefabricated rooms and majlis', ar: 'غرف جاهزة ومجالس' },
     summary: {
-      en: 'Design and fit-out of prefabricated rooms and majlis spaces in Nad Al Sheba, with four finished dog houses and a fenced outdoor exercise area.',
-      ar: 'تصميم وتنفيذ غرف جاهزة ومجالس متكاملة التشطيب في ند الشبا، إلى جانب أربعة بيوت للكلاب ومنطقة خارجية مسيّجة للعب.',
+      en: 'Insulated prefabricated rooms and majlis spaces in Nad Al Sheba, fitted out with gypsum finishes, lighting and AC. The project also included four dog houses and a fenced exercise area.',
+      ar: 'غرف جاهزة ومجالس معزولة في ند الشبا، مع تشطيبات جبسية وإنارة وتكييف. شمل المشروع أيضاً أربعة بيوت للكلاب ومنطقة خارجية مسيّجة للعب.',
     },
     scope: [
       {
@@ -82,8 +82,8 @@ export const projects: readonly Project[] = [
       ar: 'غرف جاهزة ومرافق خارجية',
     },
     summary: {
-      en: 'Design and fit-out of sandwich-panel rooms in Al Awir, with a drainage network, four dog houses and a fenced exercise area.',
-      ar: 'تصميم وتنفيذ غرف جاهزة من ألواح الساندوتش بانل في العوير، مع شبكة صرف صحي وأربعة بيوت للكلاب ومنطقة لعب مسيّجة.',
+      en: 'Sandwich-panel rooms in Al Awir with wood and rubber flooring, sanitary fixtures and a drainage network. Four finished dog houses and a fenced yard completed the outdoor area.',
+      ar: 'غرف جاهزة في العوير بألواح ساندوتش بانل وأرضيات خشبية ومطاطية وأطقم صحية وشبكة صرف. وشملت الأعمال الخارجية أربعة بيوت للكلاب وساحة مسيّجة.',
     },
     scope: [
       {
@@ -129,8 +129,8 @@ export const projects: readonly Project[] = [
     location: { en: 'Al Ajban', ar: 'العجبان' },
     title: { en: 'Prefabricated room fit-out', ar: 'تنفيذ وتجهيز غرف جاهزة' },
     summary: {
-      en: 'Design and fit-out of prefabricated sandwich-panel rooms in Al Ajban, including drainage, electrical wiring, air conditioning, flooring and sanitary fixtures.',
-      ar: 'تصميم وتنفيذ غرف جاهزة متكاملة التشطيب في العجبان باستخدام ألواح الساندوتش بانل، مع أعمال الصرف الصحي والكهرباء والتكييف والأرضيات والأطقم الصحية.',
+      en: 'Prefabricated room fit-out in Al Ajban combining AC, wiring, flooring and sanitary fixtures. A dedicated drainage network serves the rooms, with a septic tank and inspection chambers.',
+      ar: 'تجهيز غرف جاهزة في العجبان بالتكييف والتمديدات الكهربائية والأرضيات والأطقم الصحية، مع شبكة صرف خاصة بالغرف تشمل خزان صرف وغرف تفتيش.',
     },
     scope: [
       {

@@ -15,6 +15,16 @@
   overflow-wrap: anywhere;
 }
 
+.contact-actions .contact-phone,
+.footer-cta .contact-phone {
+  min-block-size: 44px;
+  gap: 3px 0.7em;
+}
+.contact-number {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
 .contact .form-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   min-inline-size: 0;

@@ -56,4 +56,20 @@ const legacyAnchor = (id: string) =>
       );
     })}
   </ul>
+  <section class="section services-faq" aria-labelledby="services-faq-heading">
+    <div>
+      <h2 id="services-faq-heading">{t.servicesFaq.heading}</h2>
+      <a class="button" href={routes.enquiry(locale)}>
+        {t.quote}
+      </a>
+    </div>
+    <div>
+      {t.servicesFaq.questions.map(({ question, answer }) => (
+        <details>
+          <summary>{question}</summary>
+          <p>{answer}</p>
+        </details>
+      ))}
+    </div>
+  </section>
 </BaseLayout>

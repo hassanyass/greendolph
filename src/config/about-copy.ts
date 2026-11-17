@@ -4,10 +4,10 @@ export const aboutCopy = {
   en: {
     intro:
       'We help homeowners, businesses and property teams in the UAE plan and carry out installation, maintenance and finishing work.',
-    company: 'Technical care for the spaces you use every day',
+    company: 'Building services and interior fit-outs',
     companyText: [
-      'Aldolphin Alakhthar brings together licensed trades for homes and workplaces. Our work covers air conditioning and ventilation, electromechanical equipment, plumbing, ceilings and partitions, and interior finishes.',
-      'We start by understanding the space, the problem and any access constraints. We use those details to define the proposed work and prepare a quotation you can review before deciding how to proceed.',
+      'Aldolphin Alakhthar brings ten licensed services together for homes, workplaces and managed properties. If you’re fitting out a space, we can discuss how the AC, plumbing and partitions fit into the same scope. We also handle individual jobs, from maintaining equipment to painting a room.',
+      'When you get in touch, we ask how you use the space, what you need and when we can access the site. Those details help us explain what the quote covers and what still needs to be checked.',
     ],
     visionTitle: 'Our vision',
     vision:
@@ -18,7 +18,7 @@ export const aboutCopy = {
     valuesTitle: 'What guides our work',
     values: [
       {
-        title: 'Quality and care',
+        title: 'Attention to the finish',
         text: 'Pay attention to the details that affect how a space works, from installations to the final finish.',
       },
       {
@@ -26,7 +26,7 @@ export const aboutCopy = {
         text: 'Explain what the quotation covers and flag anything that still needs to be checked.',
       },
       {
-        title: 'Commitment and efficiency',
+        title: 'Planning around the property',
         text: 'Plan around access, working hours and the order in which the different trades need to work.',
       },
       {
@@ -38,10 +38,10 @@ export const aboutCopy = {
   ar: {
     intro:
       'نساعد أصحاب المنازل والمنشآت وفرق إدارة العقارات في الإمارات على تخطيط أعمال التركيب والصيانة والتشطيبات وتنفيذها.',
-    company: 'عناية فنية بالأماكن التي تستخدمها كل يوم',
+    company: 'أعمال المباني والتجهيزات الداخلية',
     companyText: [
-      'تجمع مؤسسة الدولفين الأخضر عدداً من التخصصات الفنية المرخّصة لخدمة المنازل وأماكن العمل. تشمل أعمالنا التكييف والتهوية والمعدات الكهروميكانيكية والتمديدات الصحية والأسقف والقواطع والتشطيبات الداخلية.',
-      'نبدأ بفهم طبيعة المكان والمشكلة وأي قيود تتعلّق بالوصول إلى الموقع. وبناءً على هذه التفاصيل نحدّد الأعمال المقترحة ونعدّ عرض سعر يمكنك مراجعته قبل اتخاذ قرار التنفيذ.',
+      'تقدّم مؤسسة الدولفين الأخضر عشر خدمات فنية مرخّصة للمنازل وأماكن العمل والعقارات المُدارة. إذا كنت تجهّز مساحة، نناقش معك التكييف والسباكة والقواطع ضمن نطاق واحد. وننفّذ أيضاً أعمالاً منفردة، مثل صيانة المعدات أو دهان غرفة.',
+      'عند تواصلك معنا، نسألك عن استخدام المكان والأعمال المطلوبة وأوقات الدخول إلى الموقع. تساعدنا هذه التفاصيل على توضيح ما يشمله عرض السعر وما يحتاج إلى معاينة.',
     ],
     visionTitle: 'رؤيتنا',
     vision:
@@ -52,7 +52,7 @@ export const aboutCopy = {
     valuesTitle: 'القيم التي توجّه عملنا',
     values: [
       {
-        title: 'الجودة والعناية',
+        title: 'العناية بالتشطيب',
         text: 'نهتم بالتفاصيل التي تؤثر في استخدام المكان، بدءاً من التركيبات وحتى التشطيب النهائي.',
       },
       {
@@ -60,7 +60,7 @@ export const aboutCopy = {
         text: 'نوضّح ما يشمله عرض السعر ونبيّن النقاط التي تحتاج إلى مزيد من التحقّق.',
       },
       {
-        title: 'الالتزام والكفاءة',
+        title: 'التخطيط حسب ظروف الموقع',
         text: 'نراعي ظروف الوصول إلى الموقع وساعات العمل وترتيب المهام بين التخصصات المختلفة.',
       },
       {

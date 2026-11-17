@@ -1,7 +1,7 @@
 export const worksCopy = {
   en: {
     intro:
-      'Prefabricated rooms, interior fit-outs and air conditioning projects in the UAE.',
+      'See how we’ve fitted out rooms and majlis spaces in the UAE, from insulated panels and floors to air conditioning and drainage.',
     view: 'View project',
     back: 'All projects',
     scope: 'Scope of work',
@@ -16,7 +16,8 @@ export const worksCopy = {
     profileSoon: 'PDF coming soon',
   },
   ar: {
-    intro: 'مشاريع الغرف الجاهزة والتشطيبات الداخلية والتكييف في الإمارات.',
+    intro:
+      'اطّلع على مشاريع تجهيز الغرف الجاهزة والمجالس في الإمارات، من الألواح المعزولة والأرضيات إلى التكييف والصرف الصحي.',
     view: 'عرض المشروع',
     back: 'جميع المشاريع',
     scope: 'نطاق العمل',
