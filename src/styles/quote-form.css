@@ -1,0 +1,73 @@
+.contact.quote-section {
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(28px, 6vw, 92px);
+  align-items: start;
+  padding-block: clamp(48px, 7vw, 104px);
+}
+.quote-section .contact-intro {
+  padding-block-start: clamp(0px, 2vw, 22px);
+}
+.quote-panel {
+  min-inline-size: 0;
+  background: var(--mist);
+  border: 1px solid var(--line);
+  border-block-start: 3px solid var(--green);
+  padding: clamp(16px, 3.5vw, 44px);
+}
+.quote-panel-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5px 15px;
+  margin-block-end: 22px;
+}
+.quote-panel-header h3 {
+  color: var(--green);
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+}
+.quote-panel-header p {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.quote-panel .form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 17px;
+}
+.quote-panel .form-grid label {
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+.quote-panel .form-grid :is(input, select, textarea) {
+  background: var(--paper);
+  border: 1px solid color-mix(in srgb, var(--forest) 65%, var(--white));
+  border-radius: 4px;
+  min-inline-size: 0;
+  padding: 10px 12px;
+  min-block-size: 48px;
+  font-size: 1rem;
+}
+.quote-panel .form-grid textarea {
+  min-block-size: 116px;
+}
+.quote-panel .form-note {
+  font-size: 0.8rem;
+  margin-block-start: 16px;
+}
+.quote-panel .quote-review {
+  background: var(--paper);
+}
+@media (max-width: 800px) {
+  .contact.quote-section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .quote-panel .form-submit {
+    inline-size: 100%;
+  }
+}
+@media (max-width: 500px) {
+  .quote-panel .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -3,6 +3,10 @@ import type { Locale } from '../domain/routes';
 export const contactCopy = {
   en: {
     call: 'Call',
+    formHeading: 'Your request',
+    formRequired: 'All fields are required.',
+    social: 'Social media',
+    comingSoon: 'Coming soon',
     whatsapp: 'Chat on WhatsApp',
     whatsappShort: 'WhatsApp',
     email: 'Email',
@@ -26,6 +30,10 @@ export const contactCopy = {
   },
   ar: {
     call: 'اتصل بنا',
+    formHeading: 'تفاصيل طلبك',
+    formRequired: 'جميع الحقول مطلوبة.',
+    social: 'حسابات التواصل الاجتماعي',
+    comingSoon: 'قريباً',
     whatsapp: 'راسلنا على واتساب',
     whatsappShort: 'واتساب',
     email: 'البريد الإلكتروني',

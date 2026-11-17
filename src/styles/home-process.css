@@ -6,8 +6,8 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.86fr);
   grid-template-areas:
-    'photo heading'
-    'photo details';
+    'heading blueprint'
+    'details blueprint';
   grid-template-rows: auto 1fr;
   column-gap: clamp(36px, 7vw, 112px);
   row-gap: clamp(24px, 3vw, 40px);
@@ -24,36 +24,51 @@
   max-inline-size: 15ch;
   text-wrap: balance;
 }
-.home-process-photo {
-  position: relative;
-  grid-area: photo;
-  min-block-size: 420px;
-  isolation: isolate;
-  background: var(--mist);
+.home-process-blueprint {
+  grid-area: blueprint;
+  display: grid;
+  place-items: center;
+  align-self: center;
+  min-inline-size: 0;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  background-color: color-mix(in srgb, var(--forest) 88%, var(--ink));
+  background-image:
+    linear-gradient(#ffffff11 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff11 1px, transparent 1px);
+  background-size: 24px 24px;
 }
-.home-process-photo img {
-  position: absolute;
-  inset: 0;
+.home-process-blueprint svg {
+  display: block;
   inline-size: 100%;
-  block-size: 100%;
-  object-fit: cover;
-  object-position: center 55%;
+  block-size: auto;
 }
-.home-process-photo::after {
-  content: '';
-  position: absolute;
-  inset: 14px;
-  background:
-    linear-gradient(var(--white), var(--white)) top left / 32px 1px,
-    linear-gradient(var(--white), var(--white)) top left / 1px 32px,
-    linear-gradient(var(--white), var(--white)) top right / 32px 1px,
-    linear-gradient(var(--white), var(--white)) top right / 1px 32px,
-    linear-gradient(var(--white), var(--white)) bottom left / 32px 1px,
-    linear-gradient(var(--white), var(--white)) bottom left / 1px 32px,
-    linear-gradient(var(--white), var(--white)) bottom right / 32px 1px,
-    linear-gradient(var(--white), var(--white)) bottom right / 1px 32px;
-  background-repeat: no-repeat;
-  pointer-events: none;
+.process-plan {
+  stroke: color-mix(in srgb, var(--white) 70%, var(--forest));
+  stroke-width: 1.35;
+}
+.process-route-guide {
+  stroke-dasharray: 3 6;
+}
+.process-route,
+.process-check {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.process-node {
+  stroke: var(--accent);
+  stroke-width: 2;
+  fill: var(--forest);
+}
+.process-document {
+  stroke: var(--white);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.process-check {
+  stroke-width: 1.5;
 }
 .home-process-details {
   grid-area: details;
@@ -98,24 +113,70 @@
 @media (max-width: 800px) {
   .home-process-layout {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: 'heading' 'photo' 'details';
+    grid-template-areas: 'heading' 'blueprint' 'details';
     grid-template-rows: auto;
   }
   .home-process-heading {
     padding-block-start: 0;
   }
-  .home-process-photo {
-    min-block-size: 0;
-    block-size: clamp(202px, 64vw, 404px);
+}
+.quote-prep {
+  background: var(--mist);
+}
+.quote-prep-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 68px);
+  padding-block: clamp(32px, 5vw, 64px);
+}
+.quote-prep-layout h2 {
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  text-wrap: balance;
+}
+.quote-prep-layout p {
+  margin-block-start: 12px;
+  color: var(--muted);
+  max-inline-size: 47ch;
+  line-height: 1.7;
+}
+.quote-prep-layout ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-block-start: 1px solid var(--line);
+}
+.quote-prep-layout li {
+  padding: 10px 0;
+  border-block-end: 1px solid var(--line);
+}
+@media (max-width: 680px) {
+  .quote-prep-layout {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .process-visible .home-process-photo::after {
-    animation: frame-settle 650ms ease-out both;
+  .process-visible .process-route {
+    stroke-dasharray: 1;
+    animation: draw-process-route 2s ease-out both;
   }
-  @keyframes frame-settle {
+  .process-visible .process-node-scope {
+    animation: reveal-process-node 450ms 620ms ease-out both;
+  }
+  .process-visible .process-check {
+    stroke-dasharray: 1;
+    animation: draw-process-route 500ms 1.55s ease-out both;
+  }
+  @keyframes draw-process-route {
     from {
-      transform: scale(0.93);
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes reveal-process-node {
+    from {
+      opacity: 0.35;
     }
   }
 }

@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from './Hero.astro';
 import Services from './Services.astro';
-import { homeProcessPhoto } from '../config/home-photos';
+import ProcessBlueprint from './ProcessBlueprint.astro';
 import '../styles/home-process.css';
 import QuoteForm from './QuoteForm.astro';
 import { routes } from '../domain/routes';
@@ -50,18 +50,7 @@ const t = copy[locale];
         <p class="eyebrow">{t.processLabel}</p>
         <h2 id="process-title">{t.homeProcessTitle}</h2>
       </div>
-      <div class="home-process-photo">
-        <img
-          src={`${homeProcessPhoto}-480.webp`}
-          srcset={`${homeProcessPhoto}-480.webp 480w, ${homeProcessPhoto}-800.webp 800w`}
-          sizes="(max-width: 800px) 86vw, 40vw"
-          width="800"
-          height="1000"
-          alt=""
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
+      <ProcessBlueprint />
       <div class="home-process-details">
         <ol class="home-process-steps">
           {t.steps.map((step) => (
@@ -71,11 +60,27 @@ const t = copy[locale];
             </li>
           ))}
         </ol>
-        <a class="button button-light" href={routes.enquiry(locale)}>
+        <a class="button button-light" href="#contact">
           {t.quote}
         </a>
       </div>
     </div>
   </section>
+  <div class="quote-prep">
+    <section
+      class="section quote-prep-layout"
+      aria-labelledby="quote-prep-title"
+    >
+      <div>
+        <h2 id="quote-prep-title">{t.quotePrep.title}</h2>
+        <p>{t.quotePrep.text}</p>
+      </div>
+      <ul>
+        {t.quotePrep.items.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </section>
+  </div>
   <QuoteForm locale={locale} />
 </BaseLayout>

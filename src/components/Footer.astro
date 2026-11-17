@@ -1,4 +1,5 @@
 ---
+import '../styles/footer.css';
 import ContactLinks from './ContactLinks.astro';
 import BrandLogo from './BrandLogo.astro';
 import { copy, type Locale } from '../config/content';
@@ -22,23 +23,16 @@ const t = copy[locale];
       <p>{t.footerText}</p>
       <span>{t.footerLocation}</span>
     </div>
-    <div class="footer-links">
+    <nav class="footer-links" aria-label={t.footerNav}>
       <p class="eyebrow">{t.footerNav}</p>
       {navigation.map((item) => (
         <a href={navigationHref(item, locale)}>{t.nav[item.labelIndex]}</a>
       ))}
-    </div>
+    </nav>
     <div class="footer-cta">
       <p class="eyebrow">{t.footerContact}</p>
       <a href={routes.enquiry(locale)}>{t.quote}</a>
       <ContactLinks locale={locale} placement="footer" />
-      <a
-        class="footer-language"
-        href={routes.alternate(page === 'notFound' ? 'home' : page, locale)}
-        lang={locale === 'en' ? 'ar' : 'en'}
-      >
-        {t.lang}
-      </a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -46,5 +40,12 @@ const t = copy[locale];
       © {new Date().getFullYear()} {t.copyright}
     </span>
     <span>{t.rights}</span>
+    <a
+      class="footer-language"
+      href={routes.alternate(page === 'notFound' ? 'home' : page, locale)}
+      lang={locale === 'en' ? 'ar' : 'en'}
+    >
+      {t.lang}
+    </a>
   </div>
 </footer>

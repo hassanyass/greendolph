@@ -225,38 +225,8 @@ textarea:focus-visible {
   margin-top: 15px;
   max-width: 420px;
 }
-.process {
-  background: var(--forest);
-  color: var(--white);
-  max-width: none;
-}
 .process .eyebrow {
   color: var(--accent);
-}
-.process h2 {
-  margin-top: 20px;
-}
-.steps {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 55px;
-  margin-top: 55px;
-}
-.steps article {
-  border-top: 1px solid color-mix(in srgb, var(--white) 23%, transparent);
-  padding-top: 24px;
-}
-.steps h3 {
-  font-size: 19px;
-  font-weight: 500;
-  margin-top: 30px;
-}
-.steps p {
-  font-size: 14px;
-  line-height: 1.85;
-  color: color-mix(in srgb, var(--mist) 90%, var(--forest));
-  margin-top: 12px;
-  max-width: 290px;
 }
 .contact {
   display: grid;
@@ -416,10 +386,6 @@ footer :is(a, button):focus-visible {
   align-items: center;
   font-size: 17px;
 }
-.footer-cta .footer-language {
-  font-size: 12px;
-  margin-top: 10px;
-}
 .footer-links > a:hover,
 .footer-cta > a:hover {
   color: var(--accent);
@@ -476,12 +442,6 @@ html[dir='rtl'] .eyebrow {
   }
   .image-caption span {
     font-size: 11px;
-  }
-  .steps {
-    gap: 25px;
-  }
-  .steps h3 {
-    font-size: 17px;
   }
   .contact {
     gap: 35px;
@@ -542,25 +502,6 @@ html[dir='rtl'] .eyebrow {
   }
   .about-copy > p:not(.eyebrow) {
     margin-top: 20px;
-  }
-  .steps {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    margin-top: 35px;
-  }
-  .steps article {
-    display: block;
-    padding-top: 22px;
-  }
-  .steps h3 {
-    margin-top: 0;
-    font-size: 19px;
-  }
-  .steps p {
-    grid-column: 2;
-    margin-top: 0;
-    max-width: none;
-    font-size: 14px;
   }
   .contact {
     grid-template-columns: 1fr;

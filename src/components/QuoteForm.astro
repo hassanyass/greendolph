@@ -1,4 +1,5 @@
 ---
+import '../styles/quote-form.css';
 import ContactLinks from './ContactLinks.astro';
 import { contactCopy } from '../config/contact-copy';
 import { quotationEndpoint } from '../config/quotation';
@@ -9,14 +10,28 @@ const t = copy[locale];
 const formCopy = contactCopy[locale];
 ---
 
-<section class="contact section" id="contact" aria-labelledby="contact-title">
+<section
+  class="contact quote-section section"
+  id="contact"
+  aria-labelledby="contact-title"
+>
   <div class="contact-intro">
     <p class="eyebrow">{t.contactLabel}</p>
     <h2 id="contact-title">{t.contactTitle}</h2>
     <p>{t.contactText}</p>
     <ContactLinks locale={locale} placement="form" />
   </div>
-  <form id="quote-form" method="post" action={quotationEndpoint ?? undefined}>
+  <form
+    id="quote-form"
+    class="quote-panel"
+    method="post"
+    action={quotationEndpoint ?? undefined}
+    aria-labelledby="quote-panel-title"
+  >
+    <div class="quote-panel-header">
+      <h3 id="quote-panel-title">{formCopy.formHeading}</h3>
+      <p>{formCopy.formRequired}</p>
+    </div>
     <fieldset class="form-grid">
       <label>
         <span>{t.name}</span>

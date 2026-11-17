@@ -51,13 +51,19 @@ export const copy = {
     aboutText:
       'We are Aldolphin Alakhthar, a technical services company based in the UAE. We help look after the practical things that keep homes and workplaces running, from air conditioning and electromechanical equipment to interior finishes.',
     aboutMore: 'More about us',
-    aboutDetail:
-      'Every property has its own requirements. Our starting point is simple: understand what you need, discuss the work, and define the scope before moving forward. Tell us about your space and we can take the next step together.',
     aboutNote: 'For the places that matter.',
     aboutImageAlt: 'A calm, thoughtfully maintained living space',
     processLabel: 'How it works',
     homeProcessTitle: 'From enquiry to quotation',
-    processTitle: 'From a small fix\nto your next project.',
+    quotePrep: {
+      title: 'Before you request a quote',
+      text: 'A few details help us understand the work and what might need a closer look.',
+      items: [
+        'The location and type of property',
+        'What needs fixing, installing or finishing',
+        'Any access limits or preferred working hours',
+      ],
+    },
     steps: [
       {
         title: 'Send the details',
@@ -148,13 +154,19 @@ export const copy = {
     aboutText:
       'نحن الدولفين الأخضر، شركة خدمات فنية مقرها الإمارات العربية المتحدة. نعتني بالتفاصيل العملية التي تُبقي المنازل وأماكن العمل في أفضل حال، من التكييف والمعدات الكهروميكانيكية إلى التشطيبات الداخلية.',
     aboutMore: 'المزيد عن شركتنا',
-    aboutDetail:
-      'لكل عقار احتياجاته الخاصة. نبدأ بفهم ما تحتاجه، ومناقشة الأعمال، وتحديد نطاقها قبل المضي قدماً. أخبرنا عن مساحتك لنحدّد الخطوة التالية معاً.',
     aboutNote: 'للأماكن التي تعني لك الكثير.',
     aboutImageAlt: 'مساحة معيشة هادئة تحظى بالعناية',
     processLabel: 'كيف نعمل',
     homeProcessTitle: 'من الاستفسار إلى عرض السعر',
-    processTitle: 'من إصلاح بسيط\nإلى مشروعك القادم.',
+    quotePrep: {
+      title: 'قبل طلب عرض السعر',
+      text: 'تساعدنا بعض التفاصيل على فهم طبيعة العمل وتحديد ما قد يحتاج إلى معاينة.',
+      items: [
+        'موقع العقار ونوعه',
+        'ما يحتاج إلى إصلاح أو تركيب أو تشطيب',
+        'أي قيود على دخول الموقع أو أوقات العمل المفضّلة',
+      ],
+    },
     steps: [
       {
         title: 'أرسل تفاصيل طلبك',

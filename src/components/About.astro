@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { aboutCopy } from '../config/about-copy';
 import { media } from '../config/brand';
 import BrandLogo from './BrandLogo.astro';
 import { copy, type Locale } from '../config/content';
 import { routes } from '../domain/routes';
 const { locale } = Astro.props as { locale: Locale };
 const t = copy[locale];
+const a = aboutCopy[locale];
 ---
 
 <BaseLayout
@@ -14,10 +16,18 @@ const t = copy[locale];
   title={t.aboutPageTitle}
   description={t.aboutPageDescription}
 >
-  <div class="page-intro">
-    <p class="eyebrow">{t.aboutLabel}</p>
-    <h1>{t.aboutPageHeading}</h1>
-  </div>
+  <section class="about-hero" aria-labelledby="about-heading">
+    <div class="section about-hero-layout">
+      <div>
+        <p class="eyebrow">{t.aboutLabel}</p>
+        <h1 id="about-heading">{t.aboutPageHeading}</h1>
+        <p class="about-lead">{a.intro}</p>
+      </div>
+      <div class="about-identity">
+        <BrandLogo locale={locale} variant="stacked" />
+      </div>
+    </div>
+  </section>
   <section class="about section about-page" aria-labelledby="company-title">
     <div class="about-image">
       <img
@@ -25,56 +35,137 @@ const t = copy[locale];
         alt={t.aboutImageAlt}
         width="900"
         height="1050"
+        loading="lazy"
       />
     </div>
     <div class="about-copy">
-      <div class="about-identity">
-        <BrandLogo locale={locale} variant="stacked" />
-      </div>
-      <h2 id="company-title">{t.aboutTitle}</h2>
-      <p>{t.aboutText}</p>
-      <p>{t.aboutDetail}</p>
-      <a class="button" href={routes.path('services', locale)}>
+      <h2 id="company-title">{a.company}</h2>
+      {a.companyText.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
+      <a class="text-link about-more" href={routes.path('services', locale)}>
         {t.viewServices}
       </a>
     </div>
   </section>
-  <section class="process section" aria-labelledby="about-process">
-    <p class="eyebrow">{t.processLabel}</p>
-    <h2 id="about-process">{t.processTitle}</h2>
-    <div class="steps">
-      {t.steps.map((step) => (
-        <article>
-          <h3>{step.title}</h3>
-          <p>{step.text}</p>
-        </article>
-      ))}
+  <div class="about-direction">
+    <div class="section about-direction-layout">
+      <section aria-labelledby="vision-heading">
+        <h2 id="vision-heading">{a.visionTitle}</h2>
+        <p>{a.vision}</p>
+      </section>
+      <section aria-labelledby="mission-heading">
+        <h2 id="mission-heading">{a.missionTitle}</h2>
+        <p>{a.mission}</p>
+      </section>
     </div>
-    <a class="button button-light" href={routes.enquiry(locale)}>
+  </div>
+  <section class="section about-values" aria-labelledby="values-heading">
+    <h2 id="values-heading">{a.valuesTitle}</h2>
+    <dl>
+      {a.values.map(({ title, text }) => (
+        <div>
+          <dt>{title}</dt>
+          <dd>{text}</dd>
+        </div>
+      ))}
+    </dl>
+    <a class="button" href={routes.enquiry(locale)}>
       {t.quote}
     </a>
   </section>
 </BaseLayout>
 <style>
-  .about-page {
-    padding-top: 24px;
-    border: 0;
+  .about-hero {
+    background: var(--forest);
+    color: var(--white);
+    border-block-end: 4px solid var(--accent);
   }
-  .about-copy .button {
-    margin-top: 26px;
+  .about-hero-layout,
+  .about-direction-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(26px, 6vw, 90px);
+  }
+  .about-hero .eyebrow {
+    color: var(--accent);
+  }
+  .about-hero h1 {
+    max-inline-size: 17ch;
+    margin-block-start: 12px;
+    font-size: clamp(2rem, 5.2vw, 4.8rem);
+    line-height: 1.16;
+    text-wrap: balance;
+  }
+  :global([dir='rtl']) .about-hero h1 {
+    line-height: 1.35;
+  }
+  .about-lead {
+    margin-block-start: 22px;
+    max-inline-size: 52ch;
+    line-height: 1.8;
   }
   .about-identity {
-    border-inline-start: 4px solid var(--accent);
-    padding-block: 22px;
-    padding-inline: 24px;
+    display: grid;
+    place-items: center;
     background: var(--paper);
+    border-block-end: 4px solid var(--accent);
+    padding: clamp(22px, 5vw, 64px);
+    min-inline-size: 0;
   }
   .about-identity :global(img) {
-    display: block;
-    width: clamp(132px, 19vw, 165px);
-    height: auto;
+    inline-size: clamp(145px, 17vw, 232px);
+    block-size: auto;
   }
-  .process > .button {
-    margin-top: 36px;
+  .about-page {
+    border: 0;
+  }
+  .about-page .about-image {
+    height: clamp(280px, 43vw, 535px);
+  }
+  .about-direction {
+    background: var(--mist);
+  }
+  .about-direction-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+  .about-direction section {
+    border-block-start: 2px solid var(--green);
+    padding-block-start: 20px;
+  }
+  .about-direction p,
+  .about-values dd {
+    color: var(--muted);
+    line-height: 1.8;
+    margin: 14px 0 0;
+    max-inline-size: 53ch;
+  }
+  .about-values dl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px clamp(28px, 6vw, 90px);
+    margin-block: 30px;
+  }
+  .about-values dl div {
+    border-block-start: 1px solid var(--line);
+    padding-block-start: 18px;
+  }
+  .about-values dt {
+    font-weight: 700;
+    color: var(--green);
+    font-size: 1.12rem;
+  }
+  @media (max-width: 680px) {
+    .about-hero-layout,
+    .about-direction-layout,
+    .about-values dl {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .about-identity {
+      justify-self: start;
+      min-inline-size: min(100%, 235px);
+    }
   }
 </style>

@@ -11,9 +11,21 @@ const { locale, placement } = Astro.props;
 const t = contactCopy[locale];
 const whatsapp = company.whatsappUrl;
 const socialLinks = [
-  { name: 'Instagram', url: company.social.instagram },
-  { name: 'Facebook', url: company.social.facebook },
-  { name: 'TikTok', url: company.social.tiktok },
+  {
+    icon: 'instagram',
+    name: locale === 'ar' ? 'إنستغرام' : 'Instagram',
+    url: company.social.instagram,
+  },
+  {
+    icon: 'facebook',
+    name: locale === 'ar' ? 'فيسبوك' : 'Facebook',
+    url: company.social.facebook,
+  },
+  {
+    icon: 'tiktok',
+    name: locale === 'ar' ? 'تيك توك' : 'TikTok',
+    url: company.social.tiktok,
+  },
 ];
 ---
 
@@ -36,15 +48,70 @@ const socialLinks = [
 )}
 {placement === 'footer' && (
   <>
-    {company.email && <a href={`mailto:${company.email}`}>{t.email}</a>}
-    {socialLinks.map(
-      ({ name, url }) =>
-        url && (
-          <a href={url} lang="en">
-            {name}
-          </a>
-        ),
+    <a class="footer-contact-line" href={`tel:${company.phone}`}>
+      <span>{t.call}</span> <bdi dir="ltr">{company.phone}</bdi>
+    </a>
+    {whatsapp ? (
+      <a class="footer-contact-line" href={whatsapp}>
+        <span
+          class="footer-channel-icon"
+          style="--channel-icon: url('/icons/whatsapp.svg')"
+          aria-hidden="true"
+        ></span>
+        <span>{t.whatsappShort}</span> <bdi dir="ltr">{company.whatsapp}</bdi>
+      </a>
+    ) : (
+      <span class="footer-contact-line footer-pending">
+        <span
+          class="footer-channel-icon"
+          style="--channel-icon: url('/icons/whatsapp.svg')"
+          aria-hidden="true"
+        ></span>
+        <span>{t.whatsappShort}</span> <small>{t.comingSoon}</small>
+      </span>
     )}
+    {company.email && (
+      <a class="footer-contact-line" href={`mailto:${company.email}`}>
+        {t.email}
+      </a>
+    )}
+    <div class="footer-social">
+      <p>
+        {t.social}
+        {socialLinks.every(({ url }) => !url) && (
+          <small> · {t.comingSoon}</small>
+        )}
+      </p>
+      <ul>
+        {socialLinks.map(({ name, icon, url }) => (
+          <li>
+            {url ? (
+              <a href={url} aria-label={name} title={name}>
+                <span
+                  class="footer-channel-icon"
+                  style={`--channel-icon: url('/icons/${icon}.svg')`}
+                  aria-hidden="true"
+                ></span>
+              </a>
+            ) : (
+              <span
+                class="footer-social-placeholder"
+                title={`${name} · ${t.comingSoon}`}
+              >
+                <span
+                  class="footer-channel-icon"
+                  style={`--channel-icon: url('/icons/${icon}.svg')`}
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">
+                  {name} · {t.comingSoon}
+                </span>
+              </span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
   </>
 )}
 {placement === 'shortcut' && whatsapp && (
