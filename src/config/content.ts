@@ -51,7 +51,7 @@ export const copy = {
     aboutText:
       'We are Aldolphin Alakhthar, a technical services company based in the UAE. We help look after the practical things that keep homes and workplaces running, from air conditioning and electromechanical equipment to interior finishes.',
     aboutMore: 'More about us',
-    aboutNote: 'For the places that matter.',
+    viewOurWork: 'View our work',
     aboutImageAlt: 'A calm, thoughtfully maintained living space',
     processLabel: 'How it works',
     homeProcessTitle: 'From enquiry to quotation',
@@ -154,7 +154,7 @@ export const copy = {
     aboutText:
       'نحن الدولفين الأخضر، شركة خدمات فنية مقرها الإمارات العربية المتحدة. نعتني بالتفاصيل العملية التي تُبقي المنازل وأماكن العمل في أفضل حال، من التكييف والمعدات الكهروميكانيكية إلى التشطيبات الداخلية.',
     aboutMore: 'المزيد عن شركتنا',
-    aboutNote: 'للأماكن التي تعني لك الكثير.',
+    viewOurWork: 'شاهد أعمالنا',
     aboutImageAlt: 'مساحة معيشة هادئة تحظى بالعناية',
     processLabel: 'كيف نعمل',
     homeProcessTitle: 'من الاستفسار إلى عرض السعر',

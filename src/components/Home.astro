@@ -7,7 +7,6 @@ import '../styles/home-process.css';
 import '../styles/landing.css';
 import QuoteForm from './QuoteForm.astro';
 import { routes } from '../domain/routes';
-import { media } from '../config/brand';
 import BrandLogo from './BrandLogo.astro';
 import { copy, type Locale } from '../config/content';
 const { locale } = Astro.props as { locale: Locale };
@@ -18,18 +17,8 @@ const t = copy[locale];
   <Hero locale={locale} />
   <Services locale={locale} />
   <section class="about section" id="about" aria-labelledby="about-title">
-    <div class="about-image">
-      <img
-        src={media.interior}
-        alt={t.aboutImageAlt}
-        width="900"
-        height="1050"
-        loading="lazy"
-      />
-      <div class="image-caption">
-        <BrandLogo locale={locale} variant="mark" />
-        <span>{t.aboutNote}</span>
-      </div>
+    <div class="about-mark-panel" data-landing-reveal aria-hidden="true">
+      <BrandLogo locale={locale} variant="mark" loading="lazy" />
     </div>
     <div class="about-copy">
       <p class="eyebrow">{t.aboutLabel}</p>
@@ -44,7 +33,7 @@ const t = copy[locale];
     class="home-process"
     id="process"
     aria-labelledby="process-title"
-    data-home-process
+    data-landing-reveal
   >
     <div class="section home-process-layout">
       <div class="home-process-heading">

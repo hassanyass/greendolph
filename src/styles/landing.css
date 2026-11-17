@@ -12,12 +12,55 @@
 }
 
 .landing
-  :is(.about-image, .service-card-link, .home-process-blueprint, .quote-panel) {
+  :is(
+    .about-mark-panel,
+    .service-card-link,
+    .home-process-blueprint,
+    .quote-panel
+  ) {
   border-radius: var(--panel-radius);
 }
 
-.landing :is(.about-image, .service-card-link) {
+.landing :is(.about-mark-panel, .service-card-link) {
   overflow: hidden;
+}
+
+.about-mark-panel {
+  display: grid;
+  place-items: center;
+  block-size: clamp(255px, 62vw, 410px);
+  background:
+    radial-gradient(
+      ellipse at center,
+      color-mix(in srgb, var(--forest) 85%, var(--accent)),
+      transparent 72%
+    ),
+    linear-gradient(#ffffff0d 1px, transparent 1px) center / 26px 26px,
+    linear-gradient(90deg, #ffffff0d 1px, transparent 1px) center / 26px 26px,
+    var(--forest);
+}
+
+.about-mark-panel img {
+  display: block;
+  inline-size: min(51%, 245px);
+  block-size: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .about-mark-panel[data-revealed] img {
+    animation: about-mark-shine 2.2s ease-in-out 2;
+  }
+  @keyframes about-mark-shine {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 2px transparent);
+    }
+    50% {
+      filter: drop-shadow(
+        0 0 18px color-mix(in srgb, var(--accent) 55%, transparent)
+      );
+    }
+  }
 }
 
 .landing .quote-prep-layout {
@@ -44,7 +87,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .landing .about-image {
+  .landing .about-mark-panel {
     block-size: clamp(350px, 35vw, 460px);
   }
 }

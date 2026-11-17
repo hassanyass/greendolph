@@ -45,8 +45,8 @@ const a = aboutCopy[locale];
       {a.companyText.map((paragraph) => (
         <p>{paragraph}</p>
       ))}
-      <a class="text-link about-more" href={routes.path('services', locale)}>
-        {t.viewServices}
+      <a class="text-link about-more" href={routes.path('works', locale)}>
+        {t.viewOurWork}
       </a>
     </div>
   </section>
@@ -124,10 +124,7 @@ const a = aboutCopy[locale];
   .about-identity {
     display: grid;
     place-items: center;
-    background: var(--paper);
-    border-block-end: 4px solid var(--accent);
-    border-radius: var(--panel-radius);
-    padding: clamp(22px, 4vw, 54px);
+    padding: clamp(6px, 1.8vw, 26px);
     min-inline-size: 0;
   }
   .about-identity :global(img) {
@@ -183,7 +180,7 @@ const a = aboutCopy[locale];
     }
     .about-identity {
       justify-self: start;
-      min-inline-size: min(100%, 235px);
+      padding-inline: 0;
     }
   }
 </style>

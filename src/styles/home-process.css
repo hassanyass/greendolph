@@ -151,14 +151,14 @@
   }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .process-visible .process-route {
+  .home-process[data-revealed] .process-route {
     stroke-dasharray: 1;
     animation: draw-process-route 2s ease-out both;
   }
-  .process-visible .process-node-scope {
+  .home-process[data-revealed] .process-node-scope {
     animation: reveal-process-node 450ms 620ms ease-out both;
   }
-  .process-visible .process-check {
+  .home-process[data-revealed] .process-check {
     stroke-dasharray: 1;
     animation: draw-process-route 500ms 1.55s ease-out both;
   }

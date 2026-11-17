@@ -16,16 +16,24 @@ export class Brand {
   readonly logos = {
     en: {
       primary: { src: '/brand/full-en.png', width: 890, height: 235 },
-      stacked: { src: '/brand/stacked-en.png', width: 657, height: 540 },
+      stacked: {
+        src: '/brand/stacked-on-green-en.png',
+        width: 480,
+        height: 394,
+      },
       inverse: { src: '/brand/on-green-en.png', width: 650, height: 172 },
     },
     ar: {
       primary: { src: '/brand/full-ar.png', width: 960, height: 231 },
-      stacked: { src: '/brand/stacked-ar.png', width: 716, height: 538 },
+      stacked: {
+        src: '/brand/stacked-on-green-ar.png',
+        width: 524,
+        height: 394,
+      },
       inverse: { src: '/brand/on-green-ar.png', width: 700, height: 170 },
     },
   };
-  readonly mark = { src: '/brand/app-icon.png', width: 192, height: 192 };
+  readonly mark = { src: '/brand/mark-on-green.svg', width: 121, height: 108 };
   readonly favicon = { src: '/brand/app-icon.png', type: 'image/png' };
   readonly pattern = '/brand/pattern.webp';
   readonly shareImages = {

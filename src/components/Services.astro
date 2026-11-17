@@ -22,74 +22,63 @@ const t = copy[locale];
       {t.viewServices}
     </a>
   </div>
-  <div class="carousel-controls">
-    <span class="carousel-status" aria-live="polite" aria-atomic="true"></span>
-    <div class="carousel-buttons">
-      <button
-        type="button"
-        class="carousel-control"
-        data-previous
-        aria-label={t.previousService}
-        aria-controls="service-track"
-        disabled
-      >
-        <ControlIcon name="previous" />
-      </button>
-      <button
-        type="button"
-        class="carousel-control"
-        data-next
-        aria-label={t.nextService}
-        aria-controls="service-track"
-      >
-        <ControlIcon name="next" />
-      </button>
-    </div>
-  </div>
-  <ul class="service-selector" aria-label={t.carouselLabel}>
-    {services.map((service, index) => (
-      <li>
-        <a href={`#service-${service.id}`} data-service-slide={index}>
-          {service.title[locale]}
-        </a>
-      </li>
-    ))}
-  </ul>
-  <div
-    class="service-track"
-    id="service-track"
-    role="region"
-    aria-label={t.carouselLabel}
-    tabindex="0"
-  >
-    {services.map((service) => {
-      const design = servicePresentation(service.id);
-      return (
-        <article
-          class="service-card"
-          id={`service-${service.id}`}
-          style={`--service-tint:${design.tint}`}
-        >
-          <a
-            class="service-card-link"
-            href={routes.service(service.id).paths[locale]}
+  <span class="carousel-status" aria-live="polite" aria-atomic="true"></span>
+  <div class="service-carousel">
+    <button
+      type="button"
+      class="carousel-control carousel-previous"
+      data-previous
+      aria-label={t.previousService}
+      aria-controls="service-track"
+      disabled
+    >
+      <ControlIcon name="previous" />
+    </button>
+    <button
+      type="button"
+      class="carousel-control carousel-next"
+      data-next
+      aria-label={t.nextService}
+      aria-controls="service-track"
+    >
+      <ControlIcon name="next" />
+    </button>
+    <div
+      class="service-track"
+      id="service-track"
+      role="region"
+      aria-label={t.carouselLabel}
+      tabindex="0"
+    >
+      {services.map((service) => {
+        const design = servicePresentation(service.id);
+        return (
+          <article
+            class="service-card"
+            id={`service-${service.id}`}
+            style={`--service-tint:${design.tint}`}
           >
-            <div class="service-card-caption">
-              <h3>{service.title[locale]}</h3>
-              <span class="service-card-action">
-                {t.serviceExplore}
-                <ControlIcon name="next" />
-              </span>
-            </div>
-            <div class="service-card-photo">
-              <ServicePhoto
-                id={service.id}
-                sizes="(max-width: 700px) 90vw, 58vw"
-              />
-            </div>
-          </a>
-        </article>
-      );
-    })}
+            <a
+              class="service-card-link"
+              href={routes.service(service.id).paths[locale]}
+            >
+              <div class="service-card-caption">
+                <h3>{service.title[locale]}</h3>
+                <span class="service-card-action">
+                  {t.serviceExplore}
+                  <ControlIcon name="next" />
+                </span>
+              </div>
+              <div class="service-card-photo">
+                <ServicePhoto
+                  id={service.id}
+                  sizes="(max-width: 700px) 90vw, 58vw"
+                />
+              </div>
+            </a>
+          </article>
+        );
+      })}
+    </div>
   </div>
 </section>

@@ -137,7 +137,7 @@
 
 @media (min-width: 761px) {
   .hero-blueprint {
-    inline-size: min(100%, clamp(380px, 73svh, 700px));
+    inline-size: min(100%, clamp(390px, 77svh, 715px));
     justify-self: start;
   }
   .blueprint-summary {

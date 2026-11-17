@@ -192,24 +192,6 @@ textarea:focus-visible {
   height: 100%;
   object-fit: cover;
 }
-.image-caption {
-  position: absolute;
-  inset-inline: 22px;
-  bottom: 22px;
-  background: var(--paper);
-  display: flex;
-  align-items: center;
-  padding: 13px 17px;
-  gap: 12px;
-}
-.image-caption img {
-  height: 48px;
-  width: 48px;
-  object-fit: contain;
-}
-.image-caption span {
-  font-size: 13px;
-}
 .about-copy h2 {
   margin-top: 22px;
 }
@@ -446,15 +428,6 @@ html[dir='rtl'] .eyebrow {
   .about-image {
     height: 470px;
   }
-  .image-caption {
-    inset-inline: 12px;
-    bottom: 12px;
-    padding: 10px;
-    font-size: 11px;
-  }
-  .image-caption span {
-    font-size: 11px;
-  }
   .contact {
     gap: 35px;
     grid-template-columns: 0.8fr 1.2fr;
@@ -500,14 +473,6 @@ html[dir='rtl'] .eyebrow {
   }
   .about-image {
     height: 410px;
-  }
-  .image-caption {
-    inset-inline: 17px;
-    bottom: 17px;
-    padding: 13px;
-  }
-  .image-caption span {
-    font-size: 13px;
   }
   .about-copy h2 {
     margin-top: 19px;

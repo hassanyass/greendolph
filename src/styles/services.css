@@ -11,25 +11,41 @@
 .services-heading .text-link {
   color: var(--green);
 }
-.carousel-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-block: 10px;
+.service-carousel {
+  --carousel-arrow-inset: clamp(-56px, calc(5px - var(--gutter)), -16px);
+  position: relative;
+  margin-block-start: var(--panel-gap);
 }
-.carousel-buttons {
+.service-carousel .carousel-control {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
   visibility: hidden;
-  display: flex;
-  gap: 8px;
 }
-[data-carousel-ready] .carousel-buttons {
+[data-carousel-ready] .carousel-control {
   visibility: visible;
+}
+.carousel-previous {
+  inset-inline-start: var(--carousel-arrow-inset);
+}
+.carousel-next {
+  inset-inline-end: var(--carousel-arrow-inset);
+}
+@media (max-width: 700px) {
+  .service-carousel {
+    --carousel-arrow-inset: 8px;
+  }
+  .service-carousel .carousel-control {
+    inset-block-start: clamp(70px, 27vw, 205px);
+  }
 }
 .carousel-control {
   display: grid;
   place-items: center;
   inline-size: 46px;
   block-size: 46px;
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--ink) 15%, transparent);
   background: var(--white);
   color: var(--forest);
   border: 1px solid var(--line);
@@ -40,13 +56,17 @@
   color: var(--white);
 }
 .carousel-control:disabled {
-  opacity: 0.4;
+  color: var(--muted);
+  opacity: 0.72;
   cursor: default;
 }
 .carousel-status {
-  font-size: 0.82rem;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
 }
 .service-track {
   display: flex;
@@ -124,37 +144,6 @@
   block-size: 100%;
   object-fit: cover;
 }
-.service-selector {
-  display: flex;
-  gap: 6px 24px;
-  margin-block: 0 12px;
-  padding: 3px 4px 9px;
-  list-style: none;
-  overflow: auto;
-  overscroll-behavior-inline: contain;
-  scrollbar-width: thin;
-  scrollbar-color: var(--line) transparent;
-}
-.service-selector li {
-  flex: none;
-}
-.service-selector a {
-  display: flex;
-  align-items: center;
-  min-block-size: 44px;
-  font-size: 0.9rem;
-  color: var(--muted);
-  border-block-end: 2px solid transparent;
-}
-.service-selector a:hover,
-.service-selector a[aria-current] {
-  color: var(--forest);
-  border-block-end-color: currentColor;
-}
-.service-selector a:focus-visible {
-  outline-offset: -2px;
-}
-
 .page-intro {
   max-width: var(--content-width);
   padding: var(--section-space) var(--gutter) var(--panel-gap);

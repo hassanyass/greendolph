@@ -119,7 +119,6 @@ class SiteNavigation {
 class ServiceCarousel {
   private track: HTMLElement;
   private cards: HTMLElement[];
-  private selectors: HTMLAnchorElement[];
   private previous: HTMLButtonElement | null;
   private next: HTMLButtonElement | null;
   private index = 0;
@@ -128,21 +127,10 @@ class ServiceCarousel {
   constructor(private section: HTMLElement) {
     this.track = section.querySelector<HTMLElement>('.service-track')!;
     this.cards = [...this.track.querySelectorAll<HTMLElement>('.service-card')];
-    this.selectors = [
-      ...section.querySelectorAll<HTMLAnchorElement>('[data-service-slide]'),
-    ];
     this.previous = section.querySelector<HTMLButtonElement>('[data-previous]');
     this.next = section.querySelector<HTMLButtonElement>('[data-next]');
     this.previous?.addEventListener('click', () => this.go(this.index - 1));
     this.next?.addEventListener('click', () => this.go(this.index + 1));
-    this.selectors.forEach((link, index) => {
-      link.addEventListener('click', (event) => {
-        if (event.metaKey || event.ctrlKey || event.altKey || event.shiftKey)
-          return;
-        event.preventDefault();
-        this.go(index);
-      });
-    });
     this.track.addEventListener('scroll', () => this.update(), {
       passive: true,
     });
@@ -178,16 +166,10 @@ class ServiceCarousel {
       lastIndex,
       Math.max(0, Math.round(Math.abs(this.track.scrollLeft) / step)),
     );
-    if (!this.selectors[this.index]?.hasAttribute('aria-current')) {
-      this.selectors.forEach((link, index) => {
-        this.cards[index].classList.toggle(
-          'service-card-current',
-          index === this.index,
-        );
-        if (index === this.index) link.setAttribute('aria-current', 'true');
-        else link.removeAttribute('aria-current');
+    if (!this.cards[this.index]?.classList.contains('service-card-current')) {
+      this.cards.forEach((card, index) => {
+        card.classList.toggle('service-card-current', index === this.index);
       });
-      this.showSelector();
     }
     if (this.previous) this.previous.disabled = this.index === 0;
     if (this.next) this.next.disabled = this.index === lastIndex;
@@ -198,16 +180,6 @@ class ServiceCarousel {
         ?.replace('{range}', formatter.format(this.index + 1))
         .replace('{total}', formatter.format(this.cards.length)) ?? '';
     if (status && status.textContent !== text) status.textContent = text;
-  }
-  private showSelector() {
-    const link = this.selectors[this.index];
-    const rail = link?.closest('ul');
-    if (!rail) return;
-    const edge = rail.getBoundingClientRect();
-    const item = link.getBoundingClientRect();
-    if (item.left < edge.left) rail.scrollLeft += item.left - edge.left;
-    else if (item.right > edge.right)
-      rail.scrollLeft += item.right - edge.right;
   }
   private go(index: number) {
     const card =
@@ -266,24 +238,26 @@ function setupBlueprintMotion() {
   update();
 }
 
-function revealHomeProcess() {
-  const section = document.querySelector('[data-home-process]');
+function revealLandingArtwork() {
   if (
-    !section ||
     !('IntersectionObserver' in window) ||
     matchMedia('(prefers-reduced-motion: reduce)').matches
   )
     return;
 
   const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (!entry?.isIntersecting) return;
-      section.classList.add('process-visible');
-      observer.disconnect();
+    (entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (!isIntersecting) return;
+        target.setAttribute('data-revealed', '');
+        observer.unobserve(target);
+      });
     },
     { threshold: 0.2 },
   );
-  observer.observe(section);
+  document
+    .querySelectorAll('[data-landing-reveal]')
+    .forEach((artwork) => observer.observe(artwork));
 }
 
 function followLegacyServiceLink() {
@@ -299,7 +273,7 @@ followLegacyServiceLink();
 window.addEventListener('hashchange', followLegacyServiceLink);
 new SiteNavigation();
 setupBlueprintMotion();
-revealHomeProcess();
+revealLandingArtwork();
 document
   .querySelectorAll<HTMLFormElement>('#quote-form')
   .forEach((form) => new QuoteFormController(form));
