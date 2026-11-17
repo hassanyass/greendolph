@@ -3,6 +3,8 @@ import { copy, type Locale } from '../config/content';
 import '../styles/blueprint.css';
 const { locale } = Astro.props as { locale: Locale };
 const t = copy[locale].blueprint;
+const houseOutline =
+  'M80 190 286 91 610 246 404 345 80 190V388L404 543 610 444V246';
 ---
 
 <div class="hero-blueprint" data-blueprint>
@@ -39,11 +41,7 @@ const t = copy[locale].blueprint;
         </g>
         <path class="journey-water" pathLength="100" d="M0-60V0H228V-60" />
       </g>
-      <path
-        class="journey-continuation"
-        pathLength="100"
-        d="M286 91 610 246 404 345 80 190V388L404 543 610 444V246"
-      />
+      <path class="journey-continuation" pathLength="100" d={houseOutline} />
       <g class="journey-structure">
         <!-- Projection lines connect the ceiling and floor plan. -->
         <path
@@ -134,6 +132,7 @@ const t = copy[locale].blueprint;
           <circle cx="80" cy="190" r="3" />
         </g>
       </g>
+      <path class="journey-opening-trace" pathLength="100" d={houseOutline} />
     </g>
   </svg>
   <button

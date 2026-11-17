@@ -171,9 +171,19 @@
   stroke-dasharray: 4 5;
   opacity: 0;
 }
+.journey-opening-trace {
+  opacity: 0;
+  stroke: color-mix(in srgb, var(--accent) 45%, var(--white));
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 9 91;
+}
 @media (prefers-reduced-motion: no-preference) {
   [data-blueprint-ready] .blueprint-journey path {
     vector-effect: none;
+  }
+  [data-blueprint-ready] .journey-opening-trace {
+    animation: journey-opening-trace var(--journey-duration) linear infinite;
   }
   [data-blueprint-ready] .journey-pipe {
     display: inline;
@@ -232,69 +242,90 @@
   [data-blueprint-ready]:not([data-blueprint-running]) * {
     animation-play-state: paused !important;
   }
+  /* Start and end on the assembled house so the loop has no empty frame. */
+  @keyframes journey-opening-trace {
+    0% {
+      opacity: 0;
+      stroke-dashoffset: 9;
+    }
+    2%,
+    9% {
+      opacity: 0.9;
+    }
+    13%,
+    100% {
+      opacity: 0;
+      stroke-dashoffset: -100;
+    }
+  }
   @keyframes pipe-fold {
     0%,
-    40%,
+    16%,
+    73%,
     100% {
-      transform: translate(216px, 260px) rotate(0) scaleY(1);
-    }
-    52%,
-    94% {
       transform: translate(80px, 190px) rotate(-25.5deg) scaleY(0.1);
     }
-    0%,
-    72% {
-      opacity: 1;
+    29%,
+    61% {
+      transform: translate(216px, 260px) rotate(0) scaleY(1);
     }
+    0%,
+    12%,
     87%,
     100% {
       opacity: 0;
     }
+    17%,
+    77% {
+      opacity: 1;
+    }
   }
   @keyframes pipe-sketch {
-    0% {
+    0%,
+    16%,
+    100% {
       stroke-dashoffset: 100;
     }
-    9%,
-    100% {
+    29%,
+    87% {
       stroke-dashoffset: 0;
     }
   }
   @keyframes pipe-fault {
     0%,
-    8%,
-    33%,
+    26%,
+    55%,
     100% {
       opacity: 0;
     }
-    11%,
-    29% {
+    30%,
+    50% {
       opacity: 1;
     }
   }
   @keyframes pipe-leak {
     0%,
-    10% {
+    29% {
       opacity: 0;
       transform: translateY(-6px);
     }
-    13%,
-    16% {
+    32%,
+    36% {
       opacity: 1;
     }
-    20% {
+    40% {
       opacity: 0;
       transform: translateY(25px);
     }
-    20.1% {
+    40.1% {
       opacity: 0;
       transform: translateY(-6px);
     }
-    23%,
-    26% {
+    43%,
+    48% {
       opacity: 1;
     }
-    32%,
+    54%,
     100% {
       opacity: 0;
       transform: translateY(25px);
@@ -302,27 +333,27 @@
   }
   @keyframes pipe-puddle {
     0%,
-    15%,
-    39%,
+    34%,
+    62%,
     100% {
       opacity: 0;
     }
-    20%,
-    32% {
+    39%,
+    54% {
       opacity: 0.7;
     }
   }
   @keyframes pipe-seal {
     0%,
-    24% {
+    45% {
       opacity: 0;
       transform: translateY(-40px);
     }
-    27% {
+    48% {
       opacity: 1;
       transform: translateY(-38px);
     }
-    33%,
+    55%,
     100% {
       opacity: 1;
       transform: translateY(0);
@@ -330,19 +361,19 @@
   }
   @keyframes pipe-water {
     0%,
-    33% {
+    55% {
       opacity: 0;
       stroke-dashoffset: 0;
     }
-    36% {
+    58% {
       opacity: 1;
       stroke-dashoffset: -12;
     }
-    43% {
+    64% {
       opacity: 1;
       stroke-dashoffset: -40;
     }
-    54%,
+    74%,
     100% {
       opacity: 0;
       stroke-dashoffset: -84;
@@ -350,70 +381,88 @@
   }
   @keyframes journey-extend {
     0%,
-    52%,
-    97%,
+    15%,
+    85%,
     100% {
+      stroke-dashoffset: 0;
+    }
+    28% {
+      stroke-dashoffset: -100;
+    }
+    69% {
+      stroke-dashoffset: -100;
+    }
+    70% {
       stroke-dashoffset: 100;
     }
-    66%,
-    85% {
-      stroke-dashoffset: 0;
+    0%,
+    27%,
+    78%,
+    100% {
+      opacity: 1;
+    }
+    28%,
+    70% {
+      opacity: 0;
     }
   }
   @keyframes journey-draw {
     0%,
-    58%,
-    96%,
+    13%,
+    94%,
     100% {
-      stroke-dashoffset: 100;
-    }
-    73%,
-    83% {
       stroke-dashoffset: 0;
+    }
+    27%,
+    77% {
+      stroke-dashoffset: 100;
     }
   }
   @keyframes journey-fill {
     0%,
-    66%,
-    90%,
+    13%,
+    96%,
     100% {
-      fill-opacity: 0;
-    }
-    76%,
-    81% {
       fill-opacity: 0.48;
+    }
+    24%,
+    85% {
+      fill-opacity: 0;
     }
   }
   @keyframes journey-details {
     0%,
-    68%,
-    92%,
+    14%,
+    94%,
     100% {
-      opacity: 0;
-    }
-    74%,
-    84% {
       opacity: 1;
+    }
+    24%,
+    86% {
+      opacity: 0;
     }
   }
   @keyframes journey-flow {
-    0%,
-    71% {
-      opacity: 0;
+    0% {
+      opacity: 0.9;
       stroke-dashoffset: 0;
     }
-    75% {
+    12% {
       opacity: 0.9;
-      stroke-dashoffset: -12;
+      stroke-dashoffset: -36;
     }
-    84% {
-      opacity: 0.9;
-      stroke-dashoffset: -39;
-    }
-    92%,
-    100% {
+    18%,
+    91% {
       opacity: 0;
-      stroke-dashoffset: -63;
+      stroke-dashoffset: -60;
+    }
+    96% {
+      opacity: 0.9;
+      stroke-dashoffset: -84;
+    }
+    100% {
+      opacity: 0.9;
+      stroke-dashoffset: -96;
     }
   }
 }
