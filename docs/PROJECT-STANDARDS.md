@@ -24,7 +24,7 @@ Review each phase and push the checked changes to GitHub for peer review. Begin 
 - Design for phones first, then check 320, 390, 768 and 1440 px widths in both languages. No horizontal page overflow or clipped Arabic text.
 - Arabic has a real `/ar/` page, document `lang=ar`, `dir=rtl`, natural Arabic copy and CSS logical properties. Numbers and phone inputs retain the appropriate direction. Mirror directional controls rather than logos or photographs.
 - Keep navigation keyboard-operable. Menu announces its state, closes on selection/Escape, and exposes a readable focus state. Dialogs have names, keyboard dismissal and focus restoration.
-- Provide labels, visible focus, suitable contrast and approximately 44 px interaction targets. The decorative hero draws the technical illustration once and shows the complete drawing immediately with reduced motion enabled.
+- Provide labels, visible focus, suitable contrast and approximately 44 px interaction targets. The decorative blueprint loops gently while visible and includes a pause control. It shows the complete still drawing with reduced motion enabled.
 
 ## UAE search foundation
 

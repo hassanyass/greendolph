@@ -225,6 +225,47 @@ class ServiceCarousel {
   }
 }
 
+function setupBlueprintMotion() {
+  const drawing = document.querySelector('[data-blueprint]');
+  const button = drawing?.querySelector<HTMLButtonElement>(
+    '[data-blueprint-toggle]',
+  );
+  if (!drawing || !button) return;
+
+  const preference = matchMedia('(prefers-reduced-motion: reduce)');
+  let paused = false;
+  let visible = !('IntersectionObserver' in window);
+
+  const update = () => {
+    drawing.toggleAttribute(
+      'data-blueprint-running',
+      !paused && visible && !document.hidden && !preference.matches,
+    );
+    drawing.toggleAttribute('data-blueprint-paused', paused);
+    button.hidden = preference.matches;
+    const label = paused ? button.dataset.playLabel : button.dataset.pauseLabel;
+    if (label) {
+      button.setAttribute('aria-label', label);
+      button.title = label;
+    }
+  };
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      visible = entry?.isIntersecting ?? false;
+      update();
+    }).observe(drawing);
+  }
+  button.addEventListener('click', () => {
+    paused = !paused;
+    update();
+  });
+  preference.addEventListener('change', update);
+  document.addEventListener('visibilitychange', update);
+  drawing.setAttribute('data-blueprint-ready', '');
+  update();
+}
+
 function revealHomeProcess() {
   const section = document.querySelector('[data-home-process]');
   if (
@@ -257,6 +298,7 @@ function followLegacyServiceLink() {
 followLegacyServiceLink();
 window.addEventListener('hashchange', followLegacyServiceLink);
 new SiteNavigation();
+setupBlueprintMotion();
 revealHomeProcess();
 document
   .querySelectorAll<HTMLFormElement>('#quote-form')

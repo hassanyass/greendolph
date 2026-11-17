@@ -47,7 +47,7 @@ The homepage enquiry section uses [Measuring a wall](https://www.pexels.com/phot
 
 ## Homepage blueprint and share image
 
-The homepage blueprint is an original SVG with a CSS grid and a single line animation. [Magic UI’s Animated Grid Pattern](https://magicui.design/docs/components/animated-grid-pattern) served as a visual reference.
+The homepage blueprint is an original SVG. CSS animates airflow along the ducts and a scan across the partition plan. [Magic UI’s Animated Grid Pattern](https://magicui.design/docs/components/animated-grid-pattern) served as a visual reference for the background grid.
 
 The social share image at `public/images/site-installation.webp` is a still from [Construction Worker Installing Electrical Wiring](https://www.pexels.com/video/construction-worker-installing-electrical-wiring-34572318/) by Sergei Starostin under the [Pexels licence](https://www.pexels.com/license/).
 

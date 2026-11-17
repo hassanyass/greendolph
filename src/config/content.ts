@@ -36,6 +36,13 @@ export const copy = {
     eyebrow: 'TECHNICAL SERVICES · UNITED ARAB EMIRATES',
     heroTop: 'Installation, repairs',
     heroBottom: 'and fit-outs.',
+    blueprint: {
+      ceiling: 'Ceiling grid',
+      duct: 'Supply duct',
+      plan: 'Partition plan',
+      pause: 'Pause blueprint animation',
+      play: 'Play blueprint animation',
+    },
     heroText:
       'AC, electromechanical and finishing work for homes and businesses in the UAE.',
     explore: 'Explore our services',
@@ -128,6 +135,13 @@ export const copy = {
     eyebrow: 'خدمات فنية · الإمارات العربية المتحدة',
     heroTop: 'تركيب وصيانة',
     heroBottom: 'وتشطيبات.',
+    blueprint: {
+      ceiling: 'شبكة السقف المعلّق',
+      duct: 'مجرى هواء التغذية',
+      plan: 'مخطط القواطع',
+      pause: 'إيقاف حركة المخطط مؤقتاً',
+      play: 'تشغيل حركة المخطط',
+    },
     heroText:
       'أعمال التكييف والمعدات الكهروميكانيكية والتشطيبات للمنازل والمنشآت في الإمارات.',
     explore: 'تعرّف على خدماتنا',

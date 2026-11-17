@@ -1,0 +1,194 @@
+.hero-blueprint {
+  --blueprint-grid: color-mix(in srgb, var(--accent) 15%, transparent);
+  position: relative;
+  isolation: isolate;
+  min-inline-size: 0;
+  max-inline-size: 730px;
+}
+.hero-blueprint::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(var(--blueprint-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--blueprint-grid) 1px, transparent 1px);
+  background-size: clamp(16px, 2vw, 30px) clamp(16px, 2vw, 30px);
+  mask-image: radial-gradient(ellipse at center, black 28%, transparent 73%);
+}
+.hero-blueprint > svg {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+.hero-blueprint :is(path, circle) {
+  vector-effect: non-scaling-stroke;
+}
+.blueprint-guides {
+  stroke: color-mix(in srgb, var(--accent) 52%, transparent);
+  stroke-width: 1;
+  stroke-dasharray: 3 6;
+}
+.blueprint-plane {
+  fill: color-mix(in srgb, var(--forest) 88%, var(--accent));
+}
+.blueprint-ceiling {
+  fill: color-mix(in srgb, var(--forest) 78%, transparent);
+}
+.blueprint-edge {
+  fill: color-mix(in srgb, var(--green) 34%, var(--forest));
+  stroke: color-mix(in srgb, var(--accent) 59%, transparent);
+  stroke-width: 0.85;
+}
+.blueprint-outline,
+.blueprint-detail {
+  stroke: color-mix(in srgb, var(--accent) 79%, var(--white));
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.blueprint-detail {
+  stroke-width: 0.85;
+  opacity: 0.68;
+}
+.blueprint-light {
+  fill: color-mix(in srgb, var(--accent) 22%, transparent);
+  stroke: color-mix(in srgb, var(--accent) 72%, transparent);
+  stroke-width: 0.85;
+}
+.blueprint-duct {
+  fill: color-mix(in srgb, var(--green) 65%, var(--forest));
+}
+.blueprint-air {
+  stroke: var(--white);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.blueprint-points {
+  fill: var(--accent);
+}
+.blueprint-partition {
+  stroke: color-mix(in srgb, var(--white) 64%, var(--accent));
+  stroke-width: 1.45;
+  stroke-linecap: square;
+}
+.blueprint-duct-depth {
+  fill: color-mix(in srgb, var(--forest) 65%, var(--ink));
+  stroke: color-mix(in srgb, var(--accent) 48%, transparent);
+  stroke-width: 0.9;
+}
+.blueprint-annotations {
+  color: color-mix(in srgb, var(--accent) 44%, var(--white));
+}
+.blueprint-annotations path {
+  stroke: currentColor;
+  stroke-width: 0.8;
+  opacity: 0.7;
+}
+.blueprint-annotations :is(circle, text) {
+  fill: currentColor;
+}
+.blueprint-annotations text {
+  direction: ltr;
+  font: 600 14px var(--font-body);
+}
+.blueprint-airflow,
+.blueprint-scan {
+  opacity: 0;
+}
+.blueprint-airflow {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 2.5 9.5;
+}
+.blueprint-scan path {
+  stroke: var(--accent);
+  stroke-width: 1;
+}
+.blueprint-toggle {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  display: grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  border: 1px solid color-mix(in srgb, var(--white) 34%, transparent);
+  border-radius: 50%;
+  background: var(--forest);
+  color: var(--white);
+}
+.blueprint-toggle:hover {
+  background: var(--accent);
+  color: var(--forest);
+}
+.blueprint-toggle:focus-visible {
+  outline-color: var(--white);
+  outline-offset: 3px;
+}
+.blueprint-icon-play,
+[data-blueprint-paused] .blueprint-icon-pause {
+  display: none;
+}
+[data-blueprint-paused] .blueprint-icon-play {
+  display: inline;
+}
+
+@media (max-width: 760px) {
+  .hero-blueprint {
+    inline-size: min(100%, 500px);
+    justify-self: center;
+  }
+}
+@media (max-width: 480px) {
+  .blueprint-annotations {
+    display: none;
+  }
+  .hero-blueprint {
+    padding-block-end: 31px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-blueprint-ready] .blueprint-airflow {
+    animation: blueprint-airflow 2.8s linear infinite;
+    opacity: 0.89;
+  }
+  [data-blueprint-ready] .blueprint-airflow-branch {
+    animation-duration: 3.6s;
+  }
+  [data-blueprint-ready] .blueprint-scan {
+    animation: blueprint-scan 9s ease-in-out infinite;
+  }
+  [data-blueprint-ready]:not([data-blueprint-running])
+    :is(.blueprint-airflow, .blueprint-scan) {
+    animation-play-state: paused;
+  }
+  @keyframes blueprint-airflow {
+    to {
+      stroke-dashoffset: -12;
+    }
+  }
+  @keyframes blueprint-scan {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    10%,
+    67% {
+      opacity: 0.8;
+    }
+    78%,
+    100% {
+      opacity: 0;
+      transform: translateY(282px);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .blueprint-toggle {
+    display: none;
+  }
+}
