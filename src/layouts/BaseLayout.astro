@@ -68,7 +68,7 @@ const metadata = new PageMetadata(
       {copy[locale].skip}
     </a>
     <Header locale={locale} page={page.key} />
-    <main id="main">
+    <main id="main" class:list={{ landing: page.key === 'home' }}>
       <slot />
     </main>
     <Footer locale={locale} page={page.key} />
