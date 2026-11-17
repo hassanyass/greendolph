@@ -52,6 +52,6 @@ Use a compact-on-scroll header, a separately clickable Services page link and ac
 
 ## Homepage drawing journey
 
-Use one continuous 24-second drawing timeline. Sketch a recognizable pipe with elbows, paired outlines, a broken connection and falling droplets. A visible repair coupling lowers over the gap, the leak stops and flow resumes. The repaired pipe rotates and flattens into the original architectural blueprint edge as the rest of the structure draws around it. Keep the view centered at the opening and retain the same geometry through the transition. Omit technical callout labels, caption slides and disconnected replacement drawings.
+Use one continuous 19-second drawing timeline. Sketch a recognizable pipe with elbows, paired outlines, a broken connection and falling droplets. A visible repair coupling lowers over the gap, the leak stops and flow resumes. The repaired pipe rotates and flattens into the original architectural blueprint edge as the rest of the structure draws around it. Keep the view centered at the opening and retain the same geometry through the transition. Omit technical callout labels, caption slides and disconnected replacement drawings.
 
 The shared pause control freezes all motion. Reduced motion and JavaScript-disabled visits show the complete static blueprint. Brand tokens supply all colors; the short explanatory copy remains bilingual. No animation dependency is needed.
