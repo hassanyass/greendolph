@@ -38,9 +38,6 @@ export const copy = {
     heroBottom: 'and fit-outs.',
     blueprint: {
       summary: 'From the fault to the finish. We care for your space.',
-      ceiling: 'Ceiling grid',
-      duct: 'Supply duct',
-      plan: 'Partition plan',
       pause: 'Pause blueprint animation',
       play: 'Play blueprint animation',
     },
@@ -138,9 +135,6 @@ export const copy = {
     heroBottom: 'وتشطيبات.',
     blueprint: {
       summary: 'من العطل إلى الحل. نعتني بكل تفاصيل مساحتك.',
-      ceiling: 'شبكة السقف المعلّق',
-      duct: 'مجرى هواء التغذية',
-      plan: 'مخطط القواطع',
       pause: 'إيقاف حركة المخطط مؤقتاً',
       play: 'تشغيل حركة المخطط',
     },

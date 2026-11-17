@@ -78,21 +78,6 @@
   stroke: color-mix(in srgb, var(--accent) 48%, transparent);
   stroke-width: 0.9;
 }
-.blueprint-annotations {
-  color: color-mix(in srgb, var(--accent) 44%, var(--white));
-}
-.blueprint-annotations path {
-  stroke: currentColor;
-  stroke-width: 0.8;
-  opacity: 0.7;
-}
-.blueprint-annotations :is(circle, text) {
-  fill: currentColor;
-}
-.blueprint-annotations text {
-  direction: ltr;
-  font: 600 14px var(--font-body);
-}
 .blueprint-airflow {
   opacity: 0;
 }
@@ -138,9 +123,6 @@
   }
 }
 @media (max-width: 480px) {
-  .blueprint-annotations {
-    display: none;
-  }
   .hero-blueprint {
     padding-block-end: 31px;
   }
@@ -151,11 +133,12 @@
   margin: 0 0 12px;
   font-size: clamp(0.85rem, 1.2vw, 1rem);
 }
-.blueprint-journey {
-  transform-origin: 259px 105px;
+
+.journey-pipe {
+  transform: translate(80px, 190px) rotate(-25.5deg) scaleY(0.1);
 }
-.journey-route,
-.journey-bridge,
+.journey-pipe-outline,
+.journey-pipe-detail,
 .journey-continuation {
   stroke: var(--accent);
   stroke-width: 2;
@@ -171,45 +154,57 @@
   fill: var(--white);
   opacity: 0;
 }
-.journey-repair {
+.journey-puddle {
+  stroke: var(--white);
+  stroke-width: 1.5;
+  opacity: 0;
+}
+.journey-coupling {
+  fill: var(--forest);
+  stroke: var(--white);
+  stroke-width: 2;
+}
+.journey-water {
   stroke: var(--accent);
-  stroke-width: 1;
+  stroke-width: 3;
+  stroke-dasharray: 4 5;
   opacity: 0;
 }
 @media (prefers-reduced-motion: no-preference) {
   [data-blueprint-ready] .blueprint-journey path {
     vector-effect: none;
   }
-  [data-blueprint-ready] .blueprint-journey {
-    animation: journey-camera 22s ease-in-out infinite;
+  [data-blueprint-ready] .journey-pipe {
+    animation: pipe-fold 24s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
-  [data-blueprint-ready]
-    :is(.journey-route, .journey-bridge, .journey-continuation) {
+  [data-blueprint-ready] :is(.journey-pipe-outline, .journey-pipe-detail) {
     stroke-dasharray: 100;
-    animation: journey-line 22s linear infinite;
-  }
-  [data-blueprint-ready] .journey-bridge {
-    animation-name: journey-bridge;
-  }
-  [data-blueprint-ready] .journey-continuation {
-    animation-name: journey-extend;
+    animation: pipe-sketch 24s ease-in-out infinite;
   }
   [data-blueprint-ready] .journey-fault {
-    stroke-dasharray: 100;
-    animation: journey-fault 22s linear infinite;
+    animation: pipe-fault 24s ease-in-out infinite;
   }
   [data-blueprint-ready] .journey-leak {
-    animation: journey-leak 22s ease-in-out infinite;
+    animation: pipe-leak 24s linear infinite;
   }
-  [data-blueprint-ready] .journey-repair {
-    transform-origin: 259px 105px;
-    animation: journey-repair 22s ease-out infinite;
+  [data-blueprint-ready] .journey-puddle {
+    animation: pipe-puddle 24s ease-in-out infinite;
+  }
+  [data-blueprint-ready] .journey-coupling {
+    animation: pipe-seal 24s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  [data-blueprint-ready] .journey-water {
+    animation: pipe-water 24s linear infinite;
+  }
+  [data-blueprint-ready] .journey-continuation {
+    stroke-dasharray: 100;
+    animation: journey-extend 24s ease-in-out infinite;
   }
   [data-blueprint-ready]
     .journey-structure
     path[pathLength]:not(.blueprint-airflow) {
     stroke-dasharray: 100;
-    animation: journey-draw 22s ease-in-out infinite;
+    animation: journey-draw 24s ease-in-out infinite;
   }
   [data-blueprint-ready]
     :is(
@@ -221,140 +216,170 @@
     ) {
     fill-opacity: 0;
   }
-  [data-blueprint-ready] :is(.blueprint-points, .blueprint-annotations) {
-    animation: journey-details 22s ease-in-out infinite;
+  [data-blueprint-ready] .blueprint-points {
+    animation: journey-details 24s ease-in-out infinite;
   }
   [data-blueprint-ready] .blueprint-airflow {
-    animation: journey-flow 22s linear infinite;
+    animation: journey-flow 24s linear infinite;
   }
   [data-blueprint-ready]:not([data-blueprint-running]) * {
     animation-play-state: paused !important;
   }
-  @keyframes journey-camera {
+  @keyframes pipe-fold {
     0%,
-    24%,
+    37%,
     100% {
-      transform: translate(20px, 120px) scale(1.35);
+      transform: translate(216px, 260px) rotate(0) scaleY(1);
     }
-    43%,
-    81% {
-      transform: translate(0, 0) scale(1);
+    51%,
+    91% {
+      transform: translate(80px, 190px) rotate(-25.5deg) scaleY(0.1);
     }
   }
-  @keyframes journey-line {
+  @keyframes pipe-sketch {
     0%,
     100% {
       stroke-dashoffset: 100;
     }
-    10%,
-    93% {
-      stroke-dashoffset: 0;
-    }
-  }
-  @keyframes journey-fault {
-    0%,
-    9% {
-      opacity: 1;
-      stroke-dashoffset: 100;
-    }
-    13%,
-    20% {
-      opacity: 1;
-      stroke-dashoffset: 0;
-    }
-    25%,
-    100% {
-      opacity: 0;
-      stroke-dashoffset: -100;
-    }
-  }
-  @keyframes journey-leak {
-    0%,
-    12% {
-      opacity: 0;
-      transform: translateY(-4px);
-    }
-    15%,
-    19% {
-      opacity: 1;
-    }
-    24%,
-    100% {
-      opacity: 0;
-      transform: translateY(22px);
-    }
-  }
-  @keyframes journey-repair {
-    0%,
-    19% {
-      opacity: 0;
-      transform: scale(0.5);
-    }
-    22% {
-      opacity: 0.8;
-    }
-    28%,
-    100% {
-      opacity: 0;
-      transform: scale(1.8);
-    }
-  }
-  @keyframes journey-bridge {
-    0%,
-    20%,
-    100% {
-      stroke-dashoffset: 100;
-    }
-    26%,
+    9%,
     92% {
       stroke-dashoffset: 0;
     }
   }
+  @keyframes pipe-fault {
+    0%,
+    7%,
+    30%,
+    100% {
+      opacity: 0;
+    }
+    10%,
+    26% {
+      opacity: 1;
+    }
+  }
+  @keyframes pipe-leak {
+    0%,
+    10% {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    12%,
+    16% {
+      opacity: 1;
+    }
+    18% {
+      opacity: 0;
+      transform: translateY(25px);
+    }
+    18.1% {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    20%,
+    24% {
+      opacity: 1;
+    }
+    28%,
+    100% {
+      opacity: 0;
+      transform: translateY(25px);
+    }
+  }
+  @keyframes pipe-puddle {
+    0%,
+    14%,
+    37%,
+    100% {
+      opacity: 0;
+    }
+    18%,
+    28% {
+      opacity: 0.7;
+    }
+  }
+  @keyframes pipe-seal {
+    0%,
+    23% {
+      opacity: 0;
+      transform: translateY(-55px);
+    }
+    25% {
+      opacity: 1;
+      transform: translateY(-55px);
+    }
+    30%,
+    91% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    95%,
+    100% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+  }
+  @keyframes pipe-water {
+    0%,
+    30% {
+      opacity: 0;
+      stroke-dashoffset: 0;
+    }
+    32%,
+    39% {
+      opacity: 1;
+    }
+    47%,
+    100% {
+      opacity: 0;
+      stroke-dashoffset: -60;
+    }
+  }
   @keyframes journey-extend {
     0%,
-    26%,
+    48%,
     100% {
       stroke-dashoffset: 100;
     }
-    46%,
-    88% {
+    61%,
+    83% {
       stroke-dashoffset: 0;
     }
   }
   @keyframes journey-draw {
     0%,
-    37%,
+    55%,
     100% {
       stroke-dashoffset: 100;
     }
-    60%,
-    78% {
+    72%,
+    80% {
       stroke-dashoffset: 0;
     }
   }
   @keyframes journey-details {
     0%,
-    56%,
-    88%,
+    68%,
+    89%,
     100% {
       opacity: 0;
     }
-    63%,
-    78% {
+    73%,
+    81% {
       opacity: 1;
     }
   }
   @keyframes journey-flow {
     0%,
-    58% {
+    70% {
       opacity: 0;
       stroke-dashoffset: 0;
     }
-    63%,
-    78% {
+    74%,
+    81% {
       opacity: 0.9;
     }
-    84%,
+    87%,
     100% {
       opacity: 0;
       stroke-dashoffset: -60;

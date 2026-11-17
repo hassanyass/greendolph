@@ -9,24 +9,41 @@ const t = copy[locale].blueprint;
   <p class="blueprint-summary">{t.summary}</p>
   <svg viewBox="0 0 660 570" fill="none" focusable="false" aria-hidden="true">
     <g class="blueprint-journey">
-      <!-- The repaired route stays in place as the surrounding building is drawn. -->
-      <path class="journey-route" pathLength="100" d="M80 190L244 112" />
-      <path
-        class="journey-fault"
-        pathLength="100"
-        d="M244 112l7 12 7-17 6 13"
-      />
-      <path class="journey-bridge" pathLength="100" d="M244 112L274 98" />
+      <!-- The pipe is repaired in place, then folds into the building's upper edge. -->
+      <g class="journey-pipe">
+        <path
+          class="journey-pipe-outline"
+          pathLength="100"
+          d="M10-70V-26Q10-10 26-10H144M-10-70V-6Q-10 10 6 10H144M174-10H218V-70M174 10H238V-70"
+        />
+        <path
+          class="journey-pipe-detail"
+          pathLength="100"
+          d="M-14-62H14M-14-54H14M214-62H242M214-54H242"
+        />
+        <path
+          class="journey-fault"
+          pathLength="100"
+          d="M144-10l-5 6 7 7-5 7M174-10l5 6-7 7 5 7"
+        />
+        <g class="journey-leak">
+          <path d="M159 20c-4 8-9 13-9 19a9 9 0 0 0 18 0c0-6-5-11-9-19Z" />
+          <path d="M151 62c-3 6-7 10-7 14a7 7 0 0 0 14 0c0-4-4-8-7-14Z" />
+        </g>
+        <path
+          class="journey-puddle"
+          d="M127 113q32 12 64 0M139 122q20 6 40 0"
+        />
+        <g class="journey-coupling">
+          <path d="M136-15h46v30h-46ZM143-15v30m32-30v30" />
+        </g>
+        <path class="journey-water" pathLength="100" d="M0-60V0H228V-60" />
+      </g>
       <path
         class="journey-continuation"
         pathLength="100"
-        d="M274 98L286 91 610 246 404 345 80 190V388L404 543 610 444V246"
+        d="M286 91 610 246 404 345 80 190V388L404 543 610 444V246"
       />
-      <g class="journey-leak">
-        <path d="M256 138c-4 8-8 12-8 17a8 8 0 0 0 16 0c0-5-4-9-8-17Z" />
-        <path d="M267 166c-3 6-6 9-6 13a6 6 0 0 0 12 0c0-4-3-7-6-13Z" />
-      </g>
-      <circle class="journey-repair" cx="259" cy="105" r="23" />
       <g class="journey-structure">
         <!-- Projection lines connect the ceiling and floor plan. -->
         <path
@@ -115,21 +132,6 @@ const t = copy[locale].blueprint;
           <circle cx="610" cy="246" r="3" />
           <circle cx="404" cy="345" r="3" />
           <circle cx="80" cy="190" r="3" />
-        </g>
-        <g class="blueprint-annotations">
-          <path d="M27 141H103l44 31M633 103H548L404 188M24 462H104l76-35" />
-          <circle cx="147" cy="172" r="2.5" />
-          <circle cx="404" cy="188" r="2.5" />
-          <circle cx="180" cy="427" r="2.5" />
-          <text x="27" y="131">
-            {t.ceiling}
-          </text>
-          <text x="633" y="93" text-anchor="end">
-            {t.duct}
-          </text>
-          <text x="24" y="452">
-            {t.plan}
-          </text>
         </g>
       </g>
     </g>
