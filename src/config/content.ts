@@ -37,6 +37,27 @@ export const copy = {
     heroTop: 'Installation, repairs',
     heroBottom: 'and fit-outs.',
     blueprint: {
+      summary: 'From the fault to the finish. We care for your space.',
+      scenes: [
+        {
+          title: 'Air conditioning',
+          fault: 'Cooling interrupted',
+          repair: 'Diagnose & repair',
+          done: 'Comfort restored',
+        },
+        {
+          title: 'Plumbing',
+          fault: 'A leaking connection',
+          repair: 'Repair & seal',
+          done: 'Flow restored',
+        },
+        {
+          title: 'Your space, working together',
+          fault: 'Plan the work',
+          repair: 'Install & finish',
+          done: 'Ready for everyday life',
+        },
+      ],
       ceiling: 'Ceiling grid',
       duct: 'Supply duct',
       plan: 'Partition plan',
@@ -136,6 +157,27 @@ export const copy = {
     heroTop: 'تركيب وصيانة',
     heroBottom: 'وتشطيبات.',
     blueprint: {
+      summary: 'من العطل إلى الحل. نعتني بكل تفاصيل مساحتك.',
+      scenes: [
+        {
+          title: 'التكييف',
+          fault: 'توقّف التبريد',
+          repair: 'فحص وإصلاح',
+          done: 'عودة الراحة',
+        },
+        {
+          title: 'السباكة',
+          fault: 'تسرّب في التوصيلات',
+          repair: 'إصلاح وإحكام',
+          done: 'تدفّق بلا تسرّب',
+        },
+        {
+          title: 'مساحتك تعمل بتناغم',
+          fault: 'تخطيط الأعمال',
+          repair: 'تركيب وتشطيب',
+          done: 'جاهزة ليومك',
+        },
+      ],
       ceiling: 'شبكة السقف المعلّق',
       duct: 'مجرى هواء التغذية',
       plan: 'مخطط القواطع',

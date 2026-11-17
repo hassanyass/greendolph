@@ -192,3 +192,202 @@
     display: none;
   }
 }
+.blueprint-summary {
+  margin: 0 0 16px;
+  color: var(--white);
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+}
+.blueprint-story {
+  position: relative;
+  min-block-size: 74px;
+}
+.blueprint-caption {
+  position: absolute;
+  inset: 0;
+}
+.blueprint-caption strong {
+  display: block;
+  color: var(--accent);
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+}
+.blueprint-stage {
+  position: absolute;
+  inset-inline-start: 0;
+  margin-block-start: 6px;
+  color: var(--white);
+  font-size: 0.9rem;
+}
+.blueprint-scene,
+.blueprint-fault,
+.blueprint-repair {
+  opacity: 0;
+}
+.blueprint-building,
+.blueprint-caption:last-child,
+.blueprint-restored {
+  opacity: 1;
+}
+.blueprint-room {
+  stroke: var(--accent);
+  stroke-width: 1;
+  opacity: 0.22;
+}
+.blueprint-pipe {
+  stroke: var(--accent);
+  stroke-width: 18;
+  stroke-linejoin: round;
+}
+.blueprint-break {
+  stroke: var(--white);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+.blueprint-fault-ring {
+  stroke: var(--white);
+  stroke-width: 1;
+  stroke-dasharray: 3 6;
+}
+.blueprint-drop {
+  fill: var(--white);
+}
+.blueprint-repair-ring {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 8 7;
+}
+.blueprint-tool {
+  stroke: var(--white);
+  stroke-width: 2;
+  fill: var(--forest);
+}
+.blueprint-flow {
+  stroke: var(--white);
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+}
+.blueprint-check {
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-blueprint-ready] .blueprint-scene {
+    animation: service-scene 24s linear infinite;
+    animation-delay: var(--scene-delay);
+  }
+  [data-blueprint-ready] .blueprint-fault {
+    animation: service-fault 24s linear infinite;
+    animation-delay: var(--scene-delay);
+  }
+  [data-blueprint-ready] .blueprint-repair {
+    animation: service-repair 24s linear infinite;
+    animation-delay: var(--scene-delay);
+  }
+  [data-blueprint-ready] .blueprint-restored {
+    animation: service-restored 24s linear infinite;
+    animation-delay: var(--scene-delay);
+  }
+  [data-blueprint-ready] .blueprint-building > g {
+    animation: service-assemble 24s ease-in-out infinite;
+    animation-delay: var(--scene-delay);
+  }
+  [data-blueprint-ready] .blueprint-flow {
+    animation: service-flow 24s linear infinite;
+    animation-delay: var(--scene-delay);
+  }
+  [data-blueprint-ready] .blueprint-drop {
+    animation: service-drop 24s linear infinite;
+    animation-delay: var(--scene-delay);
+  }
+  [data-blueprint-ready]:not([data-blueprint-running]) * {
+    animation-play-state: paused !important;
+  }
+  @keyframes service-scene {
+    0% {
+      opacity: 0;
+    }
+    2%,
+    30% {
+      opacity: 1;
+    }
+    33.333%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes service-fault {
+    0%,
+    8% {
+      opacity: 1;
+    }
+    10%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes service-repair {
+    0%,
+    9% {
+      opacity: 0;
+    }
+    11%,
+    18% {
+      opacity: 1;
+    }
+    20%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes service-restored {
+    0%,
+    19% {
+      opacity: 0;
+    }
+    21%,
+    31% {
+      opacity: 1;
+    }
+    33.333%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes service-assemble {
+    0%,
+    3% {
+      opacity: 0;
+      transform: translateY(-22px);
+    }
+    20%,
+    31% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    33.333%,
+    100% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+  }
+  @keyframes service-flow {
+    0%,
+    20% {
+      stroke-dashoffset: 0;
+    }
+    33.333%,
+    100% {
+      stroke-dashoffset: -36;
+    }
+  }
+  @keyframes service-drop {
+    0% {
+      transform: translateY(-8px);
+    }
+    8%,
+    100% {
+      transform: translateY(30px);
+    }
+  }
+}

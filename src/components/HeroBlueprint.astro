@@ -6,6 +6,20 @@ const t = copy[locale].blueprint;
 ---
 
 <div class="hero-blueprint" data-blueprint>
+  <p class="blueprint-summary">{t.summary}</p>
+  <div class="blueprint-story" aria-hidden="true">
+    {t.scenes.map((scene, index) => (
+      <div
+        class="blueprint-caption blueprint-scene"
+        style={`--scene-delay: ${index === 0 ? 0 : index === 1 ? -16 : -8}s`}
+      >
+        <strong>{scene.title}</strong>
+        <span class="blueprint-stage blueprint-fault">{scene.fault}</span>
+        <span class="blueprint-stage blueprint-repair">{scene.repair}</span>
+        <span class="blueprint-stage blueprint-restored">{scene.done}</span>
+      </div>
+    ))}
+  </div>
   <svg viewBox="0 0 660 570" fill="none" focusable="false" aria-hidden="true">
     <defs>
       <clipPath id="blueprint-plan">
@@ -16,101 +30,176 @@ const t = copy[locale].blueprint;
         <stop offset="1" stop-color="var(--accent)" stop-opacity=".24" />
       </linearGradient>
     </defs>
-    <!-- Projection lines connect the ceiling and floor plan. -->
-    <path
-      class="blueprint-guides"
-      d="M286 91V289M610 246V444M404 345V543M80 190V388
-         M41 119h28m-14-14v28M595 57h28m-14-14v28M595 493h28m-14-14v28"
-    />
-
-    <path
-      class="blueprint-edge"
-      d="M80 388 404 543 610 444v10L404 553 80 398Z"
-    />
-    <g transform="translate(286 289) matrix(.88 .42 -.88 .42 0 0)">
-      <path class="blueprint-plane" d="M0 0H368V234H0Z" />
-      <g clip-path="url(#blueprint-plan)">
-        <g class="blueprint-scan">
-          <rect y="-48" width="368" height="48" fill="url(#blueprint-scan)" />
-          <path d="M0 0H368" />
-        </g>
-      </g>
+    <g class="blueprint-scene blueprint-service" style="--scene-delay: 0s">
       <path
-        class="blueprint-outline"
-        d="M0 0H368V234H0ZM11 11H357V223H11ZM218 11v212M227 11v212"
+        class="blueprint-room"
+        d="M90 450V165L330 75l240 90v285M90 165l240 95 240-95M330 260v225M90 450l240 85 240-85"
+      />
+      <rect
+        class="blueprint-plane blueprint-outline"
+        x="154"
+        y="176"
+        width="340"
+        height="96"
+        rx="14"
       />
       <path
-        class="blueprint-detail"
-        d="M11 96h86m47 0h74M11 104h86m47 0h74m-121 0v47a47 47 0 0 0 47-47
+        class="blueprint-outline"
+        d="M174 240h300m-295 14h290M181 199h108"
+      />
+      <circle class="blueprint-points" cx="464" cy="201" r="4" />
+      <g class="blueprint-fault">
+        <path class="blueprint-break" d="m310 180-12 20 22 15-20 23 16 33" />
+        <circle class="blueprint-fault-ring" cx="312" cy="222" r="54" />
+      </g>
+      <g class="blueprint-repair">
+        <circle class="blueprint-repair-ring" cx="330" cy="275" r="75" />
+        <path
+          class="blueprint-tool"
+          d="m298 303 47-47c-8-20 4-32 19-30l-12 15 13 12 15-13c3 19-11 30-27 23l-45 49Z"
+        />
+      </g>
+      <g class="blueprint-restored">
+        <path
+          class="blueprint-flow"
+          pathLength="100"
+          d="M218 290c-30 40 30 50 0 100M330 290c-30 40 30 50 0 100M442 290c-30 40 30 50 0 100"
+        />
+        <path class="blueprint-check" d="m303 450 18 18 36-40" />
+      </g>
+    </g>
+    <g class="blueprint-scene blueprint-service" style="--scene-delay: -16s">
+      <path
+        class="blueprint-room"
+        d="M90 450V165L330 75l240 90v285M90 165l240 95 240-95M330 260v225M90 450l240 85 240-85"
+      />
+      <path class="blueprint-pipe" d="M170 160v139h135m50 0h135v-139" />
+      <g class="blueprint-fault">
+        <path
+          class="blueprint-break"
+          d="m304 280 8 13-11 12 9 14m45-39-10 13 12 12-8 14"
+        />
+        <path
+          class="blueprint-drop"
+          d="M330 333c-8 14-17 23-17 31a17 17 0 0 0 34 0c0-8-9-17-17-31Z"
+        />
+        <ellipse class="blueprint-detail" cx="330" cy="426" rx="63" ry="15" />
+      </g>
+      <g class="blueprint-repair">
+        <circle class="blueprint-repair-ring" cx="330" cy="275" r="75" />
+        <path
+          class="blueprint-tool"
+          d="m298 303 47-47c-8-20 4-32 19-30l-12 15 13 12 15-13c3 19-11 30-27 23l-45 49Z"
+        />
+      </g>
+      <g class="blueprint-restored">
+        <path class="blueprint-pipe" d="M305 299h50" />
+        <path class="blueprint-outline" d="M303 280v38m54-38v38" />
+        <path
+          class="blueprint-flow"
+          pathLength="100"
+          d="M170 170v129h320V170"
+        />
+        <path class="blueprint-check" d="m303 450 18 18 36-40" />
+      </g>
+    </g>
+    <g class="blueprint-scene blueprint-building" style="--scene-delay: -8s">
+      <!-- Projection lines connect the ceiling and floor plan. -->
+      <path
+        class="blueprint-guides"
+        d="M286 91V289M610 246V444M404 345V543M80 190V388
+         M41 119h28m-14-14v28M595 57h28m-14-14v28M595 493h28m-14-14v28"
+      />
+
+      <path
+        class="blueprint-edge"
+        d="M80 388 404 543 610 444v10L404 553 80 398Z"
+      />
+      <g transform="translate(286 289) matrix(.88 .42 -.88 .42 0 0)">
+        <path class="blueprint-plane" d="M0 0H368V234H0Z" />
+        <g clip-path="url(#blueprint-plan)">
+          <g class="blueprint-scan">
+            <rect y="-48" width="368" height="48" fill="url(#blueprint-scan)" />
+            <path d="M0 0H368" />
+          </g>
+        </g>
+        <path
+          class="blueprint-outline"
+          d="M0 0H368V234H0ZM11 11H357V223H11ZM218 11v212M227 11v212"
+        />
+        <path
+          class="blueprint-detail"
+          d="M11 96h86m47 0h74M11 104h86m47 0h74m-121 0v47a47 47 0 0 0 47-47
            M227 133h49m40 0h41m-130 8h49m40 0h41m-81 0v40a40 40 0 0 0 40-40
            M-17 0v234m-7-234h14m-14 234h14m10 19h368m-368-7v14m368-14v14"
-      />
-      <path
-        class="blueprint-partition"
-        d="M14 96h82m50 0h72m9 37h48m42 0h39M218 13v208"
-      />
-    </g>
+        />
+        <path
+          class="blueprint-partition"
+          d="M14 96h82m50 0h72m9 37h48m42 0h39M218 13v208"
+        />
+      </g>
 
-    <g transform="translate(286 91) matrix(.88 .42 -.88 .42 0 0)">
-      <path class="blueprint-plane blueprint-ceiling" d="M0 0H368V234H0Z" />
-      <path
-        class="blueprint-outline"
-        d="M0 0H368V234H0ZM61 0v234M122 0v234M183 0v234M245 0v234M306 0v234
+      <g transform="translate(286 91) matrix(.88 .42 -.88 .42 0 0)">
+        <path class="blueprint-plane blueprint-ceiling" d="M0 0H368V234H0Z" />
+        <path
+          class="blueprint-outline"
+          d="M0 0H368V234H0ZM61 0v234M122 0v234M183 0v234M245 0v234M306 0v234
            M0 58h368M0 117h368M0 176h368"
-      />
-      <path
-        class="blueprint-light"
-        d="M129 65h47v45h-47ZM252 124h47v45h-47ZM68 183h47v44H68Z"
-      />
-    </g>
+        />
+        <path
+          class="blueprint-light"
+          d="M129 65h47v45h-47ZM252 124h47v45h-47ZM68 183h47v44H68Z"
+        />
+      </g>
 
-    <!-- Duct, branch and grilles sit above the suspended ceiling. -->
-    <g transform="translate(286 65) matrix(.88 .42 -.88 .42 0 0)">
-      <path
-        class="blueprint-duct-depth"
-        d="M27 75H290v84h42v30h-72v-84H154v65h-27v-65H27Z"
-      />
-    </g>
-    <g transform="translate(286 56) matrix(.88 .42 -.88 .42 0 0)">
-      <path
-        class="blueprint-duct"
-        d="M27 75H290v84h42v30h-72v-84H154v65h-27v-65H27Z"
-      />
-      <path
-        class="blueprint-air"
-        d="M27 75H290v84h42v30h-72v-84H154v65h-27v-65H27Z
+      <!-- Duct, branch and grilles sit above the suspended ceiling. -->
+      <g transform="translate(286 65) matrix(.88 .42 -.88 .42 0 0)">
+        <path
+          class="blueprint-duct-depth"
+          d="M27 75H290v84h42v30h-72v-84H154v65h-27v-65H27Z"
+        />
+      </g>
+      <g transform="translate(286 56) matrix(.88 .42 -.88 .42 0 0)">
+        <path
+          class="blueprint-duct"
+          d="M27 75H290v84h42v30h-72v-84H154v65h-27v-65H27Z"
+        />
+        <path
+          class="blueprint-air"
+          d="M27 75H290v84h42v30h-72v-84H154v65h-27v-65H27Z
            M27 82h254v85h51M61 75v30m42-30v30m106-30v30m51 36h30
            M114 170h53v27h-53Zm9 5v17m9-17v17m9-17v17m9-17v17m9-17v17
            M332 151h26v46h-26Zm5 8h16m-16 8h16m-16 8h16m-16 8h16m-16 8h16"
-      />
-      <path class="blueprint-airflow" pathLength="100" d="M35 94H271v83h54" />
-      <path
-        class="blueprint-airflow blueprint-airflow-branch"
-        pathLength="100"
-        d="M35 94H141v69"
-      />
-    </g>
+        />
+        <path class="blueprint-airflow" pathLength="100" d="M35 94H271v83h54" />
+        <path
+          class="blueprint-airflow blueprint-airflow-branch"
+          pathLength="100"
+          d="M35 94H141v69"
+        />
+      </g>
 
-    <g class="blueprint-points">
-      <circle cx="286" cy="91" r="3" />
-      <circle cx="610" cy="246" r="3" />
-      <circle cx="404" cy="345" r="3" />
-      <circle cx="80" cy="190" r="3" />
-    </g>
-    <g class="blueprint-annotations">
-      <path d="M27 141H103l44 31M633 103H548L404 188M24 462H104l76-35" />
-      <circle cx="147" cy="172" r="2.5" />
-      <circle cx="404" cy="188" r="2.5" />
-      <circle cx="180" cy="427" r="2.5" />
-      <text x="27" y="131">
-        {t.ceiling}
-      </text>
-      <text x="633" y="93" text-anchor="end">
-        {t.duct}
-      </text>
-      <text x="24" y="452">
-        {t.plan}
-      </text>
+      <g class="blueprint-points">
+        <circle cx="286" cy="91" r="3" />
+        <circle cx="610" cy="246" r="3" />
+        <circle cx="404" cy="345" r="3" />
+        <circle cx="80" cy="190" r="3" />
+      </g>
+      <g class="blueprint-annotations">
+        <path d="M27 141H103l44 31M633 103H548L404 188M24 462H104l76-35" />
+        <circle cx="147" cy="172" r="2.5" />
+        <circle cx="404" cy="188" r="2.5" />
+        <circle cx="180" cy="427" r="2.5" />
+        <text x="27" y="131">
+          {t.ceiling}
+        </text>
+        <text x="633" y="93" text-anchor="end">
+          {t.duct}
+        </text>
+        <text x="24" y="452">
+          {t.plan}
+        </text>
+      </g>
     </g>
   </svg>
   <button

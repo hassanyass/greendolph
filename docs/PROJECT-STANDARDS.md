@@ -49,3 +49,9 @@ Review each phase and push the checked changes to GitHub for peer review. Begin 
 ## Approved navigation and motion direction
 
 Use a compact-on-scroll header, a separately clickable Services page link and accessible service dropdown, and an Our Works destination. Pair the hero headline and actions with the technical blueprint, stacking the drawing below the copy on narrow screens. On scroll, shrink the complete navigation group into one centered floating bar, including the logo and language control. Every primary navigation item must lead to a separate locale page, and the home About button must lead to the full About page. Services are a data-driven, swipeable carousel with previous/next controls and RTL-aware motion. Avoid diagonal arrow glyphs and report-like numbered section labels.
+
+## Homepage service story
+
+The hero uses an original SVG sequence on a shared 24-second timeline. Air conditioning and plumbing each show a fault, repair and restored operation, followed by the assembled architectural blueprint. Scene captions live in the bilingual content configuration and colors inherit brand tokens. The shared pause control freezes all scene and detail animations. Reduced motion and JavaScript-disabled visits show the complete architectural drawing. No animation library or third-party illustration is required.
+
+Validation for this iteration: 11 tests, Astro check, 39-route static build and artifact verification passed. Browser review covered English desktop and Arabic at 390 px, no horizontal overflow, and a pause-state check across every animated element.
