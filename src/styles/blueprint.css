@@ -1,5 +1,5 @@
 .hero-blueprint {
-  --journey-duration: 19s;
+  --journey-duration: 13s;
   --blueprint-grid: color-mix(in srgb, var(--accent) 15%, transparent);
   position: relative;
   isolation: isolate;
@@ -150,334 +150,290 @@
   }
 }
 
-.journey-pipe {
-  display: none;
+.house-shadow {
+  fill: color-mix(in srgb, var(--ink) 18%, transparent);
 }
-.journey-pipe-outline,
-.journey-pipe-detail,
-.journey-continuation {
-  stroke: var(--accent);
-  stroke-width: 2;
+.house-wall,
+.house-finish,
+.house-openings path,
+.house-wall-outline {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.journey-fault {
+.house-highlight {
   stroke: var(--white);
   stroke-width: 2;
-  opacity: 0;
-}
-.journey-leak {
-  fill: var(--white);
-  opacity: 0;
-}
-.journey-puddle {
-  stroke: var(--white);
-  stroke-width: 1.5;
-  opacity: 0;
-}
-.journey-coupling {
-  fill: var(--forest);
-  stroke: var(--white);
-  stroke-width: 2;
-}
-.journey-water {
-  stroke: var(--accent);
-  stroke-width: 3;
-  stroke-dasharray: 4 5;
-  opacity: 0;
-}
-.journey-opening-trace {
-  opacity: 0;
-  stroke: color-mix(in srgb, var(--accent) 45%, var(--white));
-  stroke-width: 2.5;
   stroke-linecap: round;
-  stroke-dasharray: 9 91;
+  stroke-dasharray: 10 90;
+  opacity: 0;
+}
+.house-floor-tiles {
+  stroke: var(--accent);
+  stroke-width: 0.7;
+  opacity: 0.35;
+}
+.house-wall-front {
+  fill: color-mix(in srgb, var(--forest) 82%, var(--accent));
+}
+.house-wall-side {
+  fill: color-mix(in srgb, var(--forest) 92%, var(--accent));
+}
+.house-wear {
+  opacity: 0;
+}
+.house-stain {
+  fill: color-mix(in srgb, var(--ink) 60%, var(--forest));
+}
+.house-cracks {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+.house-scuffs {
+  stroke: color-mix(in srgb, var(--white) 40%, transparent);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+.house-finish-front {
+  fill: color-mix(in srgb, var(--accent) 32%, var(--forest));
+}
+.house-finish-side {
+  fill: color-mix(in srgb, var(--accent) 20%, var(--forest));
+}
+.renewal-mask {
+  transform: translateX(670px);
+}
+.house-window {
+  fill: var(--forest);
+  stroke: color-mix(in srgb, var(--white) 75%, var(--accent));
+  stroke-width: 1.3;
+}
+.house-window-lines {
+  stroke: color-mix(in srgb, var(--accent) 65%, transparent);
+  stroke-width: 1;
+}
+.house-door {
+  fill: color-mix(in srgb, var(--forest) 85%, var(--ink));
+  stroke: var(--accent);
+  stroke-width: 1.1;
+}
+.house-handle {
+  stroke: var(--white);
+  stroke-width: 2;
+}
+.house-wall-outline {
+  stroke: color-mix(in srgb, var(--accent) 60%, var(--white));
+  stroke-width: 1.5;
+}
+.house-renewal-edge {
+  opacity: 0;
+  stroke: var(--white);
+  stroke-width: 2;
+}
+.house-facade {
+  opacity: 0;
+}
+.blueprint-upper {
+  transform: translateY(0);
 }
 @media (prefers-reduced-motion: no-preference) {
-  [data-blueprint-ready] .blueprint-journey path {
-    vector-effect: none;
+  [data-blueprint-ready] .house-facade {
+    animation: house-reveal var(--journey-duration) ease-in-out infinite;
   }
-  [data-blueprint-ready] .journey-opening-trace {
-    animation: journey-opening-trace var(--journey-duration) linear infinite;
+  [data-blueprint-ready] .house-wear {
+    animation: house-weather var(--journey-duration) ease-in-out infinite;
   }
-  [data-blueprint-ready] .journey-pipe {
-    display: inline;
-    animation: pipe-fold var(--journey-duration) cubic-bezier(0.4, 0, 0.2, 1)
+  [data-blueprint-ready] .renewal-mask {
+    animation: house-renew var(--journey-duration) cubic-bezier(0.4, 0, 0.2, 1)
       infinite;
   }
-  [data-blueprint-ready] :is(.journey-pipe-outline, .journey-pipe-detail) {
-    stroke-dasharray: 100;
-    animation: pipe-sketch var(--journey-duration) ease-in-out infinite;
-  }
-  [data-blueprint-ready] .journey-fault {
-    animation: pipe-fault var(--journey-duration) ease-in-out infinite;
-  }
-  [data-blueprint-ready] .journey-leak {
-    animation: pipe-leak var(--journey-duration) linear infinite;
-  }
-  [data-blueprint-ready] .journey-puddle {
-    animation: pipe-puddle var(--journey-duration) ease-in-out infinite;
-  }
-  [data-blueprint-ready] .journey-coupling {
-    animation: pipe-seal var(--journey-duration) cubic-bezier(0.4, 0, 0.2, 1)
+  [data-blueprint-ready] .house-renewal-edge {
+    animation: house-sweep var(--journey-duration) cubic-bezier(0.4, 0, 0.2, 1)
       infinite;
   }
-  [data-blueprint-ready] .journey-water {
-    animation: pipe-water var(--journey-duration) linear infinite;
+  [data-blueprint-ready] .blueprint-upper {
+    animation: house-open var(--journey-duration) cubic-bezier(0.4, 0, 0.2, 1)
+      infinite;
   }
-  [data-blueprint-ready] .journey-continuation {
-    stroke-dasharray: 100;
-    animation: journey-extend var(--journey-duration) ease-in-out infinite;
+  [data-blueprint-ready] .house-window {
+    animation: house-glass var(--journey-duration) ease-in-out infinite;
   }
-  [data-blueprint-ready]
-    .journey-structure
-    path[pathLength]:not(.blueprint-airflow) {
-    stroke-dasharray: 100;
-    animation:
-      journey-draw var(--journey-duration) ease-in-out infinite,
-      var(--journey-fill, none);
-  }
-  [data-blueprint-ready]
-    :is(
-      .blueprint-plane,
-      .blueprint-duct,
-      .blueprint-light,
-      .blueprint-edge,
-      .blueprint-duct-depth
-    ) {
-    --journey-fill: journey-fill var(--journey-duration) ease-in-out infinite;
-    animation: var(--journey-fill);
-  }
-  [data-blueprint-ready] .blueprint-points {
-    animation: journey-details var(--journey-duration) ease-in-out infinite;
+  [data-blueprint-ready] .blueprint-light {
+    animation: house-light var(--journey-duration) ease-in-out infinite;
   }
   [data-blueprint-ready] .blueprint-airflow {
-    animation: journey-flow var(--journey-duration) linear infinite;
+    animation: house-air var(--journey-duration) linear infinite;
+  }
+  [data-blueprint-ready] .blueprint-guides {
+    animation: house-guides var(--journey-duration) ease-in-out infinite;
+  }
+  [data-blueprint-ready] .blueprint-partition {
+    animation: house-partitions var(--journey-duration) ease-in-out infinite;
+  }
+  [data-blueprint-ready] .house-highlight {
+    animation: house-trace var(--journey-duration) ease-in-out infinite;
   }
   [data-blueprint-ready]:not([data-blueprint-running]) * {
     animation-play-state: paused !important;
   }
-  /* Start and end on the assembled house so the loop has no empty frame. */
-  @keyframes journey-opening-trace {
-    0% {
-      opacity: 0;
-      stroke-dashoffset: 9;
-    }
-    2%,
-    9% {
-      opacity: 0.9;
-    }
-    13%,
-    100% {
-      opacity: 0;
-      stroke-dashoffset: -100;
-    }
-  }
-  @keyframes pipe-fold {
+  /* A visible house opens the loop. Its ceiling lifts into the original blueprint. */
+  @keyframes house-reveal {
     0%,
-    16%,
-    73%,
-    100% {
-      transform: translate(80px, 190px) rotate(-25.5deg) scaleY(0.1);
-    }
-    29%,
-    61% {
-      transform: translate(216px, 260px) rotate(0) scaleY(1);
-    }
-    0%,
-    12%,
-    87%,
-    100% {
-      opacity: 0;
-    }
-    17%,
-    77% {
-      opacity: 1;
-    }
-  }
-  @keyframes pipe-sketch {
-    0%,
-    16%,
-    100% {
-      stroke-dashoffset: 100;
-    }
-    29%,
-    87% {
-      stroke-dashoffset: 0;
-    }
-  }
-  @keyframes pipe-fault {
-    0%,
-    26%,
-    55%,
-    100% {
-      opacity: 0;
-    }
-    30%,
-    50% {
-      opacity: 1;
-    }
-  }
-  @keyframes pipe-leak {
-    0%,
-    29% {
-      opacity: 0;
-      transform: translateY(-6px);
-    }
-    32%,
-    36% {
-      opacity: 1;
-    }
-    40% {
-      opacity: 0;
-      transform: translateY(25px);
-    }
-    40.1% {
-      opacity: 0;
-      transform: translateY(-6px);
-    }
-    43%,
-    48% {
-      opacity: 1;
-    }
-    54%,
-    100% {
-      opacity: 0;
-      transform: translateY(25px);
-    }
-  }
-  @keyframes pipe-puddle {
-    0%,
-    34%,
-    62%,
-    100% {
-      opacity: 0;
-    }
     39%,
-    54% {
-      opacity: 0.7;
-    }
-  }
-  @keyframes pipe-seal {
-    0%,
-    45% {
-      opacity: 0;
-      transform: translateY(-40px);
-    }
-    48% {
-      opacity: 1;
-      transform: translateY(-38px);
-    }
-    55%,
     100% {
       opacity: 1;
+    }
+    55%,
+    73% {
+      opacity: 0;
+    }
+    88% {
+      opacity: 1;
+    }
+  }
+  @keyframes house-weather {
+    0%,
+    19%,
+    100% {
+      opacity: 1;
+    }
+    36%,
+    88% {
+      opacity: 0;
+    }
+    96% {
+      opacity: 1;
+    }
+  }
+  @keyframes house-renew {
+    0%,
+    14% {
+      transform: translateX(0);
+    }
+    38%,
+    88% {
+      transform: translateX(670px);
+    }
+    96%,
+    100% {
+      transform: translateX(0);
+    }
+  }
+  @keyframes house-sweep {
+    0%,
+    14% {
+      opacity: 0;
+      transform: translateX(0);
+    }
+    16% {
+      opacity: 0.85;
+    }
+    35% {
+      opacity: 0.85;
+    }
+    38% {
+      opacity: 0;
+      transform: translateX(670px);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(670px);
+    }
+  }
+  @keyframes house-open {
+    0%,
+    38%,
+    100% {
+      transform: translateY(0);
+    }
+    57%,
+    74% {
+      transform: translateY(-24px);
+    }
+    90% {
       transform: translateY(0);
     }
   }
-  @keyframes pipe-water {
+  @keyframes house-glass {
     0%,
-    55% {
+    18%,
+    100% {
+      fill: var(--forest);
+    }
+    37%,
+    87% {
+      fill: color-mix(in srgb, var(--accent) 15%, var(--forest));
+    }
+  }
+  @keyframes house-light {
+    0%,
+    16%,
+    100% {
+      fill-opacity: 0.2;
+      stroke-opacity: 0.4;
+    }
+    36%,
+    87% {
+      fill-opacity: 1;
+      stroke-opacity: 1;
+    }
+  }
+  @keyframes house-air {
+    0%,
+    20% {
       opacity: 0;
       stroke-dashoffset: 0;
     }
-    58% {
-      opacity: 1;
-      stroke-dashoffset: -12;
+    35% {
+      opacity: 0.9;
     }
-    64% {
-      opacity: 1;
-      stroke-dashoffset: -40;
+    86% {
+      opacity: 0.9;
+      stroke-dashoffset: -180;
     }
-    74%,
-    100% {
-      opacity: 0;
-      stroke-dashoffset: -84;
-    }
-  }
-  @keyframes journey-extend {
-    0%,
-    15%,
-    85%,
-    100% {
-      stroke-dashoffset: 0;
-    }
-    28% {
-      stroke-dashoffset: -100;
-    }
-    69% {
-      stroke-dashoffset: -100;
-    }
-    70% {
-      stroke-dashoffset: 100;
-    }
-    0%,
-    27%,
-    78%,
-    100% {
-      opacity: 1;
-    }
-    28%,
-    70% {
-      opacity: 0;
-    }
-  }
-  @keyframes journey-draw {
-    0%,
-    13%,
-    94%,
-    100% {
-      stroke-dashoffset: 0;
-    }
-    27%,
-    77% {
-      stroke-dashoffset: 100;
-    }
-  }
-  @keyframes journey-fill {
-    0%,
-    13%,
     96%,
     100% {
-      fill-opacity: 0.48;
-    }
-    24%,
-    85% {
-      fill-opacity: 0;
+      opacity: 0;
+      stroke-dashoffset: -210;
     }
   }
-  @keyframes journey-details {
+  @keyframes house-guides {
     0%,
-    14%,
-    94%,
+    37%,
     100% {
+      opacity: 0.18;
+    }
+    57%,
+    74% {
       opacity: 1;
     }
-    24%,
-    86% {
-      opacity: 0;
+    90% {
+      opacity: 0.18;
     }
   }
-  @keyframes journey-flow {
+  @keyframes house-partitions {
+    0%,
+    18%,
+    100% {
+      stroke-opacity: 0.45;
+    }
+    37%,
+    88% {
+      stroke-opacity: 1;
+    }
+  }
+  @keyframes house-trace {
     0% {
-      opacity: 0.9;
+      opacity: 0.85;
       stroke-dashoffset: 0;
     }
-    12% {
-      opacity: 0.9;
-      stroke-dashoffset: -36;
+    11% {
+      opacity: 0.85;
+      stroke-dashoffset: -100;
     }
-    18%,
-    91% {
-      opacity: 0;
-      stroke-dashoffset: -60;
-    }
-    96% {
-      opacity: 0.9;
-      stroke-dashoffset: -84;
-    }
+    15%,
     100% {
-      opacity: 0.9;
-      stroke-dashoffset: -96;
+      opacity: 0;
+      stroke-dashoffset: -100;
     }
   }
 }

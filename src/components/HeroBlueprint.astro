@@ -3,46 +3,23 @@ import { copy, type Locale } from '../config/content';
 import '../styles/blueprint.css';
 const { locale } = Astro.props as { locale: Locale };
 const t = copy[locale].blueprint;
-const houseOutline =
-  'M80 190 286 91 610 246 404 345 80 190V388L404 543 610 444V246';
 ---
 
 <div class="hero-blueprint" data-blueprint>
   <p class="blueprint-summary">{t.summary}</p>
   <svg viewBox="0 0 660 570" fill="none" focusable="false" aria-hidden="true">
+    <defs>
+      <clipPath id="house-facades">
+        <path d="M80 190 404 345V543L80 388ZM404 345 610 246V444L404 543Z" />
+      </clipPath>
+      <clipPath id="house-renewal">
+        <path class="renewal-mask" d="M-650 80H-10V570H-650Z" />
+      </clipPath>
+    </defs>
     <g class="blueprint-journey">
-      <!-- The pipe is repaired in place, then folds into the building's upper edge. -->
-      <g class="journey-pipe">
-        <path
-          class="journey-pipe-outline"
-          pathLength="100"
-          d="M10-70V-26Q10-10 26-10H144M-10-70V-6Q-10 10 6 10H144M174-10H218V-70M174 10H238V-70"
-        />
-        <path
-          class="journey-pipe-detail"
-          pathLength="100"
-          d="M-14-62H14M-14-54H14M214-62H242M214-54H242"
-        />
-        <path
-          class="journey-fault"
-          pathLength="100"
-          d="M144-10l-5 6 7 7-5 7M174-10l5 6-7 7 5 7"
-        />
-        <g class="journey-leak">
-          <path d="M159 20c-4 8-9 13-9 19a9 9 0 0 0 18 0c0-6-5-11-9-19Z" />
-          <path d="M151 62c-3 6-7 10-7 14a7 7 0 0 0 14 0c0-4-4-8-7-14Z" />
-        </g>
-        <path
-          class="journey-puddle"
-          d="M127 113q32 12 64 0M139 122q20 6 40 0"
-        />
-        <g class="journey-coupling">
-          <path d="M136-15h46v30h-46ZM143-15v30m32-30v30" />
-        </g>
-        <path class="journey-water" pathLength="100" d="M0-60V0H228V-60" />
-      </g>
-      <path class="journey-continuation" pathLength="100" d={houseOutline} />
       <g class="journey-structure">
+        <ellipse class="house-shadow" cx="346" cy="498" rx="227" ry="28" />
+        <!-- The same floor, walls and ceiling remain connected through the loop. -->
         <!-- Projection lines connect the ceiling and floor plan. -->
         <path
           pathLength="100"
@@ -58,6 +35,10 @@ const houseOutline =
         />
         <g transform="translate(286 289) matrix(.88 .42 -.88 .42 0 0)">
           <path class="blueprint-plane" d="M0 0H368V234H0Z" />
+          <path
+            class="house-floor-tiles"
+            d="M11 47h346M11 143h346M11 191h346M62 11v212M114 11v85m0 57v70M166 11v212M279 11v122m0 50v40M331 11v212"
+          />
           <path
             pathLength="100"
             class="blueprint-outline"
@@ -77,54 +58,117 @@ const houseOutline =
           />
         </g>
 
-        <g transform="translate(286 91) matrix(.88 .42 -.88 .42 0 0)">
-          <path class="blueprint-plane blueprint-ceiling" d="M0 0H368V234H0Z" />
+        <g class="house-facade">
           <path
+            class="house-wall house-wall-front"
+            d="M80 190 404 345V543L80 388Z"
+          />
+          <path
+            class="house-wall house-wall-side"
+            d="M404 345 610 246V444L404 543Z"
+          />
+          <g class="house-wear">
+            <path
+              class="house-stain"
+              d="m93 243 38 18 6 94-29-13-5-32Zm168 74 34 17 8 77-35-15Zm181 86 39-19-5 80-27 13Zm107-103 29-14-7 92-29 14Z"
+            />
+            <path
+              class="house-cracks"
+              d="m176 243-7 27 15 22-18 21 9 31m9-52 25 4m-34 48-11 18m354-72-12 29 9 17-21 29 7 22m14-51 16 1"
+            />
+            <path
+              class="house-scuffs"
+              d="m94 366 46 22m112 53 39 19m175 27 32-16m39-20 45-22"
+            />
+          </g>
+          <g clip-path="url(#house-renewal)">
+            <path
+              class="house-finish house-finish-front"
+              d="M80 190 404 345V543L80 388Z"
+            />
+            <path
+              class="house-finish house-finish-side"
+              d="M404 345 610 246V444L404 543Z"
+            />
+          </g>
+          <g class="house-openings">
+            <path
+              class="house-window"
+              d="m113 257 93 44v67l-93-45Zm116 55 64 31v67l-64-31Zm227 55 100-48v67l-100 48Z"
+            />
+            <path
+              class="house-window-lines"
+              d="m159 279v67m-46-56 93 44m55-7v67m-32-49 64 31m213-33v67m-50-9 100-48"
+            />
+            <path class="house-door" d="m321 405 56 27v98l-56-27Z" />
+            <path class="house-handle" d="m365 478-9-4" />
+          </g>
+          <g clip-path="url(#house-facades)">
+            <path class="house-renewal-edge" d="M-7 130V565" />
+          </g>
+          <path
+            class="house-wall-outline"
             pathLength="100"
-            class="blueprint-outline"
-            d="M0 0H368V234H0ZM61 0v234M122 0v234M183 0v234M245 0v234M306 0v234
+            d="M80 190 404 345 610 246M80 190V388L404 543 610 444V246M404 345V543"
+          />
+          <path
+            class="house-highlight"
+            pathLength="100"
+            d="M80 190 404 345 610 246V444L404 543 80 388V190"
+          />
+        </g>
+        <g class="blueprint-upper">
+          <g transform="translate(286 91) matrix(.88 .42 -.88 .42 0 0)">
+            <path
+              class="blueprint-plane blueprint-ceiling"
+              d="M0 0H368V234H0Z"
+            />
+            <path
+              pathLength="100"
+              class="blueprint-outline"
+              d="M0 0H368V234H0ZM61 0v234M122 0v234M183 0v234M245 0v234M306 0v234
            M0 58h368M0 117h368M0 176h368"
-          />
-          <path
-            pathLength="100"
-            class="blueprint-light"
-            d="M129 65h47v45h-47ZM252 124h47v45h-47ZM68 183h47v44H68Z"
-          />
-        </g>
+            />
+            <path
+              pathLength="100"
+              class="blueprint-light"
+              d="M129 65h47v45h-47ZM252 124h47v45h-47ZM68 183h47v44H68Z"
+            />
+          </g>
 
-        <!-- Duct, branch and grilles sit above the suspended ceiling. -->
-        <g transform="translate(286 65) matrix(.88 .42 -.88 .42 0 0)">
-          <path
-            pathLength="100"
-            class="blueprint-duct-depth"
-            d="M27 75H290v84h42v30h-72v-84H154v65h-27v-65H27Z"
-          />
-        </g>
-        <g transform="translate(286 56) matrix(.88 .42 -.88 .42 0 0)">
-          <path
-            class="blueprint-duct"
-            d="M27 75H290v84h42v30h-72v-84H154v65h-27v-65H27Z"
-          />
-          <path
-            pathLength="100"
-            class="blueprint-air"
-            d="M27 75H290v84h42v30h-72v-84H154v65h-27v-65H27Z
+          <!-- Duct, branch and grilles sit above the suspended ceiling. -->
+          <g transform="translate(286 65) matrix(.88 .42 -.88 .42 0 0)">
+            <path
+              pathLength="100"
+              class="blueprint-duct-depth"
+              d="M27 75H290v84h42v30h-72v-84H154v65h-27v-65H27Z"
+            />
+          </g>
+          <g transform="translate(286 56) matrix(.88 .42 -.88 .42 0 0)">
+            <path
+              class="blueprint-duct"
+              d="M27 75H290v84h42v30h-72v-84H154v65h-27v-65H27Z"
+            />
+            <path
+              pathLength="100"
+              class="blueprint-air"
+              d="M27 75H290v84h42v30h-72v-84H154v65h-27v-65H27Z
            M27 82h254v85h51M61 75v30m42-30v30m106-30v30m51 36h30
            M114 170h53v27h-53Zm9 5v17m9-17v17m9-17v17m9-17v17m9-17v17
            M332 151h26v46h-26Zm5 8h16m-16 8h16m-16 8h16m-16 8h16m-16 8h16"
-          />
-          <path
-            class="blueprint-airflow"
-            pathLength="100"
-            d="M35 94H271v83h54"
-          />
-          <path
-            class="blueprint-airflow blueprint-airflow-branch"
-            pathLength="100"
-            d="M35 94H141v69"
-          />
+            />
+            <path
+              class="blueprint-airflow"
+              pathLength="100"
+              d="M35 94H271v83h54"
+            />
+            <path
+              class="blueprint-airflow blueprint-airflow-branch"
+              pathLength="100"
+              d="M35 94H141v69"
+            />
+          </g>
         </g>
-
         <g class="blueprint-points">
           <circle cx="286" cy="91" r="3" />
           <circle cx="610" cy="246" r="3" />
@@ -132,7 +176,6 @@ const houseOutline =
           <circle cx="80" cy="190" r="3" />
         </g>
       </g>
-      <path class="journey-opening-trace" pathLength="100" d={houseOutline} />
     </g>
   </svg>
   <button
