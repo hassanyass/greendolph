@@ -25,21 +25,11 @@
 .hero-blueprint :is(path, circle) {
   vector-effect: non-scaling-stroke;
 }
-.blueprint-guides {
-  stroke: color-mix(in srgb, var(--accent) 52%, transparent);
-  stroke-width: 1;
-  stroke-dasharray: 3 6;
-}
 .blueprint-plane {
   fill: color-mix(in srgb, var(--forest) 88%, var(--accent));
 }
 .blueprint-ceiling {
   fill: color-mix(in srgb, var(--forest) 78%, transparent);
-}
-.blueprint-edge {
-  fill: color-mix(in srgb, var(--green) 34%, var(--forest));
-  stroke: color-mix(in srgb, var(--accent) 59%, transparent);
-  stroke-width: 0.85;
 }
 .blueprint-outline,
 .blueprint-detail {
@@ -66,18 +56,10 @@
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.blueprint-points {
-  fill: var(--accent);
-}
 .blueprint-partition {
   stroke: color-mix(in srgb, var(--white) 64%, var(--accent));
   stroke-width: 1.45;
   stroke-linecap: square;
-}
-.blueprint-duct-depth {
-  fill: color-mix(in srgb, var(--forest) 65%, var(--ink));
-  stroke: color-mix(in srgb, var(--accent) 48%, transparent);
-  stroke-width: 0.9;
 }
 .blueprint-airflow {
   opacity: 0;
@@ -151,22 +133,30 @@
   }
 }
 
+.blueprint-camera {
+  transform-origin: 330px 285px;
+}
+.blueprint-journey {
+  transform-origin: 0 0;
+  transform: var(--plan-view);
+}
 .house-shadow {
   fill: color-mix(in srgb, var(--ink) 18%, transparent);
-}
-.house-wall,
-.house-finish,
-.house-openings path,
-.house-wall-outline {
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.house-highlight {
-  stroke: var(--white);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-dasharray: 10 90;
   opacity: 0;
+}
+.house-facade {
+  opacity: 0;
+}
+.blueprint-upper {
+  opacity: 0;
+}
+.house-front-projection {
+  transform: translate(var(--wall-x), var(--wall-y))
+    matrix(0.88, 0.42, 0, 1, 0, 0);
+}
+.house-side-projection {
+  transform: translate(var(--wall-x), var(--wall-y))
+    matrix(0.88, -0.42, 0, 1, 0, 0);
 }
 .house-floor-tiles {
   stroke: var(--accent);
@@ -179,20 +169,23 @@
 .house-wall-side {
   fill: color-mix(in srgb, var(--forest) 92%, var(--accent));
 }
-.house-wear {
-  opacity: 1;
-}
 .house-stain {
   fill: color-mix(in srgb, var(--ink) 60%, var(--forest));
 }
 .house-cracks {
   stroke: var(--accent);
-  stroke-width: 2;
+  stroke-width: 1.5;
 }
 .house-scuffs {
   stroke: color-mix(in srgb, var(--white) 40%, transparent);
-  stroke-width: 4;
+  stroke-width: 3;
   stroke-linecap: round;
+}
+.house-clean-front {
+  fill: color-mix(in srgb, var(--white) 24%, var(--forest));
+}
+.house-clean-side {
+  fill: color-mix(in srgb, var(--white) 13%, var(--forest));
 }
 .house-finish-front {
   fill: color-mix(in srgb, var(--white) 82%, var(--forest));
@@ -201,132 +194,130 @@
   fill: color-mix(in srgb, var(--white) 60%, var(--forest));
 }
 .cleaning-mask {
-  transform: translateX(670px);
-}
-.house-window {
-  fill: var(--forest);
-  stroke: color-mix(in srgb, var(--white) 75%, var(--accent));
-  stroke-width: 1.3;
-}
-.house-window-lines {
-  stroke: color-mix(in srgb, var(--accent) 65%, transparent);
-  stroke-width: 1;
-}
-.house-door {
-  fill: color-mix(in srgb, var(--forest) 85%, var(--ink));
-  stroke: var(--accent);
-  stroke-width: 1.1;
-}
-.house-handle {
-  stroke: var(--white);
-  stroke-width: 2;
-}
-.house-wall-outline {
-  stroke: color-mix(in srgb, var(--accent) 60%, var(--white));
-  stroke-width: 1.5;
-}
-.house-renewal-edge {
-  opacity: 0;
-  stroke: var(--white);
-  stroke-width: 2;
-}
-.house-facade {
-  opacity: 0;
-}
-.blueprint-upper {
-  transform: translateY(0);
-}
-
-.house-clean-front {
-  fill: color-mix(in srgb, var(--white) 24%, var(--forest));
-}
-.house-clean-side {
-  fill: color-mix(in srgb, var(--white) 13%, var(--forest));
-}
-.house-window-grime {
-  stroke: color-mix(in srgb, var(--white) 28%, var(--forest));
-  stroke-width: 4;
-  stroke-linecap: round;
-}
-.house-cleaning-dust {
-  fill: var(--white);
-  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: left center;
 }
 .paint-strip {
   transform-box: fill-box;
   transform-origin: center top;
 }
-.paint-strip-second,
-.paint-side-second {
+.paint-strip-reverse {
   transform-origin: center bottom;
+}
+.house-window {
+  fill: var(--forest);
+  stroke: color-mix(in srgb, var(--white) 75%, var(--accent));
+  stroke-width: 1.1;
+}
+.house-window-lines {
+  stroke: color-mix(in srgb, var(--accent) 65%, transparent);
+  stroke-width: 0.8;
+}
+.house-door {
+  fill: color-mix(in srgb, var(--forest) 85%, var(--ink));
+  stroke: var(--accent);
+  stroke-width: 1;
+}
+.house-handle {
+  stroke: var(--white);
+  stroke-width: 1.5;
+}
+.house-window-grime {
+  stroke: color-mix(in srgb, var(--white) 28%, var(--forest));
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.house-wall-outline {
+  stroke: color-mix(in srgb, var(--accent) 60%, var(--white));
+  stroke-width: 1.2;
+}
+.plan-window {
+  stroke: var(--white);
+  stroke-width: 1.2;
 }
 .house-paint-roller {
   opacity: 0;
-  transform: translate(62px, 0);
+}
+.roller-tool {
+  transform: scale(0.5);
 }
 .roller-head {
   fill: var(--white);
   stroke: var(--forest);
-  stroke-width: 1.1;
+  stroke-width: 1;
 }
 .roller-arm {
   stroke: var(--white);
-  stroke-width: 2.2;
+  stroke-width: 1.5;
   stroke-linejoin: round;
 }
 .roller-grip {
   stroke: var(--accent);
-  stroke-width: 6;
+  stroke-width: 3.5;
   stroke-linecap: round;
 }
 .roller-highlight {
   stroke: color-mix(in srgb, var(--forest) 30%, var(--white));
-  stroke-width: 2;
+  stroke-width: 1;
   stroke-linecap: round;
 }
-.blueprint-shell {
-  stroke: var(--accent);
-  stroke-width: 1;
-  opacity: 0.38;
+.roof-fault {
+  opacity: 0;
 }
+.roof-gap {
+  fill: var(--forest);
+}
+.roof-broken-edge {
+  stroke: var(--white);
+  stroke-width: 1.4;
+}
+.roof-collar-body {
+  fill: color-mix(in srgb, var(--green) 70%, var(--forest));
+  stroke: var(--white);
+  stroke-width: 1.2;
+}
+.roof-bolt {
+  fill: var(--accent);
+}
+.roof-wrench {
+  fill: var(--white);
+  stroke: var(--forest);
+  stroke-width: 1;
+  transform-origin: 174px 77px;
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion: no-preference) {
+  [data-blueprint-ready] .blueprint-camera {
+    animation: house-camera var(--journey-duration) ease-in-out infinite;
+  }
+
+  [data-blueprint-ready] .blueprint-journey {
+    animation: house-project var(--journey-duration)
+      cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
   [data-blueprint-ready] .house-facade {
-    animation: house-reveal var(--journey-duration) cubic-bezier(0.4, 0, 0.2, 1)
-      infinite;
+    animation: house-surface var(--journey-duration) ease-in-out infinite;
+  }
+  [data-blueprint-ready] .house-shadow {
+    animation: house-shadow var(--journey-duration) ease-in-out infinite;
+  }
+  [data-blueprint-ready] .house-wall-height {
+    animation: house-wall-fold var(--journey-duration)
+      cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+  [data-blueprint-ready] .blueprint-upper {
+    animation: house-roof-fold var(--journey-duration)
+      cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
   [data-blueprint-ready] .cleaning-mask {
     animation: house-clean var(--journey-duration) linear infinite;
   }
-  [data-blueprint-ready] .house-renewal-edge {
-    animation: house-wash-edge var(--journey-duration) linear infinite;
-  }
-  [data-blueprint-ready] .house-cleaning-dust {
-    animation: house-dust var(--journey-duration) ease-out infinite;
-  }
-  [data-blueprint-ready] .paint-strip-first {
-    animation: paint-first var(--journey-duration) linear infinite;
-  }
-  [data-blueprint-ready] .paint-strip-second {
-    animation: paint-second var(--journey-duration) linear infinite;
-  }
-  [data-blueprint-ready] .paint-strip-third {
-    animation: paint-third var(--journey-duration) linear infinite;
-  }
-  [data-blueprint-ready] .paint-side-first {
-    animation: paint-side-first var(--journey-duration) linear infinite;
-  }
-  [data-blueprint-ready] .paint-side-second {
-    animation: paint-side-second var(--journey-duration) linear infinite;
+  [data-blueprint-ready] .paint-strip {
+    animation: var(--paint-pass) var(--journey-duration) linear infinite;
   }
   [data-blueprint-ready] .house-paint-roller {
     animation: house-roll var(--journey-duration) linear infinite;
-  }
-  [data-blueprint-ready] .blueprint-upper {
-    animation: house-open var(--journey-duration) cubic-bezier(0.4, 0, 0.2, 1)
-      infinite;
-  }
-  [data-blueprint-ready] .house-window {
-    animation: house-glass var(--journey-duration) ease-in-out infinite;
   }
   [data-blueprint-ready] .blueprint-light {
     animation: house-light var(--journey-duration) ease-in-out infinite;
@@ -334,206 +325,286 @@
   [data-blueprint-ready] .blueprint-airflow {
     animation: house-air var(--journey-duration) linear infinite;
   }
-  [data-blueprint-ready] .blueprint-guides {
-    animation: house-guides var(--journey-duration) ease-in-out infinite;
+  [data-blueprint-ready] .roof-fault {
+    animation: roof-fault var(--journey-duration) ease-in-out infinite;
   }
-  [data-blueprint-ready] .house-highlight {
-    animation: house-trace var(--journey-duration) ease-in-out infinite;
+  [data-blueprint-ready] .roof-repair-collar {
+    animation: roof-seal var(--journey-duration) cubic-bezier(0.4, 0, 0.2, 1)
+      infinite;
+  }
+  [data-blueprint-ready] .roof-wrench {
+    animation: roof-tighten var(--journey-duration) ease-in-out infinite;
   }
   [data-blueprint-ready]:not([data-blueprint-running]) * {
     animation-play-state: paused !important;
   }
-  @keyframes house-reveal {
+
+  /* The walls collapse to their own footprint before the shared view turns overhead. */
+  @keyframes house-camera {
     0%,
-    49%,
+    47%,
+    88%,
+    100% {
+      transform: scale(1);
+    }
+    55%,
+    82% {
+      transform: scale(0.9);
+    }
+  }
+  @keyframes house-project {
+    0%,
+    48%,
+    88%,
+    100% {
+      transform: matrix(1, 0, 0, 1, 0, 0);
+    }
+    64%,
+    73% {
+      transform: var(--plan-view);
+    }
+  }
+  @keyframes house-wall-fold {
+    0%,
+    47%,
+    88%,
+    100% {
+      transform: translateY(0) scaleY(1);
+    }
+    60%,
+    74% {
+      transform: translateY(var(--house-height)) scaleY(0.001);
+    }
+  }
+  @keyframes house-surface {
+    0%,
+    57%,
+    78%,
     100% {
       opacity: 1;
     }
-    61%,
+    60%,
     74% {
       opacity: 0;
     }
-    87% {
+  }
+  @keyframes house-roof-fold {
+    0%,
+    47%,
+    88%,
+    100% {
+      transform: translateY(0);
       opacity: 1;
+    }
+    55% {
+      opacity: 0.35;
+    }
+    60%,
+    74% {
+      transform: translateY(var(--house-height));
+      opacity: 0;
+    }
+  }
+  @keyframes house-shadow {
+    0%,
+    47%,
+    88%,
+    100% {
+      opacity: 1;
+    }
+    60%,
+    74% {
+      opacity: 0;
     }
   }
   @keyframes house-clean {
     0%,
-    5% {
-      transform: translateX(0);
-    }
-    21%,
-    87% {
-      transform: translateX(670px);
-    }
-    99%,
+    4%,
     100% {
-      transform: translateX(0);
+      transform: scaleX(0);
+    }
+    20%,
+    91% {
+      transform: scaleX(1);
     }
   }
-  @keyframes house-wash-edge {
+  @keyframes paint-1 {
     0%,
-    5% {
-      opacity: 0;
-      transform: translateX(0);
-    }
-    7%,
-    19% {
-      opacity: 0.7;
-    }
-    21% {
-      opacity: 0;
-      transform: translateX(670px);
-    }
-    100% {
-      opacity: 0;
-      transform: translateX(670px);
-    }
-  }
-  @keyframes house-dust {
-    0%,
-    6% {
-      opacity: 0;
-      transform: translate(0, 0);
-    }
-    11% {
-      opacity: 0.75;
-    }
-    22%,
-    100% {
-      opacity: 0;
-      transform: translate(10px, -26px);
-    }
-  }
-  @keyframes paint-first {
-    0%,
-    21%,
+    20%,
     100% {
       transform: scaleY(0);
     }
-    28%,
-    88% {
-      transform: scaleY(1);
-    }
-    97% {
-      transform: scaleY(0);
-    }
-  }
-  @keyframes paint-second {
-    0%,
-    30%,
-    100% {
-      transform: scaleY(0);
-    }
-    37%,
-    88% {
-      transform: scaleY(1);
-    }
-    97% {
-      transform: scaleY(0);
-    }
-  }
-  @keyframes paint-third {
-    0%,
-    39%,
-    100% {
-      transform: scaleY(0);
-    }
-    44%,
-    88% {
-      transform: scaleY(1);
-    }
-    97% {
-      transform: scaleY(0);
-    }
-  }
-  @keyframes paint-side-first {
-    0%,
     23%,
-    100% {
-      transform: scaleY(0);
-    }
-    33%,
-    88% {
+    91% {
       transform: scaleY(1);
-    }
-    97% {
-      transform: scaleY(0);
     }
   }
-  @keyframes paint-side-second {
+  @keyframes paint-2 {
     0%,
-    35%,
+    24%,
     100% {
       transform: scaleY(0);
     }
-    45%,
-    88% {
+    27%,
+    91% {
       transform: scaleY(1);
     }
-    97% {
+  }
+  @keyframes paint-3 {
+    0%,
+    28%,
+    100% {
       transform: scaleY(0);
+    }
+    31%,
+    91% {
+      transform: scaleY(1);
+    }
+  }
+  @keyframes paint-4 {
+    0%,
+    32%,
+    100% {
+      transform: scaleY(0);
+    }
+    35%,
+    91% {
+      transform: scaleY(1);
+    }
+  }
+  @keyframes paint-5 {
+    0%,
+    36%,
+    100% {
+      transform: scaleY(0);
+    }
+    39%,
+    91% {
+      transform: scaleY(1);
+    }
+  }
+  @keyframes paint-6 {
+    0%,
+    40%,
+    100% {
+      transform: scaleY(0);
+    }
+    43%,
+    91% {
+      transform: scaleY(1);
     }
   }
   @keyframes house-roll {
     0%,
-    20% {
+    19% {
       opacity: 0;
-      transform: translate(62px, 0);
+      transform: translate(32px, 0);
     }
-    21% {
+    20% {
       opacity: 1;
-      transform: translate(62px, 0);
+      transform: translate(32px, 0px);
+    }
+    23% {
+      opacity: 1;
+      transform: translate(32px, 198px);
+    }
+    24% {
+      opacity: 1;
+      transform: translate(93px, 198px);
+    }
+    27% {
+      opacity: 1;
+      transform: translate(93px, 0px);
     }
     28% {
       opacity: 1;
-      transform: translate(62px, 198px);
+      transform: translate(154px, 0px);
     }
-    30% {
+    31% {
       opacity: 1;
-      transform: translate(185px, 198px);
+      transform: translate(154px, 198px);
     }
-    37% {
+    32% {
       opacity: 1;
-      transform: translate(185px, 0);
+      transform: translate(215px, 198px);
+    }
+    35% {
+      opacity: 1;
+      transform: translate(215px, 0px);
+    }
+    36% {
+      opacity: 1;
+      transform: translate(276px, 0px);
     }
     39% {
       opacity: 1;
-      transform: translate(308px, 0);
+      transform: translate(276px, 198px);
     }
-    44% {
+    40% {
       opacity: 1;
-      transform: translate(308px, 198px);
+      transform: translate(337px, 198px);
     }
-    47%,
+    43% {
+      opacity: 1;
+      transform: translate(337px, 0px);
+    }
+    45%,
     100% {
       opacity: 0;
-      transform: translate(308px, 210px);
+      transform: translate(337px, -8px);
     }
   }
-  @keyframes house-open {
+  @keyframes roof-fault {
     0%,
-    49%,
+    19%,
     100% {
-      transform: translateY(0);
+      opacity: 1;
     }
-    61%,
-    74% {
-      transform: translateY(-24px);
-    }
-    88% {
-      transform: translateY(0);
+    23%,
+    92% {
+      opacity: 0;
     }
   }
-  @keyframes house-glass {
+  @keyframes roof-seal {
     0%,
     7%,
     100% {
-      fill: var(--forest);
+      opacity: 0;
+      transform: translateY(-35px);
     }
-    21%,
-    87% {
-      fill: color-mix(in srgb, var(--accent) 14%, var(--forest));
+    12% {
+      opacity: 1;
+      transform: translateY(-35px);
+    }
+    20%,
+    92% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes roof-tighten {
+    0%,
+    19%,
+    36%,
+    100% {
+      opacity: 0;
+      transform: rotate(-24deg);
+    }
+    21% {
+      opacity: 1;
+      transform: rotate(-24deg);
+    }
+    25% {
+      opacity: 1;
+      transform: rotate(16deg);
+    }
+    29% {
+      opacity: 1;
+      transform: rotate(-16deg);
+    }
+    33% {
+      opacity: 1;
+      transform: rotate(12deg);
     }
   }
   @keyframes house-light {
@@ -544,57 +615,28 @@
       stroke-opacity: 0.4;
     }
     43%,
-    87% {
+    91% {
       fill-opacity: 1;
       stroke-opacity: 1;
     }
   }
   @keyframes house-air {
     0%,
-    26% {
+    31% {
       opacity: 0;
       stroke-dashoffset: 0;
     }
-    43% {
+    35% {
       opacity: 0.9;
     }
-    87% {
+    91% {
       opacity: 0.9;
       stroke-dashoffset: -180;
     }
-    96%,
+    98%,
     100% {
       opacity: 0;
       stroke-dashoffset: -210;
-    }
-  }
-  @keyframes house-guides {
-    0%,
-    49%,
-    100% {
-      opacity: 0.18;
-    }
-    61%,
-    74% {
-      opacity: 1;
-    }
-    88% {
-      opacity: 0.18;
-    }
-  }
-  @keyframes house-trace {
-    0% {
-      opacity: 0.85;
-      stroke-dashoffset: 0;
-    }
-    7% {
-      opacity: 0.85;
-      stroke-dashoffset: -100;
-    }
-    10%,
-    100% {
-      opacity: 0;
-      stroke-dashoffset: -100;
     }
   }
 }

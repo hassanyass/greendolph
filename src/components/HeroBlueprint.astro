@@ -3,235 +3,289 @@ import { copy, type Locale } from '../config/content';
 import '../styles/blueprint.css';
 const { locale } = Astro.props as { locale: Locale };
 const t = copy[locale].blueprint;
+// Every surface uses this footprint so the house and its plan share their openings.
+const house = { width: 368, depth: 234, height: 198, x: 286, y: 289 };
+const projection = { x: 0.88, y: 0.42 };
+// Invert the isometric projection into a centered overhead plan, with a small camera zoom.
+const planScale = 1.3;
+const planX = 330 - (house.width * planScale) / 2;
+const planY = 285 - (house.depth * planScale) / 2;
+const planA = planScale / (2 * projection.x);
+const planC = planScale / (2 * projection.y);
+const planView = `matrix(${planA}, ${-planA}, ${planC}, ${planC}, ${planX - planA * house.x - planC * house.y}, ${planY + planA * house.x - planC * house.y})`;
+const roofY = house.y - house.height;
+const frontX = house.x - house.depth * projection.x;
+const frontY = roofY + house.depth * projection.y;
+const cornerX = frontX + house.width * projection.x;
+const cornerY = frontY + house.width * projection.y;
+const frontWindows = [
+  { x: 37, y: 50, width: 106, height: 67 },
+  { x: 169, y: 68, width: 73, height: 67 },
+];
+const sideWindow = { x: 59, y: 47, width: 114, height: 67 };
+const door = { x: 274, y: 100, width: 64, height: 98 };
+const paintPasses = Array.from({ length: 6 }, (_, index) => ({
+  x: index * 61,
+  width: index === 5 ? 63 : 64,
+  animation: `paint-${index + 1}`,
+  reverse: index % 2 === 1,
+}));
 ---
 
 <div class="hero-blueprint" data-blueprint>
   <p class="blueprint-summary">{t.summary}</p>
   <svg viewBox="0 0 660 570" fill="none" focusable="false" aria-hidden="true">
     <defs>
-      <clipPath id="house-facades">
-        <path d="M80 190 404 345V543L80 388ZM404 345 610 246V444L404 543Z" />
-      </clipPath>
-      <clipPath id="house-cleaning">
-        <path class="cleaning-mask" d="M-650 80H-10V570H-650Z" />
-      </clipPath>
-      <mask
-        id="window-wash"
-        maskUnits="userSpaceOnUse"
-        x="0"
-        y="0"
-        width="660"
-        height="570"
-      >
-        <path d="M0 0H660V570H0Z" fill="white" />
-        <path class="cleaning-mask" d="M-650 80H-10V570H-650Z" fill="black" />
-      </mask>
+      {[
+        { id: 'front', width: house.width },
+        { id: 'side', width: house.depth },
+      ].map(({ id, width }) => (
+        <>
+          <clipPath id={`${id}-cleaning`}>
+            <rect class="cleaning-mask" width={width} height={house.height} />
+          </clipPath>
+          <mask
+            id={`${id}-window-wash`}
+            maskUnits="userSpaceOnUse"
+            x="0"
+            y="0"
+            width={width}
+            height={house.height}
+          >
+            <rect width={width} height={house.height} fill="white" />
+            <rect
+              class="cleaning-mask"
+              width={width}
+              height={house.height}
+              fill="black"
+            />
+          </mask>
+        </>
+      ))}
       <clipPath id="paint-front">
-        <path class="paint-strip paint-strip-first" d="M0 0h126v198H0Z" />
-        <path class="paint-strip paint-strip-second" d="M123 0h126v198H123Z" />
-        <path class="paint-strip paint-strip-third" d="M246 0h122v198H246Z" />
+        {paintPasses.map(({ x, width, animation, reverse }) => (
+          <rect
+            class:list={['paint-strip', { 'paint-strip-reverse': reverse }]}
+            x={x}
+            width={width}
+            height={house.height}
+            style={`--paint-pass: ${animation}`}
+          />
+        ))}
       </clipPath>
       <clipPath id="paint-side">
-        <path class="paint-strip paint-side-first" d="M0 0h119v198H0Z" />
-        <path class="paint-strip paint-side-second" d="M116 0h118v198H116Z" />
+        {[0, 1, 2].map((index) => (
+          <rect
+            class="paint-strip"
+            x={index * 78}
+            width="79"
+            height={house.height}
+            style={`--paint-pass: paint-${index * 2 + 1}`}
+          />
+        ))}
       </clipPath>
     </defs>
-    <g class="blueprint-journey">
-      <g class="journey-structure">
-        <ellipse class="house-shadow" cx="346" cy="498" rx="227" ry="28" />
-        <!-- The same floor, walls and ceiling remain connected through the loop. -->
-        <!-- Projection lines connect the ceiling and floor plan. -->
-        <path
-          pathLength="100"
-          class="blueprint-guides"
-          d="M286 91V289M610 246V444M404 345V543M80 190V388
-         M41 119h28m-14-14v28M595 57h28m-14-14v28M595 493h28m-14-14v28"
-        />
-
-        <path
-          pathLength="100"
-          class="blueprint-edge"
-          d="M80 388 404 543 610 444v10L404 553 80 398Z"
-        />
-        <g transform="translate(286 289) matrix(.88 .42 -.88 .42 0 0)">
+    <g class="blueprint-camera">
+      <ellipse class="house-shadow" cx="346" cy="498" rx="227" ry="28" />
+      <g
+        class="blueprint-journey"
+        style={`--plan-view: ${planView}; --house-height: ${house.height}px`}
+      >
+        <g
+          class="house-floor-projection"
+          transform={`matrix(${projection.x} ${projection.y} ${-projection.x} ${projection.y} ${house.x} ${house.y})`}
+        >
           <path class="blueprint-plane" d="M0 0H368V234H0Z" />
           <path
             class="house-floor-tiles"
             d="M11 47h346M11 143h346M11 191h346M62 11v212M114 11v85m0 57v70M166 11v212M279 11v122m0 50v40M331 11v212"
           />
           <path
-            pathLength="100"
             class="blueprint-outline"
-            d="M0 0H368V234H0ZM11 11H357V223H11ZM218 11v212M227 11v212"
+            d="M0 234V0H368V234H338M274 234H0M11 223V11H357V223H338M274 223H11"
           />
           <path
-            pathLength="100"
             class="blueprint-detail"
-            d="M11 96h86m47 0h74M11 104h86m47 0h74m-121 0v47a47 47 0 0 0 47-47
-           M227 133h49m40 0h41m-130 8h49m40 0h41m-81 0v40a40 40 0 0 0 40-40
-           M-17 0v234m-7-234h14m-14 234h14m10 19h368m-368-7v14m368-14v14"
+            d="M11 104h86m47 0h74M11 112h86m47 0h74m-47 0v47a47 47 0 0 0 47-47M227 118h48m42 0h40M227 126h48m42 0h40m-82 0v42a42 42 0 0 0 42-42M274 223v-64a64 64 0 0 1 64 64M-17 0v234m-7-234h14m-14 234h14M0 253h368m-368-7v14m368-14v14"
           />
           <path
-            pathLength="100"
             class="blueprint-partition"
-            d="M14 96h82m50 0h72m9 37h48m42 0h39M218 13v208"
+            d="M218 11v212m9-212v212M11 104h86m47 0h74M227 118h48m42 0h40"
+          />
+          <!-- Window marks are derived from the actual facade openings. -->
+          {frontWindows.map((window) => (
+            <path
+              class="plan-window"
+              d={`M${window.x} 226h${window.width}m${-window.width} 5h${window.width}`}
+            />
+          ))}
+          <path
+            class="plan-window"
+            d={`M360 ${house.depth - sideWindow.x - sideWindow.width}v${sideWindow.width}m5 ${-sideWindow.width}v${sideWindow.width}`}
           />
         </g>
-
         <g class="house-facade">
-          <path
-            class="house-wall house-wall-front"
-            d="M80 190 404 345V543L80 388Z"
-          />
-          <path
-            class="house-wall house-wall-side"
-            d="M404 345 610 246V444L404 543Z"
-          />
-          <g class="house-wear">
-            <path
-              class="house-stain"
-              d="m94 238q10 0 18 13l18 3-4 22 8 30-9 17 2 29-18-10-4-32-9-8Zm166 79q12-7 27 10l11-1 5 48-10 4-3 29-18-11-4-37Zm181 86q17-20 40-22l-4 26 7 12-8 24 1 21-28 13 1-37-12-9Zm109-103q13-13 28-14l-5 38 7 12-9 42-29 14 8-26-6-15Z"
-            />
-            <path
-              class="house-scuffs"
-              d="m94 366 46 22m112 53 39 19m175 27 32-16m39-20 45-22"
-            />
-          </g>
-          <g clip-path="url(#house-cleaning)">
-            <path class="house-clean-front" d="M80 190 404 345V543L80 388Z" />
-            <path class="house-clean-side" d="M404 345 610 246V444L404 543Z" />
-          </g>
-          <path
-            class="house-cracks"
-            d="m176 243-7 27 15 22-18 21 9 31m9-52 25 4m-34 48-11 18m354-72-12 29 9 17-21 29 7 22m14-51 16 1"
-          />
-          <g transform="translate(80 190) matrix(.88 .42 0 1 0 0)">
-            <path
-              class="house-finish house-finish-front"
-              clip-path="url(#paint-front)"
-              d="M0 0H368V198H0Z"
-            />
-          </g>
-          <g transform="translate(404 345) matrix(.88 -.42 0 1 0 0)">
-            <path
-              class="house-finish house-finish-side"
-              clip-path="url(#paint-side)"
-              d="M0 0H234V198H0Z"
-            />
-          </g>
-          <g class="house-openings">
-            <path
-              class="house-window"
-              d="m113 257 93 44v67l-93-45Zm116 55 64 31v67l-64-31Zm227 55 100-48v67l-100 48Z"
-            />
-            <path
-              class="house-window-lines"
-              d="m159 279v67m-46-56 93 44m55-7v67m-32-49 64 31m213-33v67m-50-9 100-48"
-            />
-            <path class="house-door" d="m321 405 56 27v98l-56-27Z" />
-            <path class="house-handle" d="m365 478-9-4" />
-          </g>
-          <path
-            class="house-window-grime"
-            mask="url(#window-wash)"
-            d="m125 276 33 39m-29-8 21 25m91 3 31 32m-22-11 21 25m201-5 28 14m24-37 19 15"
-          />
-          <g class="house-cleaning-dust">
-            <circle cx="139" cy="292" r="3" />
-            <circle cx="252" cy="365" r="2.5" />
-            <circle cx="466" cy="425" r="3" />
-            <circle cx="550" cy="355" r="2" />
-          </g>
-          <g transform="translate(80 190) matrix(.88 .42 0 1 0 0)">
-            <g class="house-paint-roller">
-              <path class="roller-arm" d="M48 0H63V-26H13V-48" />
-              <path class="roller-grip" d="M13-43v-29" />
-              <rect
-                class="roller-head"
-                x="-60"
-                y="-10"
-                width="120"
-                height="20"
-                rx="7"
+          <g
+            class="house-front-projection"
+            style={`--wall-x:${frontX}px;--wall-y:${frontY}px`}
+          >
+            <g class="house-wall-height">
+              <path class="house-wall house-wall-front" d="M0 0H368V198H0Z" />
+              <g class="house-wear">
+                <path
+                  class="house-stain"
+                  d="M14 40q16-8 27 8l9 30-7 22 9 34-22-4-5-30-10-13ZM197 34q14-8 26 8l17 23-5 42-20-5-4-31-17-15Z"
+                />
+                <path class="house-scuffs" d="M15 175h48m132 8h39" />
+              </g>
+              <path
+                class="house-clean-front"
+                clip-path="url(#front-cleaning)"
+                d="M0 0H368V198H0Z"
               />
-              <path class="roller-highlight" d="M-48-4H45" />
+              <path
+                class="house-cracks"
+                d="m110 8-7 25 15 15-12 22 8 25m4-47 20-3m-24 50-10 12m156-72 10 17-11 16 7 18"
+              />
+              <path
+                class="house-finish house-finish-front"
+                clip-path="url(#paint-front)"
+                d="M0 0H368V198H0Z"
+              />
+              <g class="house-openings">
+                {frontWindows.map((window) => (
+                  <>
+                    <rect class="house-window" {...window} />
+                    <path
+                      class="house-window-lines"
+                      d={`M${window.x + window.width / 2} ${window.y}v${window.height}M${window.x} ${window.y + window.height / 2}h${window.width}`}
+                    />
+                  </>
+                ))}
+                <rect class="house-door" {...door} />
+                <path class="house-handle" d="M325 150h-8" />
+              </g>
+              <path
+                class="house-window-grime"
+                mask="url(#front-window-wash)"
+                d="m49 65 34 25m-27 0 22 19m102-24 28 19"
+              />
+              <g class="house-paint-roller">
+                <g class="roller-tool">
+                  <path class="roller-arm" d="M48 0H63V-26H13V-48" />
+                  <path class="roller-grip" d="M13-43v-29" />
+                  <rect
+                    class="roller-head"
+                    x="-60"
+                    y="-10"
+                    width="120"
+                    height="20"
+                    rx="7"
+                  />
+                  <path class="roller-highlight" d="M-48-4H45" />
+                </g>
+              </g>
+              <path class="house-wall-outline" d="M0 0H368V198H0Z" />
             </g>
           </g>
-          <g clip-path="url(#house-facades)">
-            <path class="house-renewal-edge" d="M-7 130V565" />
+          <g
+            class="house-side-projection"
+            style={`--wall-x:${cornerX}px;--wall-y:${cornerY}px`}
+          >
+            <g class="house-wall-height">
+              <path class="house-wall house-wall-side" d="M0 0H234V198H0Z" />
+              <g class="house-wear">
+                <path
+                  class="house-stain"
+                  d="M37 39q17-12 31 0l9 30-6 27 4 29-24 7-5-39-12-12Zm143-4q14-6 25 3l-3 41 7 17-13 40-22 8 7-37-7-22Z"
+                />
+                <path class="house-scuffs" d="M55 182h34m42-9h46" />
+              </g>
+              <path
+                class="house-clean-side"
+                clip-path="url(#side-cleaning)"
+                d="M0 0H234V198H0Z"
+              />
+              <path
+                class="house-cracks"
+                d="m130 6-10 20 11 15-18 17 6 18m12-35 17-3"
+              />
+              <path
+                class="house-finish house-finish-side"
+                clip-path="url(#paint-side)"
+                d="M0 0H234V198H0Z"
+              />
+              <g class="house-openings">
+                <rect class="house-window" {...sideWindow} />
+                <path class="house-window-lines" d="M116 47v67M59 80.5h114" />
+              </g>
+              <path
+                class="house-window-grime"
+                mask="url(#side-window-wash)"
+                d="m73 65 27 20m35-24 23 21"
+              />
+              <path class="house-wall-outline" d="M0 0H234V198H0Z" />
+            </g>
           </g>
-          <path
-            class="house-wall-outline"
-            pathLength="100"
-            d="M80 190 404 345 610 246M80 190V388L404 543 610 444V246M404 345V543"
-          />
-          <path
-            class="house-highlight"
-            pathLength="100"
-            d="M80 190 404 345 610 246V444L404 543 80 388V190"
-          />
         </g>
-        <path
-          class="blueprint-shell"
-          d="M80 190 404 345 610 246M80 190V388L404 543 610 444V246M404 345V543"
-        />
         <g class="blueprint-upper">
-          <g transform="translate(286 91) matrix(.88 .42 -.88 .42 0 0)">
+          <g
+            transform={`translate(${house.x} ${roofY}) matrix(.88 .42 -.88 .42 0 0)`}
+          >
             <path
               class="blueprint-plane blueprint-ceiling"
               d="M0 0H368V234H0Z"
             />
             <path
-              pathLength="100"
               class="blueprint-outline"
-              d="M0 0H368V234H0ZM61 0v234M122 0v234M183 0v234M245 0v234M306 0v234
-           M0 58h368M0 117h368M0 176h368"
+              d="M0 0H368V234H0ZM61 0v234M122 0v234M183 0v234M245 0v234M306 0v234M0 58h368M0 117h368M0 176h368"
             />
             <path
-              pathLength="100"
               class="blueprint-light"
               d="M129 65h47v45h-47ZM252 124h47v45h-47ZM68 183h47v44H68Z"
             />
           </g>
-
-          <!-- Duct, branch and grilles sit above the suspended ceiling. -->
-          <g transform="translate(286 65) matrix(.88 .42 -.88 .42 0 0)">
-            <path
-              pathLength="100"
-              class="blueprint-duct-depth"
-              d="M27 75H290v84h42v30h-72v-84H154v65h-27v-65H27Z"
-            />
-          </g>
-          <g transform="translate(286 56) matrix(.88 .42 -.88 .42 0 0)">
+          <g
+            class="roof-equipment"
+            transform={`translate(${house.x} ${roofY - 35}) matrix(.88 .42 -.88 .42 0 0)`}
+          >
             <path
               class="blueprint-duct"
               d="M27 75H290v84h42v30h-72v-84H154v65h-27v-65H27Z"
             />
             <path
-              pathLength="100"
               class="blueprint-air"
-              d="M27 75H290v84h42v30h-72v-84H154v65h-27v-65H27Z
-           M27 82h254v85h51M61 75v30m42-30v30m106-30v30m51 36h30
-           M114 170h53v27h-53Zm9 5v17m9-17v17m9-17v17m9-17v17m9-17v17
-           M332 151h26v46h-26Zm5 8h16m-16 8h16m-16 8h16m-16 8h16m-16 8h16"
+              d="M27 75H290v84h42v30h-72v-84H154v65h-27v-65H27ZM27 82h254v85h51M61 75v30m42-30v30m106-30v30m51 36h30M114 170h53v27h-53Zm9 5v17m9-17v17m9-17v17m9-17v17m9-17v17M332 151h26v46h-26Zm5 8h16m-16 8h16m-16 8h16m-16 8h16m-16 8h16"
             />
+            <g class="roof-fault">
+              <path class="roof-gap" d="M174 72h24v36h-24Z" />
+              <path
+                class="roof-broken-edge"
+                d="m174 75-3 7 5 8-3 15m25-30 3 7-5 8 3 15"
+              />
+            </g>
+            <g class="roof-repair-collar">
+              <path
+                class="roof-collar-body"
+                d="M169 70h34v40h-34ZM174 70v40m24-40v40"
+              />
+              <circle class="roof-bolt" cx="174" cy="77" r="2.5" />
+              <circle class="roof-bolt" cx="198" cy="103" r="2.5" />
+            </g>
+            <g class="roof-wrench">
+              <path d="m174 77 28-28a11 11 0 0 1 15-12l-7 7 5 5 7-7a11 11 0 0 1-12 15l-28 28Z" />
+            </g>
             <path
               class="blueprint-airflow"
               pathLength="100"
               d="M35 94H271v83h54"
             />
             <path
-              class="blueprint-airflow blueprint-airflow-branch"
+              class="blueprint-airflow"
               pathLength="100"
               d="M35 94H141v69"
             />
           </g>
-        </g>
-        <g class="blueprint-points">
-          <circle cx="286" cy="91" r="3" />
-          <circle cx="610" cy="246" r="3" />
-          <circle cx="404" cy="345" r="3" />
-          <circle cx="80" cy="190" r="3" />
         </g>
       </g>
     </g>
