@@ -12,8 +12,28 @@ const t = copy[locale].blueprint;
       <clipPath id="house-facades">
         <path d="M80 190 404 345V543L80 388ZM404 345 610 246V444L404 543Z" />
       </clipPath>
-      <clipPath id="house-renewal">
-        <path class="renewal-mask" d="M-650 80H-10V570H-650Z" />
+      <clipPath id="house-cleaning">
+        <path class="cleaning-mask" d="M-650 80H-10V570H-650Z" />
+      </clipPath>
+      <mask
+        id="window-wash"
+        maskUnits="userSpaceOnUse"
+        x="0"
+        y="0"
+        width="660"
+        height="570"
+      >
+        <path d="M0 0H660V570H0Z" fill="white" />
+        <path class="cleaning-mask" d="M-650 80H-10V570H-650Z" fill="black" />
+      </mask>
+      <clipPath id="paint-front">
+        <path class="paint-strip paint-strip-first" d="M0 0h126v198H0Z" />
+        <path class="paint-strip paint-strip-second" d="M123 0h126v198H123Z" />
+        <path class="paint-strip paint-strip-third" d="M246 0h122v198H246Z" />
+      </clipPath>
+      <clipPath id="paint-side">
+        <path class="paint-strip paint-side-first" d="M0 0h119v198H0Z" />
+        <path class="paint-strip paint-side-second" d="M116 0h118v198H116Z" />
       </clipPath>
     </defs>
     <g class="blueprint-journey">
@@ -70,25 +90,33 @@ const t = copy[locale].blueprint;
           <g class="house-wear">
             <path
               class="house-stain"
-              d="m93 243 38 18 6 94-29-13-5-32Zm168 74 34 17 8 77-35-15Zm181 86 39-19-5 80-27 13Zm107-103 29-14-7 92-29 14Z"
-            />
-            <path
-              class="house-cracks"
-              d="m176 243-7 27 15 22-18 21 9 31m9-52 25 4m-34 48-11 18m354-72-12 29 9 17-21 29 7 22m14-51 16 1"
+              d="m94 238q10 0 18 13l18 3-4 22 8 30-9 17 2 29-18-10-4-32-9-8Zm166 79q12-7 27 10l11-1 5 48-10 4-3 29-18-11-4-37Zm181 86q17-20 40-22l-4 26 7 12-8 24 1 21-28 13 1-37-12-9Zm109-103q13-13 28-14l-5 38 7 12-9 42-29 14 8-26-6-15Z"
             />
             <path
               class="house-scuffs"
               d="m94 366 46 22m112 53 39 19m175 27 32-16m39-20 45-22"
             />
           </g>
-          <g clip-path="url(#house-renewal)">
+          <g clip-path="url(#house-cleaning)">
+            <path class="house-clean-front" d="M80 190 404 345V543L80 388Z" />
+            <path class="house-clean-side" d="M404 345 610 246V444L404 543Z" />
+          </g>
+          <path
+            class="house-cracks"
+            d="m176 243-7 27 15 22-18 21 9 31m9-52 25 4m-34 48-11 18m354-72-12 29 9 17-21 29 7 22m14-51 16 1"
+          />
+          <g transform="translate(80 190) matrix(.88 .42 0 1 0 0)">
             <path
               class="house-finish house-finish-front"
-              d="M80 190 404 345V543L80 388Z"
+              clip-path="url(#paint-front)"
+              d="M0 0H368V198H0Z"
             />
+          </g>
+          <g transform="translate(404 345) matrix(.88 -.42 0 1 0 0)">
             <path
               class="house-finish house-finish-side"
-              d="M404 345 610 246V444L404 543Z"
+              clip-path="url(#paint-side)"
+              d="M0 0H234V198H0Z"
             />
           </g>
           <g class="house-openings">
@@ -102,6 +130,32 @@ const t = copy[locale].blueprint;
             />
             <path class="house-door" d="m321 405 56 27v98l-56-27Z" />
             <path class="house-handle" d="m365 478-9-4" />
+          </g>
+          <path
+            class="house-window-grime"
+            mask="url(#window-wash)"
+            d="m125 276 33 39m-29-8 21 25m91 3 31 32m-22-11 21 25m201-5 28 14m24-37 19 15"
+          />
+          <g class="house-cleaning-dust">
+            <circle cx="139" cy="292" r="3" />
+            <circle cx="252" cy="365" r="2.5" />
+            <circle cx="466" cy="425" r="3" />
+            <circle cx="550" cy="355" r="2" />
+          </g>
+          <g transform="translate(80 190) matrix(.88 .42 0 1 0 0)">
+            <g class="house-paint-roller">
+              <path class="roller-arm" d="M48 0H63V-26H13V-48" />
+              <path class="roller-grip" d="M13-43v-29" />
+              <rect
+                class="roller-head"
+                x="-60"
+                y="-10"
+                width="120"
+                height="20"
+                rx="7"
+              />
+              <path class="roller-highlight" d="M-48-4H45" />
+            </g>
           </g>
           <g clip-path="url(#house-facades)">
             <path class="house-renewal-edge" d="M-7 130V565" />
@@ -117,6 +171,10 @@ const t = copy[locale].blueprint;
             d="M80 190 404 345 610 246V444L404 543 80 388V190"
           />
         </g>
+        <path
+          class="blueprint-shell"
+          d="M80 190 404 345 610 246M80 190V388L404 543 610 444V246M404 345V543"
+        />
         <g class="blueprint-upper">
           <g transform="translate(286 91) matrix(.88 .42 -.88 .42 0 0)">
             <path

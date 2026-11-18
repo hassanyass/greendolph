@@ -223,10 +223,13 @@ function setupBlueprintMotion() {
   };
 
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(([entry]) => {
-      visible = entry?.isIntersecting ?? false;
-      update();
-    }).observe(drawing);
+    new IntersectionObserver(
+      ([entry]) => {
+        visible = !!entry?.isIntersecting && entry.intersectionRatio >= 0.35;
+        update();
+      },
+      { threshold: [0, 0.35] },
+    ).observe(drawing);
   }
   button.addEventListener('click', () => {
     paused = !paused;
