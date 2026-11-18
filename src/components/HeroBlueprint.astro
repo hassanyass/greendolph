@@ -265,15 +265,28 @@ const paintPasses = Array.from({ length: 6 }, (_, index) => ({
               />
             </g>
             <g class="roof-repair-collar">
+              <path class="roof-collar-depth" d="M164 109h44v7h-44Z" />
               <path
                 class="roof-collar-body"
-                d="M169 70h34v40h-34ZM174 70v40m24-40v40"
+                d="M164 67h44v42h-44ZM176 67v42m20-42v42"
               />
-              <circle class="roof-bolt" cx="174" cy="77" r="2.5" />
-              <circle class="roof-bolt" cx="198" cy="103" r="2.5" />
+              {[
+                { x: 170, y: 74 },
+                { x: 202, y: 74 },
+                { x: 170, y: 102 },
+                { x: 202, y: 102 },
+              ].map(({ x, y }) => (
+                <path
+                  class="roof-bolt"
+                  d={`M${x - 3} ${y - 1.7}l3-1.7 3 1.7v3.4l-3 1.7-3-1.7Z`}
+                />
+              ))}
             </g>
             <g class="roof-wrench">
-              <path d="m174 77 28-28a11 11 0 0 1 15-12l-7 7 5 5 7-7a11 11 0 0 1-12 15l-28 28Z" />
+              <path
+                fill-rule="evenodd"
+                d="M165 69a7 7 0 1 0 10 10l28-28a11 11 0 0 0 12-15l-7 7-5-5 7-7a11 11 0 0 0-15 12ZM170 71a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"
+              />
             </g>
             <path
               class="blueprint-airflow"
