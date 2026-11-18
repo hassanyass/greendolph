@@ -11,6 +11,13 @@ export const contactCopy = {
     comingSoon: 'Coming soon',
     whatsapp: 'Chat on WhatsApp',
     whatsappShort: 'WhatsApp',
+    useForm: 'Use the quotation form',
+    contactChoice:
+      'Request a quote using the form, or send your location and photos on WhatsApp so we can discuss the work.',
+    whatsappMessage:
+      'Hello Aldolphin, I’d like to discuss technical work for my property.',
+    whatsappServiceMessage:
+      'Hello Aldolphin, I’d like to discuss {service} for my property.',
     email: 'Email',
     send: 'Send quotation request',
     sending: 'Sending…',
@@ -40,6 +47,12 @@ export const contactCopy = {
     comingSoon: 'قريباً',
     whatsapp: 'راسلنا على واتساب',
     whatsappShort: 'واتساب',
+    useForm: 'اطلب عرض سعر بالنموذج',
+    contactChoice:
+      'اطلب عرض سعر عبر النموذج، أو أرسل موقعك وصور العمل على واتساب لنناقش ما تحتاج إلى تنفيذه.',
+    whatsappMessage: 'مرحباً بالدولفين الأخضر، أود مناقشة أعمال فنية لعقاري.',
+    whatsappServiceMessage:
+      'مرحباً بالدولفين الأخضر، أود الاستفسار عن خدمة {service} لعقاري.',
     email: 'البريد الإلكتروني',
     send: 'أرسل طلب عرض السعر',
     sending: 'جارٍ الإرسال…',

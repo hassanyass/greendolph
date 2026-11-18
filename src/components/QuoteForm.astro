@@ -1,6 +1,7 @@
 ---
 import '../styles/quote-form.css';
 import ContactLinks from './ContactLinks.astro';
+import { company } from '../config/company';
 import { contactCopy } from '../config/contact-copy';
 import { quotationEndpoint } from '../config/quotation';
 import { services } from '../config/services';
@@ -29,7 +30,7 @@ const formCopy = contactCopy[locale];
     >
       {standalone ? t.contactPageHeading : t.contactTitle}
     </ContactHeading>
-    <p>{t.contactText}</p>
+    <p>{company.whatsappUrl ? formCopy.contactChoice : t.contactText}</p>
     <ContactLinks locale={locale} placement="form" />
   </div>
   <form

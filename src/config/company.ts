@@ -12,7 +12,10 @@ export class CompanyProfile {
   readonly name = brand.name;
   readonly arabicName = brand.arabicName;
   readonly phone = '+971544485287';
-  readonly whatsapp = optionalPhone(import.meta.env.CONTACT_WHATSAPP);
+  // Use the owner's temporary choice until a separate WhatsApp number is supplied.
+  readonly whatsapp = optionalPhone(
+    import.meta.env.CONTACT_WHATSAPP?.trim() || this.phone,
+  );
   readonly email = optionalEmail(import.meta.env.CONTACT_EMAIL);
   readonly address: BusinessAddress | null = null;
   readonly serviceAreas: readonly string[] = [];

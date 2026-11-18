@@ -1,15 +1,26 @@
 ---
 import { company } from '../config/company';
 import { contactCopy } from '../config/contact-copy';
-import type { Locale } from '../domain/routes';
+import { routes, type Locale } from '../domain/routes';
+import { services } from '../config/services';
 
 interface Props {
   locale: Locale;
-  placement: 'form' | 'footer' | 'shortcut';
+  placement: 'form' | 'footer' | 'shortcut' | 'service';
 }
 const { locale, placement } = Astro.props;
 const t = contactCopy[locale];
-const whatsapp = company.whatsappUrl;
+const selectedService = services.find(
+  (service) =>
+    routes.service(service.id).paths[locale] === Astro.url.pathname ||
+    service.id === Astro.url.searchParams.get('service'),
+);
+const message = selectedService
+  ? t.whatsappServiceMessage.replace('{service}', selectedService.title[locale])
+  : t.whatsappMessage;
+const whatsapp = company.whatsappUrl
+  ? `${company.whatsappUrl}?text=${encodeURIComponent(message)}`
+  : null;
 const displayPhone = (number: string) =>
   number.replace(/^(\+971)(5\d)(\d{3})(\d{4})$/, '$1 $2 $3 $4');
 const phone = displayPhone(company.phone);
@@ -35,10 +46,22 @@ const socialLinks = [
 {placement === 'form' && (
   <div class="contact-actions">
     {whatsapp && (
-      <a class="button" href={whatsapp}>
+      <a
+        class="button contact-whatsapp"
+        href={whatsapp}
+        data-whatsapp-form
+        data-message-default={t.whatsappMessage}
+        data-message-service={t.whatsappServiceMessage}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="contact-channel-icon" aria-hidden="true"></span>
         {t.whatsapp}
       </a>
     )}
+    <a class="text-link contact-form-link" href="#quote-form">
+      {t.useForm}
+    </a>
     <a
       class="text-link contact-phone"
       href={`tel:${company.phone}`}
@@ -69,7 +92,12 @@ const socialLinks = [
       </bdi>
     </a>
     {whatsapp ? (
-      <a class="footer-contact-line" href={whatsapp}>
+      <a
+        class="footer-contact-line"
+        href={whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <span
           class="footer-channel-icon"
           style="--channel-icon: url('/icons/whatsapp.svg')"
@@ -134,8 +162,28 @@ const socialLinks = [
     </div>
   </>
 )}
+{placement === 'service' && whatsapp && (
+  <a
+    class="button contact-whatsapp service-whatsapp"
+    href={whatsapp}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <span class="contact-channel-icon" aria-hidden="true"></span>
+    {t.whatsapp}
+  </a>
+)}
 {placement === 'shortcut' && whatsapp && (
-  <a class="button whatsapp-shortcut" href={whatsapp} aria-label={t.whatsapp}>
-    {t.whatsappShort}
+  <a
+    class="whatsapp-shortcut"
+    href={whatsapp}
+    aria-label={t.whatsapp}
+    target="_blank"
+    rel="noopener noreferrer"
+    data-whatsapp-shortcut
+    hidden
+  >
+    <span class="contact-channel-icon" aria-hidden="true"></span>
+    <span>{t.whatsappShort}</span>
   </a>
 )}

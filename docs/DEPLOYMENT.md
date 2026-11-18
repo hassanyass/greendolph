@@ -42,7 +42,7 @@ After import, check `/`, `/ar/`, all navigation destinations and a missing URL. 
 
 1. Create a company-owned Formspree form and verify the inbox under Target Email. Copy only its public form ID from Integration into `FORMSPREE_FORM_ID` and rebuild. A blank ID enables local review. Use a separate test form for reviewer deployments where email delivery is needed.
 2. Submit a test quotation from each language and confirm receipt in the inbox. The website reports accepted submission after a successful provider response. The form includes Formspree’s `_gotcha` filter. Confirm the service’s spam controls, expected quota, and retention settings in the account before launch.
-3. Set `CONTACT_WHATSAPP` to the verified WhatsApp number in international format (a plus sign and digits) to enable the Contact action and mobile shortcut. The licence phone remains a separate call link.
+3. The owner has temporarily selected the company phone (+971 54 448 5287) for WhatsApp. Set `CONTACT_WHATSAPP` to replace it in international format (a plus sign and digits), then rebuild. A blank value uses the company phone. Verify that chats reach the intended account before launch. The call link uses the company phone independently.
 4. Supply `CONTACT_EMAIL`, `CONTACT_INSTAGRAM`, `CONTACT_FACEBOOK` and `CONTACT_TIKTOK` when ready. The social settings take full HTTPS profile URLs. Leave unknown values blank. See `.env.example` for all settings. Rebuild after any changes and verify each public link.
 5. If the chosen host adds a Content Security Policy, allow `https://formspree.io` in both `connect-src` and `form-action`. The standard form action is the fallback for browsers without JavaScript.
 

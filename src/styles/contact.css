@@ -56,32 +56,95 @@
   cursor: wait;
 }
 
+.contact-channel-icon {
+  display: inline-block;
+  inline-size: 20px;
+  block-size: 20px;
+  flex: none;
+  background: currentColor;
+  mask: url('/icons/whatsapp.svg') center / contain no-repeat;
+}
+.contact-actions .contact-whatsapp,
+.service-enquiry-actions .contact-whatsapp {
+  gap: 9px;
+}
+.contact-actions .contact-phone {
+  flex-basis: 100%;
+}
+.service-enquiry-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.service-enquiry-actions .service-whatsapp {
+  background: transparent;
+  color: var(--forest);
+  border: 1px solid color-mix(in srgb, var(--forest) 45%, transparent);
+}
+.service-enquiry-actions .service-whatsapp:hover {
+  background: var(--forest);
+  color: var(--white);
+}
 .whatsapp-shortcut {
+  position: fixed;
+  z-index: 35;
+  inset-inline-end: calc(20px + env(safe-area-inset-right));
+  inset-block-end: calc(20px + env(safe-area-inset-bottom));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-block-size: 48px;
+  max-inline-size: calc(100vw - 32px);
+  padding: 10px 17px;
+  border: 1px solid color-mix(in srgb, var(--white) 65%, transparent);
+  border-radius: 999px;
+  background: var(--forest);
+  color: var(--white);
+  font-size: 0.88rem;
+  font-weight: 650;
+  text-decoration: none;
+  box-shadow: 0 5px 18px color-mix(in srgb, var(--forest) 20%, transparent);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    visibility 180ms;
+}
+.whatsapp-shortcut[hidden] {
   display: none;
 }
-
+.whatsapp-shortcut[data-visible] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.whatsapp-shortcut:hover {
+  background: var(--green);
+}
+.whatsapp-shortcut:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+body:has(.menu-toggle[aria-expanded='true']) .whatsapp-shortcut,
+body:has(#quote-form :focus) .whatsapp-shortcut {
+  display: none;
+}
 @media (max-width: 700px) {
   .contact .form-grid {
     grid-template-columns: minmax(0, 1fr);
   }
-
   .whatsapp-shortcut {
-    position: fixed;
-    z-index: 30;
-    inset-inline-end: 12px;
+    inset-inline-end: calc(12px + env(safe-area-inset-right));
     inset-block-end: calc(12px + env(safe-area-inset-bottom));
-    display: inline-flex;
-    min-block-size: 44px;
-    padding: 8px 16px;
-    border: 1px solid var(--white);
-    box-shadow: 0 4px 14px color-mix(in srgb, var(--forest) 25%, transparent);
   }
-
-  body:has(.whatsapp-shortcut) footer {
-    padding-block-end: calc(76px + env(safe-area-inset-bottom));
-  }
-
-  body:has(#quote-form :focus) .whatsapp-shortcut {
-    display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-shortcut {
+    transition: none;
+    transform: none;
   }
 }

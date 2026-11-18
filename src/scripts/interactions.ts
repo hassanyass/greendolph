@@ -263,6 +263,73 @@ function revealLandingArtwork() {
     .forEach((artwork) => observer.observe(artwork));
 }
 
+function setupWhatsAppFormLink() {
+  const link = document.querySelector<HTMLAnchorElement>(
+    '[data-whatsapp-form]',
+  );
+  const service = document.querySelector<HTMLSelectElement>(
+    '#quote-form select[name="service"]',
+  );
+  if (!link || !service) return;
+  const url = new URL(link.href);
+  const update = () => {
+    const message =
+      service.value && service.value !== 'other'
+        ? link.dataset.messageService?.replace(
+            '{service}',
+            service.selectedOptions[0].text,
+          )
+        : link.dataset.messageDefault;
+    if (!message) return;
+    url.searchParams.set('text', message);
+    link.href = url.href;
+  };
+  service.addEventListener('change', update);
+  update();
+}
+
+function setupWhatsAppShortcut() {
+  const shortcut = document.querySelector<HTMLAnchorElement>(
+    '[data-whatsapp-shortcut]',
+  );
+  if (!shortcut) return;
+
+  const services = document.querySelector<HTMLElement>('.landing #services');
+  const contact = document.querySelector<HTMLElement>('.quote-section');
+  const footer = document.querySelector<HTMLElement>('footer');
+  let scheduled = false;
+
+  const inView = (element: HTMLElement | null) => {
+    if (!element) return false;
+    const bounds = element.getBoundingClientRect();
+    return bounds.top < innerHeight && bounds.bottom > 0;
+  };
+  const update = () => {
+    scheduled = false;
+    const reachedContent =
+      !services ||
+      (window.scrollY > 0 &&
+        services.getBoundingClientRect().top <= innerHeight * 0.8);
+    const visible = reachedContent && !inView(contact) && !inView(footer);
+    shortcut.toggleAttribute('data-visible', visible);
+    shortcut.inert = !visible;
+    shortcut.setAttribute('aria-hidden', String(!visible));
+  };
+  const schedule = () => {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(update);
+  };
+
+  shortcut.hidden = false;
+  update();
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  window.addEventListener('pageshow', schedule);
+  window.addEventListener('load', schedule);
+  document.fonts.ready.then(schedule);
+}
+
 function followLegacyServiceLink() {
   const legacyId = location.hash.slice(1);
   if (!Object.hasOwn(legacyServiceIds, legacyId)) return;
@@ -275,11 +342,13 @@ function followLegacyServiceLink() {
 followLegacyServiceLink();
 window.addEventListener('hashchange', followLegacyServiceLink);
 new SiteNavigation();
+setupWhatsAppShortcut();
 setupBlueprintMotion();
 revealLandingArtwork();
 document
   .querySelectorAll<HTMLFormElement>('#quote-form')
   .forEach((form) => new QuoteFormController(form));
+setupWhatsAppFormLink();
 document
   .querySelectorAll<HTMLElement>('[data-carousel]')
   .forEach((section) => new ServiceCarousel(section));

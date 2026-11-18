@@ -9,6 +9,7 @@ import {
 } from '../config/service-presentation';
 import { routes } from '../domain/routes';
 import type { Service } from '../domain/service';
+import ContactLinks from './ContactLinks.astro';
 import ControlIcon from './ControlIcon.astro';
 import ServicePhoto from './ServicePhoto.astro';
 
@@ -44,9 +45,12 @@ const relatedProjects = projects.filter(
         </a>
         <h1 class="page-heading">{service.title[locale]}</h1>
         <p>{service.description[locale]}</p>
-        <a class="button" href={routes.enquiry(locale, service.id)}>
-          {t.quote}
-        </a>
+        <div class="service-enquiry-actions">
+          <a class="button" href={routes.enquiry(locale, service.id)}>
+            {t.quote}
+          </a>
+          <ContactLinks locale={locale} placement="service" />
+        </div>
       </div>
       <div class="service-profile-photo">
         <ServicePhoto
