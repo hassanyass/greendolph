@@ -9,6 +9,8 @@ import { site } from '../config/site';
 import { routes, type Locale, type PageDefinition } from '../domain/routes';
 import type { Service } from '../domain/service';
 import { PageMetadata } from '../domain/seo';
+import { searchPresentation } from '../config/search-content';
+import type { BreadcrumbItem } from '../domain/breadcrumbs';
 import '../styles/global.css';
 
 interface Props {
@@ -18,14 +20,16 @@ interface Props {
   service?: Service;
   description?: string;
   shareImage?: { src: string; width: number; height: number; alt: string };
+  breadcrumbs?: readonly BreadcrumbItem[];
 }
 const {
   locale,
   service,
   page = routes.page('home'),
-  title = copy[locale].title,
-  description = copy[locale].description,
+  title = searchPresentation(page.key, locale).title,
+  description = searchPresentation(page.key, locale).description,
   shareImage = { ...brand.shareImages[locale], alt: title },
+  breadcrumbs = [],
 } = Astro.props;
 const metadata = new PageMetadata(
   site,
@@ -35,6 +39,7 @@ const metadata = new PageMetadata(
   description,
   shareImage.src,
   page.indexable,
+  breadcrumbs,
 );
 ---
 

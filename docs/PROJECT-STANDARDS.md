@@ -37,8 +37,10 @@ Cloudflare Pages static hosting is the chosen launch target. Retain portable out
 
 ## UAE search foundation
 
+- Search titles, summaries and service headings live in `src/config/search-content.ts`; the configured brand name is appended centrally. Keep navigation labels and full licence titles separate. Breadcrumb HTML and BreadcrumbList must use the same localized route items. Use `docs/SEARCH-ACCOUNT-SETUP.md` for owner account work and launch handover.
+
 - Generate readable HTML for each locale, with distinct titles, descriptions, one h1 and a meaningful heading hierarchy. Keep business copy specific and human; do not keyword-stuff emirate names or mass-produce city pages.
-- Before launch, use the confirmed HTTPS .com domain to emit canonical URLs, en/ar/x-default alternates, a sitemap, absolute social-image URLs and truthful LocalBusiness/Service structured data.
+- Before launch, use the confirmed HTTPS .com domain to emit canonical URLs, en/ar/x-default alternates, a sitemap, absolute social-image URLs and truthful Organization/Service structured data. Use LocalBusiness only with a confirmed address approved for public display; never expose a private verification address to satisfy a rich-result field.
 - Keep previews `noindex` through page metadata and deployment headers. Permit crawling so search engines can read noindex. Enable indexing deliberately through SITE_ENV=production, SITE_URL and SITE_INDEXABLE=true only for a finished launch. Avoid invented addresses, ratings, response times, 24/7 claims or service-area claims.
 - Confirm trading name, NAP (name/address/phone), geographic coverage and Google Business Profile details. Use actual company project photographs where available. Search ranking is an outcome to measure, not a promise.
 - Optimize images, font delivery and video before launch. Target good Core Web Vitals; lazy-load below-fold media and reserve image dimensions.

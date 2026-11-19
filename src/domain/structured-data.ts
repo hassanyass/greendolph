@@ -1,4 +1,22 @@
 import { SiteConfiguration } from '../config/site-configuration.mjs';
+import type { Locale } from './routes.ts';
+import type { BreadcrumbItem } from './breadcrumbs.ts';
+
+interface ServiceIdentity {
+  name: string;
+  description: string;
+  url: string;
+  alternateName?: string;
+  serviceType?: string;
+}
+
+interface PageIdentity {
+  url: string;
+  title: string;
+  description: string;
+  locale: Locale;
+  breadcrumbs: readonly BreadcrumbItem[];
+}
 
 export interface BusinessIdentity {
   name: string;
@@ -23,7 +41,7 @@ export class StructuredDataBuilder {
     readonly logoPath: string,
   ) {}
 
-  build(service?: { name: string; description: string; url: string }) {
+  build(service?: ServiceIdentity, page?: PageIdentity) {
     if (!this.site.origin) return null;
     const organization = {
       '@type':
@@ -47,6 +65,19 @@ export class StructuredDataBuilder {
         ? { sameAs: this.company.socialProfiles }
         : {}),
     };
+    const breadcrumb =
+      page && page.breadcrumbs.length >= 2
+        ? {
+            '@type': 'BreadcrumbList',
+            '@id': `${page.url}#breadcrumb`,
+            itemListElement: page.breadcrumbs.map((item, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              name: item.name,
+              item: this.site.absolute(item.path),
+            })),
+          }
+        : null;
     return {
       '@context': 'https://schema.org',
       '@graph': [
@@ -59,6 +90,26 @@ export class StructuredDataBuilder {
           inLanguage: ['en', 'ar'],
           publisher: { '@id': organization['@id'] },
         },
+        ...(page
+          ? [
+              {
+                '@type': 'WebPage',
+                '@id': `${page.url}#webpage`,
+                url: page.url,
+                name: page.title,
+                description: page.description,
+                inLanguage: page.locale,
+                isPartOf: { '@id': `${this.site.origin}/#website` },
+                ...(breadcrumb
+                  ? { breadcrumb: { '@id': breadcrumb['@id'] } }
+                  : {}),
+                ...(service
+                  ? { mainEntity: { '@id': `${service.url}#service` } }
+                  : {}),
+              },
+            ]
+          : []),
+        ...(breadcrumb ? [breadcrumb] : []),
         ...(service
           ? [
               {
@@ -66,6 +117,9 @@ export class StructuredDataBuilder {
                 '@id': `${service.url}#service`,
                 ...service,
                 provider: { '@id': organization['@id'] },
+                ...(page
+                  ? { mainEntityOfPage: { '@id': `${page.url}#webpage` } }
+                  : {}),
                 ...(this.company.serviceAreas.length
                   ? { areaServed: this.company.serviceAreas }
                   : {}),

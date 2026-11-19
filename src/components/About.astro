@@ -10,12 +10,7 @@ const t = copy[locale];
 const a = aboutCopy[locale];
 ---
 
-<BaseLayout
-  locale={locale}
-  page={routes.page('about')}
-  title={t.aboutPageTitle}
-  description={t.aboutPageDescription}
->
+<BaseLayout locale={locale} page={routes.page('about')}>
   <section class="about-hero" aria-labelledby="about-heading">
     <div class="section about-hero-layout">
       <div>

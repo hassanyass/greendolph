@@ -1,0 +1,74 @@
+---
+import type { BreadcrumbItem } from '../domain/breadcrumbs';
+import type { Locale } from '../domain/routes';
+import ControlIcon from './ControlIcon.astro';
+import { breadcrumbCopy } from '../config/breadcrumb-copy';
+interface Props {
+  items: readonly BreadcrumbItem[];
+  locale: Locale;
+}
+const { items, locale } = Astro.props;
+---
+
+<nav class="breadcrumbs" aria-label={breadcrumbCopy[locale].label}>
+  <ol>
+    {items.map((item, index) => (
+      <li>
+        {index > 0 && <ControlIcon name="next" />}
+        {index === items.length - 1 ? (
+          <span aria-current="page">{item.name}</span>
+        ) : (
+          <a href={item.path}>{item.name}</a>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+<style>
+  .breadcrumbs {
+    min-inline-size: 0;
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    min-inline-size: 0;
+    max-inline-size: 100%;
+  }
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+    color: var(--green);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+  }
+  a:hover {
+    text-decoration-color: currentColor;
+  }
+  span {
+    overflow-wrap: anywhere;
+  }
+  .breadcrumbs :global(.control-icon) {
+    flex: 0 0 12px;
+    inline-size: 12px;
+    block-size: 12px;
+    align-self: center;
+  }
+  :global([dir='rtl']) .breadcrumbs :global(.control-icon) {
+    rotate: 180deg;
+  }
+</style>

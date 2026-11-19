@@ -1,5 +1,6 @@
 import { SiteConfiguration } from '../config/site-configuration.mjs';
 import { locales, type Locale, type PageDefinition } from './routes.ts';
+import type { BreadcrumbItem } from './breadcrumbs.ts';
 
 export class PageMetadata {
   constructor(
@@ -10,6 +11,7 @@ export class PageMetadata {
     readonly description: string,
     readonly imagePath: string,
     readonly indexable = true,
+    readonly breadcrumbs: readonly BreadcrumbItem[] = [],
   ) {}
 
   get canonical() {

@@ -49,20 +49,22 @@ See [deployment and SEO settings](docs/DEPLOYMENT.md), [architecture](docs/ARCHI
 
 Follow the review gates in the [implementation rollout](docs/IMPLEMENTATION-ROLLOUT.md). Chunk 1 provides the [UAE search research](docs/SEO-RESEARCH.md) and [measured performance baseline](docs/PERFORMANCE-BASELINE.md), including reproduction instructions. Raw audit artifacts stay in ignored `docs/previews/`.
 
+Search titles/descriptions and service headings are maintained in `src/config/search-content.ts`. The [search-account handover](docs/SEARCH-ACCOUNT-SETUP.md) covers company-owned Google/Bing properties, Business Profile facts, sitemap submission and launch checks. Building the site does not create or verify an account.
+
 GitHub Actions validates preview and simulated production builds on pushes and pull requests. It uploads the noindex preview artifact and does not publish a live website.
 
 ## Current boundaries
 
-Home, Services, About and Contact are implemented in both languages. Our Works has an explicit empty state and a configurable project collection, pending actual project material; it remains noindex. Every primary navigation item leads to its own page, and the home About button leads to the full About page. Further page and lower-section work awaits the user’s next review.
+Home, Services, About, Our Works and Contact are implemented in both languages. Ten service detail pages per language contain editorial guidance and FAQs. Three photographic project stories are eligible for the production sitemap; the illustrative Sharjah entry remains noindex. Our Works provides the public bilingual profile PDF. Production indexing is still disabled pending launch sign-off.
 
-The quotation interaction remains an explicit local review, without submission or persistence. Contact delivery, privacy content, verified business SEO facts and final page content are still required before public launch. No analytics or cookie tracking is installed.
+The quotation form uses Formspree when a public form ID is configured, otherwise it stays in local review mode. Inbox delivery and final public contact facts still need launch verification. No analytics or cookie tracking is installed.
 
 ## Navigation, hero and services
 
-The full-screen video hero keeps its content over the background footage. The logo, navigation and language control contract together into a centered floating bar on scroll; `src/config/experience.ts` configures its thresholds and visible carousel cards. The Services label is a real page link, with a separate hover/touch/keyboard dropdown. Both the dropdown and swipeable carousel derive from `services` in `content.ts`. Hero media is configured in `brand.ts`; its current technical-work clip is illustrative stock footage with provenance in the asset guide. Brand colours and logos remain replaceable.
+The native SVG blueprint hero shows one continuous house-restoration journey. The logo, navigation and language control contract together on scroll; `src/config/experience.ts` owns navigation thresholds. The Services label is a page link, with a separate hover/touch/keyboard dropdown. The dropdown and swipeable carousel derive from `src/config/services.ts`. Brand colours, typography and logos remain configurable in `src/config/brand.ts`.
 
-Service enquiries return to the matching language home page with the service preselected. Add only company-approved projects to `src/config/projects.ts`; change the Works route’s indexing setting after real project content is ready.
+Service enquiries lead to Contact in the matching language with the service preselected. Maintain approved projects in `src/config/projects.ts` and profile-download settings in `src/config/company-profile.ts`. Service/project breadcrumbs share their source with structured data; unknown business facts are omitted.
 
 ## Vercel review deployment
 
-Import this repository with root `.`, framework Astro, build `npm run build`, output `dist`. The checked-in `vercel.json` provides these defaults. Keep `SITE_ENV=preview` and `SITE_INDEXABLE=false` while reviewing. See [deployment settings](docs/DEPLOYMENT.md#vercel-peer-review).
+Import this repository with root `.`, framework Astro, build `npm run build`, output `dist`. The checked-in `vercel.json` provides these defaults and a review-only noindex header for every file. Keep `SITE_ENV=preview` and `SITE_INDEXABLE=false` while reviewing. See [deployment settings](docs/DEPLOYMENT.md) before any approved public launch.

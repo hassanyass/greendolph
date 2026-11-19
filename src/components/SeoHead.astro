@@ -5,6 +5,7 @@ import { company } from '../config/company';
 import { brand } from '../config/brand';
 import { StructuredDataBuilder } from '../domain/structured-data';
 import type { Service } from '../domain/service';
+import { serviceSearch } from '../config/search-content';
 interface Props {
   service?: Service;
   shareImage: { width: number; height: number; alt: string };
@@ -15,13 +16,24 @@ const { site, locale } = metadata;
 const schema = new StructuredDataBuilder(
   site,
   company,
-  brand.logos[locale].primary.src,
+  brand.logos.en.primary.src,
 ).build(
   service && metadata.canonical
     ? {
-        name: service.licenceTitle[locale],
+        name: serviceSearch(service.id).heading[locale],
+        alternateName: service.licenceTitle[locale],
+        serviceType: service.title[locale],
         description: metadata.description,
         url: metadata.canonical,
+      }
+    : undefined,
+  metadata.canonical
+    ? {
+        url: metadata.canonical,
+        title: metadata.title,
+        description: metadata.description,
+        locale,
+        breadcrumbs: metadata.breadcrumbs,
       }
     : undefined,
 );
@@ -56,6 +68,7 @@ const schema = new StructuredDataBuilder(
 <meta name="twitter:title" content={metadata.title} />
 <meta name="twitter:description" content={metadata.description} />
 {metadata.image && <meta name="twitter:image" content={metadata.image} />}
+{metadata.image && <meta name="twitter:image:alt" content={shareImage.alt} />}
 {schema && metadata.indexable && (
   <script type="application/ld+json" set:html={serializeJsonLd(schema)} />
 )}

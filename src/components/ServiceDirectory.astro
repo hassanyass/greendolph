@@ -17,12 +17,7 @@ const legacyAnchor = (id: string) =>
   id;
 ---
 
-<BaseLayout
-  locale={locale}
-  page={routes.page('services')}
-  title={t.servicesPageTitle}
-  description={t.servicesPageDescription}
->
+<BaseLayout locale={locale} page={routes.page('services')}>
   <div class="page-intro" id="maintenance">
     <h1 class="page-heading">{t.servicesPageHeading}</h1>
     <p>{t.servicesPageDescription}</p>

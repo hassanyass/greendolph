@@ -17,6 +17,7 @@ export class CompanyProfile {
     import.meta.env.CONTACT_WHATSAPP?.trim() || this.phone,
   );
   readonly email = optionalEmail(import.meta.env.CONTACT_EMAIL);
+  // Set only a confirmed address approved for public display, not a private verification address.
   readonly address: BusinessAddress | null = null;
   readonly serviceAreas: readonly string[] = [];
   readonly social = {

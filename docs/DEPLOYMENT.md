@@ -34,7 +34,7 @@ After launch, verify the .com in Google Search Console and Bing Webmaster Tools,
 
 Import `hassanyass/greendolph`, choose branch `main`, and leave Root Directory at the repository root (`.`). `vercel.json` sets the Astro framework, `npm run build`, output `dist`, trailing-slash routes and response headers. Use Node 22.x (22.23.4+) or a supported newer version. No Vercel adapter is needed for this static site.
 
-For this review, use `SITE_ENV=preview` and `SITE_INDEXABLE=false` for both Production and Preview environments; leave `SITE_URL` unset until a stable review URL or production domain is chosen. The default build already uses these noindex settings, including on the main-branch deployment. Vercel does not consume the generated `_headers`; page robots metadata protects the review build and `vercel.json` supplies its response headers. Keep future public indexing controlled through the environment settings above.
+For this review, use `SITE_ENV=preview` and `SITE_INDEXABLE=false` for both Production and Preview environments; leave `SITE_URL` unset until a stable review URL or production domain is chosen. The default build already uses these noindex settings, including on the main-branch deployment. Vercel does not consume the generated `_headers`; its checked-in preset explicitly adds `X-Robots-Tag: noindex, follow` for every file, including the profile PDF. If Vercel becomes the public launch host, remove that review-only preset header during the approved launch and keep preview/branch domains protected. Production environment flags alone cannot override a static response header. Cloudflare Pages and Netlify use the build-derived `_headers` instead.
 
 After import, check `/`, `/ar/`, all navigation destinations and a missing URL. The quotation form uses local review when the Formspree form ID is blank. Deployment has not been performed from this workspace.
 
@@ -75,6 +75,8 @@ The build produces cache and basic response headers. Hashed Astro assets are imm
 Set `PUBLIC_ADOBE_FONTS_KIT_ID` to your Adobe Fonts web project ID once it includes Acumin Variable. English uses Inter as the fallback. Cairo is served locally for Arabic. [Adobe Fonts web setup](https://helpx.adobe.com/fonts/web/introduction/add-fonts-website.html)
 
 ## Verify production SEO without choosing a domain
+
+See [SEARCH-ACCOUNT-SETUP.md](SEARCH-ACCOUNT-SETUP.md) for company-owned Search Console/Bing properties, Business Profile eligibility, verified facts, sitemap submission and post-launch measurement. No account is created or verified by a local build.
 
 Use a reserved example hostname for this local test, never as a deployed business origin:
 

@@ -4,17 +4,8 @@ export type { Localized } from '../domain/service';
 
 export const copy = {
   en: {
-    title: 'Technical Services in the UAE | Aldolphin Alakhthar',
-    description:
-      'Request a quote for AC installation, plumbing, electromechanical work or interior fit-outs for homes and businesses in the UAE.',
     nav: ['Home', 'Services', 'About us', 'Contact', 'Our works'],
-    aboutPageTitle: 'About Us | Aldolphin Alakhthar Technical Services',
-    aboutPageDescription:
-      'Meet the Aldolphin Alakhthar team and see how we scope installation, maintenance and fit-out work for UAE homes and businesses.',
     aboutPageHeading: 'Technical services with a clear scope of work',
-    contactPageTitle: 'Contact | Aldolphin Alakhthar Technical Services',
-    contactPageDescription:
-      'Request a technical services quote from Aldolphin Alakhthar. Share your emirate, property type and the installation, maintenance or finishing work you need.',
     contactPageHeading: 'Tell us what needs doing',
     servicesMenu: 'Show services',
     previousService: 'Previous services',
@@ -22,7 +13,6 @@ export const copy = {
     carouselLabel: 'Browse our services',
     carouselStatus: 'Showing {range} of {total}',
     viewServices: 'View all services',
-    servicesPageTitle: 'Technical Services in the UAE | Our Services',
     servicesPageDescription:
       'Compare ten licensed technical services in the UAE, including AC and ventilation, plumbing, ceilings, painting, tiling and building cleaning.',
     servicesPageHeading: 'Technical services in the UAE',
@@ -129,17 +119,8 @@ export const copy = {
     rights: 'All rights reserved.',
   },
   ar: {
-    title: 'خدمات فنية في الإمارات | الدولفين الأخضر',
-    description:
-      'اطلب عرض سعر لتركيب وصيانة التكييف والسباكة والمعدات الكهروميكانيكية والتشطيبات الداخلية للمنازل والمنشآت في الإمارات.',
     nav: ['الرئيسية', 'خدماتنا', 'من نحن', 'تواصل معنا', 'أعمالنا'],
-    aboutPageTitle: 'من نحن | الدولفين الأخضر للخدمات الفنية',
-    aboutPageDescription:
-      'تعرّف على مؤسسة الدولفين الأخضر وطريقتها في تحديد نطاق أعمال التركيب والصيانة والتشطيبات للمنازل والمنشآت في الإمارات.',
     aboutPageHeading: 'خدمات فنية بنطاق عمل واضح',
-    contactPageTitle: 'تواصل معنا | الدولفين الأخضر للخدمات الفنية',
-    contactPageDescription:
-      'اطلب عرض سعر من الدولفين الأخضر. شاركنا الإمارة ونوع العقار وتفاصيل أعمال التركيب أو الصيانة أو التشطيب المطلوبة.',
     contactPageHeading: 'أخبرنا بما تحتاج إلى تنفيذه',
     servicesMenu: 'عرض الخدمات',
     previousService: 'الخدمات السابقة',
@@ -147,7 +128,6 @@ export const copy = {
     carouselLabel: 'تصفّح خدماتنا',
     carouselStatus: 'عرض {range} من {total}',
     viewServices: 'عرض جميع الخدمات',
-    servicesPageTitle: 'خدماتنا الفنية في الإمارات | الدولفين الأخضر',
     servicesPageDescription:
       'تصفّح عشر خدمات فنية مرخّصة في الإمارات تشمل التكييف والتهوية والسباكة والأسقف والدهانات والتبليط وتنظيف المباني.',
     servicesPageHeading: 'الخدمات الفنية في الإمارات',

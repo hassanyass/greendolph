@@ -31,6 +31,18 @@ assert.deepEqual(projectSlugs, [
 assert.deepEqual(await listProjects('ar/'), projectSlugs);
 const titles = new Set();
 const descriptions = new Set();
+let organizationSnapshot;
+const decodeText = (value) =>
+  value
+    .replaceAll('&amp;', '&')
+    .replaceAll('&quot;', '"')
+    .replaceAll('&#39;', "'")
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>');
+const plainText = (value) =>
+  decodeText(value.replace(/<[^>]+>/g, ''))
+    .replace(/\s+/g, ' ')
+    .trim();
 for (const [file, locale, dir, route, eligible, slug] of [
   ['index.html', 'en', 'ltr', '/', true],
   ['ar/index.html', 'ar', 'rtl', '/ar/', true],
@@ -87,25 +99,42 @@ for (const [file, locale, dir, route, eligible, slug] of [
   );
   assert.match(html, /<meta name="description" content="[^"]+"/);
   assert.match(html, /<meta name="robots" content="(?:index|noindex), follow/);
+  const pageTitle = html.match(/<title>(.+?)<\/title>/)?.[1];
+  const pageDescription = html.match(
+    /<meta name="description" content="([^"]+)"/,
+  )?.[1];
+  assert.ok(
+    pageTitle && !titles.has(pageTitle),
+    `${file}: duplicate or missing title`,
+  );
+  assert.ok(
+    pageDescription && !descriptions.has(pageDescription),
+    `${file}: duplicate or missing description`,
+  );
+  titles.add(pageTitle);
+  descriptions.add(pageDescription);
+  const detailPage = Boolean(slug) || /\/our-works\/[^/]+\/$/.test(route);
+  const trail = html.match(
+    /<nav[^>]*class="breadcrumbs"[^>]*>([\s\S]*?)<\/nav>/,
+  );
+  const crumbNames = trail
+    ? [...trail[1].matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/g)].map((item) =>
+        plainText(item[1]),
+      )
+    : [];
+  if (detailPage) {
+    assert.equal(
+      crumbNames.length,
+      3,
+      `${file}: expected three visible breadcrumbs`,
+    );
+    assert.ok(trail[1].includes('aria-current="page"'));
+  }
   if (slug) {
     const prefix = locale === 'ar' ? '/ar' : '';
     const alternatePrefix = locale === 'ar' ? '' : '/ar';
     assert.ok(html.includes(`href="${prefix}/contact/?service=${slug}"`));
     assert.ok(html.includes(`href="${alternatePrefix}/services/${slug}/"`));
-    const title = html.match(/<title>(.+?)<\/title>/)?.[1];
-    const description = html.match(
-      /<meta name="description" content="([^"]+)"/,
-    )?.[1];
-    assert.ok(
-      title && !titles.has(title),
-      `${file}: duplicate or missing title`,
-    );
-    assert.ok(
-      description && !descriptions.has(description),
-      `${file}: duplicate or missing description`,
-    );
-    titles.add(title);
-    descriptions.add(description);
   }
   if (info.origin && eligible) {
     assert.ok(
@@ -133,6 +162,43 @@ for (const [file, locale, dir, route, eligible, slug] of [
     assert.ok(jsonLd, 'Configured domain should produce structured data');
     const schema = JSON.parse(jsonLd[1]);
     assert.ok(schema['@graph'].some((item) => item['@type'] === 'WebSite'));
+    const webpage = schema['@graph'].find(
+      (item) => item['@type'] === 'WebPage',
+    );
+    assert.equal(webpage?.url, info.origin + route);
+    assert.equal(webpage?.name, decodeText(pageTitle));
+    assert.equal(webpage?.description, decodeText(pageDescription));
+    assert.equal(webpage?.inLanguage, locale);
+    const organization = schema['@graph'].find(
+      (item) => item['@type'] === 'Organization',
+    );
+    assert.ok(
+      organization,
+      'Unconfirmed address must not become a LocalBusiness',
+    );
+    organizationSnapshot ??= JSON.stringify(organization);
+    assert.equal(
+      JSON.stringify(organization),
+      organizationSnapshot,
+      'Company identity must agree across language pages',
+    );
+    if (detailPage) {
+      const breadcrumb = schema['@graph'].find(
+        (item) => item['@type'] === 'BreadcrumbList',
+      );
+      const paths = [...trail[1].matchAll(/href="([^"]+)"/g)]
+        .map((item) => item[1])
+        .concat(route);
+      assert.deepEqual(
+        breadcrumb?.itemListElement,
+        crumbNames.map((name, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name,
+          item: info.origin + paths[index],
+        })),
+      );
+    }
     if (slug) {
       assert.ok(
         schema['@graph'].some(
@@ -153,12 +219,19 @@ for (const [file, locale, dir, route, eligible, slug] of [
     );
   } else {
     assert.doesNotMatch(html, /rel="canonical"|hreflang=/);
+    assert.doesNotMatch(html, /type="application\/ld\+json"/);
   }
+  const directives = html
+    .match(/<meta name="robots" content="([^"]+)"/)[1]
+    .split(',')
+    .map((item) => item.trim());
   assert.ok(
-    html.includes(
-      `content="${info.indexable && eligible ? 'index' : 'noindex'}, follow`,
-    ),
+    directives.includes(info.indexable && eligible ? 'index' : 'noindex'),
   );
+  assert.ok(
+    !directives.includes(info.indexable && eligible ? 'noindex' : 'index'),
+  );
+  assert.ok(directives.includes('follow'));
   for (const match of html.matchAll(
     /(?:src|href)="(\/(?:_astro|brand|fonts|images)\/[^"?#]+)"/g,
   )) {

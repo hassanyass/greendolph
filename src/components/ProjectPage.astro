@@ -1,5 +1,6 @@
 ---
-import { brand } from '../config/brand';
+import { breadcrumbsFor } from '../domain/breadcrumbs';
+import Breadcrumbs from './Breadcrumbs.astro';
 import { services } from '../config/services';
 import { worksCopy } from '../config/works-copy';
 import type { Project } from '../domain/project';
@@ -22,13 +23,14 @@ const photoHeading = project.illustrativePhotos
   ? t.illustrativePhotos
   : t.photos;
 const related = services.filter(({ id }) => project.serviceIds.includes(id));
+const page = routes.project(project.id);
+const breadcrumbs = breadcrumbsFor(page, locale);
 ---
 
 <BaseLayout
   locale={locale}
-  page={routes.project(project.id)}
-  title={`${title} · ${location} | ${locale === 'ar' ? brand.arabicName : brand.name}`}
-  description={project.summary[locale]}
+  page={page}
+  breadcrumbs={breadcrumbs}
   shareImage={
     cover && !project.illustrativePhotos
       ? {
@@ -41,10 +43,9 @@ const related = services.filter(({ id }) => project.serviceIds.includes(id));
   }
 >
   <article class="work-project" data-project-gallery={cover ? '' : undefined}>
-    <a class="work-link work-back" href={routes.path('works', locale)}>
-      <ControlIcon name="previous" />
-      {t.back}
-    </a>
+    <div class="work-back">
+      <Breadcrumbs items={breadcrumbs} locale={locale} />
+    </div>
     <div
       class:list={['work-project-intro', { 'work-project-with-photo': cover }]}
     >

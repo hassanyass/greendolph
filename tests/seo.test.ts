@@ -7,6 +7,7 @@ import {
 import { SiteConfiguration } from '../src/config/site-configuration.mjs';
 import { projects } from '../src/config/projects.ts';
 import { routes } from '../src/domain/routes.ts';
+import { breadcrumbsFor } from '../src/domain/breadcrumbs.ts';
 import {
   PageMetadata,
   SitemapGenerator,
@@ -216,4 +217,116 @@ test('all primary navigation destinations are standalone locale pages', () => {
       assert.ok(!routes.path(key, locale).includes('#'));
     }
   }
+});
+
+test('detail breadcrumbs follow real locale routes, including an unindexed project', () => {
+  for (const locale of ['en', 'ar'] as const) {
+    const service = routes.service('air-conditioning');
+    const trail = breadcrumbsFor(service, locale);
+    assert.deepEqual(
+      trail.map(({ path }) => path),
+      [
+        routes.path('home', locale),
+        routes.path('services', locale),
+        service.paths[locale],
+      ],
+    );
+    const project = routes.project('sharjah');
+    assert.deepEqual(
+      breadcrumbsFor(project, locale).map(({ path }) => path),
+      [
+        routes.path('home', locale),
+        routes.path('works', locale),
+        project.paths[locale],
+      ],
+    );
+    assert.equal(project.indexable, false);
+  }
+  assert.deepEqual(breadcrumbsFor(routes.page('home'), 'en'), []);
+});
+
+test('page, service and breadcrumb entities share canonical URLs and the verified provider', () => {
+  const site = production();
+  const page = routes.service('air-conditioning');
+  const breadcrumbs = breadcrumbsFor(page, 'ar');
+  const url = site.absolute(page.paths.ar)!;
+  const schema = new StructuredDataBuilder(
+    site,
+    identity,
+    '/brand/logo.svg',
+  ).build(
+    {
+      name: 'التكييف والتهوية',
+      alternateName: 'Licensed activity',
+      serviceType: 'AC',
+      description: 'Service scope',
+      url,
+    },
+    {
+      title: 'عنوان الصفحة',
+      description: 'Service scope',
+      url,
+      locale: 'ar',
+      breadcrumbs,
+    },
+  )!;
+  const graph = schema['@graph'] as Record<string, unknown>[];
+  const webpage = graph.find((item) => item['@type'] === 'WebPage');
+  const service = graph.find((item) => item['@type'] === 'Service');
+  const breadcrumb = graph.find((item) => item['@type'] === 'BreadcrumbList');
+  assert.equal(webpage?.['@id'], `${url}#webpage`);
+  assert.equal(webpage?.inLanguage, 'ar');
+  assert.deepEqual(webpage?.isPartOf, {
+    '@id': 'https://example.com/#website',
+  });
+  assert.deepEqual(webpage?.mainEntity, { '@id': `${url}#service` });
+  assert.deepEqual(webpage?.breadcrumb, { '@id': `${url}#breadcrumb` });
+  assert.deepEqual(service?.provider, {
+    '@id': 'https://example.com/#organization',
+  });
+  assert.equal(service?.name, 'التكييف والتهوية');
+  assert.equal(service?.alternateName, 'Licensed activity');
+  assert.deepEqual(
+    breadcrumb?.itemListElement,
+    breadcrumbs.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: site.absolute(item.path),
+    })),
+  );
+  assert.doesNotMatch(
+    JSON.stringify(schema),
+    /PostalAddress|areaServed|openingHours|aggregateRating|FAQPage/,
+  );
+});
+
+test('a configured preview keeps noindex while supporting canonical and breadcrumb inspection', () => {
+  const site = new SiteConfiguration({
+    SITE_URL: 'https://example.com',
+    SITE_ENV: 'preview',
+    SITE_INDEXABLE: 'false',
+  });
+  const page = routes.service('painting');
+  const metadata = new PageMetadata(
+    site,
+    page,
+    'en',
+    'Painting',
+    'Description',
+    '/brand/share.jpg',
+    true,
+    breadcrumbsFor(page, 'en'),
+  );
+  assert.equal(metadata.robots, 'noindex, follow');
+  assert.equal(metadata.canonical, 'https://example.com/services/painting/');
+  assert.equal(metadata.breadcrumbs.length, 3);
+  assert.doesNotMatch(
+    new SitemapGenerator(site, routes.pages).render(),
+    /<url>/,
+  );
+  assert.equal(
+    new PageMetadata(production(), page, 'en', '', '', '').robots,
+    'index, follow, max-image-preview:large',
+  );
 });

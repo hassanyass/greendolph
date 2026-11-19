@@ -1,5 +1,4 @@
 ---
-import { brand } from '../config/brand';
 import { projects } from '../config/projects';
 import { companyProfile } from '../config/company-profile';
 import { worksCopy } from '../config/works-copy';
@@ -16,7 +15,6 @@ interface Props {
 const { locale } = Astro.props;
 const t = worksCopy[locale];
 const title = locale === 'ar' ? 'أعمالنا' : 'Our Works';
-const company = locale === 'ar' ? brand.arabicName : brand.name;
 const profileLanguages = new Intl.ListFormat(locale, {
   style: 'long',
   type: 'conjunction',
@@ -25,12 +23,7 @@ const profileLanguages = new Intl.ListFormat(locale, {
 );
 ---
 
-<BaseLayout
-  locale={locale}
-  page={routes.page('works')}
-  title={`${title} | ${company}`}
-  description={t.intro}
->
+<BaseLayout locale={locale} page={routes.page('works')}>
   <section class="work-index" aria-labelledby="works-title">
     <div class="work-index-intro">
       <div>
