@@ -7,16 +7,23 @@ description: Build or revise the Aldolphin Alakhthar UAE technical-services webs
 
 Use the `greendolph` repository (remote `https://github.com/hassanyass/greendolph.git`) as the source of truth. The earlier `aldolphin-website` folder is the preserved concept, not the active project. Read `docs/PROJECT-STANDARDS.md` before editing; read `docs/ASSET-SOURCES.md` when selecting media and `docs/DEPLOYMENT.md` before changing deployment or indexing behavior. Resolve these paths relative to the repository.
 
-Use the approved rollout in `docs/PROJECT-STANDARDS.md`. Finish each phase for review and wait for approval before starting the next.
+Use the approved rollout in `docs/IMPLEMENTATION-ROLLOUT.md`, linked from `docs/PROJECT-STANDARDS.md`. Finish each chunk for review and wait for approval before starting the next. The original four-phase foundation is established; the current sequence is:
 
-1. Build the ten licensed activities in English and Arabic, generic language alternates on the future .com, portable static output, and central brand settings.
-2. Add inbox delivery with a configurable Formspree form ID, direct WhatsApp, phone and email actions, and optional Instagram, Facebook and TikTok links.
-3. Add approved project data, company profile PDF download, and native motion with a reduced-motion fallback.
-4. Apply final visual identity, verify the selected host and contact delivery, and enable production indexing after sign-off.
+1. Complete UAE-wide bilingual service research and a measured performance baseline.
+2. Add real project evidence to the homepage after Services.
+3. Strengthen all twenty service pages using distinct factual content and questions.
+4. Prepare and connect a public profile PDF edition without placeholder contacts; preserve the internal profile.
+5. Implement research-backed technical/local SEO and the owner search-account handover.
+6. Optimise measured bottlenecks and add native transitions/selective prefetching for Cloudflare Pages Free.
+7. Verify the actual host and all user journeys; enable indexing only after launch sign-off.
+
+Read `docs/SEO-RESEARCH.md` before service/search work and `docs/PERFORMANCE-BASELINE.md` before speed/navigation work. Do not invent search volumes, rank positions, scopes, city coverage or testimonials. Research synonyms within the ten activity pages rather than adding service-by-city doorway pages. Questions are for visitors, not a promise of retired Google FAQ rich results; meta keywords have no Google ranking benefit.
 
 Use `src/config/services.ts` for the ten licence activities in the supplied order. Treat supplied Arabic OCR as provisional until checked against the original licence and approved. Preserve the exact approved full titles, use concise localized navigation labels, and keep licence administrative fields out of the catalog. Describe only confirmed UAE operations. Keep Saudi visibility measurement separate from claims of Saudi coverage.
 
-Original logo assets and colours are provisional. Configure branding in `src/config/brand.ts`, verified company facts in `src/config/company.ts`, copy in `src/config/content.ts`, service models in `src/domain/service.ts`, and routes in `src/domain/routes.ts`. Reuse the shared Astro layout and components. Keep classes for useful domain and interaction behavior; avoid ceremonial inheritance.
+The supplied visual identity and blueprint journey are approved. Configure branding in `src/config/brand.ts`, verified company facts in `src/config/company.ts`, copy in `src/config/content.ts`, service models in `src/domain/service.ts`, and routes in `src/domain/routes.ts`. Reuse the shared Astro layout and components. Keep classes for useful domain and interaction behavior; avoid ceremonial inheritance.
+
+Keep static `dist/` output portable, with Cloudflare Pages Free as the chosen hosting target. Retain multi-page navigation and use a short native cross-document fade with reduced-motion/unsupported-browser fallback. Opt in selected internal links to Astro prefetching; retain its slow-connection/tap behaviour and exclude downloads/external/hash-only/form destinations. ClientRouter, SSR/Functions and experimental prerendering are outside this release. Measure comparable browser/device/motion cohorts before claiming speed gains or real Core Web Vitals.
 
 Build phone-friendly English and Arabic experiences with real locale routes, natural Arabic, logical CSS, accessible interactions and reduced-motion support. Preserve the photographic architectural direction. Avoid template filler, invented badges, decorative icon grids, emoji, fake reviews or unverified business claims.
 

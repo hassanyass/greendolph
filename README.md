@@ -1,6 +1,6 @@
 # Greendolph · Aldolphin Alakhthar
 
-Bilingual UAE technical-services website built with Astro, TypeScript and semantic CSS. The approved visual concept is preserved while the real website foundation is established. Detailed home-page revisions are the next stage.
+Bilingual UAE technical-services website built with Astro, TypeScript and semantic CSS. The approved identity and blueprint journey are established. The current rollout adds project evidence, stronger service content, a public company profile, search improvements and measured performance work.
 
 ## Local development
 
@@ -43,9 +43,11 @@ Classes own domain logic and interaction behavior. Astro components own renderin
 
 ## Deployment and amendments
 
-The provider-independent static output is **`dist/`**, with no server runtime required. Netlify configuration is included; Cloudflare Pages and other static hosts can use the same output. No hosting account or domain is selected and nothing is deployed by this setup.
+The provider-independent static output is **`dist/`**, with no server runtime required. Cloudflare Pages Free is the chosen launch target; existing Netlify and Vercel presets remain available. Production domain, live hosting configuration and indexing still require launch verification and sign-off.
 
 See [deployment and SEO settings](docs/DEPLOYMENT.md), [architecture](docs/ARCHITECTURE.md), [project standards](docs/PROJECT-STANDARDS.md), [asset provenance](docs/ASSET-SOURCES.md) and [foundation verification](docs/FOUNDATION-VERIFICATION.md). The project skill is tracked in `skills/aldolphin-web/`.
+
+Follow the review gates in the [implementation rollout](docs/IMPLEMENTATION-ROLLOUT.md). Chunk 1 provides the [UAE search research](docs/SEO-RESEARCH.md) and [measured performance baseline](docs/PERFORMANCE-BASELINE.md), including reproduction instructions. Raw audit artifacts stay in ignored `docs/previews/`.
 
 GitHub Actions validates preview and simulated production builds on pushes and pull requests. It uploads the noindex preview artifact and does not publish a live website.
 

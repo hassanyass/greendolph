@@ -6,12 +6,21 @@ Aldolphin Alakhthar is a UAE technical services company. The ten active activiti
 
 ## Approved rollout
 
-1. Build the ten bilingual service detail pages, portable deployment, search metadata, and replaceable identity settings.
-2. Add the email quotation form through a configurable Formspree form ID, direct WhatsApp, phone and email actions, and optional verified social profiles.
-3. Publish approved bilingual project content, enable the profile PDF download, and animate project cards with native web APIs and a reduced-motion fallback.
-4. Apply the supplied identity, test the selected host and actual contact delivery, and enable indexing on the approved .com after sign-off.
+The original services/contact/portfolio/identity foundation is established. The current approved sequence is [IMPLEMENTATION-ROLLOUT.md](IMPLEMENTATION-ROLLOUT.md), dated 19 November 2026:
+
+1. UAE search research, measured performance baseline, and maintained project instructions.
+2. A real Selected Works showcase on the homepage after Services.
+3. Distinct bilingual editorial content and useful questions on all twenty service pages.
+4. A separate public profile PDF edition without placeholder contacts, connected to Our Works.
+5. Research-backed technical/local SEO and owner search-account handover.
+6. Measured speed improvements, native cross-document transitions and opt-in prefetching for Cloudflare Pages Free.
+7. Cross-language/device verification and gated launch preparation.
 
 Review each phase and push the checked changes to GitHub for peer review. Begin the next phase after approval. Use the supplied transcription as provisional content. Compare full English and Arabic activity titles against the original licence and obtain approval before public indexing. Keep full titles separate from concise navigation labels and editorial descriptions. Exclude licence status, printing details and contact fields from the service catalog.
+
+Use [SEO-RESEARCH.md](SEO-RESEARCH.md) for query ownership, specialist-scope limits and project evidence, and [PERFORMANCE-BASELINE.md](PERFORMANCE-BASELINE.md) for measurement and bottlenecks. UAE-wide research is not proof of all-city operating coverage. Do not report keyword-volume or ranking data without a real source. The `keywords` meta tag and retired FAQ rich results are not visibility deliverables.
+
+Cloudflare Pages static hosting is the chosen launch target. Retain portable output and other presets. Preserve ordinary multi-page navigation; use native transitions and selective Astro hover/focus prefetch with constrained-connection fallback. ClientRouter, server rendering, speculative prerendering and new animation libraries are outside this release. Do not prefetch PDF/external/hash-only links or form actions.
 
 ## Replaceable brand and content
 
