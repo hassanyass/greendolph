@@ -4,6 +4,10 @@ import { brand } from '../config/brand';
 import { copy, type Locale } from '../config/content';
 import { projects } from '../config/projects';
 import {
+  serviceContent,
+  serviceContentLabels,
+} from '../config/service-content';
+import {
   servicePhotoPath,
   servicePresentation,
 } from '../config/service-presentation';
@@ -21,6 +25,8 @@ const { locale, service } = Astro.props;
 const t = copy[locale];
 const name = locale === 'ar' ? brand.arabicName : brand.name;
 const design = servicePresentation(service.id);
+const editorial = serviceContent(service.id, locale);
+const labels = serviceContentLabels[locale];
 const relatedProjects = projects.filter(
   (project) => project.indexable && project.serviceIds.includes(service.id),
 );
@@ -61,6 +67,29 @@ const relatedProjects = projects.filter(
         />
       </div>
     </header>
+    <section
+      class="section service-overview"
+      aria-labelledby="service-overview-title"
+    >
+      <div class="service-overview-copy">
+        <h2 id="service-overview-title">{editorial.heading}</h2>
+        <p>{editorial.overview}</p>
+        <h3>{labels.requests}</h3>
+        <ul class="service-requests">
+          {editorial.requests.map((request) => (
+            <li>{request}</li>
+          ))}
+        </ul>
+      </div>
+      <div class="service-scope-list">
+        {editorial.scope.map((item) => (
+          <div>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
     <section class="section service-brief" aria-labelledby="quote-scope">
       <div class="service-brief-copy">
         <h2 id="quote-scope">{t.serviceQuoteHeading}</h2>
@@ -69,6 +98,7 @@ const relatedProjects = projects.filter(
             <li>{item}</li>
           ))}
         </ul>
+        <p class="service-quote-factors">{editorial.quotationFactors}</p>
         <p class="service-licence">
           <strong>{t.serviceLicenceLabel}</strong>
           {service.licenceTitle[locale]}
@@ -108,5 +138,124 @@ const relatedProjects = projects.filter(
         </ul>
       </section>
     )}
+    <section
+      class="section services-faq service-detail-faq"
+      aria-labelledby="service-faq-title"
+    >
+      <div class="service-faq-intro">
+        <h2 id="service-faq-title">{labels.faqHeading}</h2>
+        <p>{labels.faqIntro}</p>
+        <a class="button" href={routes.enquiry(locale, service.id)}>
+          {t.quote}
+        </a>
+      </div>
+      <div>
+        {editorial.faqs.map(({ question, answer }, index) => (
+          <details open={index === 0}>
+            <summary>{question}</summary>
+            <p>{answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
   </article>
 </BaseLayout>
+
+<style>
+  .service-overview {
+    display: grid;
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--section-column-gap);
+    padding-block: 0 var(--section-space);
+  }
+  .service-overview h2,
+  .service-detail-faq h2 {
+    font-size: var(--section-heading-size);
+    text-wrap: balance;
+  }
+  .service-overview-copy > p {
+    margin-block-start: 20px;
+    max-inline-size: 56ch;
+  }
+  .service-overview p,
+  .service-quote-factors,
+  .service-faq-intro > p {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+  .service-overview h3 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 550;
+    line-height: 1.5;
+  }
+  .service-overview-copy > h3 {
+    margin-block-start: 28px;
+    font-size: 1rem;
+  }
+  .service-requests {
+    margin-block: 12px 0;
+    padding-inline-start: 20px;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+  }
+  .service-requests li + li {
+    margin-block-start: 8px;
+  }
+  .service-requests li::marker {
+    color: var(--green);
+  }
+  .service-scope-list > div {
+    padding-block: 24px;
+    border-block-start: 1px solid var(--line);
+  }
+  .service-scope-list > div:first-child {
+    padding-block-start: 20px;
+  }
+  .service-scope-list p {
+    margin-block-start: 12px;
+    max-inline-size: 60ch;
+  }
+  .service-quote-factors {
+    margin-block: 22px;
+    max-inline-size: 60ch;
+  }
+  .service-detail-faq {
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1fr);
+    column-gap: var(--section-column-gap);
+  }
+  .service-faq-intro > p {
+    margin-block-start: 20px;
+    max-inline-size: 42ch;
+  }
+  .service-detail-faq details {
+    border-color: var(--line);
+  }
+  .service-detail-faq details:last-child {
+    border-block-end: 1px solid var(--line);
+  }
+  .service-detail-faq summary {
+    padding-block: 20px;
+    padding-inline-end: 4px;
+    line-height: 1.65;
+    font-weight: 600;
+  }
+  .service-detail-faq details p {
+    color: var(--muted);
+    line-height: 1.8;
+    padding-block-end: 20px;
+  }
+  :global([dir='rtl']) .service-projects :global(.control-icon) {
+    rotate: 180deg;
+  }
+  @media (max-width: 800px) {
+    .service-overview,
+    .service-detail-faq {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 28px;
+    }
+  }
+</style>
