@@ -47,6 +47,24 @@
   color: var(--muted);
   font-size: 0.82rem;
   padding-inline: 2px;
+  line-height: 1.7;
+}
+
+.work-profile .profile-details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 4px;
+}
+
+@media (max-width: 580px) {
+  .work-profile {
+    inline-size: 100%;
+  }
+  .work-profile .profile-download {
+    inline-size: 100%;
+    justify-content: center;
+  }
 }
 
 .work-cards {

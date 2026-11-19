@@ -1,7 +1,7 @@
 ---
-import { existsSync } from 'node:fs';
 import { brand } from '../config/brand';
-import { companyProfilePath, projects } from '../config/projects';
+import { projects } from '../config/projects';
+import { companyProfile } from '../config/company-profile';
 import { worksCopy } from '../config/works-copy';
 import { routes, type Locale } from '../domain/routes';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -17,7 +17,12 @@ const { locale } = Astro.props;
 const t = worksCopy[locale];
 const title = locale === 'ar' ? 'أعمالنا' : 'Our Works';
 const company = locale === 'ar' ? brand.arabicName : brand.name;
-const hasProfile = existsSync(`public${companyProfilePath}`);
+const profileLanguages = new Intl.ListFormat(locale, {
+  style: 'long',
+  type: 'conjunction',
+}).format(
+  companyProfile.languages.map((language) => t.profileLanguages[language]),
+);
 ---
 
 <BaseLayout
@@ -35,11 +40,27 @@ const hasProfile = existsSync(`public${companyProfilePath}`);
         <p>{t.intro}</p>
       </div>
       <div class="work-profile">
-        {hasProfile ? (
-          <a class="button profile-download" href={companyProfilePath} download>
-            <ControlIcon name="download" />
-            {t.download}
-          </a>
+        {companyProfile.available ? (
+          <>
+            <a
+              class="button profile-download"
+              href={companyProfile.path}
+              download
+              type="application/pdf"
+              aria-describedby="profile-details"
+              data-astro-prefetch="false"
+            >
+              <ControlIcon name="download" />
+              {t.download}
+            </a>
+            <p id="profile-details" class="profile-details">
+              <bdi dir="ltr">PDF</bdi>
+              <span aria-hidden="true"> · </span>
+              <span>{profileLanguages}</span>
+              <span aria-hidden="true"> · </span>
+              <bdi>{companyProfile.formatSize(locale)}</bdi>
+            </p>
+          </>
         ) : (
           <>
             <button

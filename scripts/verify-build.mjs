@@ -187,6 +187,17 @@ for (const prefix of ['', 'ar/']) {
   if (profile) {
     const pdf = await readFile(join('dist', profile[1]));
     assert.equal(pdf.subarray(0, 5).toString(), '%PDF-');
+    assert.ok(
+      pdf.length <= 25 * 1024 * 1024,
+      'Profile exceeds the static-host asset limit',
+    );
+    assert.ok(directory.includes('type="application/pdf"'));
+    assert.ok(directory.includes('data-astro-prefetch="false"'));
+    assert.ok(directory.includes('aria-describedby="profile-details"'));
+    assert.ok(
+      pdf.equals(await readFile(join('public', profile[1]))),
+      'Deployed profile differs from the public source',
+    );
   }
   for (const project of projectSlugs) {
     const route = `/${prefix}our-works/${project}/`;

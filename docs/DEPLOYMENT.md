@@ -52,7 +52,11 @@ After import, check `/`, `/ar/`, all navigation destinations and a missing URL. 
 
 ## Company profile download
 
-Add the approved PDF at `public/downloads/aldolphin-company-profile.pdf` and rebuild. The bilingual Our Works pages show a disabled download button with a coming soon note until the file is present. The button then becomes a direct PDF download. Keep the final PDF small enough for mobile download and open it from both pages during launch verification.
+The public bilingual profile is installed at `public/downloads/aldolphin-company-profile.pdf`. It preserves the approved project pages and replaces the placeholder contact page with a branded closing page. The internal profile remains separate and unchanged.
+
+To replace it, update the file and rebuild. `src/config/company-profile.ts` owns its public path and languages; the download model reads the actual file size at build time, so there is no size label to update manually. Both Our Works pages show PDF format, languages and localized size. Downloads are explicitly excluded from prefetching and are not fetched before the visitor requests the file. If the configured file is absent, the existing disabled/coming-soon state remains available.
+
+The manual editorial command and checks are documented in [CHUNK-4-VERIFICATION.md](CHUNK-4-VERIFICATION.md). Python and the external profile source bundle are needed only to revise the document, not to build or deploy the website. Keep individual files below the chosen static host's 25 MiB asset limit and verify actual phone/browser downloads on the final host.
 
 ## Host settings
 

@@ -14,6 +14,7 @@ export const worksCopy = {
     open: 'Open photo',
     download: 'Download company profile',
     profileSoon: 'PDF coming soon',
+    profileLanguages: { ar: 'Arabic', en: 'English' },
   },
   ar: {
     intro:
@@ -30,5 +31,6 @@ export const worksCopy = {
     open: 'عرض الصورة',
     download: 'تنزيل ملف الشركة',
     profileSoon: 'ملف PDF قريباً',
+    profileLanguages: { ar: 'العربية', en: 'الإنجليزية' },
   },
 };

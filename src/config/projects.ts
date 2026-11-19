@@ -6,8 +6,6 @@ import {
   sharjahPhotos,
 } from './project-photos.ts';
 
-export const companyProfilePath = '/downloads/aldolphin-company-profile.pdf';
-
 // Order controls the homepage: the first project receives the larger feature.
 export const featuredProjectIds: readonly string[] = [
   'nad-al-sheba',
