@@ -58,6 +58,8 @@ The owner supplied project descriptions and photographs in `aldolphin-website/ou
 - [Wall-mounted air conditioner in modern interior](https://www.pexels.com/photo/wall-mounted-air-conditioner-in-modern-interior-38788452/) by NEOSiAM 18+. Used on the Sharjah card and project cover.
 - [Man Repairing an Aircon](https://www.pexels.com/photo/man-repairing-an-aircon-5463580/) by José Andrés Pacheco Cortes. Used in the Sharjah gallery.
 
+The homepage Selected Works section reuses the owner's Nad Al Sheba finished exterior, Al Awir garden exterior and Al Ajban finished interior photographs. Its 480/800 px, 4:3 WebP crops are in `public/images/home/projects/`, exported from the existing project images at quality 78 with metadata excluded. These are homepage previews only; the project galleries retain their uncropped images. Configure their `ProjectPhoto` references and bilingual teasers in `src/config/projects.ts`; `featuredProjectIds` controls the homepage order and larger first feature. No new stock photographs are used in this section.
+
 ## Official visual identity
 
 The light-background logos and stacked lockups come from page 8 of the supplied Khattaby Studio brand guide. The dark-background horizontal logos use supplied exports 03–04. The transparent stacked logos and share cards use exports 01–02. The homepage uses the guide’s green dolphin symbol on white. The favicon and archived pattern asset use the artwork on pages 15 and 18 of the guide. Use the guide's palette swatches for site surfaces and keep artwork in its supplied colors. Acumin Variable Concept requires the configured Adobe Fonts web project for English. Cairo is self-hosted.

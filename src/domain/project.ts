@@ -40,6 +40,8 @@ export interface Project {
   location: Localized;
   title: Localized;
   summary: Localized;
+  teaser?: Localized;
+  homepagePhoto?: ProjectPhoto;
   scope: readonly ProjectScope[];
   photos: readonly ProjectPhoto[];
   illustrativePhotos?: boolean;

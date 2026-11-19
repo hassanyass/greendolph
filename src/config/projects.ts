@@ -1,4 +1,4 @@
-import type { Project } from '../domain/project.ts';
+import { ProjectPhoto, type Project } from '../domain/project.ts';
 import {
   alAjbanPhotos,
   alAwirPhotos,
@@ -8,11 +8,22 @@ import {
 
 export const companyProfilePath = '/downloads/aldolphin-company-profile.pdf';
 
+// Order controls the homepage: the first project receives the larger feature.
+export const featuredProjectIds: readonly string[] = [
+  'nad-al-sheba',
+  'al-awir',
+  'al-ajban',
+];
+
 export const projects: readonly Project[] = [
   {
     id: 'nad-al-sheba',
     location: { en: 'Nad Al Sheba', ar: 'ند الشبا' },
     title: { en: 'Prefabricated rooms and majlis', ar: 'غرف جاهزة ومجالس' },
+    teaser: {
+      en: 'From insulated rooms to finished interiors: gypsum details, lighting, AC and flooring brought together in one project.',
+      ar: 'من الغرف المعزولة إلى المساحات الجاهزة للاستخدام؛ تشطيبات جبسية وإنارة وتكييف وأرضيات اجتمعت في مشروع واحد.',
+    },
     summary: {
       en: 'Insulated prefabricated rooms and majlis spaces in Nad Al Sheba, fitted out with gypsum finishes, lighting and AC. The project also included four dog houses and a fenced exercise area.',
       ar: 'غرف جاهزة ومجالس معزولة في ند الشبا، مع تشطيبات جبسية وإنارة وتكييف. شمل المشروع أيضاً أربعة بيوت للكلاب ومنطقة خارجية مسيّجة للعب.',
@@ -65,6 +76,12 @@ export const projects: readonly Project[] = [
       },
     ],
     photos: nadAlShebaPhotos,
+    homepagePhoto: new ProjectPhoto(
+      '/images/home/projects/nad-al-sheba',
+      800,
+      600,
+      nadAlShebaPhotos[0].caption,
+    ),
     serviceIds: [
       'ceilings-and-partitions',
       'air-conditioning',
@@ -76,6 +93,10 @@ export const projects: readonly Project[] = [
   },
   {
     id: 'al-awir',
+    teaser: {
+      en: 'Finished rooms with wood and rubber flooring, sanitary fixtures and a dedicated drainage network.',
+      ar: 'غرف متكاملة التشطيب بأرضيات خشبية ومطاطية وأطقم صحية وشبكة صرف خاصة بها.',
+    },
     location: { en: 'Al Awir', ar: 'العوير' },
     title: {
       en: 'Prefabricated rooms and outdoor enclosures',
@@ -117,6 +138,12 @@ export const projects: readonly Project[] = [
       },
     ],
     photos: alAwirPhotos,
+    homepagePhoto: new ProjectPhoto(
+      '/images/home/projects/al-awir',
+      800,
+      600,
+      alAwirPhotos[0].caption,
+    ),
     serviceIds: [
       'air-conditioning',
       'carpentry-and-wood-flooring',
@@ -126,6 +153,10 @@ export const projects: readonly Project[] = [
   },
   {
     id: 'al-ajban',
+    teaser: {
+      en: 'Room interiors fitted with AC, lighting, flooring and sanitary fixtures, supported by drainage works.',
+      ar: 'تجهيز غرف بالتكييف والإنارة والأرضيات والأطقم الصحية، مع تنفيذ أعمال الصرف الصحي.',
+    },
     location: { en: 'Al Ajban', ar: 'العجبان' },
     title: { en: 'Prefabricated room fit-out', ar: 'تنفيذ وتجهيز غرف جاهزة' },
     summary: {
@@ -157,6 +188,12 @@ export const projects: readonly Project[] = [
       },
     ],
     photos: alAjbanPhotos,
+    homepagePhoto: new ProjectPhoto(
+      '/images/home/projects/al-ajban',
+      800,
+      600,
+      alAjbanPhotos[0].caption,
+    ),
     serviceIds: [
       'air-conditioning',
       'carpentry-and-wood-flooring',
